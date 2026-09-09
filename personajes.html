@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Expedientes y perfiles psicológicos completos de los personajes de The Mentalist: Patrick Jane, Teresa Lisbon, Kimball Cho, Wayne Rigsby, Grace Van Pelt, Red John y más.">
+  <title>Personajes & Expedientes CBI | The Mentalist</title>
+  
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+  <!-- Encabezado Principal & Navegación -->
+  <header class="site-header" id="mainHeader">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo" title="The Mentalist Fanpage">
+        <div class="brand-icon">
+          <img src="img/Red-John-Smiley-Face.png" alt="Red John Smiley" class="brand-smiley-img">
+          <div class="blood-drip-container">
+            <span class="blood-drip drip-left"></span>
+            <span class="blood-drip drip-right"></span>
+            <span class="blood-drop drop-left"></span>
+            <span class="blood-drop drop-right"></span>
+            <span class="blood-puddle"></span>
+          </div>
+        </div>
+        <div class="brand-text">
+          <span>THE</span>
+          <span class="logo-boxed">MENTALIST</span>
+        </div>
+      </a>
+
+      <nav aria-label="Navegación principal">
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="index.html" class="nav-link">Inicio</a></li>
+          <li><a href="personajes.html" class="nav-link active">Personajes</a></li>
+          <li><a href="temporadas.html" class="nav-link">Temporadas</a></li>
+          <li><a href="red-john.html" class="nav-link nav-red-john">Misterio Red John</a></li>
+          <li><a href="curiosidades.html" class="nav-link">Curiosidades</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="ambient-audio-btn" id="ambientAudioBtn" title="Activar sonido ambiental">
+          <div class="audio-equalizer">
+            <span></span><span></span><span></span>
+          </div>
+          <span class="btn-text">Ambiente</span>
+        </button>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="padding: 4rem 1.5rem 6rem;">
+    
+    <!-- ENCABEZADO DE PÁGINA -->
+    <div class="section-header">
+      <span class="badge badge-crimson">ARCHIVOS DEL ESTADO DE CALIFORNIA</span>
+      <h1>Dossier Oficial de <span class="text-crimson">Personajes</span></h1>
+      <p>
+        Accede a los perfiles confidenciales, habilidades deductivas, historiales de campo y análisis psicológicos de los miembros del CBI, agentes del FBI y amenazas de máxima prioridad.
+      </p>
+    </div>
+
+    <!-- PESTAÑAS DE FILTRO -->
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-category="all" id="filterAll">Todos los Expedientes</button>
+      <button class="filter-btn" data-category="cbi" id="filterCbi">División CBI (Sacramento)</button>
+      <button class="filter-btn" data-category="fbi" id="filterFbi">Oficina FBI (Texas)</button>
+      <button class="filter-btn" data-category="nemesis" id="filterNemesis">Némesis & Antagonistas</button>
+    </div>
+
+    <!-- CUADRÍCULA DE TARJETAS DE PERSONAJES (ADAPTATIVA: CERO HUECOS VACÍOS) -->
+    <div class="dossier-grid" id="charactersGrid">
+      <!-- Se inyecta dinámicamente mediante js/characters.js -->
+    </div>
+
+  </main>
+
+  <!-- MODAL DE DETALLES DEL PERSONAJE -->
+  <div class="modal-overlay" id="characterModal" role="dialog" aria-modal="true" aria-label="Expediente detallado del personaje">
+    <div class="modal-content">
+      <button class="modal-close" id="modalCloseBtn" aria-label="Cerrar expediente">✕</button>
+      <div id="modalDetailsBody">
+        <!-- Inyectado por JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER SIMPLIFICADO -->
+  <footer class="site-footer">
+    <div class="container footer-simple-content">
+      <div class="footer-brand-compact">
+        <span>THE</span>
+        <span style="border: 1px solid var(--cream-pure); padding: 0 0.35rem;">MENTALIST</span>
+        <span style="color: var(--text-muted); font-size: 0.75rem; font-weight: 400; font-family: var(--font-body);">| Dossier CBI</span>
+      </div>
+
+      <ul class="footer-nav-compact">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="personajes.html">Personajes</a></li>
+        <li><a href="temporadas.html">Temporadas</a></li>
+        <li><a href="red-john.html">Red John</a></li>
+        <li><a href="curiosidades.html">Curiosidades</a></li>
+      </ul>
+
+      <div class="footer-copy-text">
+        &copy; The Mentalist Fanpage.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+  <script src="js/characters.js"></script>
+</body>
+</html>

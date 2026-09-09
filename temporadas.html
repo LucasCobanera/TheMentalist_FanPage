@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Guía completa de las 7 temporadas y 151 episodios de The Mentalist. Sinopsis, arcos argumentales de Red John, capítulos clave e interruptor de spoilers.">
+  <title>Guía de Temporadas (1 a 7) | The Mentalist</title>
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+
+<body>
+
+  <!-- Encabezado Principal & Navegación -->
+  <header class="site-header" id="mainHeader">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo" title="The Mentalist Fanpage">
+        <div class="brand-icon">
+          <img src="img/Red-John-Smiley-Face.png" alt="Red John Smiley" class="brand-smiley-img">
+          <div class="blood-drip-container">
+            <span class="blood-drip drip-left"></span>
+            <span class="blood-drip drip-right"></span>
+            <span class="blood-drop drop-left"></span>
+            <span class="blood-drop drop-right"></span>
+            <span class="blood-puddle"></span>
+          </div>
+        </div>
+        <div class="brand-text">
+          <span>THE</span>
+          <span class="logo-boxed">MENTALIST</span>
+        </div>
+      </a>
+
+      <nav aria-label="Navegación principal">
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="index.html" class="nav-link">Inicio</a></li>
+          <li><a href="personajes.html" class="nav-link">Personajes</a></li>
+          <li><a href="temporadas.html" class="nav-link active">Temporadas</a></li>
+          <li><a href="red-john.html" class="nav-link nav-red-john">Misterio Red John</a></li>
+          <li><a href="curiosidades.html" class="nav-link">Curiosidades</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="ambient-audio-btn" id="ambientAudioBtn" title="Activar sonido ambiental">
+          <div class="audio-equalizer">
+            <span></span><span></span><span></span>
+          </div>
+          <span class="btn-text">Ambiente</span>
+        </button>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="padding: 4rem 1.5rem 6rem;">
+
+    <!-- ENCABEZADO HERO DINÁMICO DE TEMPORADAS -->
+    <div class="section-header season-dynamic-header" id="seasonsDynamicHeader">
+      <div class="season-header-bg" id="seasonHeaderBg" style="background-image: url('img/Seasons/temporadas.jpg');">
+      </div>
+      <div class="season-header-overlay"></div>
+      <div class="season-header-content">
+        <span class="badge badge-gold" id="seasonHeaderBadge">151 EPISODIOS | CBS (2008 - 2015)</span>
+        <h1 id="seasonHeaderTitle">Cronología de <span style="color: var(--green-bright);">Temporadas</span></h1>
+        <p id="seasonHeaderDesc">
+          Sigue la trayectoria completa de Patrick Jane: desde su llegada al CBI, pasando por la confrontación directa
+          contra Red John, hasta su desenlace en el FBI de Austin, Texas.
+        </p>
+      </div>
+    </div>
+
+    <!-- CONTROLES: SELECTOR DE TEMPORADAS & SWITCH DE SPOILERS -->
+    <div class="seasons-controls">
+      <div class="seasons-nav-pills">
+        <button class="season-pill active" data-season="all">Todas</button>
+        <button class="season-pill" data-season="1">T1</button>
+        <button class="season-pill" data-season="2">T2</button>
+        <button class="season-pill" data-season="3">T3</button>
+        <button class="season-pill" data-season="4">T4</button>
+        <button class="season-pill" data-season="5">T5</button>
+        <button class="season-pill" data-season="6">T6</button>
+        <button class="season-pill" data-season="7">T7</button>
+      </div>
+
+      <div class="spoiler-toggle-wrapper">
+        <label class="toggle-switch" for="spoilerToggle">
+          <input type="checkbox" id="spoilerToggle">
+          <span class="slider"></span>
+        </label>
+        <label for="spoilerToggle" style="cursor: pointer;">
+          Mostrar resoluciones y spoilers clave
+        </label>
+      </div>
+    </div>
+
+    <!-- CONTENEDOR DE LAS 7 TEMPORADAS -->
+    <div id="seasonsContainer">
+      <!-- Inyectado dinámicamente mediante js/seasons.js -->
+    </div>
+
+  </main>
+
+  <!-- FOOTER SIMPLIFICADO -->
+  <footer class="site-footer">
+    <div class="container footer-simple-content">
+      <div class="footer-brand-compact">
+        <span>THE</span>
+        <span style="border: 1px solid var(--cream-pure); padding: 0 0.35rem;">MENTALIST</span>
+        <span style="color: var(--text-muted); font-size: 0.75rem; font-weight: 400; font-family: var(--font-body);">|
+          Guía de Episodios</span>
+      </div>
+
+      <ul class="footer-nav-compact">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="personajes.html">Personajes</a></li>
+        <li><a href="temporadas.html">Temporadas</a></li>
+        <li><a href="red-john.html">Red John</a></li>
+        <li><a href="curiosidades.html">Curiosidades</a></li>
+      </ul>
+
+      <div class="footer-copy-text">
+        &copy; The Mentalist Fanpage.
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/seasons.js"></script>
+</body>
+
+</html>

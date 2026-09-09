@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="El enigma completo de Red John (John el Rojo): La firma de sangre, el poema Tyger Tyger de William Blake, los 7 sospechosos y la Asociación Blake.">
+  <title>El Misterio de Red John (John el Rojo) | The Mentalist</title>
+  
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body class="red-john-page">
+
+  <!-- Encabezado Principal & Navegación -->
+  <header class="site-header" id="mainHeader" style="border-bottom-color: rgba(155, 17, 36, 0.45);">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo" title="The Mentalist Fanpage">
+        <div class="brand-icon">
+          <img src="img/Red-John-Smiley-Face.png" alt="Red John Smiley" class="brand-smiley-img">
+          <div class="blood-drip-container">
+            <span class="blood-drip drip-left"></span>
+            <span class="blood-drip drip-right"></span>
+            <span class="blood-drop drop-left"></span>
+            <span class="blood-drop drop-right"></span>
+            <span class="blood-puddle"></span>
+          </div>
+        </div>
+        <div class="brand-text">
+          <span>THE</span>
+          <span class="logo-boxed" style="border-color: #ff999f; color: #ffb3b8;">MENTALIST</span>
+        </div>
+      </a>
+
+      <nav aria-label="Navegación principal">
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="index.html" class="nav-link">Inicio</a></li>
+          <li><a href="personajes.html" class="nav-link">Personajes</a></li>
+          <li><a href="temporadas.html" class="nav-link">Temporadas</a></li>
+          <li><a href="red-john.html" class="nav-link active nav-red-john">Misterio Red John</a></li>
+          <li><a href="curiosidades.html" class="nav-link">Curiosidades</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="ambient-audio-btn" id="ambientAudioBtn" title="Reproducir Tema de Red John (J.S. Bach)">
+          <div class="audio-equalizer">
+            <span></span><span></span><span></span>
+          </div>
+          <span class="btn-text">Tema Red John (Bach)</span>
+        </button>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="padding: 4rem 1.5rem 6rem; position: relative; z-index: 1;">
+    
+    <!-- HERO SECTION RED JOHN (Sin icon wrapper ni badge crimson) -->
+    <div class="red-john-hero">
+      <h1 style="font-size: clamp(2.4rem, 4.8vw, 4rem); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.08em;">
+        El Enigma de <span class="text-crimson">Red John</span>
+      </h1>
+
+      <p style="color: var(--text-secondary); max-width: 720px; margin: 0 auto; font-size: 1.1rem; line-height: 1.8;">
+        Durante seis temporadas, una presencia invisible atormentó a Patrick Jane. No era un simple criminal; era un titiritero carismático infiltrado en las altas esferas de la ley.
+      </p>
+    </div>
+
+    <!-- EL POEMA DE WILLIAM BLAKE (TYGER TYGER) -->
+    <section class="poem-box">
+      <span class="badge badge-crimson" style="margin-bottom: 1.25rem;">LA CONTRASEÑA EN LAS SOMBRAS</span>
+      <p>
+        "Tyger, Tyger, burning bright,<br>
+        In the forests of the night;<br>
+        What immortal hand or eye,<br>
+        Could frame thy fearful symmetry?"
+      </p>
+      <cite>— William Blake (1794), susurrado por Red John al oído de Patrick Jane</cite>
+    </section>
+
+    <!-- LA ASOCIACIÓN BLAKE (Detalle ampliado de 7 renglones) -->
+    <section class="glass-card crimson-hover" style="max-width: 960px; margin: 0 auto 5rem; padding: 2.5rem; border-color: var(--border-crimson); background: rgba(12, 12, 16, 0.92);">
+      <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem;">
+        <div style="width: 44px; height: 44px; border-radius: 4px; background: rgba(128, 8, 23, 0.3); border: 1px solid var(--crimson-bright); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: #ff8080;">
+          🔺
+        </div>
+        <div>
+          <h2 style="font-size: 1.6rem; color: var(--cream-pure);">La Asociación Blake (The Blake Association)</h2>
+          <span style="font-size: 0.82rem; color: var(--crimson-bright); font-family: var(--font-typewriter); text-transform: uppercase;">Sociedad secreta institucional</span>
+        </div>
+      </div>
+
+      <p style="color: var(--text-secondary); line-height: 1.85; margin-bottom: 1.25rem;">
+        Fundada y dirigida en las sombras por el mismísimo Red John (Thomas McAllister), la Asociación Blake constituyó una vasta conspiración criminal secreta enraizada en las instituciones judiciales y policiales de California. Su red incluía jueces de distrito, agentes de campo del FBI, directores del CBI, detectives locales y peritos forenses, todos unidos por un pacto inquebrantable de complicidad forzada.
+      </p>
+      <p style="color: var(--text-secondary); line-height: 1.85;">
+        Para reconocerse entre sí en situaciones encubiertas, sus miembros utilizaban los versos del célebre poema de William Blake como contraseña ("Tyger, Tyger") y portaban un tatuaje identificador de tres puntos alineados en su hombro izquierdo. El mecanismo operaba como un sindicato de favores siniestros: cuando un miembro cometía un homicidio, alteraba un peritaje o se enfrentaba a una investigación de Asuntos Internos, la red desviaba pesquisas, fabricaba coartadas o eliminaba testigos para asegurarle impunidad total. Esta maquinaria convirtió a la propia ley en el escudo impenetrable de Red John hasta que Patrick Jane descifró el tatuaje y forzó la confesión de Reede Smith, desmoronando la sociedad desde sus cimientos.
+      </p>
+    </section>
+
+    <!-- LOS 7 SOSPECHOSOS OFICIALES DE LA LISTA DE JANE (SIN HUECOS VACÍOS) -->
+    <section style="margin-bottom: 4rem;">
+      <div class="section-header">
+        <span class="badge badge-crimson">TEMPORADA 5 / EPISODIO 22</span>
+        <h2>Los Siete <span class="text-crimson">Sospechosos</span> Finales</h2>
+        <p>
+          Patrick Jane redujo la lista definitiva a siete hombres tras descartar miles de personas de su pasado. Red John predijo exactamente los mismos siete nombres.
+        </p>
+      </div>
+
+      <!-- Cuadrícula adaptativa: los contenedores que queden solos en la fila se expanden al ancho completo -->
+      <div class="suspects-grid">
+        
+        <!-- Sospechoso 1: Brett Partridge -->
+        <article class="suspect-card">
+          <div style="display:flex; justify-content:space-between; margin-bottom: 0.75rem;">
+            <span class="badge badge-cbi">#1 FORENSE</span>
+            <span class="badge badge-crimson">DESCARTE FATAL</span>
+          </div>
+          <div style="display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 0.75rem;">
+            <img src="img/characters/brett_partridge.jpg" alt="Brett Partridge" style="width: 70px; height: 95px; object-fit: cover; border-radius: 4px; border: 1px solid var(--border-crimson); flex-shrink: 0;">
+            <div>
+              <h3 style="font-size: 1.3rem; margin-bottom: 0.25rem; color: var(--cream-pure);">Brett Partridge</h3>
+              <p style="font-size: 0.82rem; color: var(--crimson-bright); margin-bottom: 0.25rem; text-transform: uppercase; font-weight: 600;">Jefe Técnico Forense del CBI</p>
+            </div>
+          </div>
+          <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
+            Fascinado de forma mórbida con las escenas del crimen de Red John. <strong>Muerte:</strong> En el inicio de la temporada 6 (6x01), Red John lo emboscó y degolló en una casa abandonada; antes de expirar susurró a Teresa Lisbon la contraseña <em>"Tyger, Tyger"</em>.
+          </p>
+        </article>
+
+        <!-- Sospechoso 2: Bob Kirkland -->
+        <article class="suspect-card">
+          <div style="display:flex; justify-content:space-between; margin-bottom: 0.75rem;">
+            <span class="badge badge-cbi">#2 SEGURIDAD NACIONAL</span>
+            <span class="badge badge-crimson">VENGADOR CAÍDO</span>
+          </div>
+          <div style="display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 0.75rem;">
+            <img src="img/characters/bob_kirkland.jpg" alt="Bob Kirkland" style="width: 70px; height: 95px; object-fit: cover; border-radius: 4px; border: 1px solid var(--border-crimson); flex-shrink: 0;">
+            <div>
+              <h3 style="font-size: 1.3rem; margin-bottom: 0.25rem; color: var(--cream-pure);">Bob Kirkland</h3>
+              <p style="font-size: 0.82rem; color: var(--crimson-bright); margin-bottom: 0.25rem; text-transform: uppercase; font-weight: 600;">Agente de Homeland Security</p>
+            </div>
+          </div>
+          <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
+            Operaba al margen de la ley buscando a Red John para vengar el asesinato de su hermano gemelo Michael. <strong>Muerte:</strong> En 6x04, fue trasladado de prisión federal y acribillado a traición por la espalda por el agente Reede Smith en una carretera desierta.
+          </p>
+        </article>
+
+        <!-- Sospechoso 3: Ray Haffner -->
+        <article class="suspect-card">
+          <div style="display:flex; justify-content:space-between; margin-bottom: 0.75rem;">
+            <span class="badge badge-cbi">#3 EX-CBI</span>
+            <span class="badge badge-crimson">EXPLOSIÓN</span>
+          </div>
+          <div style="display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 0.75rem;">
+            <img src="img/characters/ray_haffner.jpg" alt="Ray Haffner" style="width: 70px; height: 95px; object-fit: cover; border-radius: 4px; border: 1px solid var(--border-crimson); flex-shrink: 0;">
+            <div>
+              <h3 style="font-size: 1.3rem; margin-bottom: 0.25rem; color: var(--cream-pure);">Ray Haffner</h3>
+              <p style="font-size: 0.82rem; color: var(--crimson-bright); margin-bottom: 0.25rem; text-transform: uppercase; font-weight: 600;">Ex-Agente CBI / Detective Privado</p>
+            </div>
+          </div>
+          <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
+            Ex-líder de equipo y miembro devoto de la secta Visualize. Mantenía una vieja rivalidad con Jane. <strong>Muerte:</strong> Falleció destrozado en 6x06 por la bomba colocada en la casa de Jane en Malibú cuando este reunió a los cinco sospechosos finales.
+          </p>
+        </article>
+
+        <!-- Sospechoso 4: Reede Smith -->
+        <article class="suspect-card">
+          <div style="display:flex; justify-content:space-between; margin-bottom: 0.75rem;">
+            <span class="badge badge-cbi">#4 AGENTE FEDERAL</span>
+            <span class="badge badge-green">CONFESOR VIVO</span>
+          </div>
+          <div style="display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 0.75rem;">
+            <img src="img/characters/reede_smith.jpg" alt="Reede Smith" style="width: 70px; height: 95px; object-fit: cover; border-radius: 4px; border: 1px solid var(--border-crimson); flex-shrink: 0;">
+            <div>
+              <h3 style="font-size: 1.3rem; margin-bottom: 0.25rem; color: var(--cream-pure);">Reede Smith</h3>
+              <p style="font-size: 0.82rem; color: var(--crimson-bright); margin-bottom: 0.25rem; text-transform: uppercase; font-weight: 600;">Agente Especial del FBI</p>
+            </div>
+          </div>
+          <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
+            Miembro activo de la Asociación Blake con el tatuaje de los tres puntos. Sobrevivió a la explosión de Malibú y, al ser atacado por sus propios cómplices, se entregó al CBI confesando toda la trama a cambio de protección judicial (único sospechoso vivo).
+          </p>
+        </article>
+
+        <!-- Sospechoso 5: Gale Bertram -->
+        <article class="suspect-card">
+          <div style="display:flex; justify-content:space-between; margin-bottom: 0.75rem;">
+            <span class="badge badge-cbi">#5 ALTO MANDO</span>
+            <span class="badge badge-crimson">SEÑUELO EJECUTADO</span>
+          </div>
+          <div style="display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 0.75rem;">
+            <img src="img/characters/gale_bertram.jpg" alt="Gale Bertram" style="width: 70px; height: 95px; object-fit: cover; border-radius: 4px; border: 1px solid var(--border-crimson); flex-shrink: 0;">
+            <div>
+              <h3 style="font-size: 1.3rem; margin-bottom: 0.25rem; color: var(--cream-pure);">Gale Bertram</h3>
+              <p style="font-size: 0.82rem; color: var(--crimson-bright); margin-bottom: 0.25rem; text-transform: uppercase; font-weight: 600;">Director de la CBI</p>
+            </div>
+          </div>
+          <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
+            Director cínico y socio de la conspiración utilizado como señuelo público para desviar la atención de McAllister. <strong>Muerte:</strong> En 6x08, al reunirse con Jane en la capilla del cementerio, fue ejecutado de un disparo por Oscar Cordero por orden de McAllister.
+          </p>
+        </article>
+
+        <!-- Sospechoso 6: Brett Stiles (Intercambiado de posición) -->
+        <article class="suspect-card">
+          <div style="display:flex; justify-content:space-between; margin-bottom: 0.75rem;">
+            <span class="badge badge-cbi">#6 GURÚ ESPIRITUAL</span>
+            <span class="badge badge-crimson">EXPLOSIÓN MALIBÚ</span>
+          </div>
+          <div style="display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 0.75rem;">
+            <img src="img/characters/brett_stiles.jpg" alt="Brett Stiles" style="width: 70px; height: 95px; object-fit: cover; border-radius: 4px; border: 1px solid var(--border-crimson); flex-shrink: 0;">
+            <div>
+              <h3 style="font-size: 1.3rem; margin-bottom: 0.25rem; color: var(--cream-pure);">Brett Stiles</h3>
+              <p style="font-size: 0.82rem; color: var(--crimson-bright); margin-bottom: 0.25rem; text-transform: uppercase; font-weight: 600;">Líder Supremo de Visualize</p>
+            </div>
+          </div>
+          <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
+            Líder omnipotente de la iglesia Visualize y mentor filosófico con nexos con la primera víctima de Red John en 1988. <strong>Muerte:</strong> Sabiendo que padecía un cáncer terminal, acudió a la reunión en la casa de Jane en Malibú y pereció al detonar la bomba (6x06).
+          </p>
+        </article>
+
+        <!-- Sospechoso 7: Thomas McAllister (EL VERDADERO RED JOHN) -->
+        <article class="suspect-card" style="border-color: var(--crimson-bright); background: linear-gradient(170deg, rgba(128, 8, 23, 0.4) 0%, rgba(12, 12, 18, 0.95) 100%);">
+          <div style="display:flex; justify-content:space-between; margin-bottom: 0.75rem;">
+            <span class="badge badge-crimson">#7 IDENTIDAD REVELADA</span>
+            <span class="badge badge-crimson">EL VERDADERO ASESINO</span>
+          </div>
+          <div style="display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 0.75rem;">
+            <img src="img/characters/thomas_mcallister.jpg" alt="Thomas McAllister" style="width: 70px; height: 95px; object-fit: cover; border-radius: 4px; border: 1px solid var(--crimson-bright); flex-shrink: 0;">
+            <div>
+              <h3 style="font-size: 1.4rem; color: #ffb3b8; margin-bottom: 0.25rem;">Thomas McAllister</h3>
+              <p style="font-size: 0.82rem; color: var(--cream-pure); margin-bottom: 0.25rem; text-transform: uppercase; font-weight: 700;">Sheriff del Condado de Napa</p>
+            </div>
+          </div>
+          <p style="font-size: 0.88rem; color: var(--cream-muted); line-height: 1.6;">
+            <strong>El auténtico Red John.</strong> Conoció a Patrick Jane en el episodio 1x02 y fingió su muerte en Malibú suplantando su cadáver con ADN forense alterado. <strong>Muerte:</strong> En el episodio 6x08 ("Red John"), tras ser herido en la capilla y perseguido hasta un parque público de Sacramento, Jane lo inmovilizó y lo estranguló con sus propias manos hasta quitarle la vida.
+          </p>
+        </article>
+
+      </div>
+    </section>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER SIMPLIFICADO -->
+  <footer class="site-footer">
+    <div class="container footer-simple-content">
+      <div class="footer-brand-compact">
+        <span>THE</span>
+        <span style="border: 1px solid var(--cream-pure); padding: 0 0.35rem;">MENTALIST</span>
+        <span style="color: var(--text-muted); font-size: 0.75rem; font-weight: 400; font-family: var(--font-body);">| Red John Dossier</span>
+      </div>
+
+      <ul class="footer-nav-compact">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="personajes.html">Personajes</a></li>
+        <li><a href="temporadas.html">Temporadas</a></li>
+        <li><a href="red-john.html">Red John</a></li>
+        <li><a href="curiosidades.html">Curiosidades</a></li>
+      </ul>
+
+      <div class="footer-copy-text">
+        &copy; The Mentalist Fanpage. "Tyger, Tyger..."
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

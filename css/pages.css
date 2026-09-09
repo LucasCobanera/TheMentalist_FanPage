@@ -1,0 +1,945 @@
+/* ==========================================================================
+   THE MENTALIST - ESTILOS ESPECÍFICOS DE PÁGINAS Y MÓDULOS
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   HERO SECTION (Inicio)
+   Recuadros y sombras en VERDE extraído del logo oficial mentalistLogoGreen.jpg
+   -------------------------------------------------------------------------- */
+.hero-section {
+  position: relative;
+  padding: 4.5rem 0 4rem;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.hero-backdrop {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 75% 25%, rgba(57, 145, 95, 0.35) 0%, transparent 60%),
+    linear-gradient(180deg, rgba(8, 8, 10, 0.5) 0%, rgba(8, 8, 10, 0.98) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+.hero-badge {
+  margin-bottom: 1.25rem;
+}
+
+/* H1 exacto: "The mentalist" con recuadro y sombra verde */
+.hero-main-title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-logo);
+  font-weight: 900;
+  font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+  line-height: 1.05;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cream-pure);
+  margin-bottom: 1.75rem;
+}
+
+.hero-main-title .box-frame {
+  border: 3px solid var(--cream-pure);
+  padding: 0.2rem 1rem;
+  background: var(--green-box-bg);
+  box-shadow: 0 0 35px var(--green-glow);
+}
+
+.hero-definition {
+  background: rgba(18, 18, 24, 0.75);
+  border-left: 3px solid var(--green-bright);
+  padding: 1.2rem 1.5rem;
+  border-radius: 0 6px 6px 0;
+  margin-bottom: 1.75rem;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 20px rgba(67, 197, 142, 0.15);
+}
+
+.hero-definition p {
+  font-family: var(--font-typewriter);
+  font-size: 0.95rem;
+  color: var(--cream-muted);
+  line-height: 1.6;
+}
+
+.hero-definition cite {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--green-bright);
+  margin-top: 0.6rem;
+  font-style: normal;
+}
+
+.hero-description {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  margin-bottom: 2.25rem;
+  max-width: 580px;
+}
+
+.hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.hero-media {
+  position: relative;
+}
+
+.hero-poster-frame {
+  position: relative;
+  background: #000;
+  border: 2px solid var(--green-border);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 35px var(--green-glow);
+  transition: transform var(--transition-smooth);
+}
+
+.hero-poster-frame:hover {
+  transform: translateY(-4px);
+  border-color: var(--green-bright);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 45px var(--green-glow);
+}
+
+.hero-floating-quote {
+  position: absolute;
+  bottom: -1rem;
+  left: -1rem;
+  background: rgba(12, 12, 16, 0.95);
+  border: 1px solid var(--green-forest);
+  padding: 0.9rem 1.25rem;
+  border-radius: 6px;
+  box-shadow: var(--shadow-lg), 0 0 20px var(--green-glow);
+  max-width: 280px;
+  z-index: 3;
+}
+
+.hero-floating-quote p {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--cream-pure);
+  line-height: 1.4;
+}
+
+.hero-floating-quote span {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--green-bright);
+  margin-top: 0.35rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* --------------------------------------------------------------------------
+   CUADRÍCULAS ADAPTATIVAS (Cero espacios vacíos)
+   Si en una fila quedan menos contenedores, se expanden automáticamente
+   para ocupar todo el ancho disponible.
+   -------------------------------------------------------------------------- */
+.highlights-container,
+.dossier-grid,
+.suspects-grid,
+.curio-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.75rem;
+  width: 100%;
+}
+
+.highlights-container>*,
+.dossier-card,
+.suspect-card,
+.curio-grid>* {
+  flex: 1 1 320px;
+  min-width: 280px;
+}
+
+/* Encabezados de sección */
+.section-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 3.5rem;
+}
+
+.section-header .badge {
+  margin-bottom: 1rem;
+}
+
+.section-header h2 {
+  font-size: clamp(2rem, 3.2vw, 2.8rem);
+  margin-bottom: 0.85rem;
+}
+
+.section-header p {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+}
+
+/* --------------------------------------------------------------------------
+   PERSONAJES / DOSSIER POLICIAL (personajes.html)
+   -------------------------------------------------------------------------- */
+.filter-tabs {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-bottom: 3.5rem;
+}
+
+.filter-btn {
+  background: rgba(18, 18, 24, 0.6);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  padding: 0.6rem 1.25rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.filter-btn:hover {
+  color: var(--cream-pure);
+  border-color: var(--border-strong);
+  background: rgba(250, 246, 238, 0.06);
+}
+
+.filter-btn.active {
+  background: var(--green-forest);
+  color: #ffffff;
+  border-color: var(--green-bright);
+  box-shadow: 0 4px 14px rgba(67, 197, 142, 0.4);
+}
+
+.dossier-card {
+  background: linear-gradient(170deg, rgba(18, 18, 26, 0.95), rgba(10, 10, 14, 0.98));
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: all var(--transition-smooth);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.dossier-card::before {
+  content: "CBI RECORD";
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-family: var(--font-typewriter);
+  font-size: 0.68rem;
+  color: rgba(250, 246, 238, 0.25);
+  letter-spacing: 0.15em;
+  z-index: 2;
+}
+
+.dossier-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--green-border);
+  box-shadow: var(--shadow-lg), 0 0 25px rgba(67, 197, 142, 0.25);
+}
+
+.dossier-card.nemesis-card:hover {
+  border-color: var(--crimson-bordeaux);
+  box-shadow: var(--shadow-lg), var(--shadow-crimson);
+}
+
+.dossier-photo-wrap {
+  position: relative;
+  background: #050507;
+  border-bottom: 1px solid var(--border-subtle);
+  height: 340px;
+  overflow: hidden;
+}
+
+.dossier-photo-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform var(--transition-smooth);
+}
+
+.dossier-card:hover .dossier-photo-wrap img {
+  transform: scale(1.04);
+}
+
+.dossier-stamp {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  border: 2px solid var(--green-bright);
+  color: var(--green-bright);
+  font-family: var(--font-typewriter);
+  font-size: 0.72rem;
+  padding: 0.2rem 0.6rem;
+  text-transform: uppercase;
+  transform: rotate(-6deg);
+  background: rgba(8, 8, 10, 0.9);
+  border-radius: 2px;
+  letter-spacing: 0.1em;
+  box-shadow: 0 0 10px rgba(67, 197, 142, 0.3);
+}
+
+.dossier-stamp.red {
+  border-color: var(--crimson-bright);
+  color: #ff999f;
+  transform: rotate(8deg);
+  box-shadow: 0 0 10px rgba(193, 18, 31, 0.4);
+}
+
+.dossier-body {
+  padding: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.dossier-header {
+  margin-bottom: 1rem;
+}
+
+.dossier-name {
+  font-size: 1.45rem;
+  margin-bottom: 0.35rem;
+  color: var(--cream-pure);
+}
+
+.dossier-role {
+  font-size: 0.85rem;
+  color: var(--green-bright);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.dossier-desc {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+.dossier-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1.5rem;
+}
+
+.skill-tag {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 2px;
+  color: var(--cream-muted);
+}
+
+.dossier-footer {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* --------------------------------------------------------------------------
+   TEMPORADAS (temporadas.html)
+   -------------------------------------------------------------------------- */
+.seasons-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background: rgba(18, 18, 24, 0.85);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  padding: 1.25rem 1.75rem;
+  margin-bottom: 3rem;
+}
+
+.seasons-nav-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.season-pill {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  padding: 0.45rem 0.95rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.season-pill:hover,
+.season-pill.active {
+  background: var(--green-forest);
+  color: #fff;
+  border-color: var(--green-bright);
+  box-shadow: 0 0 12px var(--green-glow);
+}
+
+.spoiler-toggle-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 22px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: #2b2b36;
+  transition: .3s;
+  border-radius: 22px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 3px;
+  bottom: 3px;
+  background-color: var(--cream-pure);
+  transition: .3s;
+  border-radius: 50%;
+}
+
+input:checked+.slider {
+  background-color: var(--green-forest);
+}
+
+input:checked+.slider:before {
+  transform: translateX(22px);
+}
+
+.season-block {
+  position: relative;
+  margin-bottom: 3.5rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  background-color: rgba(18, 18, 26, 0.88);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 2.5rem;
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  transition: border-color var(--transition-smooth), box-shadow var(--transition-smooth), transform var(--transition-smooth);
+}
+
+.season-block::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(10, 11, 15, 0.92) 0%, rgba(14, 16, 22, 0.95) 100%);
+  z-index: 1;
+  pointer-events: none;
+  transition: background 0.3s ease;
+}
+
+.season-block:hover {
+  border-color: var(--green-border);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.8), 0 0 30px rgba(46, 116, 80, 0.3);
+}
+
+.season-block>* {
+  position: relative;
+  z-index: 2;
+}
+
+/* Imágenes de fondo por temporada */
+.season-block-1 {
+  background-image: url('../img/Seasons/S1.jpg');
+}
+
+.season-block-2 {
+  background-image: url('../img/Seasons/S2.jpg');
+}
+
+.season-block-3 {
+  background-image: url('../img/Seasons/S3.jpg');
+}
+
+.season-block-4 {
+  background-image: url('../img/Seasons/S4.jpg');
+}
+
+.season-block-5 {
+  background-image: url('../img/Seasons/S5.jpg');
+}
+
+.season-block-6 {
+  background-image: url('../img/Seasons/S6.jpg');
+}
+
+.season-block-7 {
+  background-image: url('../img/Seasons/S7.jpg');
+}
+
+.season-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 1.5rem;
+}
+
+.season-info h3 {
+  font-size: 1.85rem;
+  margin-bottom: 0.35rem;
+}
+
+.season-meta-tags {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 0.5rem;
+}
+
+.season-synopsis {
+  color: var(--text-secondary);
+  font-size: 1.02rem;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+.episodes-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  width: 100%;
+}
+
+.episode-card {
+  flex: 1 1 280px;
+  min-width: 250px;
+  background: rgba(10, 10, 14, 0.85);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  padding: 1.25rem;
+  transition: all var(--transition-fast);
+}
+
+.episode-card:hover {
+  border-color: var(--green-border);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+}
+
+.episode-num {
+  font-family: var(--font-typewriter);
+  font-size: 0.75rem;
+  color: var(--green-bright);
+  margin-bottom: 0.3rem;
+}
+
+.episode-title {
+  font-size: 1.05rem;
+  margin-bottom: 0.5rem;
+  color: var(--cream-pure);
+}
+
+.episode-plot {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.spoiler-content {
+  filter: blur(5px);
+  user-select: none;
+  transition: filter 0.3s ease;
+}
+
+.spoilers-revealed .spoiler-content {
+  filter: blur(0);
+  user-select: auto;
+}
+
+/* --------------------------------------------------------------------------
+   RED JOHN PAGE (red-john.html)
+   Fondo atmosférico de suspenso con linterna-smiley-web.jpg iluminando la pared
+   -------------------------------------------------------------------------- */
+body.red-john-page {
+  background-color: #040406;
+  background-image:
+    radial-gradient(circle at 50% 28%, rgba(4, 4, 6, 0.4) 0%, rgba(4, 4, 6, 0.88) 75%),
+    linear-gradient(180deg, rgba(4, 4, 6, 0.6) 0%, rgba(4, 4, 6, 0.95) 100%),
+    url('../img/linterna-smiley-web.jpg');
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+  background-attachment: fixed;
+  position: relative;
+}
+
+body.red-john-page::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 50% 35%, transparent 15%, rgba(4, 4, 6, 0.82) 80%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.red-john-hero {
+  text-align: center;
+  padding: 4.5rem 0 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.red-john-icon-wrapper {
+  width: 110px;
+  height: 110px;
+  margin: 0 auto 1.5rem;
+  filter: drop-shadow(0 0 25px rgba(193, 18, 31, 0.7));
+  animation: pulseGlow 4s infinite alternate;
+}
+
+.poem-box {
+  max-width: 680px;
+  margin: 3rem auto;
+  background: rgba(128, 8, 23, 0.15);
+  border: 1px solid var(--border-crimson);
+  border-radius: 4px;
+  padding: 2.5rem;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 0 40px rgba(128, 8, 23, 0.35);
+  backdrop-filter: blur(10px);
+}
+
+.poem-box p {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  line-height: 1.9;
+  color: #ffe6e8;
+  letter-spacing: 0.05em;
+}
+
+.poem-box cite {
+  display: block;
+  font-family: var(--font-typewriter);
+  font-size: 0.85rem;
+  color: var(--crimson-bright);
+  margin-top: 1rem;
+  font-style: normal;
+}
+
+.suspect-card {
+  background: rgba(12, 12, 18, 0.92);
+  border: 1px solid rgba(128, 8, 23, 0.35);
+  border-radius: 4px;
+  padding: 1.5rem;
+  transition: all var(--transition-smooth);
+}
+
+.suspect-card:hover {
+  border-color: var(--crimson-bright);
+  box-shadow: var(--shadow-crimson);
+  transform: translateY(-4px);
+}
+
+/* --------------------------------------------------------------------------
+   CURIOSIDADES & GENERADOR DE CITAS (curiosidades.html)
+   Estética con sombras verdes esmeralda/jade que armonizan con el index
+   -------------------------------------------------------------------------- */
+.quotes-generator-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--green-border);
+  border-radius: 10px;
+  padding: 3.5rem 2.5rem;
+  text-align: center;
+  max-width: 860px;
+  margin: 0 auto 3.5rem;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 35px rgba(46, 116, 80, 0.35);
+  background-color: #0b110e;
+  transition: all var(--transition-smooth);
+}
+
+.quotes-generator-card:hover {
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.9), var(--shadow-green);
+  border-color: var(--green-bright);
+}
+
+.quotes-bg-layer {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: opacity 0.4s ease, transform 0.6s ease;
+  z-index: 1;
+}
+
+.quotes-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 40%, rgba(6, 12, 9, 0.72) 0%, rgba(3, 6, 5, 0.93) 85%);
+  backdrop-filter: blur(1.5px);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.quotes-generator-content {
+  position: relative;
+  z-index: 3;
+}
+
+.quote-display {
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.quote-display blockquote {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+  line-height: 1.55;
+  color: var(--cream-pure);
+  margin-bottom: 0.85rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+}
+
+.quote-display cite {
+  font-family: var(--font-typewriter);
+  color: var(--green-bright);
+  font-size: 0.92rem;
+  font-style: normal;
+  letter-spacing: 0.05em;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* Grilla de curiosidades: 2 columnas a la par y 1 fila completa abajo */
+.curio-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.75rem;
+  width: 100%;
+}
+
+.curio-card {
+  background: rgba(12, 17, 15, 0.92);
+  border: 1px solid var(--green-border);
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.65), 0 0 18px rgba(46, 116, 80, 0.2);
+  transition: all var(--transition-smooth);
+  display: flex;
+  flex-direction: column;
+}
+
+.curio-card-full {
+  grid-column: 1 / -1;
+}
+
+.curio-card-img-wrap {
+  width: 100%;
+  height: 220px;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+  border: 1px solid rgba(85, 194, 153, 0.35);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+}
+
+.curio-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--transition-smooth);
+}
+
+.curio-card:hover .curio-card-img {
+  transform: scale(1.05);
+}
+
+.curio-card:hover {
+  border-color: var(--green-bright);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.8), 0 0 30px rgba(67, 197, 142, 0.4);
+  transform: translateY(-4px);
+}
+
+/* --------------------------------------------------------------------------
+   HEADER DINÁMICO DE TEMPORADAS (temporadas.html)
+   -------------------------------------------------------------------------- */
+.season-dynamic-header {
+  position: relative;
+  min-height: 280px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--green-border);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(46, 116, 80, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3.5rem 2rem;
+  margin-bottom: 2.5rem;
+  background-color: #0c0f12;
+  transition: all var(--transition-smooth);
+}
+
+.season-header-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: opacity 0.5s ease, transform 0.6s ease;
+  z-index: 1;
+}
+
+.season-header-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(6, 10, 8, 0.68) 0%, rgba(4, 6, 5, 0.92) 85%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.season-header-content {
+  position: relative;
+  z-index: 3;
+  max-width: 850px;
+}
+
+.season-header-content h1 {
+  font-size: clamp(1.8rem, 3.5vw, 2.7rem);
+  margin-bottom: 0.75rem;
+  color: var(--cream-pure);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.season-header-content p {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.65;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+}
+
+/* Bloque destacado: El Palacio de la Memoria */
+.memory-palace-showcase {
+  background: linear-gradient(135deg, rgba(16, 28, 22, 0.95) 0%, rgba(8, 14, 11, 0.98) 100%);
+  border: 1.5px solid var(--green-bright);
+  border-radius: 8px;
+  padding: 2.75rem 2.25rem;
+  margin-top: 2.5rem;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.85), var(--shadow-green);
+  position: relative;
+  overflow: hidden;
+}
+
+.memory-palace-showcase::after {
+  content: '🏛️';
+  position: absolute;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 8rem;
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+.memory-palace-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.75rem;
+}
+
+.memory-pillar {
+  background: rgba(8, 12, 10, 0.8);
+  border: 1px solid rgba(85, 194, 153, 0.35);
+  border-radius: 6px;
+  padding: 1.35rem;
+  transition: all var(--transition-fast);
+}
+
+.memory-pillar:hover {
+  border-color: var(--green-bright);
+  box-shadow: 0 0 20px rgba(67, 197, 142, 0.25);
+  transform: translateY(-2px);
+}
+
+.memory-pillar-title {
+  color: var(--green-bright);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@media (max-width: 900px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .hero-main-title {
+    flex-wrap: wrap;
+  }
+
+  .seasons-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Fanpage oficial no comercial dedicada a The Mentalist (El Mentalista). Explora los personajes del CBI, guía de temporadas y el misterio de Red John.">
+  <title>The Mentalist | Fanpage Oficial</title>
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+
+<body>
+
+  <!-- Encabezado Principal & Navegación -->
+  <header class="site-header" id="mainHeader">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo" title="The Mentalist Fanpage">
+        <div class="brand-icon">
+          <img src="img/Red-John-Smiley-Face.png" alt="Red John Smiley" class="brand-smiley-img">
+          <div class="blood-drip-container">
+            <span class="blood-drip drip-left"></span>
+            <span class="blood-drip drip-right"></span>
+            <span class="blood-drop drop-left"></span>
+            <span class="blood-drop drop-right"></span>
+            <span class="blood-puddle"></span>
+          </div>
+        </div>
+        <div class="brand-text">
+          <span>THE</span>
+          <span class="logo-boxed">MENTALIST</span>
+        </div>
+      </a>
+
+      <!-- Menú de Navegación -->
+      <nav aria-label="Navegación principal">
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="index.html" class="nav-link active">Inicio</a></li>
+          <li><a href="personajes.html" class="nav-link">Personajes</a></li>
+          <li><a href="temporadas.html" class="nav-link">Temporadas</a></li>
+          <li><a href="red-john.html" class="nav-link nav-red-john">Misterio Red John</a></li>
+          <li><a href="curiosidades.html" class="nav-link">Curiosidades</a></li>
+        </ul>
+      </nav>
+
+      <!-- Acciones de cabecera -->
+      <div class="nav-actions">
+        <button class="ambient-audio-btn" id="ambientAudioBtn" title="Activar/Desactivar sonido ambiental">
+          <div class="audio-equalizer">
+            <span></span><span></span><span></span>
+          </div>
+          <span class="btn-text">Ambiente</span>
+        </button>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero-section" id="hero">
+      <div class="hero-backdrop"></div>
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span class="badge badge-green">BRUNO HELLER / CBS / WARNER BROS</span>
+          </div>
+
+          <!-- H1 PRINCIPAL SOLICITADO EXACTAMENTE: "The mentalist" CON RECUADRO Y SOMBRA VERDE -->
+          <h1 class="hero-main-title">
+            <span>THE</span>
+            <span class="box-frame">MENTALIST</span>
+          </h1>
+
+          <div class="hero-definition">
+            <p>
+              "<strong>Mentalista:</strong> Alguien que utiliza la agudeza mental, la hipnosis y/o la sugestión... Un
+              maestro manipulador del pensamiento y del comportamiento."
+            </p>
+            <cite>— Definición oficial al inicio de cada episodio</cite>
+          </div>
+
+          <p class="hero-description">
+            Bienvenido al espacio definitivo dedicado a <strong>The Mentalist</strong>. Acompaña al consultor
+            <strong>Patrick Jane</strong>, a Teresa Lisbon y al equipo del CBI en Sacramento a través de la psicología
+            criminal, los engaños y la persecución implacable de Red John.
+          </p>
+
+          <div class="hero-ctas">
+            <a href="personajes.html" class="btn btn-green" id="btnExploreCharacters">
+              <span>Explorar Personajes</span>
+              <span>➔</span>
+            </a>
+            <a href="red-john.html" class="btn btn-crimson" id="btnExploreRedJohn">
+              <span>Misterio Red John</span>
+              <span>👁</span>
+            </a>
+            <a href="temporadas.html" class="btn btn-outline" id="btnExploreSeasons">
+              <span>Guía de Temporadas</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Portada con Jane & Lisbon -->
+        <div class="hero-media">
+          <div class="hero-poster-frame">
+            <img src="img/jane&lisbon.jpeg" alt="Patrick Jane & Teresa Lisbon"
+              style="width: 100%; height: auto; display: block; object-fit: cover;">
+          </div>
+
+          <div class="hero-floating-quote animate-float">
+            <p>"No existen los psíquicos, Teresa. Solo personas que no saben ver."</p>
+            <span>— Patrick Jane</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIONES DESTACADAS (CERO ESPACIOS VACÍOS, SE ADAPTAN AL ANCHO COMPLETO) -->
+    <section class="container" style="padding: 4.5rem 1.5rem 5rem;">
+      <div class="highlights-container">
+
+        <article class="glass-card green-hover">
+          <div style="font-size: 2rem; margin-bottom: 0.75rem; color: var(--green-bright);">📁</div>
+          <span class="badge badge-green" style="margin-bottom: 0.75rem;">Expedientes Policiales</span>
+          <h3 style="font-size: 1.35rem; margin-bottom: 0.5rem; color: var(--cream-pure);">Unidad de Homicidios CBI</h3>
+          <p style="color: var(--text-secondary); font-size: 0.92rem; margin-bottom: 1.5rem; line-height: 1.6;">
+            Dossier completo de Patrick Jane, Teresa Lisbon, Kimball Cho, Wayne Rigsby, Grace Van Pelt y aliados con
+            habilidades y datos psicológicos oficiales.
+          </p>
+          <div style="margin-top: auto;">
+            <a href="personajes.html"
+              style="color: var(--green-bright); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 0.4rem;">
+              Ver expedientes <span>➔</span>
+            </a>
+          </div>
+        </article>
+
+        <article class="glass-card green-hover">
+          <div style="font-size: 2rem; margin-bottom: 0.75rem; color: var(--green-bright);">🎬</div>
+          <span class="badge badge-green" style="margin-bottom: 0.75rem;">7 Temporadas (2008 - 2015)</span>
+          <h3 style="font-size: 1.35rem; margin-bottom: 0.5rem; color: var(--cream-pure);">Guía de Temporadas</h3>
+          <p style="color: var(--text-secondary); font-size: 0.92rem; margin-bottom: 1.5rem; line-height: 1.6;">
+            151 episodios organizados cronológicamente con sinopsis, capítulos clave y control conmutador para ver u
+            ocultar spoilers de la trama.
+          </p>
+          <div style="margin-top: auto;">
+            <a href="temporadas.html"
+              style="color: var(--green-bright); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 0.4rem;">
+              Explorar temporadas <span>➔</span>
+            </a>
+          </div>
+        </article>
+
+        <article class="glass-card crimson-hover">
+          <div style="font-size: 2rem; margin-bottom: 0.75rem; color: var(--crimson-bright);">🩸</div>
+          <span class="badge badge-crimson" style="margin-bottom: 0.75rem;">Asociación Blake</span>
+          <h3 style="font-size: 1.35rem; margin-bottom: 0.5rem; color: #ffb3b8;">El Misterio de Red John</h3>
+          <p style="color: var(--text-secondary); font-size: 0.92rem; margin-bottom: 1.5rem; line-height: 1.6;">
+            El símbolo de sangre, los 7 sospechosos de la lista de Patrick Jane, el poema "Tyger Tyger" de William Blake
+            y la conspiración policial encubierta.
+          </p>
+          <div style="margin-top: auto;">
+            <a href="red-john.html"
+              style="color: #ff999f; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 0.4rem;">
+              Desentrañar misterio <span>➔</span>
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER SIMPLIFICADO -->
+  <footer class="site-footer">
+    <div class="container footer-simple-content">
+      <div class="footer-brand-compact">
+        <span>THE</span>
+        <span style="border: 1px solid var(--cream-pure); padding: 0 0.35rem;">MENTALIST</span>
+        <span style="color: var(--text-muted); font-size: 0.75rem; font-weight: 400; font-family: var(--font-body);">|
+          Fanpage Tributo</span>
+      </div>
+
+      <ul class="footer-nav-compact">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="personajes.html">Personajes</a></li>
+        <li><a href="temporadas.html">Temporadas</a></li>
+        <li><a href="red-john.html">Red John</a></li>
+        <li><a href="curiosidades.html">Curiosidades</a></li>
+      </ul>
+
+      <div class="footer-copy-text">
+        &copy; The Mentalist Fanpage. "Tyger, Tyger..."
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,221 @@
+/* ==========================================================================
+   THE MENTALIST - SISTEMA DE DISEÑO & ESTILOS GLOBALES
+   Paleta inspirada en el póster oficial & variante verde:
+   - Verde Esmeralda / Jade Logo: #2e7450, #39915f, #55c299, #43c58e
+   - Blanco Crema / Marfil: #FAF6EE / #F4EFE6
+   - Rojo Burdeos / Crimson: #800817, #9B1124, #660511
+   - Negro / Noir Cinemático: #08080A, #101014, #181820
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Montserrat:wght@400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700&family=Special+Elite&display=swap');
+
+:root {
+  /* Fondo base */
+  --color-bg-deep: #08080a;
+  --color-bg-surface: #101015;
+  --color-bg-card: rgba(18, 18, 24, 0.85);
+  --color-bg-card-hover: rgba(28, 28, 38, 0.95);
+
+  /* Marfil / Crema Póster */
+  --cream-pure: #FAF6EE;
+  --cream-muted: #E8E2D5;
+  --cream-dark: #C9C2B3;
+  --cream-glow: rgba(250, 246, 238, 0.18);
+
+  /* Verde Esmeralda / Jade (Extraído del logo mentalistLogoGreen.jpg) */
+  --green-forest: #2e7450;
+  --green-jade: #39915f;
+  --green-bright: #55c299;
+  --green-vibrant: #43c58e;
+  --green-glow: rgba(67, 197, 142, 0.45);
+  --green-box-bg: rgba(46, 116, 80, 0.28);
+  --green-border: rgba(85, 194, 153, 0.55);
+
+  /* Burdeos & Rojo Sangre Profundo (Para páginas de misterio / Red John) */
+  --crimson-bordeaux: #800817;
+  --crimson-vibrant: #9b1124;
+  --crimson-bright: #c1121f;
+  --crimson-dark: #58030d;
+  --crimson-glow: rgba(155, 17, 36, 0.45);
+
+  /* Neutros & Tipografía */
+  --text-primary: #FAF6EE;
+  --text-secondary: #B0AFA8;
+  --text-muted: #73737A;
+  --border-subtle: rgba(250, 246, 238, 0.12);
+  --border-strong: rgba(250, 246, 238, 0.35);
+  --border-crimson: rgba(155, 17, 36, 0.5);
+
+  /* Tipografías */
+  --font-logo: 'Montserrat', sans-serif;
+  --font-display: 'Cinzel', Georgia, serif;
+  --font-body: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-typewriter: 'Special Elite', monospace;
+
+  /* Sombras */
+  --shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.85);
+  --shadow-green: 0 0 35px rgba(67, 197, 142, 0.45);
+  --shadow-crimson: 0 0 30px rgba(155, 17, 36, 0.45);
+
+  /* Transiciones */
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Reset básico */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  color-scheme: dark;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg-deep);
+  color: var(--text-primary);
+  line-height: 1.65;
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 9px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg-deep);
+}
+::-webkit-scrollbar-thumb {
+  background: #252530;
+  border-radius: 4px;
+  border: 2px solid var(--color-bg-deep);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--green-jade);
+}
+
+/* Contenedor estándar */
+.container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Titulares */
+h1, h2, h3, h4, .font-serif {
+  font-family: var(--font-display);
+  letter-spacing: 0.04em;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.text-cream {
+  color: var(--cream-pure);
+}
+
+.text-green {
+  color: var(--green-bright);
+}
+
+.text-crimson {
+  color: var(--crimson-bright);
+}
+
+/* Cuadrículas elásticas adaptativas (Cero espacios vacíos) */
+.flex-adaptive-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.75rem;
+  width: 100%;
+}
+
+.flex-adaptive-grid > * {
+  flex: 1 1 320px;
+  min-width: 280px;
+}
+
+/* Insignias */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  border-radius: 4px;
+}
+
+.badge-cream {
+  background: rgba(250, 246, 238, 0.1);
+  border: 1px solid var(--border-strong);
+  color: var(--cream-pure);
+}
+
+.badge-green {
+  background: var(--green-box-bg);
+  border: 1px solid var(--green-border);
+  color: var(--green-bright);
+  box-shadow: 0 0 14px rgba(67, 197, 142, 0.25);
+}
+
+.badge-crimson {
+  background: rgba(128, 8, 23, 0.3);
+  border: 1px solid var(--crimson-bordeaux);
+  color: #ffb3b8;
+}
+
+.badge-cbi {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-subtle);
+  color: var(--cream-muted);
+}
+
+/* Símbolo Red John */
+.red-john-symbol {
+  display: inline-block;
+  vertical-align: middle;
+  transition: transform var(--transition-fast);
+}
+
+.red-john-symbol:hover {
+  transform: rotate(6deg) scale(1.1);
+  filter: drop-shadow(0 0 10px var(--crimson-bright));
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.85; }
+}
+
+@keyframes floatElement {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.animate-float {
+  animation: floatElement 5s ease-in-out infinite;
+}
