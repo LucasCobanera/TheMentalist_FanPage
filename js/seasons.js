@@ -172,42 +172,34 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function updateSeasonHeader(selectedSeason) {
+  const dynamicHeader = document.getElementById('seasonsDynamicHeader');
   const headerBg = document.getElementById('seasonHeaderBg');
+  const headerImg = document.getElementById('seasonHeaderImg');
   const headerBadge = document.getElementById('seasonHeaderBadge');
   const headerTitle = document.getElementById('seasonHeaderTitle');
   const headerDesc = document.getElementById('seasonHeaderDesc');
 
+  if (headerDesc) headerDesc.remove();
+
   if (!headerTitle) return;
 
   if (selectedSeason === 'all') {
-    if (headerBadge) headerBadge.textContent = '151 EPISODIOS | CBS (2008 - 2015)';
-    headerTitle.innerHTML = 'Cronología de <span style="color: var(--green-bright);">Temporadas</span>';
-    if (headerDesc) {
-      headerDesc.textContent = 'Sigue la trayectoria completa de Patrick Jane: desde su llegada al CBI, pasando por la confrontación directa contra Red John, hasta su desenlace en el FBI de Austin, Texas.';
-    }
-    if (headerBg) {
-      headerBg.style.opacity = '0.35';
-      setTimeout(() => {
-        headerBg.style.backgroundImage = "url('img/Seasons/temporadas.jpg')";
-        headerBg.style.opacity = '1';
-      }, 150);
-    }
+    const bgUrl = "url('img/Seasons/temporadas.jpg')";
+    if (headerBadge) headerBadge.textContent = '151 EPISODIOS';
+    headerTitle.textContent = 'Temporadas';
+    if (headerImg) headerImg.src = 'img/Seasons/temporadas.jpg';
+    if (headerBg) headerBg.style.backgroundImage = bgUrl;
+    if (dynamicHeader) dynamicHeader.style.backgroundImage = bgUrl;
   } else {
     const s = SEASONS_DATA.find(item => item.season.toString() === selectedSeason.toString());
     if (!s) return;
 
-    if (headerBadge) headerBadge.textContent = `TEMPORADA ${s.season} | ${s.year} • ${s.episodesCount} EPISODIOS`;
-    headerTitle.innerHTML = `Temporada ${s.season}: <span style="color: var(--green-bright);">${s.arc}</span>`;
-    if (headerDesc) {
-      headerDesc.textContent = s.synopsis;
-    }
-    if (headerBg) {
-      headerBg.style.opacity = '0.35';
-      setTimeout(() => {
-        headerBg.style.backgroundImage = `url('img/Seasons/S${s.season}.jpg')`;
-        headerBg.style.opacity = '1';
-      }, 150);
-    }
+    const bgUrl = `url('img/Seasons/S${s.season}.jpg')`;
+    if (headerBadge) headerBadge.textContent = `${s.episodesCount} EPISODIOS`;
+    headerTitle.textContent = `T${s.season}: "${s.arc}"`;
+    if (headerImg) headerImg.src = `img/Seasons/S${s.season}.jpg`;
+    if (headerBg) headerBg.style.backgroundImage = bgUrl;
+    if (dynamicHeader) dynamicHeader.style.backgroundImage = bgUrl;
   }
 }
 

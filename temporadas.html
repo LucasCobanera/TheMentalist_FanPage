@@ -64,46 +64,42 @@
     </div>
   </header>
 
-  <main class="container" style="padding: 4rem 1.5rem 6rem;">
+  <!-- ENCABEZADO HERO DINÁMICO DE TEMPORADAS (100% DEL ANCHO DE PANTALLA) -->
+  <div class="section-header season-dynamic-header" id="seasonsDynamicHeader">
+    <div class="season-header-bg" id="seasonHeaderBg">
+      <img id="seasonHeaderImg" src="img/Seasons/temporadas.jpg" alt="Temporadas" class="season-header-img">
+    </div>
+    <div class="season-header-content">
+      <span class="badge badge-gold" id="seasonHeaderBadge">151 EPISODIOS</span>
+      <h1 id="seasonHeaderTitle">Temporadas</h1>
 
-    <!-- ENCABEZADO HERO DINÁMICO DE TEMPORADAS -->
-    <div class="section-header season-dynamic-header" id="seasonsDynamicHeader">
-      <div class="season-header-bg" id="seasonHeaderBg" style="background-image: url('img/Seasons/temporadas.jpg');">
-      </div>
-      <div class="season-header-overlay"></div>
-      <div class="season-header-content">
-        <span class="badge badge-gold" id="seasonHeaderBadge">151 EPISODIOS | CBS (2008 - 2015)</span>
-        <h1 id="seasonHeaderTitle">Cronología de <span style="color: var(--green-bright);">Temporadas</span></h1>
-        <p id="seasonHeaderDesc">
-          Sigue la trayectoria completa de Patrick Jane: desde su llegada al CBI, pasando por la confrontación directa
-          contra Red John, hasta su desenlace en el FBI de Austin, Texas.
-        </p>
+      <!-- CONTROLES: SELECTOR DE TEMPORADAS & SWITCH DE SPOILERS -->
+      <div class="seasons-controls">
+        <div class="seasons-nav-pills">
+          <button class="season-pill active" data-season="all">Todas</button>
+          <button class="season-pill" data-season="1">T1</button>
+          <button class="season-pill" data-season="2">T2</button>
+          <button class="season-pill" data-season="3">T3</button>
+          <button class="season-pill" data-season="4">T4</button>
+          <button class="season-pill" data-season="5">T5</button>
+          <button class="season-pill" data-season="6">T6</button>
+          <button class="season-pill" data-season="7">T7</button>
+        </div>
+
+        <div class="spoiler-toggle-wrapper">
+          <label class="toggle-switch" for="spoilerToggle">
+            <input type="checkbox" id="spoilerToggle">
+            <span class="slider"></span>
+          </label>
+          <label for="spoilerToggle" style="cursor: pointer;">
+            Mostrar resoluciones y spoilers clave
+          </label>
+        </div>
       </div>
     </div>
+  </div>
 
-    <!-- CONTROLES: SELECTOR DE TEMPORADAS & SWITCH DE SPOILERS -->
-    <div class="seasons-controls">
-      <div class="seasons-nav-pills">
-        <button class="season-pill active" data-season="all">Todas</button>
-        <button class="season-pill" data-season="1">T1</button>
-        <button class="season-pill" data-season="2">T2</button>
-        <button class="season-pill" data-season="3">T3</button>
-        <button class="season-pill" data-season="4">T4</button>
-        <button class="season-pill" data-season="5">T5</button>
-        <button class="season-pill" data-season="6">T6</button>
-        <button class="season-pill" data-season="7">T7</button>
-      </div>
-
-      <div class="spoiler-toggle-wrapper">
-        <label class="toggle-switch" for="spoilerToggle">
-          <input type="checkbox" id="spoilerToggle">
-          <span class="slider"></span>
-        </label>
-        <label for="spoilerToggle" style="cursor: pointer;">
-          Mostrar resoluciones y spoilers clave
-        </label>
-      </div>
-    </div>
+  <main class="container" style="padding: 2.5rem 1.5rem 6rem;">
 
     <!-- CONTENEDOR DE LAS 7 TEMPORADAS -->
     <div id="seasonsContainer">
