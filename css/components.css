@@ -170,36 +170,101 @@
 }
 
 @keyframes bleedDownLeft {
-  0% { height: 0; opacity: 0; }
-  25% { opacity: 0.95; }
-  100% { height: 21px; opacity: 1; }
+  0% {
+    height: 0;
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 0.95;
+  }
+
+  100% {
+    height: 21px;
+    opacity: 1;
+  }
 }
 
 @keyframes bleedDownRight {
-  0% { height: 0; opacity: 0; }
-  25% { opacity: 0.95; }
-  100% { height: 23px; opacity: 1; }
+  0% {
+    height: 0;
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 0.95;
+  }
+
+  100% {
+    height: 23px;
+    opacity: 1;
+  }
 }
 
 @keyframes dripFallLeft {
-  0% { transform: translateY(0) scaleY(1); opacity: 0; }
-  25% { opacity: 1; transform: translateY(2px) scaleY(1.2); }
-  85% { opacity: 1; transform: translateY(19px) scaleY(1.4); }
-  100% { opacity: 0; transform: translateY(21px) scale(1.4, 0.5); }
+  0% {
+    transform: translateY(0) scaleY(1);
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 1;
+    transform: translateY(2px) scaleY(1.2);
+  }
+
+  85% {
+    opacity: 1;
+    transform: translateY(19px) scaleY(1.4);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(21px) scale(1.4, 0.5);
+  }
 }
 
 @keyframes dripFallRight {
-  0% { transform: translateY(0) scaleY(1); opacity: 0; }
-  25% { opacity: 1; transform: translateY(2px) scaleY(1.2); }
-  85% { opacity: 1; transform: translateY(21px) scaleY(1.4); }
-  100% { opacity: 0; transform: translateY(23px) scale(1.4, 0.5); }
+  0% {
+    transform: translateY(0) scaleY(1);
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 1;
+    transform: translateY(2px) scaleY(1.2);
+  }
+
+  85% {
+    opacity: 1;
+    transform: translateY(21px) scaleY(1.4);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(23px) scale(1.4, 0.5);
+  }
 }
 
 @keyframes puddlePoolDark {
-  0% { transform: translateX(-50%) scale(0); opacity: 0; }
-  40% { transform: translateX(-50%) scale(0.4, 0.4); opacity: 0.85; }
-  75% { transform: translateX(-50%) scale(0.9, 0.75); opacity: 0.95; }
-  100% { transform: translateX(-50%) scale(1, 1); opacity: 1; }
+  0% {
+    transform: translateX(-50%) scale(0);
+    opacity: 0;
+  }
+
+  40% {
+    transform: translateX(-50%) scale(0.4, 0.4);
+    opacity: 0.85;
+  }
+
+  75% {
+    transform: translateX(-50%) scale(0.9, 0.75);
+    opacity: 0.95;
+  }
+
+  100% {
+    transform: translateX(-50%) scale(1, 1);
+    opacity: 1;
+  }
 }
 
 .brand-text {
@@ -321,16 +386,23 @@
 .ambient-audio-btn.playing .audio-equalizer span:nth-child(1) {
   animation: barBounce 0.7s ease-in-out infinite alternate;
 }
+
 .ambient-audio-btn.playing .audio-equalizer span:nth-child(2) {
   animation: barBounce 0.9s 0.2s ease-in-out infinite alternate;
 }
+
 .ambient-audio-btn.playing .audio-equalizer span:nth-child(3) {
   animation: barBounce 0.6s 0.4s ease-in-out infinite alternate;
 }
 
 @keyframes barBounce {
-  from { height: 3px; }
-  to { height: 12px; }
+  from {
+    height: 3px;
+  }
+
+  to {
+    height: 12px;
+  }
 }
 
 .nav-toggle {
@@ -624,4 +696,342 @@
     justify-content: center;
     gap: 1rem;
   }
+}
+
+background: #8c2a36;
+border-style: solid;
+border-color: #5a121c;
+color: #faf6ee;
+box-shadow: 0 3px 10px rgba(140, 42, 54, 0.35);
+}
+
+/* Inputs & Textareas como renglones / campos de papel */
+.notebook-control {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid #c9bda9;
+  border-bottom: 2px solid #998369;
+  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  color: #1a1511;
+  font-family: var(--font-typewriter);
+  font-size: 0.95rem;
+  outline: none;
+  transition: all var(--transition-fast);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.notebook-control:focus {
+  background: #ffffff;
+  border-color: #2e7450;
+  border-bottom-color: #1a452e;
+  box-shadow: 0 0 10px rgba(46, 116, 80, 0.25), inset 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.notebook-control::placeholder {
+  color: #9c8e7e;
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 0.88rem;
+}
+
+.notebook-select {
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-weight: 600;
+}
+
+.notebook-select option {
+  background: #fbf7ee;
+  color: #241c16;
+}
+
+.notebook-textarea-wrapper {
+  position: relative;
+}
+
+.notebook-textarea {
+  resize: vertical;
+  min-height: 110px;
+  line-height: 1.6;
+}
+
+.notebook-char-counter {
+  font-family: var(--font-typewriter);
+  font-size: 0.74rem;
+  color: #827262;
+  text-align: right;
+  margin-top: 0.2rem;
+}
+
+/* Botón de Envío como Sello Oficial de Goma CBI Sacramento */
+.notebook-submit-wrap {
+  margin-top: 0.3rem;
+}
+
+.notebook-submit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  width: 100%;
+  background: linear-gradient(135deg, #2e7450 0%, #1c5236 100%);
+  border: 2px solid #163e26;
+  border-radius: 5px;
+  padding: 0.9rem 1.5rem;
+  color: #FAF6EE;
+  font-family: var(--font-display);
+  font-size: 0.96rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(30, 20, 10, 0.25), 0 2px 6px rgba(46, 116, 80, 0.4);
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.notebook-submit-btn:hover {
+  background: linear-gradient(135deg, #388a5f 0%, #236342 100%);
+  box-shadow: 0 6px 18px rgba(30, 20, 10, 0.35), 0 0 15px rgba(46, 116, 80, 0.5);
+  transform: translateY(-2px);
+}
+
+.notebook-submit-btn:active {
+  transform: translateY(1px) scale(0.99);
+  box-shadow: 0 2px 8px rgba(30, 20, 10, 0.25);
+}
+
+.notebook-submit-btn.success {
+  background: #1c5e3a;
+  border-color: #123d26;
+}
+
+/* Alertas de Confirmación */
+.notebook-alert {
+  display: none;
+  font-family: var(--font-typewriter);
+  font-size: 0.85rem;
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  line-height: 1.4;
+  margin-top: 0.5rem;
+}
+
+.notebook-alert.show {
+  display: block;
+}
+
+.notebook-alert.alert-error {
+  background: #fde8e8;
+  border: 1.5px solid #d32f2f;
+  color: #8c1d1d;
+}
+
+.notebook-alert.alert-success {
+  background: #e8f5e9;
+  border: 1.5px solid #2e7450;
+  color: #17422b;
+}
+
+/* 5. Lista de Notas (Feed de Fichas con Clip Metálico) */
+.notes-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+}
+
+.note-card {
+  background: #fffdf8;
+  border: 1px solid #d8caa7;
+  border-radius: 6px;
+  padding: 1.15rem 1.25rem;
+  position: relative;
+  box-shadow: 0 4px 14px rgba(70, 50, 30, 0.08);
+  transition: all var(--transition-fast);
+}
+
+.note-card:hover {
+  box-shadow: 0 8px 22px rgba(70, 50, 30, 0.16);
+  transform: translateY(-2px);
+  border-color: #b5a389;
+}
+
+/* Clip metálico en la parte superior derecha */
+.note-paperclip {
+  position: absolute;
+  top: -12px;
+  right: 18px;
+  width: 14px;
+  height: 32px;
+  border: 2.5px solid #a39788;
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+  z-index: 4;
+}
+
+.note-paperclip::after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 1px;
+  right: 1px;
+  height: 22px;
+  border: 2px solid #8e8273;
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+}
+
+.note-card.type-momento {
+  border-left: 4px solid #2e7450;
+}
+
+.note-card.type-sugerencia {
+  border-left: 4px solid #b0811e;
+}
+
+.note-card.type-teoria {
+  border-left: 4px solid #8c2a36;
+}
+
+.note-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.65rem;
+}
+
+.note-tags {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.note-badge {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: 3px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.note-badge.type-momento {
+  background: #e8f5ed;
+  color: #1a452e;
+  border: 1px solid #2e7450;
+}
+
+.note-badge.type-sugerencia {
+  background: #fdf5e6;
+  color: #805c10;
+  border: 1px solid #b0811e;
+}
+
+.note-badge.type-teoria {
+  background: #fde8ea;
+  color: #8c2a36;
+  border: 1px solid #8c2a36;
+}
+
+.note-season-badge {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  color: #5c4e43;
+  background: #f0e9dc;
+  border: 1px solid #d4c7b4;
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  font-weight: 700;
+}
+
+.note-date {
+  font-family: var(--font-typewriter);
+  font-size: 0.75rem;
+  color: #7d6e60;
+}
+
+.note-text {
+  font-family: var(--font-typewriter);
+  font-size: 0.95rem;
+  color: #1a1613;
+  line-height: 1.55;
+  margin-bottom: 0.85rem;
+}
+
+.note-author-row {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  border-top: 1px dashed #e8ded0;
+  padding-top: 0.5rem;
+}
+
+.author-icon {
+  font-size: 0.95rem;
+}
+
+.author-label {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: #7d6e60;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.author-name {
+  font-family: var(--font-handwriting);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a1613;
+  line-height: 1;
+}
+
+.notes-empty {
+  text-align: center;
+  padding: 3.5rem 1.5rem;
+  color: #7d6e60;
+}
+
+.empty-icon {
+  font-size: 2.8rem;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.empty-hint {
+  font-family: var(--font-typewriter);
+  font-size: 0.88rem;
+  color: #2e7450;
+  margin-top: 0.5rem;
+}
+
+/* 6. Pie de la Agenda */
+.notebook-footer {
+  padding: 0.75rem 1.5rem;
+  background: #efe6d4;
+  border-top: 1px solid #c9bda9;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  z-index: 2;
+}
+
+.notebook-footer-quote {
+  font-family: var(--font-typewriter);
+  font-size: 0.75rem;
+  color: #5c4e43;
+  font-style: italic;
+}
+
+.notebook-page-num {
+  font-family: var(--font-typewriter);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #8a7b6c;
+  white-space: nowrap;
 }

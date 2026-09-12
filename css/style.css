@@ -64,7 +64,9 @@
 }
 
 /* Reset básico */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -91,14 +93,17 @@ body {
 ::-webkit-scrollbar {
   width: 9px;
 }
+
 ::-webkit-scrollbar-track {
   background: var(--color-bg-deep);
 }
+
 ::-webkit-scrollbar-thumb {
   background: #252530;
   border-radius: 4px;
   border: 2px solid var(--color-bg-deep);
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: var(--green-jade);
 }
@@ -124,7 +129,11 @@ img {
 }
 
 /* Titulares */
-h1, h2, h3, h4, .font-serif {
+h1,
+h2,
+h3,
+h4,
+.font-serif {
   font-family: var(--font-display);
   letter-spacing: 0.04em;
   font-weight: 700;
@@ -151,7 +160,7 @@ h1, h2, h3, h4, .font-serif {
   width: 100%;
 }
 
-.flex-adaptive-grid > * {
+.flex-adaptive-grid>* {
   flex: 1 1 320px;
   min-width: 280px;
 }
@@ -207,13 +216,27 @@ h1, h2, h3, h4, .font-serif {
 }
 
 @keyframes pulseGlow {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 0.85; }
+
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 0.85;
+  }
 }
 
 @keyframes floatElement {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
 }
 
 .animate-float {

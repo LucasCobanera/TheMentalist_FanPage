@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Entrena tu mente en El Palacio de la Memoria de Patrick Jane. Pon a prueba tu observación y técnica mnemotécnica con desafíos interactivos del CBI.">
+  <title>El Palacio de la Memoria | The Mentalist</title>
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="css/game.css">
+</head>
+
+<body>
+
+  <!-- Encabezado Principal & Navegación -->
+  <header class="site-header" id="mainHeader">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo" title="The Mentalist Fanpage">
+        <div class="brand-icon">
+          <img src="img/Red-John-Smiley-Face.png" alt="Red John Smiley" class="brand-smiley-img">
+          <div class="blood-drip-container">
+            <span class="blood-drip drip-left"></span>
+            <span class="blood-drip drip-right"></span>
+            <span class="blood-drop drop-left"></span>
+            <span class="blood-drop drop-right"></span>
+            <span class="blood-puddle"></span>
+          </div>
+        </div>
+        <div class="brand-text">
+          <span>THE</span>
+          <span class="logo-boxed">MENTALIST</span>
+        </div>
+      </a>
+
+      <!-- Menú de Navegación -->
+      <nav aria-label="Navegación principal">
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="index.html" class="nav-link">Inicio</a></li>
+          <li><a href="personajes.html" class="nav-link">Personajes</a></li>
+          <li><a href="temporadas.html" class="nav-link">Temporadas</a></li>
+          <li><a href="red-john.html" class="nav-link nav-red-john">Misterio Red John</a></li>
+          <li><a href="curiosidades.html" class="nav-link">Curiosidades</a></li>
+          <li><a href="juego.html" class="nav-link active nav-game-link">🧠 Juego Mental</a></li>
+        </ul>
+      </nav>
+
+      <!-- Acciones de cabecera -->
+      <div class="nav-actions">
+        <button class="ambient-audio-btn" id="ambientAudioBtn" title="Activar/Desactivar sonido ambiental">
+          <div class="audio-equalizer">
+            <span></span><span></span><span></span>
+          </div>
+          <span class="btn-text">Ambiente</span>
+        </button>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Audio ambiental Bach -->
+  <audio id="ambientAudio" loop preload="none">
+    <source src="audio/js-bach--prelude-in-c-major.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- SECCIÓN PRINCIPAL DEL JUEGO -->
+  <main class="game-section">
+    <div class="container">
+
+      <!-- Cabecera de Introducción -->
+      <header class="game-header-intro">
+        <div class="game-badge">
+          <span>🧠</span> MÉTODO DE LOCI • ENTRENAMIENTO CBI
+        </div>
+        <h1 class="game-title">El Palacio de la <span class="accent-green">Memoria</span></h1>
+        <p class="game-subtitle">
+          Recorre las estancias mentales de Patrick Jane, fija pistas y sospechosos en ubicaciones clave y demuestra que nada escapa a tu mirada deductiva.
+        </p>
+      </header>
+
+      <!-- Cuadro Principal del Juego -->
+      <div class="game-container" id="gameContainer">
+        
+        <!-- Barra superior de estado -->
+        <div class="game-top-bar">
+          <div class="room-indicator">
+            <span class="room-icon" id="roomIcon">🏛️</span>
+            <div>
+              <span class="room-title-sub" id="roomSubtitle">Palacio Mental de Patrick Jane</span>
+              <span class="room-title-main" id="roomName">Acceso al Palacio</span>
+            </div>
+          </div>
+
+          <div class="game-metrics">
+            <div class="metric-pill">
+              <span class="metric-label">Estancia</span>
+              <span class="metric-value" id="levelDisplay">1 / 3</span>
+            </div>
+            <div class="metric-pill">
+              <span class="metric-label">Puntuación</span>
+              <span class="metric-value highlight-green" id="scoreDisplay">0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1. PANTALLA: LOBBY / INICIO -->
+        <section class="game-screen active" id="screenLobby" aria-label="Inicio del juego">
+          <div class="lobby-content">
+            
+            <div class="jane-quote-card">
+              <p class="jane-quote-text">
+                «Para recordar cualquier cosa, Lisbon, no necesitas magia ni poderes psíquicos. Solo necesitas un lugar mental donde guardar cada pieza del rompecabezas.»
+              </p>
+              <span class="jane-quote-author">— Patrick Jane, Consultor del CBI</span>
+            </div>
+
+            <div class="rules-grid">
+              <div class="rule-box">
+                <span class="rule-icon">👁️</span>
+                <h3 class="rule-title">1. Observa</h3>
+                <p class="rule-desc">Cada habitación te mostrará objetos, pistas o sospechosos colocados en puntos específicos.</p>
+              </div>
+              <div class="rule-box">
+                <span class="rule-icon">⏳</span>
+                <h3 class="rule-title">2. Fija en tu Mente</h3>
+                <p class="rule-desc">Aprovecha el temporizador para conectar mentalmente cada detalle antes de que la escena desaparezca.</p>
+              </div>
+              <div class="rule-box">
+                <span class="rule-icon">💡</span>
+                <h3 class="rule-title">3. Deduce</h3>
+                <p class="rule-desc">Jane te pondrá a prueba con preguntas deductivas para calcular tu rango de agudeza en el CBI.</p>
+              </div>
+            </div>
+
+            <div class="start-btn-wrap">
+              <button class="btn-game-primary" id="btnStartGame">
+                <span>INICIAR ENTRENAMIENTO MENTAL</span>
+                <span>➔</span>
+              </button>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- 2. PANTALLA: MEMORIZACIÓN (FOCUS) -->
+        <section class="game-screen" id="screenMemorize" aria-label="Fase de memorización">
+          <div class="memorize-header">
+            <div class="memorize-tip" id="memorizeTip">
+              <strong>Técnica de Jane:</strong> Asocia cada elemento con su posición exacta en la estancia.
+            </div>
+            <div class="timer-container">
+              <div class="timer-badge">
+                <span class="timer-pulse"></span>
+                <span id="timerText">12s</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Barra de progreso temporal -->
+          <div class="time-progress-bar-wrap">
+            <div class="time-progress-bar" id="timeProgressBar"></div>
+          </div>
+
+          <!-- Grid de Elementos en la Estancia -->
+          <div class="memory-grid" id="memoryGrid">
+            <!-- Se llena dinámicamente mediante JS -->
+          </div>
+
+          <div class="memorize-actions">
+            <button class="btn-skip-timer" id="btnSkipTimer">
+              <span>⚡ ¡Listo, ya lo memoricé!</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- 3. PANTALLA: DESAFÍO DEDUCTIVO (PREGUNTAS) -->
+        <section class="game-screen" id="screenChallenge" aria-label="Fase de preguntas">
+          <div class="challenge-wrapper">
+            
+            <div class="challenge-question-card">
+              <div class="question-counter" id="questionCounter">Pregunta 1 de 3</div>
+              <h2 class="question-text" id="questionText">¿Pregunta sobre la habitación?</h2>
+            </div>
+
+            <!-- Opciones A, B, C, D -->
+            <div class="options-grid" id="optionsContainer">
+              <!-- Se llena dinámicamente mediante JS -->
+            </div>
+
+            <!-- Caja de explicación / retroalimentación de Jane -->
+            <div class="challenge-feedback-box" id="feedbackBox"></div>
+
+          </div>
+        </section>
+
+        <!-- 4. PANTALLA: RESULTADOS & EVALUACIÓN CBI -->
+        <section class="game-screen" id="screenResults" aria-label="Resultados del juego">
+          <div class="results-card">
+            
+            <div class="results-badge-icon">🧠</div>
+            <span class="game-badge">EVALUACIÓN DEL CBI</span>
+            <h2 class="results-rank-title" id="resultsRank">Sucesor de Patrick Jane</h2>
+            <div class="results-score-display" id="finalScore">950 PTS</div>
+
+            <div class="results-breakdown">
+              <div class="breakdown-item">
+                <span class="breakdown-label">Respuestas Correctas</span>
+                <span class="breakdown-val" id="finalCorrect">9 / 9</span>
+              </div>
+              <div class="breakdown-item">
+                <span class="breakdown-label">Precisión Mental</span>
+                <span class="breakdown-val" id="finalAccuracy">100%</span>
+              </div>
+            </div>
+
+            <p class="results-verdict-quote" id="resultsQuote">
+              «Impresionante. Tu memoria de loci es prodigiosa. Ni Red John ni el mejor ilusionista podrían esconderse de ti.»
+            </p>
+
+            <div class="results-actions">
+              <button class="btn-game-primary" id="btnRestart">
+                <span>🔄 Volver a Entrenar</span>
+              </button>
+              <a href="index.html" class="btn-game-secondary">
+                <span>Volver al Inicio</span>
+              </a>
+            </div>
+
+          </div>
+        </section>
+
+      </div><!-- /.game-container -->
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-simple-content">
+      <div class="footer-brand-compact">
+        <span>THE</span>
+        <span style="border: 1px solid var(--cream-pure); padding: 0 0.35rem;">MENTALIST</span>
+        <span style="color: var(--text-muted); font-size: 0.75rem; font-weight: 400; font-family: var(--font-body);">| Fanpage Tributo</span>
+      </div>
+
+      <ul class="footer-nav-compact">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="personajes.html">Personajes</a></li>
+        <li><a href="temporadas.html">Temporadas</a></li>
+        <li><a href="red-john.html">Red John</a></li>
+        <li><a href="curiosidades.html">Curiosidades</a></li>
+        <li><a href="juego.html">Juego Mental</a></li>
+      </ul>
+
+      <div class="footer-copy-text">
+        &copy; The Mentalist Fanpage. "Tyger, Tyger..."
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/notebook.js"></script>
+</body>
+
+</html>
