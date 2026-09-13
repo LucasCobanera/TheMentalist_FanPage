@@ -725,19 +725,19 @@
 /* Enlace especial en la barra de navegación para el juego */
 .nav-game-link {
   position: relative;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .nav-game-link::after {
   content: 'NUEVO';
   position: absolute;
-  top: -8px;
-  right: -14px;
+  top: -6px;
+  right: -8px;
   background: var(--green-bright);
   color: #08080a;
-  font-size: 0.58rem;
+  font-size: 0.52rem;
   font-weight: 900;
-  padding: 0.1rem 0.35rem;
-  border-radius: 3px;
-  letter-spacing: 0.05em;
+  padding: 0.08rem 0.28rem;
+  border-radius: 2px;
+  letter-spacing: 0.06em;
 }

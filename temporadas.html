@@ -8,6 +8,7 @@
     content="Guía completa de las 7 temporadas y 151 episodios de The Mentalist. Sinopsis, arcos argumentales de Red John, capítulos clave e interruptor de spoilers.">
   <title>Guía de Temporadas (1 a 7) | The Mentalist</title>
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/pages.css">
@@ -109,6 +110,69 @@
 
   </main>
 
+  <!-- SECCIÓN MEJORES MOMENTOS DE CAPÍTULOS (COMUNIDAD & FAN CHOICE) -->
+  <section class="fan-moments-section" id="fanMomentsSection">
+    <div class="container">
+      <div class="fan-moments-header">
+        <div class="moments-badge">
+          <i class="fa-solid fa-star"></i> Elección de la Comunidad
+        </div>
+        <h2 class="moments-main-title">Mejores Momentos de Capítulos</h2>
+        <p class="moments-subtitle">
+          Los giros deductivos, diálogos filosos y escenas más sobrecogedoras elegidas por los seguidores de <em>The Mentalist</em>. Vota tus preferidas o propón tu momento favorito a través del Despacho del CBI para ser evaluado e incorporado a la galería oficial.
+        </p>
+        <div style="margin-top: 1.5rem;">
+          <button type="button" class="btn btn-primary" id="btnOpenMomentsDispatch" style="display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.92rem; padding: 0.75rem 1.6rem;">
+            <i class="fa-solid fa-plus-circle" style="color: var(--green-bright);"></i> Proponer mi momento favorito
+          </button>
+        </div>
+      </div>
+
+      <!-- Barra de Filtros por Temporada -->
+      <div class="moments-filter-bar" id="momentsFilterBar">
+        <button type="button" class="moment-filter-pill active" data-season="all">Todas</button>
+        <button type="button" class="moment-filter-pill" data-season="1">Temporada 1</button>
+        <button type="button" class="moment-filter-pill" data-season="2">Temporada 2</button>
+        <button type="button" class="moment-filter-pill" data-season="3">Temporada 3</button>
+        <button type="button" class="moment-filter-pill" data-season="4">Temporada 4</button>
+        <button type="button" class="moment-filter-pill" data-season="5">Temporada 5</button>
+        <button type="button" class="moment-filter-pill" data-season="6">Temporada 6</button>
+        <button type="button" class="moment-filter-pill" data-season="7">Temporada 7</button>
+      </div>
+
+      <!-- Carrusel de Expedientes de Momentos -->
+      <div class="moments-carousel-container" id="momentsCarouselContainer">
+        <!-- Botón Desplazamiento Izquierdo -->
+        <button type="button" class="moments-carousel-arrow prev" id="carouselPrevBtn" aria-label="Expediente anterior">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <!-- Pista de Desplazamiento -->
+        <div class="moments-carousel-viewport" id="carouselViewport" tabindex="0" aria-label="Carrusel de expedientes de momentos">
+          <div class="moments-dossier-track" id="fanMomentsTrack">
+            <!-- Inyectado dinámicamente como expedientes oficiales por js/cbi-dispatch.js -->
+          </div>
+        </div>
+
+        <!-- Botón Desplazamiento Derecho -->
+        <button type="button" class="moments-carousel-arrow next" id="carouselNextBtn" aria-label="Expediente siguiente">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
+
+      <!-- Barra Inferior de Paginación y Contador de Expedientes -->
+      <div class="moments-carousel-footer">
+        <div class="carousel-dots-bar" id="carouselDotsBar">
+          <!-- Puntos indicadores generados dinámicamente -->
+        </div>
+        <div class="carousel-counter-tag" id="carouselCounterTag">
+          <i class="fa-solid fa-folder-open" style="color: var(--green-bright); margin-right: 0.35rem;"></i>
+          <span id="carouselCurrentIndex">1</span> de <span id="carouselTotalCount">7</span> Expedientes
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- FOOTER SIMPLIFICADO -->
   <footer class="site-footer">
     <div class="container footer-simple-content">
@@ -128,6 +192,21 @@
         <li><a href="juego.html">Juego Mental</a></li>
       </ul>
 
+      <div class="footer-social-links">
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram" title="Instagram">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="GitHub" title="GitHub">
+          <i class="fa-brands fa-github"></i>
+        </a>
+        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook" title="Facebook">
+          <i class="fa-brands fa-facebook-f"></i>
+        </a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn" title="LinkedIn">
+          <i class="fa-brands fa-linkedin-in"></i>
+        </a>
+      </div>
+
       <div class="footer-copy-text">
         &copy; The Mentalist Fanpage.
       </div>
@@ -136,7 +215,7 @@
 
   <script src="js/main.js"></script>
   <script src="js/seasons.js"></script>
-  <script src="js/notebook.js"></script>
+  <script src="js/cbi-dispatch.js"></script>
 </body>
 
 </html>

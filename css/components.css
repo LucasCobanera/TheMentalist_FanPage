@@ -21,11 +21,15 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
 }
 
+.site-header .container {
+  max-width: 1320px;
+}
+
 .nav-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 74px;
+  height: 68px;
 }
 
 /* Logo con la estética del cartel */
@@ -34,6 +38,8 @@
   align-items: center;
   gap: 0.75rem;
   text-decoration: none;
+  flex-shrink: 0;
+  margin-right: clamp(1.5rem, 3.2vw, 3.2rem);
 }
 
 .brand-icon {
@@ -285,11 +291,20 @@
   font-size: 0.95rem;
 }
 
-/* Menú de navegación */
+/* Menú de navegación rediseñado: centrado, compacto y con separación amplia con el logo y acciones */
+.site-header nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-width: 0;
+}
+
 .nav-menu {
   display: flex;
   align-items: center;
-  gap: 0.35rem;
+  justify-content: center;
+  gap: clamp(0.35rem, 0.9vw, 0.95rem);
   list-style: none;
 }
 
@@ -297,38 +312,48 @@
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.55rem 0.95rem;
-  font-size: 0.88rem;
+  gap: 0.3rem;
+  padding: 0.28rem 0.65rem;
+  font-size: 0.75rem;
   font-weight: 600;
   color: var(--text-secondary);
-  border-radius: 4px;
+  border: 1px solid transparent;
+  border-radius: 20px;
   transition: all var(--transition-fast);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .nav-link:hover {
   color: var(--cream-pure);
-  background: rgba(250, 246, 238, 0.05);
+  background: rgba(85, 194, 153, 0.12);
+  border-color: rgba(85, 194, 153, 0.28);
+  box-shadow: 0 0 10px rgba(85, 194, 153, 0.18);
 }
 
 .nav-link.active {
   color: var(--cream-pure);
-  background: rgba(46, 116, 80, 0.3);
-  border: 1px solid var(--green-border);
-  box-shadow: 0 0 14px rgba(67, 197, 142, 0.35);
+  background: rgba(46, 116, 80, 0.26);
+  border-color: rgba(85, 194, 153, 0.5);
+  box-shadow: 0 0 12px rgba(67, 197, 142, 0.3);
 }
 
 .nav-link.nav-red-john {
   color: #ff999f;
 }
 
-.nav-link.nav-red-john:hover,
+.nav-link.nav-red-john:hover {
+  color: #fff;
+  background: rgba(128, 8, 23, 0.22);
+  border-color: rgba(255, 71, 87, 0.35);
+  box-shadow: 0 0 10px rgba(255, 71, 87, 0.22);
+}
+
 .nav-link.nav-red-john.active {
   color: #fff;
-  background: rgba(128, 8, 23, 0.45);
-  border-color: var(--crimson-bright);
+  background: rgba(128, 8, 23, 0.38);
+  border-color: rgba(255, 71, 87, 0.55);
   box-shadow: 0 0 14px var(--crimson-glow);
 }
 
@@ -337,6 +362,8 @@
   display: flex;
   align-items: center;
   gap: 0.85rem;
+  flex-shrink: 0;
+  margin-left: clamp(1.5rem, 3.2vw, 3.2rem);
 }
 
 .ambient-audio-btn {
@@ -610,7 +637,7 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 1.25rem;
+  gap: 1.5rem;
 }
 
 .footer-brand-compact {
@@ -633,7 +660,7 @@
 
 .footer-nav-compact a {
   color: var(--text-secondary);
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -644,12 +671,66 @@
   color: var(--cream-pure);
 }
 
+/* Redes Sociales con iconos Font Awesome */
+.footer-social-links {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(250, 246, 238, 0.12);
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+
+.social-icon:hover {
+  color: var(--cream-pure);
+  background: rgba(46, 116, 80, 0.25);
+  border-color: var(--green-bright);
+  transform: translateY(-2px);
+  box-shadow: 0 0 12px rgba(85, 194, 153, 0.4);
+}
+
+.social-icon:hover .fa-instagram {
+  color: #e1306c;
+}
+
+.social-icon:hover .fa-github {
+  color: #fff;
+}
+
+.social-icon:hover .fa-facebook-f {
+  color: #1877f2;
+}
+
+.social-icon:hover .fa-linkedin-in {
+  color: #0077b5;
+}
+
 .footer-copy-text {
   font-size: 0.78rem;
   color: var(--text-muted);
 }
 
-@media (max-width: 900px) {
+@media (max-width: 992px) {
+  .brand-logo {
+    margin-right: 0;
+  }
+
+  .nav-actions {
+    margin-left: 0;
+  }
+
   .nav-toggle {
     display: flex;
     align-items: center;
@@ -658,7 +739,7 @@
 
   .nav-menu {
     position: fixed;
-    top: 74px;
+    top: 68px;
     left: 0;
     right: 0;
     background: rgba(8, 8, 10, 0.98);
@@ -666,7 +747,7 @@
     border-bottom: 1px solid var(--border-subtle);
     flex-direction: column;
     padding: 1.5rem 1rem;
-    gap: 0.5rem;
+    gap: 0.6rem;
     max-height: 0;
     overflow: hidden;
     opacity: 0;
@@ -675,20 +756,21 @@
   }
 
   .nav-menu.open {
-    max-height: 380px;
+    max-height: 440px;
     opacity: 1;
     pointer-events: auto;
   }
 
   .nav-link {
     width: 100%;
-    padding: 0.85rem 1.25rem;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.86rem;
   }
 
   .footer-simple-content {
     flex-direction: column;
     text-align: center;
-    gap: 1rem;
+    gap: 1.25rem;
   }
 
   .footer-nav-compact {
@@ -696,13 +778,10 @@
     justify-content: center;
     gap: 1rem;
   }
-}
 
-background: #8c2a36;
-border-style: solid;
-border-color: #5a121c;
-color: #faf6ee;
-box-shadow: 0 3px 10px rgba(140, 42, 54, 0.35);
+  .footer-social-links {
+    justify-content: center;
+  }
 }
 
 /* Inputs & Textareas como renglones / campos de papel */
@@ -1034,4 +1113,893 @@ box-shadow: 0 3px 10px rgba(140, 42, 54, 0.35);
   font-weight: 700;
   color: #8a7b6c;
   white-space: nowrap;
+}
+
+/* ==========================================================================
+   COMPONENTE GLOBAL: BOTÓN FLOTANTE & MODAL FORMULARIO OFICIAL CBI
+   Contacto, Recomendaciones y Envío de Mejores Momentos por Fans
+   ========================================================================== */
+
+/* 1. Botón Flotante con Sello Oficial CBI */
+.cbi-dispatch-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 990;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: linear-gradient(135deg, #101015 0%, #171822 100%);
+  border: 1.5px solid rgba(85, 194, 153, 0.45);
+  border-radius: 30px;
+  padding: 0.6rem 1.15rem 0.6rem 0.85rem;
+  color: var(--cream-pure);
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 18px rgba(46, 116, 80, 0.35);
+  transition: all 0.3s cubic-bezier(0.2, 1, 0.3, 1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.cbi-dispatch-btn:hover {
+  transform: translateY(-3px) scale(1.03);
+  border-color: var(--green-bright);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.85), 0 0 25px rgba(85, 194, 153, 0.55);
+}
+
+.dispatch-badge-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(85, 194, 153, 0.3) 0%, rgba(46, 116, 80, 0.8) 100%);
+  border: 1px solid var(--green-bright);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+  box-shadow: 0 0 10px rgba(85, 194, 153, 0.4);
+  flex-shrink: 0;
+}
+
+.dispatch-btn-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.15;
+}
+
+.dispatch-tag {
+  font-family: var(--font-typewriter);
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--green-bright);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.dispatch-label {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--cream-pure);
+}
+
+/* 2. Modal Oficial del CBI */
+body.cbi-modal-open {
+  overflow: hidden;
+}
+
+.cbi-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1060;
+  background: rgba(8, 8, 10, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.cbi-modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.cbi-modal {
+  width: 100%;
+  max-width: 620px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #111116;
+  border: 1px solid rgba(85, 194, 153, 0.35);
+  border-radius: 14px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 30px rgba(46, 116, 80, 0.25);
+  transform: scale(0.94);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.cbi-modal-overlay.active .cbi-modal {
+  transform: scale(1);
+}
+
+/* Cabecera del Expediente */
+.cbi-modal-header {
+  padding: 1.25rem 1.75rem;
+  background: rgba(18, 18, 26, 0.95);
+  border-bottom: 1px solid rgba(250, 246, 238, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cbi-header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.cbi-header-seal {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1.5px dashed var(--green-bright);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  background: rgba(46, 116, 80, 0.15);
+}
+
+.cbi-header-titles {
+  display: flex;
+  flex-direction: column;
+}
+
+.cbi-agency-sub {
+  font-family: var(--font-typewriter);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--green-bright);
+  text-transform: uppercase;
+}
+
+.cbi-modal-title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--cream-pure);
+}
+
+.cbi-modal-close {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(250, 246, 238, 0.15);
+  color: var(--cream-muted);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all var(--transition-fast);
+}
+
+.cbi-modal-close:hover {
+  background: #800817;
+  border-color: #c1121f;
+  color: #fff;
+  transform: rotate(90deg);
+}
+
+/* Eslogan temático de Patrick Jane */
+.cbi-slogan-box {
+  padding: 1.15rem 1.75rem;
+  background: rgba(26, 26, 36, 0.5);
+  border-bottom: 1px solid rgba(250, 246, 238, 0.08);
+  border-left: 4px solid var(--green-bright);
+}
+
+.cbi-slogan-text {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  color: var(--cream-pure);
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* Selector de Tipo de Envío (Switch Pills) */
+.cbi-type-switch {
+  display: flex;
+  padding: 1.15rem 1.75rem 0.25rem 1.75rem;
+  gap: 0.75rem;
+}
+
+.cbi-switch-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(250, 246, 238, 0.12);
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.cbi-switch-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--cream-pure);
+}
+
+.cbi-switch-btn.active {
+  background: rgba(46, 116, 80, 0.25);
+  border-color: var(--green-bright);
+  color: var(--cream-pure);
+  box-shadow: 0 0 15px rgba(67, 197, 142, 0.25);
+}
+
+/* Formulario */
+.cbi-form-body {
+  padding: 1.25rem 1.75rem 1.75rem 1.75rem;
+}
+
+.cbi-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.cbi-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.cbi-field-row {
+  display: flex;
+  gap: 1rem;
+}
+
+@media (max-width: 580px) {
+  .cbi-field-row {
+    flex-direction: column;
+  }
+}
+
+.cbi-field-label {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--cream-muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.cbi-field-label .required {
+  color: #ff6b7b;
+}
+
+.cbi-input {
+  width: 100%;
+  background: rgba(22, 22, 30, 0.85);
+  border: 1px solid rgba(250, 246, 238, 0.15);
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  color: var(--cream-pure);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  outline: none;
+  transition: all var(--transition-fast);
+}
+
+.cbi-input:focus {
+  border-color: var(--green-bright);
+  background: rgba(28, 28, 40, 0.95);
+  box-shadow: 0 0 12px rgba(85, 194, 153, 0.3);
+}
+
+.cbi-input::placeholder {
+  color: var(--text-muted);
+  font-style: italic;
+  font-size: 0.86rem;
+}
+
+.cbi-select {
+  cursor: pointer;
+  appearance: auto;
+}
+
+.cbi-select option {
+  background: #111116;
+  color: #faf6ee;
+}
+
+.cbi-textarea {
+  resize: vertical;
+  min-height: 95px;
+  line-height: 1.5;
+}
+
+.cbi-char-counter {
+  font-family: var(--font-typewriter);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-align: right;
+  margin-top: 0.2rem;
+}
+
+/* Botón Sello de Tinta Oficial */
+.cbi-submit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  width: 100%;
+  background: linear-gradient(135deg, var(--green-forest) 0%, #1b4b32 100%);
+  border: 1.5px solid var(--green-bright);
+  border-radius: 6px;
+  padding: 0.9rem 1.5rem;
+  color: var(--cream-pure);
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(46, 116, 80, 0.35);
+  transition: all var(--transition-fast);
+}
+
+.cbi-submit-btn:hover {
+  background: linear-gradient(135deg, #388a5f 0%, #226141 100%);
+  box-shadow: 0 6px 24px rgba(85, 194, 153, 0.5);
+  transform: translateY(-2px);
+}
+
+.cbi-submit-btn:active {
+  transform: translateY(1px);
+}
+
+.cbi-submit-btn.success {
+  background: #174e30;
+  border-color: #55c299;
+}
+
+.cbi-alert {
+  display: none;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  line-height: 1.4;
+  margin-top: 0.5rem;
+}
+
+.cbi-alert.show {
+  display: block;
+  animation: fadeInAlert 0.3s ease;
+}
+
+@keyframes fadeInAlert {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.cbi-alert.alert-success {
+  background: rgba(46, 116, 80, 0.25);
+  border: 1px solid var(--green-bright);
+  color: #6ee7b7;
+}
+
+.cbi-alert.alert-error {
+  background: rgba(128, 8, 23, 0.3);
+  border: 1px solid #ff4757;
+  color: #ff999f;
+}
+
+/* ==========================================================================
+   SECCIÓN DE MEJORES MOMENTOS EN TEMPORADAS (temporadas.html)
+   ========================================================================== */
+.fan-moments-section {
+  padding: 4rem 0 5rem 0;
+  background: linear-gradient(180deg, rgba(8, 8, 10, 0.95) 0%, rgba(16, 16, 22, 0.98) 100%);
+  border-top: 1px solid var(--border-subtle);
+  position: relative;
+}
+
+.fan-moments-header {
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto 2.5rem auto;
+}
+
+.moments-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(46, 116, 80, 0.18);
+  border: 1px solid rgba(85, 194, 153, 0.4);
+  color: var(--green-bright);
+  font-family: var(--font-typewriter);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.35rem 0.85rem;
+  border-radius: 20px;
+  text-transform: uppercase;
+  margin-bottom: 0.85rem;
+  letter-spacing: 0.1em;
+}
+
+.moments-main-title {
+  font-family: var(--font-display);
+  font-size: 2.3rem;
+  font-weight: 700;
+  color: var(--cream-pure);
+  margin-bottom: 0.6rem;
+}
+
+.moments-subtitle {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--cream-muted);
+  line-height: 1.6;
+}
+
+/* Barra de Filtros por Temporada */
+.moments-filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2.75rem;
+}
+
+.moment-filter-pill {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(250, 246, 238, 0.15);
+  border-radius: 20px;
+  padding: 0.45rem 1rem;
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.moment-filter-pill:hover {
+  background: rgba(250, 246, 238, 0.1);
+  color: var(--cream-pure);
+}
+
+.moment-filter-pill.active {
+  background: rgba(46, 116, 80, 0.3);
+  border-color: var(--green-bright);
+  color: var(--cream-pure);
+  box-shadow: 0 0 12px rgba(67, 197, 142, 0.3);
+}
+
+/* ==========================================================================
+   CARRUSEL DE EXPEDIENTES - MEJORES MOMENTOS (temporadas.html)
+   ========================================================================== */
+.moments-carousel-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 2rem;
+}
+
+.moments-carousel-viewport {
+  overflow: hidden;
+  width: 100%;
+  border-radius: 12px;
+  padding: 0.85rem 0.25rem 1.75rem 0.25rem;
+}
+
+.moments-dossier-track {
+  display: flex;
+  gap: 1.75rem;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+/* Botones de navegación del carrusel */
+.moments-carousel-arrow {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(16, 16, 24, 0.92);
+  border: 1.5px solid var(--green-bright);
+  color: var(--cream-pure);
+  font-size: 1.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.75), 0 0 14px rgba(67, 197, 142, 0.35);
+  transition: all var(--transition-fast);
+  z-index: 10;
+  backdrop-filter: blur(8px);
+}
+
+.moments-carousel-arrow:hover:not(:disabled) {
+  background: var(--green-forest);
+  color: #fff;
+  transform: scale(1.1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.85), 0 0 22px rgba(85, 194, 153, 0.65);
+}
+
+.moments-carousel-arrow:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+  border-color: rgba(250, 246, 238, 0.15);
+  color: var(--text-muted);
+  box-shadow: none;
+  transform: none;
+}
+
+/* Barra inferior: Puntos de paginación y contador de expedientes */
+.moments-carousel-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 0.75rem 0.5rem 0 0.5rem;
+  border-top: 1px solid rgba(250, 246, 238, 0.08);
+}
+
+.carousel-dots-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  padding: 0;
+}
+
+.carousel-dot:hover {
+  background: rgba(85, 194, 153, 0.5);
+}
+
+.carousel-dot.active {
+  width: 28px;
+  border-radius: 10px;
+  background: var(--green-bright);
+  box-shadow: 0 0 10px rgba(85, 194, 153, 0.6);
+}
+
+.carousel-counter-tag {
+  font-family: var(--font-typewriter);
+  font-size: 0.82rem;
+  color: var(--cream-muted);
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.35rem 0.85rem;
+  border-radius: 16px;
+  border: 1px solid rgba(250, 246, 238, 0.1);
+}
+
+/* ==========================================================================
+   ESTILO EXPEDIENTE DE INVESTIGACIÓN CBI (Dossier Cards)
+   ========================================================================== */
+.dossier-moment-card {
+  flex: 0 0 calc(33.333% - 1.2rem);
+  min-width: 320px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform var(--transition-fast), filter var(--transition-fast);
+  user-select: none;
+}
+
+@media (max-width: 1100px) {
+  .dossier-moment-card {
+    flex: 0 0 calc(50% - 0.9rem);
+    min-width: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .dossier-moment-card {
+    flex: 0 0 100%;
+    min-width: 270px;
+  }
+
+  .moments-carousel-container {
+    gap: 0.35rem;
+  }
+
+  .moments-carousel-arrow {
+    width: 38px;
+    height: 38px;
+    font-size: 0.95rem;
+  }
+}
+
+.dossier-moment-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Pestaña de Carpeta de Archivo (Folder Tab) */
+.dossier-folder-tab {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, #1f1f2a 0%, #151520 100%);
+  border: 1px solid rgba(200, 185, 155, 0.28);
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  padding: 0.45rem 1rem;
+  width: 90%;
+  position: relative;
+  z-index: 2;
+  margin-left: 5%;
+}
+
+.dossier-folder-tab .tab-label {
+  font-family: var(--font-typewriter);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--green-bright);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.dossier-stamp-classified {
+  font-family: var(--font-typewriter);
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #ff6b7b;
+  border: 1.5px solid rgba(255, 107, 123, 0.65);
+  padding: 0.1rem 0.45rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  transform: rotate(-3deg);
+  background: rgba(128, 8, 23, 0.28);
+  border-radius: 2px;
+}
+
+/* Cuerpo de la Carpeta Manila Oscura */
+.dossier-folder-body {
+  position: relative;
+  background: linear-gradient(175deg, #13131c 0%, #0d0d14 100%);
+  border: 1px solid rgba(200, 185, 155, 0.22);
+  border-radius: 8px;
+  padding: 1.35rem 1.25rem 1.25rem 1.25rem;
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+
+.dossier-moment-card:hover .dossier-folder-body {
+  border-color: rgba(85, 194, 153, 0.45);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.85), 0 0 25px rgba(46, 116, 80, 0.25);
+}
+
+/* Clip metálico simulado */
+.dossier-metal-clip {
+  position: absolute;
+  top: -8px;
+  left: 26px;
+  width: 10px;
+  height: 30px;
+  background: linear-gradient(90deg, #9595a0 0%, #dcdce4 50%, #707078 100%);
+  border-radius: 4px;
+  box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.7);
+  z-index: 5;
+}
+
+/* Fotografía de Evidencia Adjunta */
+.dossier-evidence-wrap {
+  position: relative;
+  width: 100%;
+  height: 185px;
+  background: #08080c;
+  border: 1px solid rgba(250, 246, 238, 0.18);
+  border-radius: 4px;
+  padding: 5px;
+  background-color: #1a1a24;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
+  margin-bottom: 1.15rem;
+  overflow: hidden;
+}
+
+.evidence-tape {
+  position: absolute;
+  top: -4px;
+  right: 18px;
+  width: 55px;
+  height: 16px;
+  background: rgba(220, 210, 180, 0.35);
+  transform: rotate(4deg);
+  z-index: 3;
+  backdrop-filter: blur(2px);
+  border-left: 1px dashed rgba(255, 255, 255, 0.3);
+  border-right: 1px dashed rgba(255, 255, 255, 0.3);
+}
+
+.dossier-evidence-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 2px;
+  filter: contrast(1.05);
+  transition: transform 0.4s ease;
+}
+
+.dossier-moment-card:hover .dossier-evidence-img {
+  transform: scale(1.04);
+}
+
+.evidence-tag {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: rgba(10, 10, 14, 0.88);
+  border: 1px solid var(--green-bright);
+  color: var(--green-bright);
+  font-family: var(--font-typewriter);
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: 2px;
+  letter-spacing: 0.08em;
+  backdrop-filter: blur(4px);
+}
+
+/* Hoja de Datos del Expediente */
+.dossier-data-sheet {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.dossier-case-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-typewriter);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid rgba(250, 246, 238, 0.08);
+}
+
+.dossier-case-meta .meta-case-num strong {
+  color: var(--cream-pure);
+}
+
+.dossier-case-meta .meta-archive-date {
+  color: var(--green-bright);
+}
+
+.dossier-moment-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--cream-pure);
+  line-height: 1.35;
+  margin-bottom: 0.75rem;
+}
+
+.dossier-report-box {
+  background: rgba(8, 8, 12, 0.65);
+  border-left: 3px solid var(--green-bright);
+  padding: 0.75rem 0.9rem;
+  border-radius: 0 4px 4px 0;
+  margin-bottom: 1.25rem;
+  flex: 1;
+}
+
+.dossier-report-text {
+  font-family: var(--font-body);
+  font-size: 0.86rem;
+  color: #d8d4c8;
+  line-height: 1.55;
+  font-style: italic;
+}
+
+/* Pie del Expediente y Sello de Aprobación/Voto */
+.dossier-footer-seal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px dashed rgba(250, 246, 238, 0.12);
+  padding-top: 0.85rem;
+  margin-top: auto;
+}
+
+.dossier-agent-credit {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.dossier-agent-credit .agent-label {
+  font-family: var(--font-typewriter);
+  font-size: 0.62rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+}
+
+.dossier-agent-credit .agent-name {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--cream-pure);
+}
+
+.dossier-vote-stamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1.5px solid rgba(250, 246, 238, 0.16);
+  border-radius: 6px;
+  padding: 0.4rem 0.8rem;
+  color: var(--cream-pure);
+  font-family: var(--font-typewriter);
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.dossier-vote-stamp:hover {
+  background: rgba(128, 8, 23, 0.28);
+  border-color: #ff4757;
+  color: #ff999f;
+  transform: scale(1.05) rotate(-1deg);
+}
+
+.dossier-vote-stamp.voted {
+  background: rgba(128, 8, 23, 0.45);
+  border-color: #ff4757;
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(255, 71, 87, 0.35);
+}
+
+.dossier-vote-stamp.voted .vote-heart {
+  color: #ff4757;
+}
+
+.dossier-vote-stamp .vote-text {
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  opacity: 0.75;
 }
