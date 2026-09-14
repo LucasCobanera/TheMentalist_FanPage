@@ -169,6 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateSeasonHeader('all');
   initSeasonPills();
   initSpoilerToggle();
+  initSeasonSynopsisModal();
 });
 
 function updateSeasonHeader(selectedSeason) {
@@ -211,7 +212,11 @@ function renderSeasons(selectedSeason) {
     ? SEASONS_DATA
     : SEASONS_DATA.filter(s => s.season.toString() === selectedSeason.toString());
 
-  container.innerHTML = list.map(s => `
+  container.innerHTML = list.map(s => {
+    const isLong = s.synopsis && s.synopsis.length > 140;
+    const excerpt = isLong ? s.synopsis.substring(0, 137).trim() + '...' : s.synopsis;
+
+    return `
     <section class="season-block season-block-${s.season}" id="season-${s.season}">
       <div class="season-header-row">
         <div class="season-info">
@@ -224,7 +229,16 @@ function renderSeasons(selectedSeason) {
         </div>
       </div>
 
-      <p class="season-synopsis">${s.synopsis}</p>
+      <div class="season-synopsis-box">
+        <p class="season-synopsis">${excerpt}</p>
+        ${isLong ? `
+          <button type="button" class="btn-read-more-season" data-season="${s.season}" aria-label="Leer sinopsis completa de la Temporada ${s.season}">
+            <i class="fa-solid fa-book-open" style="font-size: 0.75rem;"></i>
+            <span>Leer sinopsis completa</span>
+            <i class="fa-solid fa-arrow-right" style="font-size: 0.75rem;"></i>
+          </button>
+        ` : ''}
+      </div>
 
       <h4 style="font-size: 1.1rem; color: var(--amber-light); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.08em;">
         Episodios Clave & Momentos Cumbre:
@@ -244,7 +258,90 @@ function renderSeasons(selectedSeason) {
         `).join('')}
       </div>
     </section>
-  `).join('');
+  `;
+  }).join('');
+
+  attachSynopsisModalListeners();
+}
+
+function openSeasonSynopsisModal(seasonNum) {
+  const modal = document.getElementById('seasonSynopsisModal');
+  const body = document.getElementById('seasonSynopsisModalBody');
+  if (!modal || !body) return;
+
+  const s = SEASONS_DATA.find(item => item.season.toString() === seasonNum.toString());
+  if (!s) return;
+
+  body.innerHTML = `
+    <div style="text-align: center; margin-bottom: 1.25rem;">
+      <span class="badge badge-gold" style="font-size: 0.78rem; letter-spacing: 0.1em;">EXPEDIENTE OFICIAL CBI</span>
+      <h3 style="font-family: var(--font-display, serif); font-size: 1.45rem; color: var(--cream-pure); margin-top: 0.6rem; text-transform: uppercase; letter-spacing: 0.04em; line-height: 1.25;">
+        Temporada ${s.season}: "${s.arc}"
+      </h3>
+      <div style="display: flex; justify-content: center; gap: 0.75rem; margin-top: 0.65rem; flex-wrap: wrap;">
+        <span class="badge badge-cbi">📅 ${s.year}</span>
+        <span class="badge badge-cbi">🎬 ${s.episodesCount} Episodios</span>
+      </div>
+    </div>
+
+    <div style="background: rgba(10, 12, 16, 0.6); border: 1px solid rgba(212, 180, 131, 0.25); border-left: 3px solid #d4b483; border-radius: 6px; padding: 1.25rem 1.4rem; margin-bottom: 1.5rem; line-height: 1.8; color: #dcd8d0; font-size: 0.94rem; text-align: left;">
+      ${s.synopsis}
+    </div>
+
+    <div style="display: flex; justify-content: flex-end;">
+      <button type="button" class="btn btn-outline" id="closeSeasonSynopsisInnerBtn" style="padding: 0.5rem 1.35rem; font-size: 0.85rem; border-color: rgba(212, 180, 131, 0.4); color: #ecdcc2;">
+        Cerrar Expediente
+      </button>
+    </div>
+  `;
+
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+
+  const innerClose = document.getElementById('closeSeasonSynopsisInnerBtn');
+  if (innerClose) {
+    innerClose.addEventListener('click', closeSeasonSynopsisModal);
+  }
+}
+
+function closeSeasonSynopsisModal() {
+  const modal = document.getElementById('seasonSynopsisModal');
+  if (!modal) return;
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function attachSynopsisModalListeners() {
+  const buttons = document.querySelectorAll('.btn-read-more-season');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const season = btn.getAttribute('data-season');
+      openSeasonSynopsisModal(season);
+    });
+  });
+}
+
+function initSeasonSynopsisModal() {
+  const modal = document.getElementById('seasonSynopsisModal');
+  const closeBtn = document.getElementById('closeSeasonSynopsisBtn');
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeSeasonSynopsisModal);
+  }
+
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeSeasonSynopsisModal();
+      }
+    });
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
+      closeSeasonSynopsisModal();
+    }
+  });
 }
 
 function initSeasonPills() {

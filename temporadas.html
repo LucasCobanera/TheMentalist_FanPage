@@ -122,8 +122,8 @@
           Los giros deductivos, diálogos filosos y escenas más sobrecogedoras elegidas por los seguidores de <em>The Mentalist</em>. Vota tus preferidas o propón tu momento favorito a través del Despacho del CBI para ser evaluado e incorporado a la galería oficial.
         </p>
         <div style="margin-top: 1.5rem;">
-          <button type="button" class="btn btn-primary" id="btnOpenMomentsDispatch" style="display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.92rem; padding: 0.75rem 1.6rem;">
-            <i class="fa-solid fa-plus-circle" style="color: var(--green-bright);"></i> Proponer mi momento favorito
+          <button type="button" class="btn btn-outline" id="btnOpenMomentsDispatch" style="display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.92rem; padding: 0.75rem 1.6rem; border-color: rgba(212, 180, 131, 0.45); color: #ecdcc2; background: rgba(36, 27, 18, 0.7);">
+            <i class="fa-solid fa-plus-circle" style="color: #d4b483;"></i> Proponer mi momento favorito
           </button>
         </div>
       </div>
@@ -166,12 +166,22 @@
           <!-- Puntos indicadores generados dinámicamente -->
         </div>
         <div class="carousel-counter-tag" id="carouselCounterTag">
-          <i class="fa-solid fa-folder-open" style="color: var(--green-bright); margin-right: 0.35rem;"></i>
+          <i class="fa-solid fa-folder-open" style="color: #c8a97e; margin-right: 0.35rem;"></i>
           <span id="carouselCurrentIndex">1</span> de <span id="carouselTotalCount">7</span> Expedientes
         </div>
       </div>
     </div>
   </section>
+
+  <!-- MODAL DE SINOPSIS COMPLETA DE TEMPORADA -->
+  <div class="modal-overlay" id="seasonSynopsisModal" role="dialog" aria-modal="true" aria-label="Sinopsis de temporada">
+    <div class="modal-content" style="max-width: 620px;">
+      <button class="modal-close" id="closeSeasonSynopsisBtn" aria-label="Cerrar sinopsis">✕</button>
+      <div id="seasonSynopsisModalBody" style="padding: 2rem 1.75rem;">
+        <!-- Inyectado dinámicamente por js/seasons.js -->
+      </div>
+    </div>
+  </div>
 
   <!-- FOOTER SIMPLIFICADO -->
   <footer class="site-footer">

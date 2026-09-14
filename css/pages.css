@@ -8,32 +8,34 @@
    -------------------------------------------------------------------------- */
 .hero-section {
   position: relative;
-  padding: 4.5rem 0 4rem;
+  padding: 3.25rem 0 2.75rem;
   overflow: hidden;
   border-bottom: 1px solid var(--border-subtle);
+  background-color: #08080a;
 }
 
 .hero-backdrop {
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(circle at 75% 25%, rgba(57, 145, 95, 0.35) 0%, transparent 60%),
-    linear-gradient(180deg, rgba(8, 8, 10, 0.5) 0%, rgba(8, 8, 10, 0.98) 100%);
+  background-image:
+    linear-gradient(90deg, #08080a 0%, rgba(8, 8, 10, 0.95) 45%, rgba(8, 8, 10, 0.38) 75%, rgba(8, 8, 10, 0.9) 100%),
+    linear-gradient(180deg, rgba(8, 8, 10, 0.35) 0%, rgba(8, 8, 10, 0.98) 100%),
+    url('../img/jane&lisbon.jpeg');
+  background-position: right 10% center;
+  background-size: cover;
+  background-repeat: no-repeat;
   z-index: 1;
   pointer-events: none;
 }
 
-.hero-grid {
+.hero-content {
   position: relative;
   z-index: 2;
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 3.5rem;
-  align-items: center;
+  max-width: 680px;
 }
 
 .hero-badge {
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.85rem;
 }
 
 /* H1 exacto: "The mentalist" con recuadro y sombra verde */
@@ -43,110 +45,61 @@
   gap: 0.6rem;
   font-family: var(--font-logo);
   font-weight: 900;
-  font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
   line-height: 1.05;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--cream-pure);
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.15rem;
 }
 
 .hero-main-title .box-frame {
   border: 3px solid var(--cream-pure);
-  padding: 0.2rem 1rem;
+  padding: 0.15rem 0.85rem;
   background: var(--green-box-bg);
-  box-shadow: 0 0 35px var(--green-glow);
+  box-shadow: 0 0 30px var(--green-glow);
 }
 
 .hero-definition {
-  background: rgba(18, 18, 24, 0.75);
+  background: rgba(14, 16, 20, 0.82);
   border-left: 3px solid var(--green-bright);
-  padding: 1.2rem 1.5rem;
+  padding: 0.85rem 1.25rem;
   border-radius: 0 6px 6px 0;
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.15rem;
   backdrop-filter: blur(8px);
-  box-shadow: 0 0 20px rgba(67, 197, 142, 0.15);
+  box-shadow: 0 0 20px rgba(67, 197, 142, 0.12);
 }
 
 .hero-definition p {
   font-family: var(--font-typewriter);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: var(--cream-muted);
-  line-height: 1.6;
+  line-height: 1.55;
 }
 
 .hero-definition cite {
   display: block;
   font-family: var(--font-body);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   color: var(--green-bright);
-  margin-top: 0.6rem;
+  margin-top: 0.45rem;
   font-style: normal;
 }
 
 .hero-description {
   color: var(--text-secondary);
-  font-size: 1.05rem;
-  margin-bottom: 2.25rem;
+  font-size: 0.96rem;
+  line-height: 1.6;
+  margin-bottom: 1.6rem;
   max-width: 580px;
 }
 
 .hero-ctas {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.hero-media {
-  position: relative;
-}
-
-.hero-poster-frame {
-  position: relative;
-  background: #000;
-  border: 2px solid var(--green-border);
-  border-radius: 6px;
-  overflow: hidden;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 35px var(--green-glow);
-  transition: transform var(--transition-smooth);
-}
-
-.hero-poster-frame:hover {
-  transform: translateY(-4px);
-  border-color: var(--green-bright);
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 45px var(--green-glow);
-}
-
-.hero-floating-quote {
-  position: absolute;
-  bottom: -1rem;
-  left: -1rem;
-  background: rgba(12, 12, 16, 0.95);
-  border: 1px solid var(--green-forest);
-  padding: 0.9rem 1.25rem;
-  border-radius: 6px;
-  box-shadow: var(--shadow-lg), 0 0 20px var(--green-glow);
-  max-width: 280px;
-  z-index: 3;
-}
-
-.hero-floating-quote p {
-  font-size: 0.85rem;
-  font-style: italic;
-  color: var(--cream-pure);
-  line-height: 1.4;
-}
-
-.hero-floating-quote span {
-  display: block;
-  font-size: 0.72rem;
-  color: var(--green-bright);
-  margin-top: 0.35rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  gap: 0.85rem;
 }
 
 /* --------------------------------------------------------------------------
@@ -551,11 +504,41 @@ input:checked+.slider:before {
   margin-top: 0.5rem;
 }
 
+.season-synopsis-box {
+  margin-bottom: 2rem;
+}
+
 .season-synopsis {
   color: var(--text-secondary);
   font-size: 1.02rem;
   line-height: 1.7;
-  margin-bottom: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.btn-read-more-season {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: rgba(212, 180, 131, 0.12);
+  border: 1px solid rgba(212, 180, 131, 0.35);
+  color: #ecdcc2;
+  font-family: var(--font-mono, 'Courier New', monospace);
+  font-size: 0.84rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.5rem 1.1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-read-more-season:hover {
+  background: rgba(212, 180, 131, 0.25);
+  border-color: #d4b483;
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(212, 180, 131, 0.35);
+  transform: translateX(4px);
 }
 
 .episodes-grid {
@@ -821,6 +804,33 @@ body.red-john-page::before {
   transform: translateY(-4px);
 }
 
+.btn-read-curio {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(67, 197, 142, 0.1);
+  border: 1px solid rgba(67, 197, 142, 0.35);
+  color: var(--green-bright);
+  font-family: var(--font-mono, 'Courier New', monospace);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.45rem 0.95rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 0.75rem;
+  transition: all var(--transition-fast);
+}
+
+.btn-read-curio:hover {
+  background: rgba(67, 197, 142, 0.22);
+  border-color: var(--green-bright);
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(67, 197, 142, 0.35);
+  transform: translateX(4px);
+}
+
 /* --------------------------------------------------------------------------
    HEADER DINÁMICO DE TEMPORADAS (temporadas.html)
    -------------------------------------------------------------------------- */
@@ -958,11 +968,6 @@ body.red-john-page::before {
 }
 
 @media (max-width: 900px) {
-  .hero-grid {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-  }
-
   .hero-main-title {
     flex-wrap: wrap;
   }
@@ -970,5 +975,392 @@ body.red-john-page::before {
   .seasons-controls {
     flex-direction: column;
     align-items: stretch;
+  }
+}
+
+/* ==========================================================================
+   TRANSFORMACIÓN RESPONSIVE: CUADRÍCULAS A CARRUSELES DESLIZABLES (Mobile/Tablet)
+   En resoluciones pequeñas (<= 768px), las grillas de múltiples tarjetas
+   se convierten en carruseles táctiles de deslizamiento horizontal (touch-scroll
+   con scroll-snap), evitando listados verticales interminables.
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* Hero compacto en móviles con fondo cinematográfico */
+  .hero-section {
+    padding: 2.25rem 0 1.85rem;
+  }
+
+  .hero-backdrop {
+    background-image:
+      linear-gradient(180deg, rgba(8, 8, 10, 0.9) 0%, rgba(8, 8, 10, 0.96) 100%),
+      url('../img/jane&lisbon.jpeg');
+    background-position: center 25%;
+    background-size: cover;
+    opacity: 0.4;
+  }
+
+  .hero-main-title {
+    font-size: clamp(1.9rem, 8.5vw, 2.5rem);
+    margin-bottom: 0.85rem;
+  }
+
+  .hero-main-title .box-frame {
+    padding: 0.1rem 0.65rem;
+  }
+
+  .hero-definition {
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .hero-definition p {
+    font-size: 0.82rem;
+    line-height: 1.45;
+  }
+
+  .hero-description {
+    font-size: 0.88rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .hero-ctas {
+    gap: 0.65rem;
+  }
+
+  .hero-ctas .btn {
+    padding: 0.6rem 1.15rem;
+    font-size: 0.82rem;
+  }
+
+  /* Cuadrículas transformadas en carruseles táctiles con scroll horizontal suave */
+  .highlights-container,
+  .dossier-grid,
+  .suspects-grid,
+  .curio-grid,
+  .episodes-grid {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 0 1rem;
+    -webkit-overflow-scrolling: touch;
+    gap: 1.15rem !important;
+    padding: 0.5rem 1rem 1.4rem 1rem !important;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    width: calc(100% + 2rem) !important;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(200, 185, 155, 0.4) rgba(0, 0, 0, 0.2);
+  }
+
+  .highlights-container::-webkit-scrollbar,
+  .dossier-grid::-webkit-scrollbar,
+  .suspects-grid::-webkit-scrollbar,
+  .curio-grid::-webkit-scrollbar,
+  .episodes-grid::-webkit-scrollbar {
+    height: 5px;
+  }
+
+  .highlights-container::-webkit-scrollbar-track,
+  .dossier-grid::-webkit-scrollbar-track,
+  .suspects-grid::-webkit-scrollbar-track,
+  .curio-grid::-webkit-scrollbar-track,
+  .episodes-grid::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+  }
+
+  .highlights-container::-webkit-scrollbar-thumb,
+  .dossier-grid::-webkit-scrollbar-thumb,
+  .suspects-grid::-webkit-scrollbar-thumb,
+  .curio-grid::-webkit-scrollbar-thumb,
+  .episodes-grid::-webkit-scrollbar-thumb {
+    background: rgba(200, 185, 155, 0.4);
+    border-radius: 4px;
+  }
+
+  .highlights-container > *,
+  .dossier-card,
+  .suspect-card,
+  .curio-card,
+  .curio-grid > *,
+  .episode-card {
+    flex: 0 0 85% !important;
+    max-width: 310px !important;
+    min-width: 260px !important;
+    scroll-snap-align: center;
+    scroll-snap-stop: normal;
+  }
+
+  /* La tarjeta extendida de curiosidades en móvil se unifica en el carrusel */
+  .curio-card-full {
+    grid-column: auto !important;
+  }
+
+  /* 1. Tarjetas de Personajes Compactas */
+  .dossier-photo-wrap {
+    height: 195px !important;
+  }
+
+  .dossier-body {
+    padding: 1rem 1rem 1.15rem !important;
+  }
+
+  .dossier-name {
+    font-size: 1.15rem !important;
+    margin-top: 0.35rem !important;
+  }
+
+  .dossier-desc {
+    font-size: 0.82rem !important;
+    line-height: 1.45 !important;
+    margin-bottom: 0.65rem !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+
+  .dossier-skills {
+    gap: 0.35rem !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  .dossier-skills .skill-tag {
+    font-size: 0.7rem !important;
+    padding: 0.2rem 0.5rem !important;
+  }
+
+  .dossier-skills .skill-tag:nth-child(n+4) {
+    display: none !important;
+  }
+
+  /* 2. Guía de Temporadas y Episodios Compacta */
+  .season-block {
+    margin-bottom: 2.25rem !important;
+  }
+
+  .season-synopsis {
+    font-size: 0.88rem !important;
+    line-height: 1.5 !important;
+    margin-bottom: 1.25rem !important;
+  }
+
+  .episode-card {
+    padding: 1rem !important;
+  }
+
+  .episode-title {
+    font-size: 0.95rem !important;
+    margin-bottom: 0.35rem !important;
+  }
+
+  .episode-plot {
+    font-size: 0.82rem !important;
+    line-height: 1.45 !important;
+  }
+
+  /* 3. Tarjetas de Curiosidades Compactas */
+  .curio-card-img-wrap {
+    height: 150px !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  .curio-card {
+    padding: 1.25rem 1rem !important;
+  }
+
+  .curio-card h3 {
+    font-size: 1.15rem !important;
+    margin-bottom: 0.45rem !important;
+  }
+
+  .curio-card p {
+    font-size: 0.84rem !important;
+    line-height: 1.5 !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .curio-grid {
+    margin-bottom: 2.25rem !important;
+  }
+
+  /* 4. Red John & Asociación Blake */
+  .blake-association-card {
+    padding: 1.5rem 1.15rem !important;
+    margin: 0 auto 2.5rem !important;
+  }
+
+  .blake-association-card p {
+    font-size: 0.88rem !important;
+    line-height: 1.55 !important;
+  }
+
+  .suspect-card {
+    padding: 1rem !important;
+  }
+
+  .suspect-card h3 {
+    font-size: 1.15rem !important;
+  }
+
+  .suspect-card p {
+    font-size: 0.82rem !important;
+    line-height: 1.45 !important;
+  }
+
+  /* 5. Escala de Títulos y Secciones Globales en Móvil */
+  .section-header {
+    margin: 0 auto 1.85rem auto !important;
+  }
+
+  .section-header h1,
+  .section-header h2 {
+    font-size: clamp(1.6rem, 6.5vw, 1.95rem) !important;
+    margin-bottom: 0.55rem !important;
+  }
+
+  .section-header p {
+    font-size: 0.88rem !important;
+    line-height: 1.5 !important;
+  }
+
+  .filter-tabs {
+    gap: 0.4rem !important;
+    margin-bottom: 1.75rem !important;
+  }
+
+  .filter-btn {
+    padding: 0.45rem 0.85rem !important;
+    font-size: 0.76rem !important;
+  }
+
+  .seasons-nav-pills {
+    justify-content: center !important;
+    gap: 0.35rem !important;
+  }
+
+  .season-pill {
+    padding: 0.38rem 0.65rem !important;
+    font-size: 0.78rem !important;
+  }
+
+  .season-dynamic-header {
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 0 !important;
+    background: #0b0d13 !important;
+  }
+
+  .season-header-bg {
+    position: relative !important;
+    width: 100% !important;
+    height: 230px !important;
+    overflow: hidden !important;
+  }
+
+  .season-header-img {
+    width: 100% !important;
+    height: 230px !important;
+    object-fit: cover !important;
+    object-position: center top !important;
+    display: block !important;
+  }
+
+  .season-header-bg::after {
+    content: '' !important;
+    position: absolute !important;
+    inset: 0 !important;
+    background: linear-gradient(180deg, rgba(8, 10, 14, 0.15) 0%, rgba(8, 10, 14, 0.65) 60%, #0b0d13 100%) !important;
+    pointer-events: none !important;
+    display: block !important;
+  }
+
+  .season-header-content {
+    position: relative !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
+    margin-top: -65px !important;
+    z-index: 5 !important;
+    padding: 0 1rem 1.25rem !important;
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+  .season-header-content .badge {
+    font-size: 0.74rem !important;
+    padding: 0.28rem 0.75rem !important;
+    margin-bottom: 0.35rem !important;
+  }
+
+  .season-header-content h1 {
+    font-size: 1.35rem !important;
+    line-height: 1.25 !important;
+    margin-bottom: 0.85rem !important;
+    letter-spacing: 0.03em !important;
+  }
+
+  .seasons-controls {
+    padding: 0.85rem 1rem !important;
+    gap: 0.75rem !important;
+  }
+
+  .season-block {
+    padding: 1.5rem 1.15rem !important;
+    margin-bottom: 2rem !important;
+  }
+
+  .season-info h3 {
+    font-size: 1.28rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .season-meta-tags {
+    flex-wrap: wrap !important;
+    gap: 0.4rem !important;
+  }
+
+  .mentalism-guide-card {
+    padding: 1.5rem 1rem !important;
+  }
+
+  .mentalism-techniques-row {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    gap: 0.85rem !important;
+    padding: 0.25rem 0.25rem 0.85rem !important;
+  }
+
+  .mentalism-technique-card {
+    flex: 0 0 84% !important;
+    min-width: 0 !important;
+    scroll-snap-align: center !important;
+    padding: 1.15rem 1rem !important;
+  }
+
+  .memory-palace-showcase {
+    padding: 1.6rem 1.15rem !important;
+  }
+
+  .memory-palace-grid {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    gap: 0.85rem !important;
+    padding: 0.25rem 0.25rem 0.85rem !important;
+  }
+
+  .memory-pillar {
+    flex: 0 0 84% !important;
+    min-width: 0 !important;
+    scroll-snap-align: center !important;
+    padding: 1.1rem 1rem !important;
   }
 }

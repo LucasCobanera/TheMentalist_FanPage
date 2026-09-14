@@ -93,37 +93,33 @@
       <cite>— William Blake (1794), susurrado por Red John al oído de Patrick Jane</cite>
     </section>
 
-    <!-- LA ASOCIACIÓN BLAKE (Detalle ampliado de 7 renglones) -->
-    <section class="glass-card crimson-hover"
-      style="max-width: 960px; margin: 0 auto 5rem; padding: 2.5rem; border-color: var(--border-crimson); background: rgba(12, 12, 16, 0.92);">
-      <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem;">
+    <!-- LA ASOCIACIÓN BLAKE (Informe Ejecutivo & Desclasificación) -->
+    <section class="glass-card crimson-hover blake-association-card"
+      style="max-width: 960px; margin: 0 auto 4rem; padding: 2rem 2.25rem; border-color: var(--border-crimson); background: rgba(12, 12, 16, 0.92);">
+      <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
         <div
           style="width: 44px; height: 44px; border-radius: 4px; background: rgba(128, 8, 23, 0.3); border: 1px solid var(--crimson-bright); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: #ff8080;">
           🔺
         </div>
         <div>
-          <h2 style="font-size: 1.6rem; color: var(--cream-pure);">La Asociación Blake (The Blake Association)</h2>
+          <h2 style="font-size: 1.5rem; color: var(--cream-pure);">La Asociación Blake (The Blake Association)</h2>
           <span
-            style="font-size: 0.82rem; color: var(--crimson-bright); font-family: var(--font-typewriter); text-transform: uppercase;">Sociedad
-            secreta institucional</span>
+            style="font-size: 0.8rem; color: var(--crimson-bright); font-family: var(--font-typewriter); text-transform: uppercase;">
+            Sindicato Clandestino de Impunidad Policial
+          </span>
         </div>
       </div>
 
-      <p style="color: var(--text-secondary); line-height: 1.85; margin-bottom: 1.25rem;">
-        Fundada y dirigida en las sombras por el mismísimo Red John (Thomas McAllister), la Asociación Blake constituyó
-        una vasta conspiración criminal secreta enraizada en las instituciones judiciales y policiales de California. Su
-        red incluía jueces de distrito, agentes de campo del FBI, directores del CBI, detectives locales y peritos
-        forenses, todos unidos por un pacto inquebrantable de complicidad forzada.
+      <p style="color: var(--text-secondary); line-height: 1.75; margin-bottom: 0.85rem; font-size: 0.94rem;">
+        Fundada y dirigida en las sombras por el mismísimo Red John, constituyó una vasta conspiración criminal secreta enraizada en las instituciones judiciales y policiales de California. Sus miembros operaban bajo la contraseña poética <em>"Tyger, Tyger"</em> y portaban un tatuaje identificador de tres puntos en el hombro izquierdo.
       </p>
-      <p style="color: var(--text-secondary); line-height: 1.85;">
-        Para reconocerse entre sí en situaciones encubiertas, sus miembros utilizaban los versos del célebre poema de
-        William Blake como contraseña ("Tyger, Tyger") y portaban un tatuaje identificador de tres puntos alineados en
-        su hombro izquierdo. El mecanismo operaba como un sindicato de favores siniestros: cuando un miembro cometía un
-        homicidio, alteraba un peritaje o se enfrentaba a una investigación de Asuntos Internos, la red desviaba
-        pesquisas, fabricaba coartadas o eliminaba testigos para asegurarle impunidad total. Esta maquinaria convirtió a
-        la propia ley en el escudo impenetrable de Red John hasta que Patrick Jane descifró el tatuaje y forzó la
-        confesión de Reede Smith, desmoronando la sociedad desde sus cimientos.
-      </p>
+
+      <button type="button" class="btn btn-crimson-outline" id="openBlakeReportBtn"
+        style="display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.86rem; padding: 0.6rem 1.3rem; margin-top: 0.5rem; border-color: var(--crimson-bright); color: #ffb3b8;">
+        <i class="fa-solid fa-folder-open"></i>
+        <span>Desclasificar informe completo de la Asociación Blake</span>
+        <i class="fa-solid fa-arrow-right"></i>
+      </button>
     </section>
 
     <!-- LOS 7 SOSPECHOSOS OFICIALES DE LA LISTA DE JANE (SIN HUECOS VACÍOS) -->
@@ -278,38 +274,102 @@
           </p>
         </article>
 
-        <!-- Sospechoso 7: Thomas McAllister (EL VERDADERO RED JOHN) -->
-        <article class="suspect-card"
-          style="border-color: var(--crimson-bright); background: linear-gradient(170deg, rgba(128, 8, 23, 0.4) 0%, rgba(12, 12, 18, 0.95) 100%);">
+        <!-- Sospechoso 7: Thomas McAllister (PROTEGIDO POR CONTROL DE SPOILERS) -->
+        <article class="suspect-card suspect-redjohn-card" id="mcallisterCard"
+          style="border-color: var(--crimson-bright); background: linear-gradient(170deg, rgba(128, 8, 23, 0.25) 0%, rgba(12, 12, 18, 0.95) 100%);">
           <div style="display:flex; justify-content:space-between; margin-bottom: 0.75rem;">
-            <span class="badge badge-crimson">#7 IDENTIDAD REVELADA</span>
-            <span class="badge badge-crimson">EL VERDADERO ASESINO</span>
+            <span class="badge badge-crimson">#7 SOSPECHOSO FINAL</span>
+            <span class="badge badge-crimson" id="mcallisterBadge">ALERTA DE SPOILER</span>
           </div>
-          <div style="display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 0.75rem;">
-            <img src="img/characters/thomas_mcallister.jpg" alt="Thomas McAllister"
-              style="width: 70px; height: 95px; object-fit: cover; border-radius: 4px; border: 1px solid var(--crimson-bright); flex-shrink: 0;">
-            <div>
-              <h3 style="font-size: 1.4rem; color: #ffb3b8; margin-bottom: 0.25rem;">Thomas McAllister</h3>
-              <p
-                style="font-size: 0.82rem; color: var(--cream-pure); margin-bottom: 0.25rem; text-transform: uppercase; font-weight: 700;">
-                Sheriff del Condado de Napa</p>
+
+          <!-- Escudo de Spoiler de Red John -->
+          <div class="redjohn-spoiler-overlay" id="redJohnSpoilerOverlay" style="text-align: center; padding: 1.5rem 0.5rem;">
+            <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">⚠️</div>
+            <h4 style="color: #ff999f; font-family: var(--font-display, serif); font-size: 1.15rem; margin-bottom: 0.4rem; text-transform: uppercase;">
+              Identidad Secreta de Red John
+            </h4>
+            <p style="font-size: 0.82rem; color: var(--cream-muted); margin-bottom: 1.1rem; line-height: 1.5;">
+              Este expediente desclasifica el mayor misterio de la serie (Temporada 6). ¿Deseas revelar la verdadera identidad del asesino?
+            </p>
+            <button type="button" class="btn btn-crimson-outline" id="btnRevealRedJohn"
+              style="font-size: 0.84rem; padding: 0.55rem 1.25rem; border-color: var(--crimson-bright); color: #ffb3b8; display: inline-flex; align-items: center; gap: 0.5rem;">
+              <i class="fa-solid fa-unlock-keyhole"></i>
+              <span>Revelar Identidad de Red John</span>
+            </button>
+          </div>
+
+          <!-- Contenido Desclasificado (Revelado tras pulsar el botón) -->
+          <div class="redjohn-revealed-content" id="redJohnRevealedContent" style="display: none;">
+            <div style="display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 0.75rem;">
+              <img src="img/characters/thomas_mcallister.jpg" alt="Thomas McAllister"
+                style="width: 70px; height: 95px; object-fit: cover; border-radius: 4px; border: 1px solid var(--crimson-bright); flex-shrink: 0;">
+              <div>
+                <h3 style="font-size: 1.4rem; color: #ffb3b8; margin-bottom: 0.25rem;">Thomas McAllister</h3>
+                <p
+                  style="font-size: 0.82rem; color: var(--cream-pure); margin-bottom: 0.25rem; text-transform: uppercase; font-weight: 700;">
+                  Sheriff del Condado de Napa</p>
+                <span class="badge badge-crimson" style="font-size: 0.7rem;">EL AUTÉNTICO RED JOHN</span>
+              </div>
+            </div>
+            <p style="font-size: 0.88rem; color: var(--cream-muted); line-height: 1.6; margin-bottom: 0.75rem;">
+              <strong>El cerebro maestro.</strong> Conoció a Patrick Jane en el episodio 1x02 y fingió su propia muerte en Malibú suplantando su cadáver con ADN alterado por el forense Partridge.
+            </p>
+            <p style="font-size: 0.86rem; color: #ff858d; line-height: 1.5; border-top: 1px dashed rgba(255, 60, 60, 0.25); padding-top: 0.5rem;">
+              <strong>Desenlace:</strong> En el episodio 6x08 ("Red John"), tras ser herido en la capilla del cementerio y perseguido hasta un parque público de Sacramento, Jane lo inmovilizó y lo estranguló con sus propias manos hasta quitarle la vida.
+            </p>
+            <div style="text-align: right; margin-top: 0.75rem;">
+              <button type="button" id="btnHideRedJohn" style="background: none; border: none; color: var(--text-muted); font-size: 0.75rem; cursor: pointer; text-decoration: underline;">
+                Ocultar spoiler nuevamente
+              </button>
             </div>
           </div>
-          <p style="font-size: 0.88rem; color: var(--cream-muted); line-height: 1.6;">
-            <strong>El auténtico Red John.</strong> Conoció a Patrick Jane en el episodio 1x02 y fingió su muerte en
-            Malibú suplantando su cadáver con ADN forense alterado. <strong>Muerte:</strong> En el episodio 6x08 ("Red
-            John"), tras ser herido en la capilla y perseguido hasta un parque público de Sacramento, Jane lo inmovilizó
-            y lo estranguló con sus propias manos hasta quitarle la vida.
-          </p>
         </article>
 
       </div>
     </section>
 
-    </div>
-    </section>
-
   </main>
+
+  <!-- MODAL DE INFORME DESCLASIFICADO: ASOCIACIÓN BLAKE -->
+  <div class="modal-overlay" id="blakeModal" role="dialog" aria-modal="true" aria-label="Informe de la Asociación Blake">
+    <div class="modal-content" style="max-width: 680px; border-color: var(--crimson-bright); box-shadow: 0 20px 60px rgba(0,0,0,0.9), 0 0 35px rgba(220, 20, 60, 0.35);">
+      <button class="modal-close" id="closeBlakeModalBtn" aria-label="Cerrar informe">✕</button>
+      <div style="padding: 2.2rem 1.85rem;">
+        
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+          <span class="badge badge-crimson" style="font-size: 0.78rem; letter-spacing: 0.12em;">DOCUMENTO ULTRA SECRETO • FBI / CBI</span>
+          <h3 style="font-family: var(--font-display, serif); font-size: 1.65rem; color: #ff999f; margin-top: 0.5rem; text-transform: uppercase; letter-spacing: 0.04em;">
+            Dossier: La Asociación Blake
+          </h3>
+          <p style="color: var(--cream-muted); font-size: 0.88rem; font-style: italic; margin-top: 0.25rem;">
+            «Tyger, Tyger, burning bright, In the forests of the night...»
+          </p>
+        </div>
+
+        <div style="background: rgba(18, 10, 14, 0.8); border: 1px solid rgba(220, 20, 60, 0.3); border-left: 3px solid var(--crimson-bright); border-radius: 6px; padding: 1.35rem 1.45rem; margin-bottom: 1.5rem; line-height: 1.8; color: #e0d8d8; font-size: 0.93rem; text-align: left;">
+          <p style="margin-bottom: 1rem;">
+            <strong>Origen y Estructura:</strong> Fundada y dirigida en las sombras por el mismísimo Red John (el Sheriff Thomas McAllister), la Asociación Blake constituyó una vasta conspiración criminal secreta institucionalizada en California durante más de dos décadas.
+          </p>
+          <p style="margin-bottom: 1rem;">
+            <strong>Miembros de Alto Perfil:</strong> La red infiltró cada estrato del sistema de justicia: el Director del CBI Gale Bertram, el agente especial Reede Smith, detectives locales, jueces federales y personal forense como Brett Partridge. Todos estaban atados por un juramento de silencio y reciprocidad delictiva forzada.
+          </p>
+          <p style="margin-bottom: 1rem;">
+            <strong>Modus Operandi:</strong> Si un oficial miembro cometía un homicidio accidental o tráfico ilícito, la Asociación Blake alteraba peritajes forenses, extraviaba expedientes y eliminaba testigos para garantizarle impunidad total. A cambio, el miembro quedaba en deuda perpetua con Red John para cumplir cualquier favor criminal.
+          </p>
+          <p>
+            <strong>La Caída:</strong> Patrick Jane descubrió que todos los miembros portaban un tatuaje secreto de tres puntos en el hombro izquierdo. Al desenmascarar a Reede Smith en un hospital y negociar su protección federal a cambio de una confesión jurada, la Asociación Blake fue desarticulada por el FBI en todo el estado.
+          </p>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end;">
+          <button type="button" class="btn btn-crimson-outline" id="closeBlakeInnerBtn" style="padding: 0.5rem 1.35rem; font-size: 0.85rem; border-color: var(--crimson-bright); color: #ffb3b8;">
+            Cerrar Expediente
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
 
   <!-- FOOTER SIMPLIFICADO -->
   <footer class="site-footer">
@@ -352,6 +412,7 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script src="js/red-john.js"></script>
   <script src="js/cbi-dispatch.js"></script>
 </body>
 

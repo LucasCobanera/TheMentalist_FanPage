@@ -87,6 +87,34 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  text-align: left;
+}
+
+/* Reglas de alineación: Todos los textos a la izquierda, excepto la frase de Red John */
+p,
+li,
+dd,
+blockquote,
+article p,
+section p,
+.season-synopsis,
+.episode-plot,
+.modal-agent-bio,
+.dossier-desc,
+.curio-card p,
+.suspect-card p,
+.cbi-slogan-text,
+.cbi-field-label,
+.jane-quote-text,
+.rule-desc {
+  text-align: left;
+}
+
+/* La frase / poema de Red John: estrictamente centrada */
+.poem-box,
+.poem-box p,
+.poem-box cite {
+  text-align: center !important;
 }
 
 /* Scrollbar */

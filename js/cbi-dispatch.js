@@ -208,13 +208,13 @@
           <form class="cbi-form" id="cbiDispatchForm" novalidate>
             <!-- Fila: Autor y Contacto -->
             <div class="cbi-field-row">
-              <div class="cbi-field-group" style="flex: 1;">
+              <div class="cbi-field-group flex-1">
                 <label class="cbi-field-label" for="cbiAuthorName">
                   Tu Nombre o Alias <span class="required">*</span>
                 </label>
                 <input type="text" id="cbiAuthorName" class="cbi-input" placeholder="Ej: Patrick Jane, Teresa Lisbon..." required maxlength="40">
               </div>
-              <div class="cbi-field-group" style="flex: 1;">
+              <div class="cbi-field-group flex-1">
                 <label class="cbi-field-label" for="cbiAuthorEmail">
                   Email de contacto (opcional)
                 </label>
@@ -225,7 +225,7 @@
             <!-- Campos específicos para "Mejor Momento" -->
             <div id="cbiMomentFields">
               <div class="cbi-field-row">
-                <div class="cbi-field-group" style="flex: 1;">
+                <div class="cbi-field-group flex-1">
                   <label class="cbi-field-label" for="cbiSeasonSelect">
                     Temporada <span class="required">*</span>
                   </label>
@@ -239,7 +239,7 @@
                     <option value="7">Temporada 7</option>
                   </select>
                 </div>
-                <div class="cbi-field-group" style="flex: 1.4;">
+                <div class="cbi-field-group flex-1-4">
                   <label class="cbi-field-label" for="cbiEpisodeRef">
                     Capítulo / Número <span class="required">*</span>
                   </label>
@@ -544,7 +544,7 @@
     if (filtered.length === 0) {
       track.innerHTML = `
         <div style="flex: 1; text-align: center; padding: 3.5rem 1rem; color: var(--text-muted);">
-          <i class="fa-solid fa-folder-closed" style="font-size: 2.8rem; margin-bottom: 1rem; color: var(--green-bright); opacity: 0.5;"></i>
+          <i class="fa-solid fa-folder-closed" style="font-size: 2.8rem; margin-bottom: 1rem; color: #c8a97e; opacity: 0.5;"></i>
           <p style="font-size: 1.15rem; color: var(--cream-pure);">No hay expedientes archivados para la Temporada ${activeSeasonFilter}.</p>
           <p style="font-size: 0.9rem; margin-top: 0.5rem;">Envía tu propuesta con el botón flotante del CBI para ser evaluada.</p>
         </div>
@@ -642,7 +642,7 @@
     const firstCard = track.children[0];
     if (firstCard && filtered.length > 0 && !firstCard.classList.contains('empty-dossier')) {
       const cardWidth = firstCard.offsetWidth;
-      const gap = 28; // 1.75rem
+      const gap = parseFloat(window.getComputedStyle(track).gap) || 28;
       const offset = currentSlideIndex * (cardWidth + gap);
       track.style.transition = animate ? 'transform 0.45s cubic-bezier(0.16, 1, 0.3, 1)' : 'none';
       track.style.transform = `translateX(-${offset}px)`;

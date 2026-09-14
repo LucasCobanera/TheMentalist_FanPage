@@ -337,39 +337,39 @@ function openCharacterModal(characterId) {
   const hasImage = char.imageSrc && char.imageSrc.trim() !== '';
 
   modalBody.innerHTML = `
-    <div style="padding: 2rem;">
-      <div style="display:flex; gap: 1.5rem; align-items: flex-start; border-bottom: 1px solid var(--border-subtle); padding-bottom: 1.5rem; margin-bottom: 1.5rem;">
+    <div class="character-modal-inner">
+      <div class="modal-agent-header">
         ${hasImage ? `
-          <div style="width: 110px; height: 145px; border-radius: 4px; overflow: hidden; border: 2px solid var(--green-border); flex-shrink: 0;">
+          <div class="modal-agent-photo-wrap">
             <img src="${char.imageSrc}" alt="${char.name}" style="width: 100%; height: 100%; object-fit: cover;">
           </div>
         ` : ''}
-        <div>
+        <div class="modal-agent-meta">
           <span class="badge ${char.category === 'nemesis' ? 'badge-crimson' : 'badge-green'}">${char.badge}</span>
-          <h2 style="font-size: 1.85rem; margin-top: 0.5rem; color: var(--cream-pure);">${char.name}</h2>
-          <p style="color: var(--green-bright); font-family: var(--font-typewriter); font-size: 0.85rem;">Actor: ${char.actor} | CBI ARCHIVE</p>
-          <p style="color: var(--text-secondary); font-size: 0.88rem; margin-top: 0.35rem;">${char.role}</p>
+          <h2 class="modal-agent-name">${char.name}</h2>
+          <p class="modal-agent-actor">Actor: ${char.actor} | CBI ARCHIVE</p>
+          <p class="modal-agent-role">${char.role}</p>
         </div>
       </div>
 
-      <div style="margin-bottom: 1.5rem; background: rgba(46, 116, 80, 0.18); border-left: 3px solid var(--green-bright); padding: 1rem 1.25rem; border-radius: 0 4px 4px 0;">
-        <p style="font-style: italic; color: var(--cream-pure);">"${char.quote}"</p>
+      <div class="modal-agent-quote-box">
+        <p>"${char.quote}"</p>
       </div>
 
-      <h4 style="color: var(--green-bright); font-size: 0.95rem; margin-bottom: 0.6rem; text-transform: uppercase; letter-spacing: 0.08em;">Perfil Psicológico e Historial</h4>
-      <p style="color: var(--text-secondary); line-height: 1.7; font-size: 0.95rem; margin-bottom: 1.75rem;">${char.fullBio}</p>
+      <h4 class="modal-agent-section-title">Perfil Psicológico e Historial</h4>
+      <p class="modal-agent-bio">${char.fullBio}</p>
 
-      <h4 style="color: var(--green-bright); font-size: 0.95rem; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em;">Métricas de Comportamiento</h4>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.85rem; margin-bottom: 1.5rem;">
+      <h4 class="modal-agent-section-title">Métricas de Comportamiento</h4>
+      <div class="modal-agent-stats-grid">
         ${Object.entries(char.stats).map(([statName, val]) => `
-          <div style="background: rgba(255,255,255,0.04); border: 1px solid var(--border-subtle); border-radius: 4px; padding: 0.75rem; text-align: center;">
-            <span style="font-size: 0.75rem; text-transform: capitalize; color: var(--text-muted); display: block;">${statName}</span>
-            <strong style="font-size: 1.25rem; color: var(--green-bright); font-family: var(--font-display);">${val}</strong>
+          <div class="modal-stat-box">
+            <span class="stat-name">${statName}</span>
+            <strong class="stat-val">${val}</strong>
           </div>
         `).join('')}
       </div>
 
-      <div style="border-top: 1px solid var(--border-subtle); padding-top: 1rem; display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-typewriter);">
+      <div class="modal-agent-footer">
         <span>CONFIDENCIAL - ESTADO DE CALIFORNIA</span>
         <span>REGISTRO: OK-2008-CBI</span>
       </div>

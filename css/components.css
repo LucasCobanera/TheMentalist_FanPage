@@ -513,6 +513,28 @@
   transform: translateY(-2px);
 }
 
+.btn-crimson-outline {
+  background: rgba(128, 8, 23, 0.15);
+  color: #ffb3b8;
+  border: 1px solid var(--crimson-bright);
+  backdrop-filter: blur(8px);
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: var(--font-display, serif);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all var(--transition-fast);
+}
+
+.btn-crimson-outline:hover {
+  background: rgba(128, 8, 23, 0.35);
+  border-color: #ff4757;
+  color: #ffffff;
+  box-shadow: 0 0 15px rgba(220, 20, 60, 0.4);
+  transform: translateY(-2px);
+}
+
 .btn-sm {
   padding: 0.45rem 0.95rem;
   font-size: 0.8rem;
@@ -611,6 +633,118 @@
   color: #fff;
   background: var(--green-forest);
   border-color: var(--green-bright);
+}
+
+/* Estructura Interna del Modal de Personajes */
+.character-modal-inner {
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.modal-agent-header {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.modal-agent-photo-wrap {
+  width: 110px;
+  height: 145px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 2px solid var(--green-border);
+  flex-shrink: 0;
+}
+
+.modal-agent-meta {
+  flex: 1;
+}
+
+.modal-agent-name {
+  font-size: 1.85rem;
+  margin-top: 0.5rem;
+  color: var(--cream-pure);
+}
+
+.modal-agent-actor {
+  color: var(--green-bright);
+  font-family: var(--font-typewriter);
+  font-size: 0.85rem;
+}
+
+.modal-agent-role {
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  margin-top: 0.35rem;
+}
+
+.modal-agent-quote-box {
+  margin-bottom: 1.5rem;
+  background: rgba(46, 116, 80, 0.18);
+  border-left: 3px solid var(--green-bright);
+  padding: 1rem 1.25rem;
+  border-radius: 0 4px 4px 0;
+}
+
+.modal-agent-quote-box p {
+  font-style: italic;
+  color: var(--cream-pure);
+}
+
+.modal-agent-section-title {
+  color: var(--green-bright);
+  font-size: 0.95rem;
+  margin-bottom: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.modal-agent-bio {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  font-size: 0.95rem;
+  margin-bottom: 1.75rem;
+}
+
+.modal-agent-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+.modal-stat-box {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  padding: 0.75rem;
+  text-align: center;
+}
+
+.modal-stat-box .stat-name {
+  font-size: 0.75rem;
+  text-transform: capitalize;
+  color: var(--text-muted);
+  display: block;
+}
+
+.modal-stat-box .stat-val {
+  font-size: 1.25rem;
+  color: var(--green-bright);
+  font-family: var(--font-display);
+}
+
+.modal-agent-footer {
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-family: var(--font-typewriter);
 }
 
 /* FOOTER SIMPLIFICADO & ELEGANTE */
@@ -781,6 +915,149 @@
 
   .footer-social-links {
     justify-content: center;
+  }
+}
+
+/* En celulares (<= 768px), el botón de sonido se extrae del header para no romper la barra y se convierte en botón flotante */
+@media (max-width: 768px) {
+  .ambient-audio-btn {
+    position: fixed;
+    bottom: 80px;
+    right: 18px;
+    z-index: 985;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(16, 16, 24, 0.94);
+    border: 1.5px solid rgba(85, 194, 153, 0.45);
+    color: var(--cream-pure);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.75), 0 0 14px rgba(46, 116, 80, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: all 0.3s cubic-bezier(0.2, 1, 0.3, 1);
+  }
+
+  .ambient-audio-btn:hover {
+    transform: translateY(-2px) scale(1.06);
+    border-color: var(--green-bright);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.85), 0 0 18px rgba(85, 194, 153, 0.5);
+  }
+
+  .ambient-audio-btn.playing {
+    border-color: var(--green-bright);
+    background: rgba(22, 38, 28, 0.95);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.85), 0 0 20px rgba(85, 194, 153, 0.6);
+  }
+
+  body.red-john-page .ambient-audio-btn {
+    border-color: rgba(255, 71, 87, 0.45);
+  }
+
+  body.red-john-page .ambient-audio-btn.playing {
+    border-color: #ff4757;
+    background: rgba(45, 12, 18, 0.95);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.85), 0 0 20px rgba(255, 71, 87, 0.6);
+  }
+
+  .ambient-audio-btn .btn-text {
+    display: none !important;
+  }
+
+  .ambient-audio-btn .audio-equalizer {
+    height: 16px;
+    gap: 3px;
+  }
+
+  .ambient-audio-btn .audio-equalizer span {
+    width: 3.5px;
+    height: 6px;
+    border-radius: 2px;
+  }
+
+  .character-modal-inner {
+    padding: 1.25rem 1rem !important;
+  }
+
+  /* Modal de agentes en celulares: foto centrada y contenido apilado debajo sin desbordar */
+  .modal-overlay {
+    padding: 0.75rem !important;
+  }
+
+  .modal-content {
+    max-width: calc(100vw - 24px) !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    border-radius: 10px !important;
+    overflow-x: hidden !important;
+  }
+
+  .modal-agent-header {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 0.85rem !important;
+    padding-bottom: 1.15rem !important;
+    margin-bottom: 1.15rem !important;
+  }
+
+  .modal-agent-photo-wrap {
+    width: 100% !important;
+    max-width: 180px !important;
+    height: 220px !important;
+    margin: 0 auto !important;
+  }
+
+  .modal-agent-name {
+    font-size: 1.4rem !important;
+    margin-top: 0.35rem !important;
+  }
+
+  .modal-agent-actor {
+    font-size: 0.8rem !important;
+  }
+
+  .modal-agent-role {
+    font-size: 0.84rem !important;
+  }
+
+  .modal-agent-quote-box {
+    padding: 0.75rem 1rem !important;
+    margin-bottom: 1.15rem !important;
+  }
+
+  .modal-agent-quote-box p {
+    font-size: 0.88rem !important;
+  }
+
+  .modal-agent-bio {
+    font-size: 0.86rem !important;
+    line-height: 1.55 !important;
+    margin-bottom: 1.25rem !important;
+  }
+
+  .modal-agent-stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.55rem !important;
+  }
+
+  .modal-stat-box {
+    padding: 0.55rem 0.35rem !important;
+  }
+
+  .modal-stat-box .stat-val {
+    font-size: 1.1rem !important;
+  }
+
+  .modal-agent-footer {
+    flex-direction: column !important;
+    gap: 0.35rem !important;
+    text-align: center !important;
+    font-size: 0.7rem !important;
   }
 }
 
@@ -1116,6 +1393,59 @@
 }
 
 /* ==========================================================================
+   COMPONENTE GLOBAL: BOTÓN VOLVER ARRIBA (Back to Top)
+   Aparece dinámicamente al descender por cualquier página del sitio
+   ========================================================================== */
+.back-to-top-btn {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 995;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(16, 16, 22, 0.88);
+  border: 1.5px solid rgba(200, 185, 155, 0.3);
+  color: var(--cream-pure);
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px) scale(0.9);
+  transition: all 0.3s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.back-to-top-btn.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.back-to-top-btn:hover {
+  background: #251d14;
+  border-color: #d4b483;
+  color: #ecdcc2;
+  transform: translateY(-3px) scale(1.08);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.85), 0 0 16px rgba(212, 180, 131, 0.35);
+}
+
+@media (max-width: 768px) {
+  .back-to-top-btn {
+    bottom: 18px;
+    left: 18px;
+    width: 40px;
+    height: 40px;
+    font-size: 0.9rem;
+  }
+}
+
+/* ==========================================================================
    COMPONENTE GLOBAL: BOTÓN FLOTANTE & MODAL FORMULARIO OFICIAL CBI
    Contacto, Recomendaciones y Envío de Mejores Momentos por Fans
    ========================================================================== */
@@ -1211,10 +1541,12 @@ body.cbi-modal-open {
 }
 
 .cbi-modal {
+  box-sizing: border-box;
   width: 100%;
   max-width: 620px;
   max-height: 90vh;
   overflow-y: auto;
+  overflow-x: hidden;
   background: #111116;
   border: 1px solid rgba(85, 194, 153, 0.35);
   border-radius: 14px;
@@ -1366,17 +1698,31 @@ body.cbi-modal-open {
 }
 
 .cbi-field-group {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+  width: 100%;
+  min-width: 0;
+}
+
+.cbi-field-group.flex-1 {
+  flex: 1;
+}
+
+.cbi-field-group.flex-1-4 {
+  flex: 1.4;
 }
 
 .cbi-field-row {
+  box-sizing: border-box;
   display: flex;
   gap: 1rem;
+  width: 100%;
+  min-width: 0;
 }
 
-@media (max-width: 580px) {
+@media (max-width: 768px) {
   .cbi-field-row {
     flex-direction: column;
   }
@@ -1389,6 +1735,7 @@ body.cbi-modal-open {
   color: var(--cream-muted);
   letter-spacing: 0.05em;
   text-transform: uppercase;
+  text-align: left;
 }
 
 .cbi-field-label .required {
@@ -1396,7 +1743,9 @@ body.cbi-modal-open {
 }
 
 .cbi-input {
+  box-sizing: border-box;
   width: 100%;
+  max-width: 100%;
   background: rgba(22, 22, 30, 0.85);
   border: 1px solid rgba(250, 246, 238, 0.15);
   border-radius: 6px;
@@ -1446,11 +1795,13 @@ body.cbi-modal-open {
 
 /* Botón Sello de Tinta Oficial */
 .cbi-submit-btn {
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.65rem;
   width: 100%;
+  max-width: 100%;
   background: linear-gradient(135deg, var(--green-forest) 0%, #1b4b32 100%);
   border: 1.5px solid var(--green-bright);
   border-radius: 6px;
@@ -1514,6 +1865,125 @@ body.cbi-modal-open {
 }
 
 /* ==========================================================================
+   ADAPTABILIDAD MÓVIL: DESPACHO Y FORMULARIO CBI
+   ========================================================================== */
+@media (max-width: 768px) {
+  .cbi-modal-overlay {
+    padding: 0.5rem !important;
+  }
+
+  .cbi-modal {
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: 94vh !important;
+    margin: auto !important;
+    border-radius: 10px !important;
+    overflow-x: hidden !important;
+  }
+
+  .cbi-modal-header {
+    padding: 0.85rem 1rem !important;
+    gap: 0.5rem !important;
+  }
+
+  .cbi-header-left {
+    min-width: 0 !important;
+    flex: 1 !important;
+  }
+
+  .cbi-header-titles {
+    min-width: 0 !important;
+  }
+
+  .cbi-agency-sub {
+    font-size: 0.6rem !important;
+    letter-spacing: 0.08em !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  .cbi-modal-title {
+    font-size: 1.05rem !important;
+  }
+
+  .cbi-modal-close {
+    flex-shrink: 0 !important;
+  }
+
+  .cbi-slogan-box {
+    padding: 0.75rem 1rem !important;
+  }
+
+  .cbi-slogan-text {
+    font-size: 0.82rem !important;
+    line-height: 1.45 !important;
+    text-align: left !important;
+  }
+
+  .cbi-type-switch {
+    flex-direction: column !important;
+    padding: 0.75rem 1rem 0.25rem !important;
+    gap: 0.5rem !important;
+  }
+
+  .cbi-switch-btn {
+    width: 100% !important;
+    padding: 0.65rem 0.85rem !important;
+    font-size: 0.82rem !important;
+    justify-content: flex-start !important;
+  }
+
+  .cbi-form-body {
+    padding: 0.85rem 1rem 1.25rem !important;
+  }
+
+  .cbi-field-row {
+    flex-direction: column !important;
+    gap: 0.85rem !important;
+  }
+
+  .cbi-field-group {
+    width: 100% !important;
+    flex: none !important;
+  }
+
+  .cbi-input {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    font-size: 0.9rem !important;
+    padding: 0.65rem 0.85rem !important;
+  }
+
+  .cbi-submit-btn {
+    padding: 0.8rem 1rem !important;
+    font-size: 0.88rem !important;
+  }
+
+  /* Botón Flotante CBI en Móvil */
+  .cbi-dispatch-btn {
+    bottom: 14px !important;
+    right: 14px !important;
+    padding: 0.45rem 0.85rem 0.45rem 0.55rem !important;
+    border-radius: 24px !important;
+  }
+
+  .dispatch-badge-icon {
+    width: 28px !important;
+    height: 28px !important;
+    font-size: 0.9rem !important;
+  }
+
+  .dispatch-tag {
+    font-size: 0.58rem !important;
+  }
+
+  .dispatch-label {
+    font-size: 0.75rem !important;
+  }
+}
+
+/* ==========================================================================
    SECCIÓN DE MEJORES MOMENTOS EN TEMPORADAS (temporadas.html)
    ========================================================================== */
 .fan-moments-section {
@@ -1533,9 +2003,9 @@ body.cbi-modal-open {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  background: rgba(46, 116, 80, 0.18);
-  border: 1px solid rgba(85, 194, 153, 0.4);
-  color: var(--green-bright);
+  background: rgba(212, 180, 131, 0.15);
+  border: 1px solid rgba(212, 180, 131, 0.4);
+  color: #d4b483;
   font-family: var(--font-typewriter);
   font-size: 0.78rem;
   font-weight: 700;
@@ -1590,10 +2060,10 @@ body.cbi-modal-open {
 }
 
 .moment-filter-pill.active {
-  background: rgba(46, 116, 80, 0.3);
-  border-color: var(--green-bright);
-  color: var(--cream-pure);
-  box-shadow: 0 0 12px rgba(67, 197, 142, 0.3);
+  background: rgba(61, 49, 33, 0.75);
+  border-color: #d4b483;
+  color: #ecdcc2;
+  box-shadow: 0 0 12px rgba(212, 180, 131, 0.35);
 }
 
 /* ==========================================================================
@@ -1626,32 +2096,33 @@ body.cbi-modal-open {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: rgba(16, 16, 24, 0.92);
-  border: 1.5px solid var(--green-bright);
-  color: var(--cream-pure);
+  background: rgba(28, 22, 16, 0.94);
+  border: 1.5px solid rgba(212, 180, 131, 0.45);
+  color: #ecdcc2;
   font-size: 1.15rem;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   flex-shrink: 0;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.75), 0 0 14px rgba(67, 197, 142, 0.35);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.75), 0 0 14px rgba(212, 180, 131, 0.2);
   transition: all var(--transition-fast);
   z-index: 10;
   backdrop-filter: blur(8px);
 }
 
 .moments-carousel-arrow:hover:not(:disabled) {
-  background: var(--green-forest);
+  background: #3d3121;
+  border-color: #d4b483;
   color: #fff;
   transform: scale(1.1);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.85), 0 0 22px rgba(85, 194, 153, 0.65);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.85), 0 0 22px rgba(212, 180, 131, 0.5);
 }
 
 .moments-carousel-arrow:disabled {
   opacity: 0.25;
   cursor: not-allowed;
-  border-color: rgba(250, 246, 238, 0.15);
+  border-color: rgba(200, 185, 155, 0.15);
   color: var(--text-muted);
   box-shadow: none;
   transform: none;
@@ -1686,14 +2157,14 @@ body.cbi-modal-open {
 }
 
 .carousel-dot:hover {
-  background: rgba(85, 194, 153, 0.5);
+  background: rgba(212, 180, 131, 0.5);
 }
 
 .carousel-dot.active {
   width: 28px;
   border-radius: 10px;
-  background: var(--green-bright);
-  box-shadow: 0 0 10px rgba(85, 194, 153, 0.6);
+  background: #d4b483;
+  box-shadow: 0 0 12px rgba(212, 180, 131, 0.65);
 }
 
 .carousel-counter-tag {
@@ -1730,18 +2201,43 @@ body.cbi-modal-open {
 
 @media (max-width: 768px) {
   .dossier-moment-card {
-    flex: 0 0 100%;
-    min-width: 270px;
+    flex: 0 0 100% !important;
+    min-width: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .moments-carousel-container {
-    gap: 0.35rem;
+    position: relative !important;
+    gap: 0 !important;
+    padding: 0 16px !important;
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+  }
+
+  .moments-carousel-viewport {
+    width: 100% !important;
+    padding: 0.5rem 0 1.25rem 0 !important;
   }
 
   .moments-carousel-arrow {
-    width: 38px;
-    height: 38px;
-    font-size: 0.95rem;
+    position: absolute !important;
+    top: 42% !important;
+    transform: translateY(-50%) !important;
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 0.85rem !important;
+    z-index: 20 !important;
+    background: rgba(28, 22, 16, 0.96) !important;
+  }
+
+  .moments-carousel-arrow.prev {
+    left: -4px !important;
+  }
+
+  .moments-carousel-arrow.next {
+    right: -4px !important;
   }
 }
 
@@ -1749,13 +2245,13 @@ body.cbi-modal-open {
   transform: translateY(-5px);
 }
 
-/* Pestaña de Carpeta de Archivo (Folder Tab) */
+/* Pestaña de Carpeta de Archivo (Folder Tab - Estilo Manila / Kraft Clásico) */
 .dossier-folder-tab {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: linear-gradient(135deg, #1f1f2a 0%, #151520 100%);
-  border: 1px solid rgba(200, 185, 155, 0.28);
+  background: linear-gradient(135deg, #3a2e1d 0%, #291f13 100%);
+  border: 1.5px solid rgba(212, 180, 131, 0.42);
   border-bottom: none;
   border-radius: 8px 8px 0 0;
   padding: 0.45rem 1rem;
@@ -1769,7 +2265,7 @@ body.cbi-modal-open {
   font-family: var(--font-typewriter);
   font-size: 0.72rem;
   font-weight: 700;
-  color: var(--green-bright);
+  color: #d4b483;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   display: flex;
@@ -1791,14 +2287,14 @@ body.cbi-modal-open {
   border-radius: 2px;
 }
 
-/* Cuerpo de la Carpeta Manila Oscura */
+/* Cuerpo de la Carpeta Manila Clásica */
 .dossier-folder-body {
   position: relative;
-  background: linear-gradient(175deg, #13131c 0%, #0d0d14 100%);
-  border: 1px solid rgba(200, 185, 155, 0.22);
+  background: linear-gradient(175deg, #241b12 0%, #17110a 100%);
+  border: 1.5px solid rgba(212, 180, 131, 0.35);
   border-radius: 8px;
   padding: 1.35rem 1.25rem 1.25rem 1.25rem;
-  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.05);
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -1806,8 +2302,8 @@ body.cbi-modal-open {
 }
 
 .dossier-moment-card:hover .dossier-folder-body {
-  border-color: rgba(85, 194, 153, 0.45);
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.85), 0 0 25px rgba(46, 116, 80, 0.25);
+  border-color: rgba(212, 180, 131, 0.7);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.85), 0 0 25px rgba(212, 180, 131, 0.25);
 }
 
 /* Clip metálico simulado */
@@ -1869,9 +2365,9 @@ body.cbi-modal-open {
   position: absolute;
   bottom: 10px;
   left: 10px;
-  background: rgba(10, 10, 14, 0.88);
-  border: 1px solid var(--green-bright);
-  color: var(--green-bright);
+  background: rgba(24, 18, 12, 0.92);
+  border: 1px solid #d4b483;
+  color: #ecdcc2;
   font-family: var(--font-typewriter);
   font-size: 0.68rem;
   font-weight: 700;
@@ -1906,7 +2402,7 @@ body.cbi-modal-open {
 }
 
 .dossier-case-meta .meta-archive-date {
-  color: var(--green-bright);
+  color: #c8a97e;
 }
 
 .dossier-moment-title {
@@ -1919,8 +2415,8 @@ body.cbi-modal-open {
 }
 
 .dossier-report-box {
-  background: rgba(8, 8, 12, 0.65);
-  border-left: 3px solid var(--green-bright);
+  background: rgba(20, 15, 10, 0.75);
+  border-left: 3px solid #c8a97e;
   padding: 0.75rem 0.9rem;
   border-radius: 0 4px 4px 0;
   margin-bottom: 1.25rem;

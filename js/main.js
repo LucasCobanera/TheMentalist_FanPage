@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavigation();
   initAmbientAudio();
   highlightActiveNavLink();
+  initBackToTop();
 });
 
 /* --------------------------------------------------------------------------
@@ -181,3 +182,35 @@ function stopAmbientSound() {
     }, 1300);
   }
 }
+
+/* --------------------------------------------------------------------------
+   Botón Flotante Global "Volver Arriba" (Scroll-to-Top)
+   -------------------------------------------------------------------------- */
+function initBackToTop() {
+  if (document.getElementById('backToTopBtn')) return;
+
+  const btn = document.createElement('button');
+  btn.id = 'backToTopBtn';
+  btn.className = 'back-to-top-btn';
+  btn.type = 'button';
+  btn.setAttribute('aria-label', 'Volver arriba de la página');
+  btn.setAttribute('title', 'Volver arriba');
+  btn.innerHTML = '<i class="fa-solid fa-arrow-up"></i>';
+  document.body.appendChild(btn);
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 350) {
+      btn.classList.add('visible');
+    } else {
+      btn.classList.remove('visible');
+    }
+  }, { passive: true });
+
+  btn.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+}
+
