@@ -50,13 +50,6 @@
 
       <!-- Acciones de cabecera -->
       <div class="nav-actions">
-        <button class="ambient-audio-btn" id="ambientAudioBtn" title="Activar/Desactivar sonido ambiental">
-          <div class="audio-equalizer">
-            <span></span><span></span><span></span>
-          </div>
-          <span class="btn-text">Ambiente</span>
-        </button>
-
         <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -69,44 +62,58 @@
   </header>
 
   <main>
-    <!-- HERO SECTION (FONDO CINEMATOGRÁFICO JANE & LISBON Y FORMATO COMPACTO) -->
+    <!-- HERO SECTION (PORTADA PRINCIPAL Y FORMATO ADAPTATIVO) -->
     <section class="hero-section" id="hero">
       <div class="hero-backdrop"></div>
       <div class="container">
-        <div class="hero-content">
-          <div class="hero-badge">
-            <span class="badge badge-green">BRUNO HELLER / CBS / WARNER BROS</span>
-          </div>
+        <div class="hero-grid">
+          <div class="hero-content">
+            <div class="hero-badge">
+              <span class="badge badge-green">BRUNO HELLER / CBS / WARNER BROS</span>
+            </div>
 
-          <!-- H1 PRINCIPAL: "The mentalist" CON RECUADRO Y SOMBRA VERDE -->
-          <h1 class="hero-main-title">
-            <span>THE</span>
-            <span class="box-frame">MENTALIST</span>
-          </h1>
+            <!-- H1 PRINCIPAL: "The mentalist" CON RECUADRO Y SOMBRA VERDE -->
+            <h1 class="hero-main-title">
+              <span>THE</span>
+              <span class="box-frame">MENTALIST</span>
+            </h1>
 
-          <div class="hero-definition">
-            <p>
-              "<strong>Mentalista:</strong> Alguien que utiliza la agudeza mental, la hipnosis y/o la sugestión... Un maestro manipulador del pensamiento y del comportamiento."
+            <div class="hero-definition">
+              <p>
+                "<strong>Mentalista:</strong> Alguien que utiliza la agudeza mental, la hipnosis y/o la sugestión... Un maestro manipulador del pensamiento y del comportamiento."
+              </p>
+              <cite>— Definición oficial al inicio de cada episodio</cite>
+            </div>
+
+            <p class="hero-description">
+              Bienvenido al archivo oficial y fanpage tributo a <strong>The Mentalist</strong>. Explora los expedientes de homicidios del CBI, la cacería de <strong>Red John</strong> y la psicología deductiva de Patrick Jane.
             </p>
-            <cite>— Definición oficial al inicio de cada episodio</cite>
+
+            <div class="hero-ctas">
+              <a href="personajes.html" class="btn btn-green" id="btnExploreCharacters">
+                <span>Explorar Personajes</span>
+                <span>➔</span>
+              </a>
+              <a href="red-john.html" class="btn btn-crimson" id="btnExploreRedJohn">
+                <span>Misterio Red John</span>
+                <span>👁</span>
+              </a>
+              <a href="temporadas.html" class="btn btn-outline" id="btnExploreSeasons">
+                <span>Guía de Temporadas</span>
+              </a>
+            </div>
           </div>
 
-          <p class="hero-description">
-            Bienvenido al archivo oficial y fanpage tributo a <strong>The Mentalist</strong>. Explora los expedientes de homicidios del CBI, la cacería de <strong>Red John</strong> y la psicología deductiva de Patrick Jane.
-          </p>
+          <!-- Portada con Jane & Lisbon y Frase Emblemática -->
+          <div class="hero-media">
+            <div class="hero-poster-frame">
+              <img src="img/jane&lisbon.jpeg" alt="Patrick Jane y Teresa Lisbon" class="hero-poster-img">
+            </div>
 
-          <div class="hero-ctas">
-            <a href="personajes.html" class="btn btn-green" id="btnExploreCharacters">
-              <span>Explorar Personajes</span>
-              <span>➔</span>
-            </a>
-            <a href="red-john.html" class="btn btn-crimson" id="btnExploreRedJohn">
-              <span>Misterio Red John</span>
-              <span>👁</span>
-            </a>
-            <a href="temporadas.html" class="btn btn-outline" id="btnExploreSeasons">
-              <span>Guía de Temporadas</span>
-            </a>
+            <div class="hero-floating-quote animate-float">
+              <p>"No existen los psíquicos, Teresa. Solo personas que no saben ver."</p>
+              <span>— Patrick Jane</span>
+            </div>
           </div>
         </div>
       </div>

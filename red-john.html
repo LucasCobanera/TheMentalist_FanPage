@@ -48,13 +48,6 @@
       </nav>
 
       <div class="nav-actions">
-        <button class="ambient-audio-btn" id="ambientAudioBtn" title="Reproducir Tema de Red John (J.S. Bach)">
-          <div class="audio-equalizer">
-            <span></span><span></span><span></span>
-          </div>
-          <span class="btn-text">Tema Red John (Bach)</span>
-        </button>
-
         <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -66,7 +59,15 @@
     </div>
   </header>
 
-  <main class="container" style="padding: 4rem 1.5rem 6rem; position: relative; z-index: 1;">
+  <main class="container" id="mainContainer" style="padding: 4rem 1.5rem 6rem; position: relative; z-index: 1;">
+
+    <!-- BOTÓN FLOTANTE DEL TEMA DE RED JOHN -->
+    <button class="redjohn-floating-audio-btn" id="redJohnAudioBtn" title="Tema de Red John (J.S. Bach - Preludio en Do Mayor)" aria-label="Controlar música de Red John">
+      <div class="audio-equalizer">
+        <span></span><span></span><span></span>
+      </div>
+      <span class="btn-text">Tema Red John</span>
+    </button>
 
     <!-- HERO SECTION RED JOHN (Sin icon wrapper ni badge crimson) -->
     <div class="red-john-hero">

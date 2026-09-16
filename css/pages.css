@@ -17,13 +17,9 @@
 .hero-backdrop {
   position: absolute;
   inset: 0;
-  background-image:
-    linear-gradient(90deg, #08080a 0%, rgba(8, 8, 10, 0.95) 45%, rgba(8, 8, 10, 0.38) 75%, rgba(8, 8, 10, 0.9) 100%),
-    linear-gradient(180deg, rgba(8, 8, 10, 0.35) 0%, rgba(8, 8, 10, 0.98) 100%),
-    url('../img/jane&lisbon.jpeg');
-  background-position: right 10% center;
-  background-size: cover;
-  background-repeat: no-repeat;
+  background:
+    radial-gradient(circle at 80% 30%, rgba(46, 116, 80, 0.16) 0%, transparent 60%),
+    linear-gradient(180deg, rgba(8, 8, 10, 0.4) 0%, rgba(8, 8, 10, 0.98) 100%);
   z-index: 1;
   pointer-events: none;
 }
@@ -31,7 +27,6 @@
 .hero-content {
   position: relative;
   z-index: 2;
-  max-width: 680px;
 }
 
 .hero-badge {
@@ -100,6 +95,98 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.85rem;
+}
+
+/* Disposición en dos columnas para Hero en escritorio */
+.hero-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 2.8rem;
+  align-items: center;
+}
+
+.hero-media {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-poster-frame {
+  position: relative;
+  max-width: 290px;
+  width: 100%;
+  background: #050508;
+  border: 2px solid var(--green-border);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.85), 0 0 25px var(--green-glow);
+  transition: transform var(--transition-smooth), border-color var(--transition-smooth), box-shadow var(--transition-smooth);
+}
+
+.hero-poster-frame:hover {
+  transform: translateY(-4px);
+  border-color: var(--green-bright);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.9), 0 0 35px var(--green-glow);
+}
+
+.hero-poster-img {
+  width: 100%;
+  height: auto;
+  max-height: 350px;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-floating-quote {
+  position: absolute;
+  bottom: -0.75rem;
+  left: -1rem;
+  background: rgba(12, 14, 18, 0.95);
+  border: 1.5px solid var(--green-forest);
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  box-shadow: var(--shadow-lg), 0 0 20px rgba(67, 197, 142, 0.3);
+  max-width: 270px;
+  z-index: 3;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.hero-floating-quote p {
+  font-family: var(--font-display, Georgia, serif);
+  font-size: 0.82rem;
+  font-style: italic;
+  color: var(--cream-pure);
+  line-height: 1.4;
+  text-align: left;
+  margin-bottom: 0.3rem;
+}
+
+.hero-floating-quote span {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  color: var(--green-bright);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-align: left;
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .hero-grid {
+    gap: 2rem;
+    grid-template-columns: 1.1fr 0.9fr;
+  }
+
+  .hero-floating-quote {
+    max-width: 270px;
+    padding: 0.75rem 1rem;
+    left: -0.5rem;
+    bottom: -0.5rem;
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -324,7 +411,7 @@
    -------------------------------------------------------------------------- */
 .seasons-controls {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
@@ -539,6 +626,92 @@ input:checked+.slider:before {
   color: #ffffff;
   box-shadow: 0 0 12px rgba(212, 180, 131, 0.35);
   transform: translateX(4px);
+}
+
+/* Cabecera de episodios con botón de spoilers al costado del título */
+.episodes-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-bottom: 1.15rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px dashed rgba(250, 246, 238, 0.1);
+}
+
+.episodes-section-title {
+  font-size: 1.05rem;
+  color: var(--amber-light);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0;
+  font-weight: 700;
+}
+
+.btn-spoiler-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.4rem 0.85rem;
+  background: rgba(22, 22, 30, 0.85);
+  border: 1.5px solid rgba(200, 185, 155, 0.25);
+  border-radius: 20px;
+  color: var(--cream-muted);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-spoiler-toggle:hover {
+  background: rgba(35, 35, 48, 0.95);
+  border-color: var(--amber-light);
+  color: var(--cream-pure);
+}
+
+.btn-spoiler-toggle.active {
+  background: rgba(60, 20, 25, 0.9);
+  border-color: #ff4757;
+  color: #ffffff;
+  box-shadow: 0 0 14px rgba(255, 71, 87, 0.35);
+}
+
+.toggle-switch-ui {
+  position: relative;
+  display: inline-block;
+  width: 34px;
+  height: 18px;
+  background-color: #2b2b36;
+  border-radius: 18px;
+  transition: background-color 0.25s ease;
+  flex-shrink: 0;
+}
+
+.slider-ui {
+  position: absolute;
+  height: 12px;
+  width: 12px;
+  left: 3px;
+  bottom: 3px;
+  background-color: var(--cream-pure);
+  border-radius: 50%;
+  transition: transform 0.25s cubic-bezier(0.2, 1, 0.3, 1), background-color 0.25s ease;
+}
+
+.btn-spoiler-toggle.active .toggle-switch-ui {
+  background-color: #ff4757;
+}
+
+.btn-spoiler-toggle.active .slider-ui {
+  transform: translateX(16px);
+  background-color: #ffffff;
+}
+
+.btn-spoiler-toggle .spoiler-btn-label {
+  user-select: none;
+  letter-spacing: 0.04em;
 }
 
 .episodes-grid {
@@ -990,6 +1163,14 @@ body.red-john-page::before {
     padding: 2.25rem 0 1.85rem;
   }
 
+  .hero-grid {
+    display: block !important;
+  }
+
+  .hero-media {
+    display: none !important;
+  }
+
   .hero-backdrop {
     background-image:
       linear-gradient(180deg, rgba(8, 8, 10, 0.9) 0%, rgba(8, 8, 10, 0.96) 100%),
@@ -1310,6 +1491,34 @@ body.red-john-page::before {
   .season-block {
     padding: 1.5rem 1.15rem !important;
     margin-bottom: 2rem !important;
+  }
+
+  .episodes-header-bar {
+    gap: 0.6rem !important;
+    margin-bottom: 0.85rem !important;
+  }
+
+  .episodes-section-title {
+    font-size: 0.9rem !important;
+  }
+
+  .btn-spoiler-toggle {
+    padding: 0.35rem 0.75rem !important;
+    font-size: 0.74rem !important;
+  }
+
+  .toggle-switch-ui {
+    width: 30px !important;
+    height: 16px !important;
+  }
+
+  .slider-ui {
+    width: 10px !important;
+    height: 10px !important;
+  }
+
+  .btn-spoiler-toggle.active .slider-ui {
+    transform: translateX(14px) !important;
   }
 
   .season-info h3 {

@@ -204,6 +204,36 @@ function updateSeasonHeader(selectedSeason) {
   }
 }
 
+let isSpoilersRevealed = false;
+
+function toggleSpoilers(forceState) {
+  const container = document.getElementById('seasonsContainer');
+  if (!container) return;
+
+  isSpoilersRevealed = typeof forceState === 'boolean' ? forceState : !isSpoilersRevealed;
+
+  if (isSpoilersRevealed) {
+    container.classList.add('spoilers-revealed');
+  } else {
+    container.classList.remove('spoilers-revealed');
+  }
+
+  const buttons = document.querySelectorAll('.btn-spoiler-toggle');
+  buttons.forEach(btn => {
+    btn.classList.toggle('active', isSpoilersRevealed);
+    btn.setAttribute('aria-pressed', isSpoilersRevealed.toString());
+    const label = btn.querySelector('.spoiler-btn-label');
+    if (label) {
+      label.textContent = isSpoilersRevealed ? 'Ocultar spoilers' : 'Mostrar spoilers';
+    }
+  });
+
+  const headerCheckbox = document.getElementById('spoilerToggle');
+  if (headerCheckbox && headerCheckbox.checked !== isSpoilersRevealed) {
+    headerCheckbox.checked = isSpoilersRevealed;
+  }
+}
+
 function renderSeasons(selectedSeason) {
   const container = document.getElementById('seasonsContainer');
   if (!container) return;
@@ -211,6 +241,12 @@ function renderSeasons(selectedSeason) {
   const list = selectedSeason === 'all'
     ? SEASONS_DATA
     : SEASONS_DATA.filter(s => s.season.toString() === selectedSeason.toString());
+
+  if (isSpoilersRevealed) {
+    container.classList.add('spoilers-revealed');
+  } else {
+    container.classList.remove('spoilers-revealed');
+  }
 
   container.innerHTML = list.map(s => {
     const isLong = s.synopsis && s.synopsis.length > 140;
@@ -240,9 +276,17 @@ function renderSeasons(selectedSeason) {
         ` : ''}
       </div>
 
-      <h4 style="font-size: 1.1rem; color: var(--amber-light); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.08em;">
-        Episodios Clave & Momentos Cumbre:
-      </h4>
+      <div class="episodes-header-bar">
+        <h4 class="episodes-section-title">
+          Episodios Clave & Momentos Cumbre:
+        </h4>
+        <button type="button" class="btn-spoiler-toggle ${isSpoilersRevealed ? 'active' : ''}" aria-pressed="${isSpoilersRevealed}" title="Mostrar u ocultar resoluciones y spoilers">
+          <span class="toggle-switch-ui">
+            <span class="slider-ui"></span>
+          </span>
+          <span class="spoiler-btn-label">${isSpoilersRevealed ? 'Ocultar spoilers' : 'Mostrar spoilers'}</span>
+        </button>
+      </div>
 
       <div class="episodes-grid">
         ${s.episodes.map(ep => `
@@ -358,15 +402,21 @@ function initSeasonPills() {
 }
 
 function initSpoilerToggle() {
-  const checkbox = document.getElementById('spoilerToggle');
   const container = document.getElementById('seasonsContainer');
-  if (!checkbox || !container) return;
+  if (container) {
+    container.addEventListener('click', (e) => {
+      const btn = e.target.closest('.btn-spoiler-toggle');
+      if (btn) {
+        e.preventDefault();
+        toggleSpoilers();
+      }
+    });
+  }
 
-  checkbox.addEventListener('change', () => {
-    if (checkbox.checked) {
-      container.classList.add('spoilers-revealed');
-    } else {
-      container.classList.remove('spoilers-revealed');
-    }
-  });
+  const checkbox = document.getElementById('spoilerToggle');
+  if (checkbox) {
+    checkbox.addEventListener('change', () => {
+      toggleSpoilers(checkbox.checked);
+    });
+  }
 }

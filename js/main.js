@@ -5,7 +5,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   initNavigation();
-  initAmbientAudio();
+  initRedJohnAudio();
   highlightActiveNavLink();
   initBackToTop();
 });
@@ -62,125 +62,104 @@ function highlightActiveNavLink() {
 }
 
 /* --------------------------------------------------------------------------
-   Audio Ambiental & Banda Sonora (Red John Theme / Web Audio API)
-   - En red-john.html: Reproduce el preludio de J.S. Bach (audio/js-bach--prelude-in-c-major.mp3)
-   - En las demás páginas: Genera el acorde suspendido con Web Audio API
+   Audio Exclusivo: Tema de Red John (J.S. Bach - Preludio en Do Mayor)
+   - Exclusivo de red-john.html con botón flotante en el main container.
+   - Activación automática por defecto al ingresar a la sección de Red John.
    -------------------------------------------------------------------------- */
-let audioCtx = null;
-let masterGain = null;
-let isAudioPlaying = false;
-let ambientOscillators = [];
-let redJohnThemeAudio = null;
+let redJohnAudio = null;
+let isRedJohnAudioPlaying = false;
+let userPausedRedJohn = false;
 
-function initAmbientAudio() {
-  const audioBtn = document.getElementById('ambientAudioBtn');
+function initRedJohnAudio() {
+  const audioBtn = document.getElementById('redJohnAudioBtn');
   if (!audioBtn) return;
 
-  const isRedJohnPage = window.location.pathname.includes('red-john');
+  redJohnAudio = new Audio('audio/js-bach--prelude-in-c-major.mp3');
+  redJohnAudio.loop = true;
+  redJohnAudio.volume = 0.55;
 
-  if (isRedJohnPage) {
-    redJohnThemeAudio = new Audio('audio/js-bach--prelude-in-c-major.mp3');
-    redJohnThemeAudio.loop = true;
-    redJohnThemeAudio.volume = 0.55;
-  }
+  const textSpan = audioBtn.querySelector('.btn-text');
 
-  audioBtn.addEventListener('click', () => {
-    // Si estamos en la página de Red John, reproducir el MP3 del tema oficial
-    if (isRedJohnPage && redJohnThemeAudio) {
-      if (!isAudioPlaying) {
-        redJohnThemeAudio.play().then(() => {
-          audioBtn.classList.add('playing');
-          const textSpan = audioBtn.querySelector('.btn-text');
-          if (textSpan) textSpan.textContent = 'Tema Red John: On';
-          isAudioPlaying = true;
-        }).catch(err => console.log('Reproducción interactiva requerida:', err));
-      } else {
-        redJohnThemeAudio.pause();
-        audioBtn.classList.remove('playing');
-        const textSpan = audioBtn.querySelector('.btn-text');
-        if (textSpan) textSpan.textContent = 'Tema Red John (Bach)';
-        isAudioPlaying = false;
-      }
-      return;
-    }
-
-    // Para las demás páginas: síntesis de suspenso con Web Audio API
-    if (!audioCtx) {
-      const AudioContext = window.AudioContext || window.webkitAudioContext;
-      audioCtx = new AudioContext();
-    }
-
-    if (audioCtx.state === 'suspended') {
-      audioCtx.resume();
-    }
-
-    if (!isAudioPlaying) {
-      startAmbientSound();
+  function updateButtonUI(playing) {
+    if (playing) {
       audioBtn.classList.add('playing');
-      const textSpan = audioBtn.querySelector('.btn-text');
-      if (textSpan) textSpan.textContent = 'Misterio Sonoro: On';
-      isAudioPlaying = true;
+      if (textSpan) textSpan.textContent = 'Tema Red John: On';
+      audioBtn.setAttribute('title', 'Pausar tema de Red John (J.S. Bach)');
     } else {
-      stopAmbientSound();
       audioBtn.classList.remove('playing');
-      const textSpan = audioBtn.querySelector('.btn-text');
-      if (textSpan) textSpan.textContent = 'Ambiente de Suspenso';
-      isAudioPlaying = false;
+      if (textSpan) textSpan.textContent = 'Tema Red John';
+      audioBtn.setAttribute('title', 'Reproducir tema de Red John (J.S. Bach)');
+    }
+  }
+
+  function startPlayback() {
+    if (userPausedRedJohn || isRedJohnAudioPlaying) return;
+    const playPromise = redJohnAudio.play();
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
+        isRedJohnAudioPlaying = true;
+        updateButtonUI(true);
+        cleanupInteractionListeners();
+      }).catch(err => {
+        // Política de autoplay del navegador: aguardar primera interacción
+        updateButtonUI(false);
+        setupInteractionListeners();
+      });
+    }
+  }
+
+  function onFirstInteraction() {
+    if (!userPausedRedJohn && !isRedJohnAudioPlaying) {
+      startPlayback();
+    }
+    cleanupInteractionListeners();
+  }
+
+  const interactionEvents = ['click', 'keydown', 'scroll', 'touchstart'];
+  function setupInteractionListeners() {
+    interactionEvents.forEach(evt => {
+      window.addEventListener(evt, onFirstInteraction, { once: true, passive: true });
+    });
+  }
+
+  function cleanupInteractionListeners() {
+    interactionEvents.forEach(evt => {
+      window.removeEventListener(evt, onFirstInteraction);
+    });
+  }
+
+  // Activar música por defecto al ingresar a la sección
+  startPlayback();
+
+  // Control interactivo del botón flotante
+  audioBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (isRedJohnAudioPlaying) {
+      redJohnAudio.pause();
+      isRedJohnAudioPlaying = false;
+      userPausedRedJohn = true;
+      updateButtonUI(false);
+    } else {
+      userPausedRedJohn = false;
+      redJohnAudio.play().then(() => {
+        isRedJohnAudioPlaying = true;
+        updateButtonUI(true);
+      }).catch(err => console.log('Error de reproducción:', err));
     }
   });
-}
 
-function startAmbientSound() {
-  if (!audioCtx) return;
-
-  masterGain = audioCtx.createGain();
-  masterGain.gain.setValueAtTime(0.01, audioCtx.currentTime);
-  masterGain.gain.exponentialRampToValueAtTime(0.12, audioCtx.currentTime + 2.5);
-  masterGain.connect(audioCtx.destination);
-
-  // Frecuencias para crear un acorde menor misterioso (Re menor / D minor, clásico de suspense)
-  const notes = [73.42, 110.0, 146.83, 220.0]; // D2, A2, D3, A3
-
-  ambientOscillators = notes.map((freq, index) => {
-    const osc = audioCtx.createOscillator();
-    const noteGain = audioCtx.createGain();
-
-    osc.type = index % 2 === 0 ? 'sine' : 'triangle';
-    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-
-    // LFO sutil para respiración sonora
-    const lfo = audioCtx.createOscillator();
-    const lfoGain = audioCtx.createGain();
-    lfo.frequency.value = 0.2 + (index * 0.08);
-    lfoGain.gain.value = 1.5;
-    lfo.connect(osc.frequency);
-    lfo.start();
-
-    noteGain.gain.value = 0.25 / (index + 1);
-    osc.connect(noteGain);
-    noteGain.connect(masterGain);
-
-    osc.start();
-    return { osc, lfo };
+  // Pausar si el usuario cambia de pestaña y reanudar si estaba activo
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      if (isRedJohnAudioPlaying && redJohnAudio) {
+        redJohnAudio.pause();
+      }
+    } else {
+      if (isRedJohnAudioPlaying && !userPausedRedJohn && redJohnAudio) {
+        redJohnAudio.play().catch(() => {});
+      }
+    }
   });
-}
-
-function stopAmbientSound() {
-  if (masterGain && audioCtx) {
-    masterGain.gain.setValueAtTime(masterGain.gain.value, audioCtx.currentTime);
-    masterGain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1.2);
-    setTimeout(() => {
-      ambientOscillators.forEach(({ osc, lfo }) => {
-        try {
-          osc.stop();
-          lfo.stop();
-          osc.disconnect();
-          lfo.disconnect();
-        } catch (e) {}
-      });
-      ambientOscillators = [];
-    }, 1300);
-  }
 }
 
 /* --------------------------------------------------------------------------
