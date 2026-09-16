@@ -222,6 +222,17 @@ const CHARACTERS_DATA = [
   }
 ];
 
+const PAPERCLIP_SVG = `
+<div class="dossier-paperclip" aria-hidden="true">
+  <svg width="24" height="56" viewBox="0 0 24 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M7 14V42C7 46.5 10.5 50 15 50C19.5 50 22 46.5 22 42V9C22 4 17.5 1.5 12 1.5C6.5 1.5 2 4.5 2 11V45C2 51.5 7.5 55 14 55C19 55 22 52 22 47" 
+      stroke="#d2d8e0" stroke-width="2.8" stroke-linecap="round"/>
+    <path d="M7 14V42C7 46.5 10.5 50 15 50C19.5 50 22 46.5 22 42V9C22 4 17.5 1.5 12 1.5C6.5 1.5 2 4.5 2 11V45C2 51.5 7.5 55 14 55C19 55 22 52 22 47" 
+      stroke="rgba(50, 55, 65, 0.45)" stroke-width="1.2" stroke-linecap="round"/>
+  </svg>
+</div>
+`;
+
 document.addEventListener('DOMContentLoaded', () => {
   renderCharacters('all');
   initFilterTabs();
@@ -240,26 +251,33 @@ function renderCharacters(filterCategory) {
     const hasImage = c.imageSrc && c.imageSrc.trim() !== '';
     return `
     <article class="dossier-card ${c.category === 'nemesis' ? 'nemesis-card' : ''}" data-id="${c.id}">
-      <div class="dossier-photo-wrap">
-        ${hasImage
-        ? `<img src="${c.imageSrc}" alt="${c.imageAlt}" loading="lazy">`
-        : `<div class="image-slot" id="${c.imageSlotId}" style="height: 100%; border: none;">
-              <div class="placeholder-hint">
-                <span class="badge-tag">Espacio para Foto</span>
+      <div class="dossier-folder-tab">
+        <span class="folder-tab-badge">ARCHIVO CBI // DIV. HOMICIDIOS</span>
+        <span class="folder-tab-id">#${c.id.toUpperCase().replace('-', '_')}</span>
+      </div>
+
+      <div class="dossier-photo-container">
+        <div class="dossier-photo-frame">
+          ${PAPERCLIP_SVG}
+          ${hasImage
+            ? `<img src="${c.imageSrc}" alt="${c.imageAlt}" loading="lazy">`
+            : `<div class="image-slot" id="${c.imageSlotId}">
                 <p>📁 ${c.name}</p>
-                <p style="font-size:0.7rem; opacity:0.7; margin-top:4px;">Arrastra o vincula tu imagen aquí</p>
-              </div>
-            </div>`
-      }
+              </div>`
+          }
+          <div class="photo-evidence-tag">EVIDENCIA FOTOGRÁFICA // CBI-EVD</div>
+        </div>
         <div class="dossier-stamp ${c.stampClass}">${c.stamp}</div>
       </div>
 
       <div class="dossier-body">
         <div class="dossier-header">
-          <span class="badge ${c.category === 'nemesis' ? 'badge-crimson' : 'badge-green'}">${c.badge}</span>
-          <h3 class="dossier-name" style="margin-top: 0.6rem;">${c.name}</h3>
+          <div class="dossier-category-seal ${c.category === 'nemesis' ? 'seal-crimson' : 'seal-cbi'}">
+            <span>${c.badge}</span>
+          </div>
+          <h3 class="dossier-name">${c.name}</h3>
           <span class="dossier-role">${c.role}</span>
-          <p style="font-size: 0.8rem; color: var(--cream-muted); margin-top: 2px;">Interpretado por: <strong>${c.actor}</strong></p>
+          <p class="dossier-actor">Actor: <strong>${c.actor}</strong></p>
         </div>
 
         <p class="dossier-desc">${c.description}</p>
@@ -269,9 +287,10 @@ function renderCharacters(filterCategory) {
         </div>
 
         <div class="dossier-footer">
-          <button class="btn btn-sm btn-outline view-dossier-btn" data-id="${c.id}">
+          <button type="button" class="btn-dossier-open view-dossier-btn" data-id="${c.id}">
+            <i class="fa-solid fa-folder-open"></i>
             <span>Ver Expediente Completo</span>
-            <span>➔</span>
+            <i class="fa-solid fa-arrow-right"></i>
           </button>
         </div>
       </div>
@@ -337,41 +356,104 @@ function openCharacterModal(characterId) {
   const hasImage = char.imageSrc && char.imageSrc.trim() !== '';
 
   modalBody.innerHTML = `
-    <div class="character-modal-inner">
-      <div class="modal-agent-header">
-        ${hasImage ? `
-          <div class="modal-agent-photo-wrap">
-            <img src="${char.imageSrc}" alt="${char.name}" style="width: 100%; height: 100%; object-fit: cover;">
+    <div class="dossier-open-folder ${char.category === 'nemesis' ? 'nemesis-folder' : ''}">
+      <!-- Pestaña superior del folder abierto -->
+      <div class="folder-spread-tab">
+        <span>DEPARTAMENTO DE JUSTICIA DE CALIFORNIA // ARCHIVO POLICIAL CONFIDENCIAL</span>
+        <span class="folder-ref-num">EXPEDIENTE Nº ${char.badge}</span>
+      </div>
+
+      <!-- Lomo / Pliegue central del expediente -->
+      <div class="dossier-open-spine" aria-hidden="true"></div>
+
+      <!-- HOJA IZQUIERDA: Foto grande, identificación y datos clave -->
+      <div class="dossier-leaf dossier-leaf-left">
+        <div class="leaf-header">
+          <div class="leaf-agency-seal">
+            <span class="agency-title">CALIFORNIA BUREAU OF INVESTIGATION</span>
+            <span class="agency-sub">DIVISIÓN DE HOMICIDIOS // SACRAMENTO HQ</span>
           </div>
-        ` : ''}
-        <div class="modal-agent-meta">
-          <span class="badge ${char.category === 'nemesis' ? 'badge-crimson' : 'badge-green'}">${char.badge}</span>
-          <h2 class="modal-agent-name">${char.name}</h2>
-          <p class="modal-agent-actor">Actor: ${char.actor} | CBI ARCHIVE</p>
-          <p class="modal-agent-role">${char.role}</p>
+          <div class="leaf-stamp ${char.stampClass}">${char.stamp}</div>
+        </div>
+
+        <div class="dossier-modal-identity-row">
+          <div class="dossier-modal-photo-frame">
+            ${PAPERCLIP_SVG}
+            ${hasImage ? `
+              <img src="${char.imageSrc}" alt="${char.name}" class="dossier-modal-photo">
+            ` : ''}
+            <div class="photo-polaroid-caption">FICHA CBI // ${char.name.toUpperCase()}</div>
+          </div>
+
+          <div class="dossier-agent-id-box">
+            <span class="badge ${char.category === 'nemesis' ? 'badge-crimson' : 'badge-green'}">${char.badge}</span>
+            <h2 class="modal-agent-name">${char.name}</h2>
+            <p class="modal-agent-role">${char.role}</p>
+            <p class="modal-agent-actor">Interpretado por: <strong>${char.actor}</strong></p>
+          </div>
+        </div>
+
+        <div class="modal-agent-quote-box">
+          <div class="quote-typewriter-mark">DECLARACIÓN REGISTRADA:</div>
+          <p>"${char.quote}"</p>
+        </div>
+
+        <div class="modal-agent-stats-section">
+          <h4 class="dossier-section-subtitle">Métricas de Evaluación de Campo:</h4>
+          <div class="modal-agent-stats-grid">
+            ${Object.entries(char.stats).map(([statName, val]) => `
+              <div class="modal-stat-box">
+                <span class="stat-name">${statName}</span>
+                <strong class="stat-val">${val}</strong>
+              </div>
+            `).join('')}
+          </div>
         </div>
       </div>
 
-      <div class="modal-agent-quote-box">
-        <p>"${char.quote}"</p>
-      </div>
+      <!-- HOJA DERECHA: Informe psicológico, habilidades y notas -->
+      <div class="dossier-leaf dossier-leaf-right">
+        <div class="leaf-watermark-stamp ${char.category === 'nemesis' ? 'stamp-watermark-crimson' : 'stamp-watermark-cbi'}">
+          CONFIDENCIAL
+        </div>
 
-      <h4 class="modal-agent-section-title">Perfil Psicológico e Historial</h4>
-      <p class="modal-agent-bio">${char.fullBio}</p>
+        <div class="leaf-header right-leaf-header">
+          <div class="leaf-doc-title">SECCIÓN II: ANÁLISIS PSICOLÓGICO Y ANTECEDENTES</div>
+          <div class="leaf-doc-date">REGISTRO ARCHIVADO</div>
+        </div>
 
-      <h4 class="modal-agent-section-title">Métricas de Comportamiento</h4>
-      <div class="modal-agent-stats-grid">
-        ${Object.entries(char.stats).map(([statName, val]) => `
-          <div class="modal-stat-box">
-            <span class="stat-name">${statName}</span>
-            <strong class="stat-val">${val}</strong>
+        <div class="dossier-bio-container">
+          <h4 class="dossier-section-subtitle">Perfil Psicológico e Historial de Campo:</h4>
+          <p class="modal-agent-bio">${char.fullBio}</p>
+        </div>
+
+        <div class="dossier-skills-container">
+          <h4 class="dossier-section-subtitle">Especialidades y Habilidades Deductivas:</h4>
+          <div class="modal-agent-skills-list">
+            ${char.skills.map(s => `
+              <div class="dossier-skill-item">
+                <span class="skill-bullet">✓</span>
+                <span class="skill-name">${s}</span>
+              </div>
+            `).join('')}
           </div>
-        `).join('')}
-      </div>
+        </div>
 
-      <div class="modal-agent-footer">
-        <span>CONFIDENCIAL - ESTADO DE CALIFORNIA</span>
-        <span>REGISTRO: OK-2008-CBI</span>
+        <div class="dossier-summary-memo">
+          <div class="memo-title">MEMORÁNDUM DE EVALUACIÓN:</div>
+          <p class="memo-text">${char.description}</p>
+        </div>
+
+        <div class="dossier-leaf-footer">
+          <div class="footer-sign-col">
+            <div class="sign-line"></div>
+            <span>Firma del Agente a Cargo / CBI</span>
+          </div>
+          <div class="footer-seal-col">
+            <div class="official-cbi-stamp">APROBADO CBI</div>
+            <span>SACRAMENTO DIVISION</span>
+          </div>
+        </div>
       </div>
     </div>
   `;
