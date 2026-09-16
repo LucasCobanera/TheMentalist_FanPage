@@ -1,10 +1,12 @@
 /* ==========================================================================
    THE MENTALIST - SISTEMA DE DISEÑO & ESTILOS GLOBALES
-   Paleta inspirada en el póster oficial & variante verde:
-   - Verde Esmeralda / Jade Logo: #2e7450, #39915f, #55c299, #43c58e
-   - Blanco Crema / Marfil: #FAF6EE / #F4EFE6
-   - Rojo Burdeos / Crimson: #800817, #9B1124, #660511
-   - Negro / Noir Cinemático: #08080A, #101014, #181820
+   ==========================================================================
+   ÍNDICE DE ARQUITECTURA:
+   1. Design Tokens & Variables CSS (:root)
+   2. Reset & Normalización Base (box-sizing, scrollbar, selección)
+   3. Tipografía Global & Encabezados Cinematográficos
+   4. Botones & Acciones Principales (.btn, .btn-primary, .btn-outline)
+   5. Insignias & Badges del CBI / FBI (.badge-cbi, .badge-crimson, .badge-gold)
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Montserrat:wght@400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700&family=Special+Elite&display=swap');

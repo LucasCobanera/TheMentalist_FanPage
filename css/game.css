@@ -1,6 +1,14 @@
 /* ==========================================================================
    THE MENTALIST - EL PALACIO DE LA MEMORIA (CSS DEL JUEGO)
-   Estilos dedicados para la experiencia mnemotécnica interactiva
+   ==========================================================================
+   ÍNDICE DE ARQUITECTURA:
+   1. Contenedor Principal & Gradientes Cinemáticos (.game-section, .game-container)
+   2. Barra Superior de Estado & HUD (.game-top-bar, .metric-pill)
+   3. Pantalla 1: Lobby & Reglas Mnemotécnicas (.lobby-content, .rules-grid)
+   4. Pantalla 2: Fase de Memorización & Temporizador (.memory-grid, .timer-badge)
+   5. Pantalla 3: Desafío de Preguntas & Feedback (.challenge-wrapper, .options-grid)
+   6. Pantalla 4: Resultados & Evaluación del CBI (.results-card, .results-breakdown)
+   7. Adaptabilidad Responsive & Breakpoints Móviles
    ========================================================================== */
 
 /* Contenedor Principal del Juego */

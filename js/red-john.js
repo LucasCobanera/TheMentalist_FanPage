@@ -1,6 +1,16 @@
 /**
- * THE MENTALIST - MISTERIO DE RED JOHN
- * Control interactivo de desclasificación de la Asociación Blake y spoiler de Red John
+ * ============================================================================
+ * THE MENTALIST - MISTERIO DE RED JOHN & ASOCIACIÓN BLAKE
+ * ============================================================================
+ * Control interactivo de desclasificación y gestión de spoilers.
+ * 
+ * ARQUITECTURA:
+ * 1. initBlakeModal: Controla el despliegue del informe clasificado sobre la
+ *    Asociación Blake ("Tyger Tyger"), gestionando scroll locks y descarte por ESC.
+ * 2. initRedJohnSpoiler: Administra la revelación controlada del expediente
+ *    de Thomas McAllister, alternando el overlay de advertencia, el contenido
+ *    secreto y la mutación de insignias de alerta.
+ * ============================================================================
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -8,6 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initRedJohnSpoiler();
 });
 
+/**
+ * Inicializa los controladores para el modal de desclasificación de la
+ * conspiración judicial y policial "Asociación Blake" (Tyger Tyger).
+ */
 function initBlakeModal() {
   const openBtn = document.getElementById('openBlakeReportBtn');
   const modal = document.getElementById('blakeModal');
@@ -16,11 +30,17 @@ function initBlakeModal() {
 
   if (!modal) return;
 
+  /**
+   * Abre el modal y bloquea el desplazamiento del fondo.
+   */
   function openModal() {
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
 
+  /**
+   * Cierra el modal y restablece el comportamiento normal del scroll.
+   */
   function closeModal() {
     modal.classList.remove('active');
     document.body.style.overflow = '';
@@ -30,10 +50,12 @@ function initBlakeModal() {
   if (closeBtn) closeBtn.addEventListener('click', closeModal);
   if (innerCloseBtn) innerCloseBtn.addEventListener('click', closeModal);
 
+  // Cerrar al hacer clic en el backdrop exterior
   modal.addEventListener('click', (e) => {
     if (e.target === modal) closeModal();
   });
 
+  // Cerrar con la tecla Escape
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modal.classList.contains('active')) {
       closeModal();
@@ -41,6 +63,10 @@ function initBlakeModal() {
   });
 }
 
+/**
+ * Administra el panel de revelación de la identidad definitiva de Red John
+ * (Thomas McAllister), alternando dinámicamente el velo de advertencia y las insignias.
+ */
 function initRedJohnSpoiler() {
   const revealBtn = document.getElementById('btnRevealRedJohn');
   const hideBtn = document.getElementById('btnHideRedJohn');
@@ -50,6 +76,7 @@ function initRedJohnSpoiler() {
 
   if (!revealBtn || !overlay || !content) return;
 
+  // Revelar la identidad del asesino
   revealBtn.addEventListener('click', () => {
     overlay.style.display = 'none';
     content.style.display = 'block';
@@ -60,12 +87,15 @@ function initRedJohnSpoiler() {
     }
   });
 
+  // Ocultar de nuevo la identidad y restaurar la advertencia
   if (hideBtn) {
     hideBtn.addEventListener('click', () => {
       content.style.display = 'none';
       overlay.style.display = 'block';
       if (badge) {
         badge.textContent = 'ALERTA DE SPOILER';
+        badge.classList.remove('badge-crimson');
+        badge.classList.add('badge-cbi');
       }
     });
   }

@@ -1,16 +1,37 @@
 /**
+ * ============================================================================
  * THE MENTALIST - EL PALACIO DE LA MEMORIA DE PATRICK JANE
- * Motor del juego mnemotécnico interactivo
- * Audio sintetizado (Web Audio API) y gestión de estados
+ * ============================================================================
+ * Motor del juego mnemotécnico interactivo.
+ * 
+ * ARQUITECTURA:
+ * 1. SoundSynth: Sintetizador Web Audio API autónomo (sin dependencias externas)
+ *    que genera efectos sonoros procesales (tic-tac, aciertos, fallos, fanfarria).
+ * 2. ROOMS_DATA: Estructura de datos mnemotécnica de loci con objetos, pistas y preguntas.
+ * 3. MemoryPalaceGame: Máquina de estados del juego (Lobby -> Memorización -> Desafío -> Resultados).
+ *    Maneja persistencia de récord en LocalStorage, temporizador reactivo, cálculo de bonus
+ *    por velocidad y evaluación final de rango mentalista.
+ * ============================================================================
  */
 
 (function () {
-  // 1. Sintetizador de Sonidos (Web Audio API)
+  /**
+   * ==========================================================================
+   * 1. SINTETIZADOR DE SONIDOS (Web Audio API)
+   * ==========================================================================
+   * Generador de audio procedural para proporcionar retroalimentación táctil-auditiva
+   * inmediata sin necesidad de cargar archivos de audio externos.
+   */
   class SoundSynth {
     constructor() {
+      /** @type {AudioContext|null} Contexto de audio Web Audio API */
       this.ctx = null;
     }
 
+    /**
+     * Inicializa el AudioContext bajo demanda tras la primera interacción del usuario
+     * para respetar la política de reproducción automática (autoplay) de navegadores modernos.
+     */
     init() {
       if (!this.ctx) {
         const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -23,7 +44,9 @@
       }
     }
 
-    // Tic-tac suave de reloj
+    /**
+     * Reproduce un pulso percusivo suave (onda senoidal a 800 Hz) que simula el tic-tac de un reloj.
+     */
     playTick() {
       if (!this.ctx) return;
       try {
@@ -40,7 +63,10 @@
       } catch (e) {}
     }
 
-    // Chime cristalino de acierto mental (Acorde mayor brillante)
+    /**
+     * Reproduce un chime armónico ascendente (acorde de Mi Mayor: E5, G#5, B5, E6)
+     * para indicar un acierto mental o deducción exitosa.
+     */
     playCorrect() {
       if (!this.ctx) return;
       try {
@@ -60,7 +86,10 @@
       } catch (e) {}
     }
 
-    // Sonido suave de error
+    /**
+     * Reproduce un tono disonante descendente (220 Hz a 140 Hz en onda triangular)
+     * para indicar una deducción o respuesta errónea.
+     */
     playWrong() {
       if (!this.ctx) return;
       try {
@@ -78,7 +107,10 @@
       } catch (e) {}
     }
 
-    // Fanfarria de victoria / evaluación final
+    /**
+     * Reproduce una fanfarria triunfal arpegiada (C5, E5, G5, C6) al finalizar
+     * con éxito el recorrido del palacio de la memoria.
+     */
     playVictory() {
       if (!this.ctx) return;
       try {
@@ -99,7 +131,13 @@
     }
   }
 
-  // 2. Base de Datos de Habitaciones del Palacio Mental
+  /**
+   * ==========================================================================
+   * 2. BASE DE DATOS DEL PALACIO DE LA MEMORIA (Mnemotecnia de Loci)
+   * ==========================================================================
+   * Habitaciones estructuradas con objetos asociados a coordenadas espaciales fijas,
+   * pistas metodológicas y preguntas de validación cognitiva.
+   */
   const ROOMS_DATA = [
     {
       id: 1,
@@ -118,202 +156,211 @@
         {
           pos: "Mesa Central",
           name: "Citroën DS de 1971",
-          detail: "El coche francés clásico que conduce Patrick",
-          img: "img/citroenDS.jpg"
+          detail: "Llaves del mítico coche europeo de colección",
+          img: "img/citroenDS2.jpg"
         },
         {
-          pos: "Muro Este",
-          name: "Carita de Red John",
-          detail: "La marca sonriente trazada con tres dedos",
-          img: "img/Red-John-Smiley-Face.png"
+          pos: "Pizarra de Casos",
+          name: "La Cara Sonriente",
+          detail: "Firma macabra de Red John trazada en sangre",
+          img: "img/red-john-face.jpg"
         },
         {
           pos: "Escritorio de Lisbon",
-          name: "Expediente del Caso",
-          detail: "La linterna iluminando la escena oculta",
-          img: "img/linterna-smiley-web.jpg"
+          name: "Placa Oficial del CBI",
+          detail: "Insignia dorada del Departamento de Sacramento",
+          img: "img/cbi-logo.png"
         }
       ],
       questions: [
         {
-          q: "¿Qué vehículo clásico conduce Patrick Jane según las pistas de la estancia?",
+          q: "¿Qué objeto colocó Patrick Jane en la 'Esquina Norte' de su despacho?",
           options: [
-            "Citroën DS de 1971",
-            "Ford Mustang Shelby 1968",
-            "Chevrolet Impala 1967",
-            "Austin Mini Cooper Clásico"
-          ],
-          correct: 0,
-          explanation: "¡Exacto! El emblemático Citroën DS rojo burdeos de 1971 es su vehículo insignia."
-        },
-        {
-          q: "¿En qué posición de la estancia se encontraba el sofá de cuero con la taza de té de Jane?",
-          options: [
-            "Muro Este",
-            "Esquina Norte",
-            "Mesa Central",
-            "Escritorio de Lisbon"
+            "La Placa Oficial del CBI",
+            "El Sofá & Taza de Té",
+            "El Citroën DS de 1971",
+            "La Cara Sonriente de Red John"
           ],
           correct: 1,
-          explanation: "¡Brillante! El sofá y el té reposaban en la Esquina Norte de su palacio mental."
+          explanation: "¡Exacto! El sofá marrón y la taza de té ocupan la Esquina Norte, el santuario de descanso mental de Jane."
         },
         {
-          q: "¿Cuál de los siguientes objetos NO formaba parte de esta primera habitación?",
+          q: "¿En qué posición de la habitación se encontraban las llaves del Citroën DS?",
           options: [
-            "Las llaves del Citroën DS",
-            "La carita sonriente de Red John",
-            "Una manzana verde cortada con navaja",
-            "La linterna sobre el expediente del caso"
+            "En la Pizarra de Casos",
+            "En el Escritorio de Lisbon",
+            "En la Mesa Central",
+            "En la Esquina Norte"
           ],
           correct: 2,
-          explanation: "¡Gran deducción! La manzana nunca estuvo en la estancia, no te dejaste engañar por distractores."
+          explanation: "¡Correcto! Las llaves del clásico Citroën reposaban sobre la Mesa Central."
+        },
+        {
+          q: "¿Dónde estaba fijada la macabra firma de Red John?",
+          options: [
+            "En la Pizarra de Casos",
+            "En el Respaldo del Sofá",
+            "En el Suelo de Madera",
+            "En la Ventana Principal"
+          ],
+          correct: 0,
+          explanation: "¡Brillante! El símbolo sangriento de Red John dominaba el centro de la Pizarra de Casos."
         }
       ]
     },
     {
       id: 2,
       title: "La Galería de Sospechosos",
-      subtitle: "La Lista de Red John",
+      subtitle: "Lista Secreta de Red John",
       icon: "🔍",
-      memorizeTime: 14,
-      tip: "Jane memorizó la lista definitiva de 7 sospechosos mediante el Método de Loci.",
+      memorizeTime: 12, // segundos
+      tip: "Visualiza a cada sospechoso interactuando de forma insólita con su ubicación asignada.",
       items: [
         {
-          pos: "Posición 1 (Izquierda)",
-          name: "Gale Bertram",
-          detail: "Director del CBI y miembro encubierto",
-          img: "img/characters/gale_bertram.jpg"
-        },
-        {
-          pos: "Posición 2 (Centro-Izq)",
-          name: "Thomas McAllister",
-          detail: "Sheriff del condado de Napa Valley",
-          img: "img/characters/thomas_mcallister.jpg"
-        },
-        {
-          pos: "Posición 3 (Centro-Der)",
-          name: "Bob Kirkland",
-          detail: "Agente encubierto de Seguridad Nacional",
-          img: "img/characters/bob_kirkland.jpg"
-        },
-        {
-          pos: "Posición 4 (Derecha)",
+          pos: "Flanco Izquierdo",
           name: "Brett Stiles",
-          detail: "Carismático líder supremo de Visualize",
-          img: "img/characters/brett_stiles.jpg"
+          detail: "Líder supremo y carismático de la secta Visualize",
+          img: "img/characters/stiles.jpg"
+        },
+        {
+          pos: "Balcón Superior",
+          name: "Gale Bertram",
+          detail: "Director del CBI y miembro de la conspiración Blake",
+          img: "img/characters/bertram.jpg"
+        },
+        {
+          pos: "Flanco Derecho",
+          name: "Thomas McAllister",
+          detail: "Alguacil del Condado de Napa con fobia a las palomas",
+          img: "img/characters/mcallister.jpg"
+        },
+        {
+          pos: "Piso Inferior",
+          name: "Reede Smith",
+          detail: "Agente del FBI tatuado con el secreto 'Tyger Tyger'",
+          img: "img/characters/smith.jpg"
         }
       ],
       questions: [
         {
-          q: "¿Quién ocupaba la Posición 2 (Centro-Izquierda) en la fila de sospechosos?",
+          q: "¿A quién ubicaste en el 'Balcón Superior' supervisando la conspiración?",
           options: [
-            "Thomas McAllister",
-            "Gale Bertram",
-            "Brett Stiles",
-            "Bob Kirkland"
-          ],
-          correct: 0,
-          explanation: "¡Deducción perfecta! El Sheriff Thomas McAllister ocupaba la segunda posición."
-        },
-        {
-          q: "¿Qué cargo oficial desempeñaba Gale Bertram dentro de la trama?",
-          options: [
-            "Sheriff rural",
-            "Director del CBI",
-            "Forense jefe de Sacramento",
-            "Fiscal de distrito de California"
+            "Al Alguacil Thomas McAllister",
+            "Al Director Gale Bertram",
+            "Al Líder Brett Stiles",
+            "Al Agente Reede Smith"
           ],
           correct: 1,
-          explanation: "¡Así es! Bertram dirigía el California Bureau of Investigation."
+          explanation: "¡Magnífico! Gale Bertram, con su pose burocrática, ocupaba el Balcón Superior."
         },
         {
-          q: "¿A qué misteriosa organización lideraba el sospechoso Brett Stiles?",
+          q: "¿Quién se encontraba en el 'Flanco Derecho' de la galería?",
           options: [
-            "Visualize",
-            "Asociación Blake",
-            "Homeland Security",
-            "Fundación El Silencio"
+            "Thomas McAllister",
+            "Brett Stiles",
+            "Kimball Cho",
+            "Sam Bosco"
           ],
           correct: 0,
-          explanation: "¡Correcto! Brett Stiles era el enigmático fundador y líder de Visualize."
+          explanation: "¡Deducción impecable! El Alguacil McAllister (quien más tarde se revelaría como Red John) estaba en el Flanco Derecho."
+        },
+        {
+          q: "¿Qué rasgo distintivo memorizaste sobre Reede Smith en el Piso Inferior?",
+          options: [
+            "Su fobia insuperable a las palomas",
+            "Su taza de té con dos terrones",
+            "Su tatuaje de la Asociación Blake ('Tyger Tyger')",
+            "Su liderazgo en la secta Visualize"
+          ],
+          correct: 2,
+          explanation: "¡Muy bien! Reede Smith portaba el tatuaje de tres puntos de la Asociación Blake."
         }
       ]
     },
     {
       id: 3,
-      title: "El Gran Salón Mental",
-      subtitle: "Deducción de Foco y Detalles",
-      icon: "🧠",
-      memorizeTime: 10,
-      tip: "La velocidad es clave: fija los rasgos sutiles antes de que la niebla mental los oculte.",
+      title: "El Santuario de la Hipnosis",
+      subtitle: "Objetos de Sugestión y Lectura Fría",
+      icon: "🌀",
+      memorizeTime: 10, // segundos
+      tip: "Presta máxima atención a los colores y materiales; Jane memoriza los detalles sutiles.",
       items: [
         {
-          pos: "Punto Central",
-          name: "Patrick Jane",
-          detail: "Traje chaleco de tres piezas de lana azul",
-          img: "img/characters/patrick_jane.jpg"
+          pos: "Vitrina de Cristal",
+          name: "Reloj de Bolsillo de Plata",
+          detail: "Herencia del padre de Jane usado para inducir trance",
+          img: "img/game/reloj.jpg"
         },
         {
-          pos: "Flanco Izquierdo",
-          name: "Teresa Lisbon",
-          detail: "Insignia dorada del CBI oficial #142",
-          img: "img/characters/teresa_lisbon.jpg"
+          pos: "Pedestal de Mármol",
+          name: "Vela de Llama Azul",
+          detail: "Punto focal de fijación y relajación hipnótica",
+          img: "img/game/vela.jpg"
         },
         {
-          pos: "Flanco Derecho",
-          name: "Kimball Cho",
-          detail: "Expresión imperturbable de hielo",
-          img: "img/characters/kimball_cho.jpg"
+          pos: "Caja Fuerte",
+          name: "Moneda de Oro Falsa",
+          detail: "Truco de prestidigitación aprendido en su juventud de feria",
+          img: "img/game/moneda.jpg"
         },
         {
-          pos: "Estante Superior",
-          name: "Té Caliente con Miel",
-          detail: "Taza de porcelana inglesa humeante",
-          img: "img/sillon&tea.jpg"
+          pos: "Atril de Roble",
+          name: "Poema 'The Tyger'",
+          detail: "Manuscrito de William Blake: «Tyger Tyger burning bright»",
+          img: "img/game/poema.jpg"
         }
       ],
       questions: [
         {
-          q: "¿Cómo estaba preparado el té de Patrick en el estante superior?",
+          q: "¿Qué objeto descansaba sobre el 'Pedestal de Mármol'?",
           options: [
-            "Té negro humeante con miel",
-            "Té helado de jazmín con limón",
-            "Infusión de menta amarga",
-            "Café espresso doble"
+            "La Vela de Llama Azul",
+            "El Reloj de Bolsillo de Plata",
+            "La Moneda de Oro Falsa",
+            "El Manuscrito de William Blake"
           ],
           correct: 0,
-          explanation: "«El té es como un abrazo en una taza, Lisbon.» — Té negro con miel, impecable."
+          explanation: "¡Correcto! La Vela de Llama Azul servía como punto focal en el Pedestal de Mármol."
         },
         {
-          q: "¿Qué vestimenta distintiva portaba Patrick Jane en el centro de tu enfoque?",
+          q: "¿Dónde guardó Patrick Jane la 'Moneda de Oro Falsa'?",
           options: [
-            "Gabardina oscura de detective",
-            "Traje chaleco de tres piezas azul",
-            "Camisa arremangada sin corbata",
-            "Chaqueta marrón de pana"
+            "En el Atril de Roble",
+            "Bajo la Vitrina",
+            "En la Caja Fuerte",
+            "En su bolsillo de chaleco"
+          ],
+          correct: 2,
+          explanation: "¡Exacto! El truco de prestidigitación estaba custodiado dentro de la Caja Fuerte."
+        },
+        {
+          q: "¿Qué pieza literaria se encontraba en el 'Atril de Roble'?",
+          options: [
+            "Las Obras Completas de Shakespeare",
+            "El Poema 'The Tyger' de William Blake",
+            "El Expediente de Lorelei Martins",
+            "El Manual de Procedimientos del CBI"
           ],
           correct: 1,
-          explanation: "¡Exacto! El inconfundible traje de tres piezas con chaleco de Jane."
-        },
-        {
-          q: "¿Quién custodiaba el flanco derecho con su expresión inquebrantable?",
-          options: [
-            "Kimball Cho",
-            "Wayne Rigsby",
-            "Grace Van Pelt",
-            "Dennis Abbott"
-          ],
-          correct: 0,
-          explanation: "¡El agente Cho! Frío, disciplinado e implacable en el interrogatorio."
+          explanation: "¡Perfecto! En el atril descansaban las escalofriantes líneas de 'The Tyger'."
         }
       ]
     }
   ];
 
-  // 3. Controlador Principal del Juego
+  /**
+   * ==========================================================================
+   * 3. CONTROLADOR PRINCIPAL DEL JUEGO (MemoryPalaceGame)
+   * ==========================================================================
+   * Maneja el ciclo de vida de las pantallas, temporizadores regresivos,
+   * cálculo de puntuación reactivo con bonificación de tiempo, y rangos de mentalista.
+   */
   class MemoryPalaceGame {
     constructor() {
+      /** @type {SoundSynth} Sintetizador de audio procedural */
       this.sound = new SoundSynth();
+
+      // Estado del juego
       this.currentRoomIndex = 0;
       this.currentQuestionIndex = 0;
       this.score = 0;
@@ -328,36 +375,41 @@
       this.loadHighScore();
     }
 
+    /**
+     * Cachea selectores del DOM y enlaza listeners de eventos clave.
+     */
     initDom() {
-      // Elementos de la interfaz
-      this.screenLobby = document.getElementById('screenLobby');
-      this.screenMemorize = document.getElementById('screenMemorize');
-      this.screenChallenge = document.getElementById('screenChallenge');
-      this.screenResults = document.getElementById('screenResults');
+      // Pantallas de juego
+      this.screenLobby = document.getElementById('screenLobby') || document.getElementById('gameScreenLobby');
+      this.screenMemorize = document.getElementById('screenMemorize') || document.getElementById('gameScreenMemorize');
+      this.screenChallenge = document.getElementById('screenChallenge') || document.getElementById('gameScreenChallenge');
+      this.screenResults = document.getElementById('screenResults') || document.getElementById('gameScreenResults');
 
+      // Botones principales
+      this.btnStartGame = document.getElementById('btnStartGame');
+      this.btnSkipTimer = document.getElementById('btnSkipTimer');
+      this.btnRestart = document.getElementById('btnRestart') || document.getElementById('btnRestartGame');
+
+      // Elementos del HUD
+      this.levelDisplayEl = document.getElementById('levelDisplay') || document.getElementById('gameLevelDisplay');
+      this.scoreDisplayEl = document.getElementById('scoreDisplay') || document.getElementById('gameScoreDisplay');
+
+      // Pantalla de Memorización
       this.roomNameEl = document.getElementById('roomName');
       this.roomSubtitleEl = document.getElementById('roomSubtitle');
       this.roomIconEl = document.getElementById('roomIcon');
-      this.scoreDisplayEl = document.getElementById('scoreDisplay');
-      this.levelDisplayEl = document.getElementById('levelDisplay');
-
-      // Botones
-      this.btnStartGame = document.getElementById('btnStartGame');
-      this.btnSkipTimer = document.getElementById('btnSkipTimer');
-      this.btnRestart = document.getElementById('btnRestart');
-
-      // Contenedores
       this.memoryGrid = document.getElementById('memoryGrid');
       this.memorizeTipEl = document.getElementById('memorizeTip');
       this.timerTextEl = document.getElementById('timerText');
       this.timeProgressBar = document.getElementById('timeProgressBar');
 
+      // Pantalla de Desafío (Preguntas)
       this.questionCounterEl = document.getElementById('questionCounter');
       this.questionTextEl = document.getElementById('questionText');
       this.optionsContainer = document.getElementById('optionsContainer');
       this.feedbackBox = document.getElementById('feedbackBox');
 
-      // Pantalla de resultados
+      // Pantalla de Resultados
       this.resultsRankEl = document.getElementById('resultsRank');
       this.finalScoreEl = document.getElementById('finalScore');
       this.finalCorrectEl = document.getElementById('finalCorrect');
@@ -367,6 +419,9 @@
       this.bindEvents();
     }
 
+    /**
+     * Enlaza controladores de clics a los botones de inicio, salto y reinicio.
+     */
     bindEvents() {
       if (this.btnStartGame) {
         this.btnStartGame.addEventListener('click', () => {
@@ -388,6 +443,9 @@
       }
     }
 
+    /**
+     * Carga el récord guardado en LocalStorage si existe.
+     */
     loadHighScore() {
       try {
         const stored = localStorage.getItem('the_mentalist_memory_palace_highscore');
@@ -397,6 +455,9 @@
       } catch (e) {}
     }
 
+    /**
+     * Guarda un nuevo récord en LocalStorage si la puntuación actual supera la previa.
+     */
     saveHighScore() {
       if (this.score > this.highScore) {
         this.highScore = this.score;
@@ -406,6 +467,10 @@
       }
     }
 
+    /**
+     * Activa una pantalla específica y desactiva las restantes con clase CSS 'active'.
+     * @param {HTMLElement|null} screen Elemento contenedor de la pantalla a mostrar
+     */
     showScreen(screen) {
       [this.screenLobby, this.screenMemorize, this.screenChallenge, this.screenResults].forEach(s => {
         if (s) s.classList.remove('active');
@@ -415,6 +480,9 @@
       }
     }
 
+    /**
+     * Reinicia contadores y arranca la primera habitación del palacio mental.
+     */
     startGame() {
       this.currentRoomIndex = 0;
       this.score = 0;
@@ -424,6 +492,10 @@
       this.startRoom(this.currentRoomIndex);
     }
 
+    /**
+     * Configura y lanza la fase de memorización para la habitación dada.
+     * @param {number} roomIdx Índice de la habitación en ROOMS_DATA
+     */
     startRoom(roomIdx) {
       const room = ROOMS_DATA[roomIdx];
       if (!room) {
@@ -446,6 +518,10 @@
       this.startMemorizationTimer(room.memorizeTime);
     }
 
+    /**
+     * Renderiza las tarjetas de objetos con su posición espacial y detalles mnemotécnicos.
+     * @param {Array<Object>} items Lista de objetos de la habitación
+     */
     renderMemoryGrid(items) {
       if (!this.memoryGrid) return;
       this.memoryGrid.innerHTML = items.map(item => `
@@ -462,6 +538,10 @@
       `).join('');
     }
 
+    /**
+     * Ejecuta el temporizador de memorización visual y sonoro (reloj tick).
+     * @param {number} seconds Segundos totales permitidos para memorizar
+     */
     startMemorizationTimer(seconds) {
       clearInterval(this.timerInterval);
       this.timeLeft = seconds;
@@ -491,6 +571,9 @@
       }, 1000);
     }
 
+    /**
+     * Da por concluida la fase de memorización e inicia la fase de desafío y preguntas.
+     */
     finishMemorizationPhase() {
       clearInterval(this.timerInterval);
       this.currentQuestionIndex = 0;
@@ -498,6 +581,10 @@
       this.loadQuestion();
     }
 
+    /**
+     * Carga y renderiza la pregunta actual de la habitación en pantalla,
+     * o transiciona a la siguiente habitación si ya se respondieron todas.
+     */
     loadQuestion() {
       const room = ROOMS_DATA[this.currentRoomIndex];
       const qData = room.questions[this.currentQuestionIndex];
@@ -528,7 +615,7 @@
         this.feedbackBox.textContent = '';
       }
 
-      // Renderizar 4 opciones
+      // Renderizar 4 opciones (A, B, C, D)
       if (this.optionsContainer) {
         const letters = ['A', 'B', 'C', 'D'];
         this.optionsContainer.innerHTML = qData.options.map((opt, idx) => `
@@ -540,7 +627,7 @@
 
         const buttons = this.optionsContainer.querySelectorAll('.option-btn');
         buttons.forEach(btn => {
-          btn.addEventListener('click', (e) => {
+          btn.addEventListener('click', () => {
             const selectedIdx = parseInt(btn.getAttribute('data-idx'), 10);
             this.handleAnswer(selectedIdx, qData, buttons);
           });
@@ -548,6 +635,13 @@
       }
     }
 
+    /**
+     * Procesa la respuesta seleccionada, calcula puntos (base + bonus por velocidad),
+     * reproduce feedback sonoro y avanza a la siguiente pregunta tras un breve delay.
+     * @param {number} selectedIdx Índice de la opción elegida (0..3)
+     * @param {Object} qData Objeto con datos de la pregunta
+     * @param {NodeList} buttons Lista de botones de opciones para deshabilitar
+     */
     handleAnswer(selectedIdx, qData, buttons) {
       // Deshabilitar botones para evitar clics múltiples
       buttons.forEach(b => b.disabled = true);
@@ -586,12 +680,19 @@
       }, 1600);
     }
 
+    /**
+     * Actualiza el contador numérico de puntos en el HUD superior.
+     */
     updateScoreDisplay() {
       if (this.scoreDisplayEl) {
         this.scoreDisplayEl.textContent = this.score;
       }
     }
 
+    /**
+     * Evalúa el desempeño final del usuario, calcula porcentaje de precisión,
+     * asigna un rango con cita representativa de la serie y reproduce la fanfarria de victoria.
+     */
     showFinalResults() {
       this.saveHighScore();
       this.showScreen(this.screenResults);
@@ -630,6 +731,11 @@
     }
   }
 
+  /**
+   * Sanitiza cadenas de texto para evitar inserción involuntaria de HTML.
+   * @param {string} str Texto original a escapar
+   * @returns {string} Cadena sanitizada
+   */
   function escapeHtml(str) {
     if (!str) return '';
     const div = document.createElement('div');

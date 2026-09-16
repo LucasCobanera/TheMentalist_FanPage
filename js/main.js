@@ -13,28 +13,35 @@ document.addEventListener('DOMContentLoaded', () => {
 /* --------------------------------------------------------------------------
    Navegación Móvil & Scroll
    -------------------------------------------------------------------------- */
+
+/**
+ * Inicializa la lógica del encabezado y la barra de navegación:
+ * 1. Agrega clase 'scrolled' al hacer scroll hacia abajo para reforzar el fondo y sombra.
+ * 2. Maneja el menú responsive móvil (hamburguesa) y accesibilidad mediante aria-expanded.
+ * 3. Cierra el menú automáticamente al hacer clic en cualquier enlace de navegación.
+ */
 function initNavigation() {
   const header = document.querySelector('.site-header');
   const navToggle = document.querySelector('.nav-toggle');
   const navMenu = document.querySelector('.nav-menu');
 
-  // Efecto scroll en header
+  // Efecto visual al descender: agrega clase de contraste
   window.addEventListener('scroll', () => {
     if (window.scrollY > 30) {
       header?.classList.add('scrolled');
     } else {
       header?.classList.remove('scrolled');
     }
-  });
+  }, { passive: true });
 
   // Alternar menú hamburguesa móvil
   if (navToggle && navMenu) {
     navToggle.addEventListener('click', () => {
       const isOpen = navMenu.classList.toggle('open');
-      navToggle.setAttribute('aria-expanded', isOpen);
+      navToggle.setAttribute('aria-expanded', String(isOpen));
     });
 
-    // Cerrar al pulsar un enlace
+    // Cerrar menú al pulsar un enlace
     navMenu.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', () => {
         navMenu.classList.remove('open');
@@ -47,6 +54,12 @@ function initNavigation() {
 /* --------------------------------------------------------------------------
    Resaltar Enlace Activo según URL
    -------------------------------------------------------------------------- */
+
+/**
+ * Inspecciona la URL actual de la ventana y asigna la clase 'active' al enlace
+ * correspondiente en la barra de navegación superior. Maneja tanto rutas relativas
+ * directas como la raíz index.html por defecto.
+ */
 function highlightActiveNavLink() {
   const currentPath = window.location.pathname.split('/').pop() || 'index.html';
   const links = document.querySelectorAll('.nav-link');
@@ -63,13 +76,21 @@ function highlightActiveNavLink() {
 
 /* --------------------------------------------------------------------------
    Audio Exclusivo: Tema de Red John (J.S. Bach - Preludio en Do Mayor)
-   - Exclusivo de red-john.html con botón flotante en el main container.
-   - Activación automática por defecto al ingresar a la sección de Red John.
+   - Exclusivo de red-john.html con botón flotante interactivo.
+   - Manejo de restricciones de autoplay de navegadores y visibilidad de pestaña.
    -------------------------------------------------------------------------- */
 let redJohnAudio = null;
 let isRedJohnAudioPlaying = false;
 let userPausedRedJohn = false;
 
+/**
+ * Inicializa el reproductor de audio ambiental para la sección del misterio de Red John.
+ * Gestiona:
+ * - Autoplay condicional (inicia automáticamente si el navegador lo permite; si se bloquea,
+ *   espera el primer gesto de interacción del usuario).
+ * - Sincronización visual del botón flotante y el ecualizador animado.
+ * - Pausa automática al cambiar o minimizar la pestaña (Page Visibility API) para evitar ruidos no deseados.
+ */
 function initRedJohnAudio() {
   const audioBtn = document.getElementById('redJohnAudioBtn');
   if (!audioBtn) return;
@@ -80,6 +101,10 @@ function initRedJohnAudio() {
 
   const textSpan = audioBtn.querySelector('.btn-text');
 
+  /**
+   * Actualiza el estado visual del botón flotante (animación del ecualizador y texto).
+   * @param {boolean} playing - Indica si el audio se está reproduciendo.
+   */
   function updateButtonUI(playing) {
     if (playing) {
       audioBtn.classList.add('playing');
@@ -92,6 +117,9 @@ function initRedJohnAudio() {
     }
   }
 
+  /**
+   * Intenta reproducir el audio manejando la promesa del navegador.
+   */
   function startPlayback() {
     if (userPausedRedJohn || isRedJohnAudioPlaying) return;
     const playPromise = redJohnAudio.play();
@@ -100,14 +128,17 @@ function initRedJohnAudio() {
         isRedJohnAudioPlaying = true;
         updateButtonUI(true);
         cleanupInteractionListeners();
-      }).catch(err => {
-        // Política de autoplay del navegador: aguardar primera interacción
+      }).catch(() => {
+        // Política de autoplay del navegador: aguarda la primera interacción del usuario
         updateButtonUI(false);
         setupInteractionListeners();
       });
     }
   }
 
+  /**
+   * Desencadenante ejecutado en el primer clic, scroll o toque del usuario.
+   */
   function onFirstInteraction() {
     if (!userPausedRedJohn && !isRedJohnAudioPlaying) {
       startPlayback();
@@ -128,10 +159,10 @@ function initRedJohnAudio() {
     });
   }
 
-  // Activar música por defecto al ingresar a la sección
+  // Intentar reproducción inmediata
   startPlayback();
 
-  // Control interactivo del botón flotante
+  // Control interactivo del botón flotante (Play / Pause manual)
   audioBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     if (isRedJohnAudioPlaying) {
@@ -144,11 +175,11 @@ function initRedJohnAudio() {
       redJohnAudio.play().then(() => {
         isRedJohnAudioPlaying = true;
         updateButtonUI(true);
-      }).catch(err => console.log('Error de reproducción:', err));
+      }).catch(err => console.warn('Reproducción bloqueada:', err));
     }
   });
 
-  // Pausar si el usuario cambia de pestaña y reanudar si estaba activo
+  // Pausar si el usuario cambia de pestaña y reanudar solo si estaba activo
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
       if (isRedJohnAudioPlaying && redJohnAudio) {
@@ -165,6 +196,12 @@ function initRedJohnAudio() {
 /* --------------------------------------------------------------------------
    Botón Flotante Global "Volver Arriba" (Scroll-to-Top)
    -------------------------------------------------------------------------- */
+
+/**
+ * Inyecta dinámicamente y controla el botón flotante "Volver Arriba":
+ * - Se hace visible cuando el usuario baja más de 350 píxeles.
+ * - Desplaza suavemente la ventana hasta la parte superior al hacer clic.
+ */
 function initBackToTop() {
   if (document.getElementById('backToTopBtn')) return;
 

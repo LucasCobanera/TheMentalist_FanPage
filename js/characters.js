@@ -222,6 +222,17 @@ const CHARACTERS_DATA = [
   }
 ];
 
+/**
+ * THE MENTALIST - ARCHIVADOR & EXPEDIENTES CBI (personajes.html)
+ * Base de datos de personajes principales y antagonistas, renderizado dinámico
+ * de tarjetas tipo dossier dentro de un archivador metálico de oficina de 4 cajones,
+ * control de desplazamiento suave del carrusel y modal de expediente abierto en 2 hojas.
+ */
+
+/**
+ * Representación en SVG del clip metálico tradicional de oficina.
+ * Se reutiliza de manera compartida en las fotos de evidencia polaroid.
+ */
 const PAPERCLIP_SVG = `
 <div class="dossier-paperclip" aria-hidden="true">
   <svg width="24" height="56" viewBox="0 0 24 56" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -240,6 +251,16 @@ document.addEventListener('DOMContentLoaded', () => {
   initCarouselControls();
 });
 
+/**
+ * Renderiza los expedientes en el carrusel del archivador metálico:
+ * 1. Filtra los personajes según la categoría seleccionada ('all', 'cbi', 'nemesis').
+ * 2. Actualiza la placa de latón con el contador total de expedientes archivados.
+ * 3. Inyecta el marcado de las dossier cards con pestaña, marco polaroid con clip y sellos oficiales.
+ * 4. Asigna los listeners de apertura de expediente completo para cada tarjeta.
+ * 5. Restablece el scroll del viewport y actualiza el estado de las flechas.
+ * 
+ * @param {string} filterCategory - Categoría a filtrar ('all' | 'cbi' | 'nemesis')
+ */
 function renderCharacters(filterCategory) {
   const grid = document.getElementById('charactersGrid');
   if (!grid) return;
@@ -320,6 +341,13 @@ function renderCharacters(filterCategory) {
 
 let navUpdateRafId = null;
 
+/**
+ * Inicializa los controles de navegación interactiva del carrusel del archivador:
+ * - Calcula dinámicamente la distancia de scroll (paso proporcional al ancho visible).
+ * - Asigna listeners a los botones anterior y siguiente con scroll suave nativo.
+ * - Monitorea el evento 'scroll' optimizado mediante requestAnimationFrame para evitar layout thrashing.
+ * - Recalcula límites en eventos de redimensionamiento de ventana (resize).
+ */
 function initCarouselControls() {
   const prevBtn = document.getElementById('carouselPrevBtn');
   const nextBtn = document.getElementById('carouselNextBtn');
@@ -357,6 +385,10 @@ function initCarouselControls() {
   updateCarouselNavState();
 }
 
+/**
+ * Evalúa la posición actual del scroll del archivador y deshabilita visual y funcionalmente
+ * las flechas cuando se alcanza el límite izquierdo o derecho.
+ */
 function updateCarouselNavState() {
   const prevBtn = document.getElementById('carouselPrevBtn');
   const nextBtn = document.getElementById('carouselNextBtn');
@@ -386,6 +418,10 @@ function updateCarouselNavState() {
   }
 }
 
+/**
+ * Inicializa las pestañas de filtrado (Todos, Equipo CBI, Nemesis / Red John):
+ * Alterna la clase 'active' y vuelve a renderizar los expedientes según la categoría.
+ */
 function initFilterTabs() {
   const buttons = document.querySelectorAll('.filter-btn');
   buttons.forEach(btn => {
@@ -398,6 +434,12 @@ function initFilterTabs() {
   });
 }
 
+/**
+ * Inicializa los eventos de cierre del modal de expediente:
+ * - Cierre por botón X.
+ * - Cierre al pulsar fuera del contenido (en el overlay oscuro).
+ * - Cierre por teclado mediante la tecla 'Escape'.
+ */
 function initCharacterModal() {
   const modalOverlay = document.getElementById('characterModal');
   const closeBtn = document.getElementById('modalCloseBtn');
@@ -426,6 +468,14 @@ function initCharacterModal() {
   }
 }
 
+/**
+ * Abre el modal del expediente en formato de carpeta abierta de dos hojas:
+ * - Hoja izquierda: Fotografía polaroid con clip metálico, identidad, declaración registrada y métricas numéricas.
+ * - Hoja derecha: Análisis psicológico exhaustivo, lista de habilidades con viñetas, memorándum de evaluación y sello oficial.
+ * - Bloquea el scroll del body mientras el modal permanezca abierto.
+ * 
+ * @param {string} characterId - Identificador único del personaje (ej: 'patrick-jane')
+ */
 function openCharacterModal(characterId) {
   const char = CHARACTERS_DATA.find(c => c.id === characterId);
   const modalOverlay = document.getElementById('characterModal');

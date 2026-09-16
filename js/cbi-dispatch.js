@@ -127,8 +127,13 @@
   /* --------------------------------------------------------------------------
      GESTIÓN DE DATOS EN LOCALSTORAGE (MOMENTOS CURADOS Y VOTOS)
      -------------------------------------------------------------------------- */
+
+  /**
+   * Obtiene la lista de momentos icónicos curados incorporando el voto
+   * local emitido por el usuario actual desde el almacenamiento del navegador.
+   * @returns {Array<Object>} Lista de momentos con el recuento total de votos.
+   */
   function getStoredMoments() {
-    // Los momentos publicados son estrictamente los momentos curados y evaluados por el equipo
     const userLikes = getUserLikes();
     return DEFAULT_MOMENTS.map(moment => {
       const extraVote = userLikes[moment.id] ? 1 : 0;
@@ -139,6 +144,10 @@
     });
   }
 
+  /**
+   * Recupera del LocalStorage el diccionario de identificadores de momentos votados por el usuario.
+   * @returns {Object.<string, boolean>} Mapa clave-valor de ID de momento a estado booleano.
+   */
   function getUserLikes() {
     try {
       const data = localStorage.getItem(STORAGE_KEYS.LIKES);
@@ -148,6 +157,10 @@
     }
   }
 
+  /**
+   * Guarda en LocalStorage el mapa de votos actualizados del usuario.
+   * @param {Object.<string, boolean>} likes - Mapa de IDs votados.
+   */
   function saveUserLikes(likes) {
     try {
       localStorage.setItem(STORAGE_KEYS.LIKES, JSON.stringify(likes));
@@ -156,6 +169,10 @@
     }
   }
 
+  /**
+   * Almacena una nueva propuesta de momento o recomendación en el historial local.
+   * @param {Object} submission - Objeto con los datos del formulario remitido.
+   */
   function saveSubmission(submission) {
     try {
       const existing = JSON.parse(localStorage.getItem(STORAGE_KEYS.SUBMISSIONS) || '[]');
@@ -546,6 +563,10 @@
   let touchStartX = 0;
   let touchEndX = 0;
 
+  /**
+   * Calcula el número de tarjetas visibles simultáneamente según el ancho del viewport.
+   * @returns {number} 3 para pantallas de escritorio (>1100px), 2 para tablets (>768px), 1 para móviles.
+   */
   function getCardsPerView() {
     const w = window.innerWidth;
     if (w > 1100) return 3;
@@ -553,6 +574,10 @@
     return 1;
   }
 
+  /**
+   * Filtra los momentos archivados según la temporada actualmente seleccionada.
+   * @returns {Array<Object>} Lista filtrada de momentos.
+   */
   function getFilteredMoments() {
     const allMoments = getStoredMoments();
     return activeSeasonFilter === 'all'
@@ -560,6 +585,13 @@
       : allMoments.filter(m => m.season === parseInt(activeSeasonFilter, 10));
   }
 
+  /**
+   * Renderiza las tarjetas de expediente de los momentos favoritos en el carrusel de temporadas:
+   * 1. Asigna estilo Manila Kraft, pestaña de archivo y clip metálico SVG a cada tarjeta.
+   * 2. Incorpora sellos oficiales de investigación (verde CBI o rojo Red John/Nemesis).
+   * 3. Configura el botón de votación interactivo y sincroniza con el estado en LocalStorage.
+   * 4. Genera los indicadores de puntos (dots) y actualiza el desplazamiento del carrusel.
+   */
   function renderMomentsTrack() {
     const track = document.getElementById('fanMomentsTrack') || document.getElementById('fanMomentsGrid');
     if (!track) return;
@@ -652,11 +684,21 @@
     updateCarousel(false);
   }
 
+  /**
+   * Calcula el índice máximo de desplazamiento posible sin dejar huecos vacíos al final.
+   * @param {number} totalItems - Cantidad de tarjetas filtradas.
+   * @returns {number} Índice de desplazamiento máximo.
+   */
   function getMaxSlideIndex(totalItems) {
     const perView = getCardsPerView();
     return Math.max(0, totalItems - perView);
   }
 
+  /**
+   * Aplica la transformación CSS de desplazamiento horizontal en el carrusel
+   * y actualiza el estado de deshabilitación de las flechas y la clase activa de los dots.
+   * @param {boolean} [animate=true] - Si se debe realizar la transición suave.
+   */
   function updateCarousel(animate = true) {
     const track = document.getElementById('fanMomentsTrack') || document.getElementById('fanMomentsGrid');
     if (!track) return;
@@ -696,6 +738,10 @@
     if (totalCounter) totalCounter.textContent = filtered.length;
   }
 
+  /**
+   * Genera dinámicamente los botones indicadores (dots) de paginación del carrusel.
+   * @param {number} totalItems - Total de elementos a paginar.
+   */
   function createCarouselDots(totalItems) {
     const dotsBar = document.getElementById('carouselDotsBar');
     if (!dotsBar) return;
@@ -719,6 +765,14 @@
     }
   }
 
+  /**
+   * Alterna el voto del usuario sobre un expediente de momento específico:
+   * Si ya ha votado, elimina su voto; de lo contrario, lo suma.
+   * Actualiza el contador numérico y persiste el estado en LocalStorage.
+   * 
+   * @param {string} momentId - ID del momento (ej: 'moment-s1-pilot')
+   * @param {HTMLElement} buttonEl - Elemento botón en el DOM
+   */
   function toggleVote(momentId, buttonEl) {
     const userLikes = getUserLikes();
     const baseMoment = DEFAULT_MOMENTS.find(m => m.id === momentId);
@@ -739,10 +793,18 @@
     const newVoteCount = baseMoment.votes + (userLikes[momentId] ? 1 : 0);
     const countEl = buttonEl.querySelector('.vote-count');
     if (countEl) {
-      countEl.textContent = newVoteCount;
+      countEl.textContent = String(newVoteCount);
     }
   }
 
+  /**
+   * Configura la sección de mejores momentos en temporadas.html:
+   * - Filtros por temporada (píldoras interactivas).
+   * - Navegación por flechas anterior/siguiente.
+   * - Gestos táctiles de deslizamiento (swipe horizontal en dispositivos móviles).
+   * - Redimensionamiento responsivo con temporizador antirrebote (debounce).
+   * - Enlace al modal de envío mediante el botón "Proponer mi momento favorito".
+   */
   function setupMomentsSection() {
     const track = document.getElementById('fanMomentsTrack') || document.getElementById('fanMomentsGrid');
     if (!track) return;
@@ -820,6 +882,12 @@
     renderMomentsTrack();
   }
 
+  /**
+   * Sanitiza cadenas de texto para prevenir inyección de código (XSS)
+   * al insertar contenido dinámico de usuarios en el DOM.
+   * @param {string} str - Cadena de texto a sanitizar.
+   * @returns {string} Cadena con caracteres HTML escapados de forma segura.
+   */
   function escapeHTML(str) {
     if (!str) return '';
     return str
@@ -830,7 +898,10 @@
       .replace(/'/g, '&#039;');
   }
 
-  // Inicialización cuando el DOM esté listo
+  /**
+   * Inicialización del módulo:
+   * Inyecta el botón flotante global del CBI y vincula la sección de mejores momentos si está presente.
+   */
   function init() {
     injectFloatingElements();
     setupMomentsSection();
@@ -842,7 +913,9 @@
     init();
   }
 
-  // Exponer API global opcional
+  /**
+   * API pública global del Despacho CBI para integración desde cualquier página.
+   */
   window.CbiDispatch = {
     open: openModal,
     close: closeModal,

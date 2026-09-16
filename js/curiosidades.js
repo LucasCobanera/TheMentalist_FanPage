@@ -1,8 +1,22 @@
 /**
- * THE MENTALIST - Curiosidades & Secretos de Producción
- * Modal desclasificado de curiosidades y navegación interactiva
+ * ============================================================================
+ * THE MENTALIST - CURIOSIDADES & SECRETOS DE PRODUCCIÓN
+ * ============================================================================
+ * Módulo de profundización en anécdotas de rodaje y simbolismo de la serie.
+ * 
+ * ARQUITECTURA:
+ * 1. CURIOSITIES_DATA: Base de conocimientos con datos de utilería, vehículos,
+ *    hábitos de Patrick Jane y el código cromático de Bruno Heller.
+ * 2. initCurioModal: Maneja la inyección dinámica del expediente según el botón
+ *    presionado, controlando estado visual, scroll lock y atajos de teclado.
+ * 3. closeCurioModal: Cierra el modal y restablece el flujo de navegación.
+ * ============================================================================
  */
 
+/**
+ * Base de datos con información desclasificada de producción y anécdotas de rodaje.
+ * @type {Object.<string, {badge: string, title: string, subtitle: string, img: string|null, icon?: string, paragraphs: Array<string>}>}
+ */
 const CURIOSITIES_DATA = {
   citroen: {
     badge: 'ICONO AUTOMOVILÍSTICO',
@@ -48,6 +62,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initCurioModal();
 });
 
+/**
+ * Inicializa el comportamiento del modal de curiosidades de producción,
+ * vinculando los disparadores a la plantilla dinámica y configurando el cierre.
+ */
 function initCurioModal() {
   const modal = document.getElementById('curioModal');
   const body = document.getElementById('curioModalBody');
@@ -110,12 +128,14 @@ function initCurioModal() {
     closeBtn.addEventListener('click', closeCurioModal);
   }
 
+  // Cierre por clic en el fondo oscuro
   modal.addEventListener('click', (e) => {
     if (e.target === modal) {
       closeCurioModal();
     }
   });
 
+  // Cierre por pulsación de la tecla Escape
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modal.classList.contains('active')) {
       closeCurioModal();
@@ -123,6 +143,9 @@ function initCurioModal() {
   });
 }
 
+/**
+ * Cierra el modal de curiosidades y restablece el scroll del documento.
+ */
 function closeCurioModal() {
   const modal = document.getElementById('curioModal');
   if (!modal) return;

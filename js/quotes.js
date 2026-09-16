@@ -1,7 +1,22 @@
 /**
- * THE MENTALIST - Generador Interactivo de Frases & Curiosidades
+ * ============================================================================
+ * THE MENTALIST - GENERADOR INTERACTIVO DE FRASES ICÓNICAS
+ * ============================================================================
+ * Módulo de citas célebres con ambientación visual y copia al portapapeles.
+ * 
+ * ARQUITECTURA:
+ * 1. QUOTES_LIST: Repertorio de frases representativas de Jane, Lisbon, Cho,
+ *    Van Pelt y Red John, con temporadas y fondos temáticos.
+ * 2. initQuoteGenerator: Inicializa la primera cita, controla la selección aleatoria
+ *    sin repetición consecutiva, anima la transición visual (cross-fade y zoom sutil),
+ *    y permite copiar la cita formateada a través de la Clipboard API con notificación flotante.
+ * ============================================================================
  */
 
+/**
+ * Repertorio de citas célebres de la serie.
+ * @type {Array<{quote: string, author: string, season: string, bg: string}>}
+ */
 const QUOTES_LIST = [
   {
     quote: "Si dejas de buscar la verdad en las palabras y comienzas a buscarla en los ojos, nadie podrá mentirte jamás.",
@@ -69,6 +84,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initQuoteGenerator();
 });
 
+/**
+ * Inicializa el carrusel aleatorio de citas, configurando la animación de cambio,
+ * la actualización del fondo temático del héroe y la copia al portapapeles.
+ */
 function initQuoteGenerator() {
   const quoteText = document.getElementById('currentQuoteText');
   const quoteAuthor = document.getElementById('currentQuoteAuthor');
@@ -79,8 +98,14 @@ function initQuoteGenerator() {
 
   if (!quoteText || !nextBtn) return;
 
+  /** @type {number} Índice de la cita mostrada actualmente */
   let currentIndex = 0;
 
+  /**
+   * Muestra la cita seleccionada aplicando una suave transición de fundido
+   * y zoom en la imagen de fondo.
+   * @param {number} index Índice de la cita en QUOTES_LIST
+   */
   function displayQuote(index) {
     const q = QUOTES_LIST[index];
     quoteText.style.opacity = '0';
@@ -110,6 +135,7 @@ function initQuoteGenerator() {
   // Inicializar con la primera cita
   displayQuote(0);
 
+  // Obtener siguiente cita aleatoria sin repetición consecutiva
   nextBtn.addEventListener('click', () => {
     let newIndex;
     do {
@@ -120,6 +146,7 @@ function initQuoteGenerator() {
     displayQuote(currentIndex);
   });
 
+  // Copiar frase con atribución al portapapeles
   if (copyBtn) {
     copyBtn.addEventListener('click', () => {
       const textToCopy = `${quoteText.textContent} ${quoteAuthor.textContent}`;

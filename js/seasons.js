@@ -1,5 +1,21 @@
 /**
- * THE MENTALIST - Guía Interactiva de Temporadas & Control de Spoilers
+ * ============================================================================
+ * THE MENTALIST - GUÍA INTERACTIVA DE TEMPORADAS & CONTROL DE SPOILERS
+ * ============================================================================
+ * Módulo de visualización narrativa y explorador de episodios.
+ * 
+ * ARQUITECTURA:
+ * 1. SEASONS_DATA: Registro central con sinopsis oficiales, arcos narrativos,
+ *    año de emisión, recuento de capítulos y resoluciones clave con spoilers.
+ * 2. Header Reactivo: updateSeasonHeader adapta la portada del héroe dinámicamente
+ *    según la temporada seleccionada.
+ * 3. Renderizado y Filtros: renderSeasons e initSeasonPills permiten navegar
+ *    entre temporadas individuales o la vista panorámica completa.
+ * 4. Control Global de Spoilers: toggleSpoilers sincroniza interruptores de UI
+ *    y revela/oculta las resoluciones clave de los episodios.
+ * 5. Modal de Expediente Oficial: openSeasonSynopsisModal despliega la sinopsis
+ *    completa desclasificada de cada temporada con bloqueo de scroll y soporte ESC.
+ * ============================================================================
  */
 
 const SEASONS_DATA = [
@@ -172,6 +188,11 @@ document.addEventListener('DOMContentLoaded', () => {
   initSeasonSynopsisModal();
 });
 
+/**
+ * Actualiza el encabezado visual dinámico con la portada, título del arco y número
+ * de episodios según la temporada filtrada (o la vista global de 'all').
+ * @param {string|number} selectedSeason Número de temporada ('1'..'7') o 'all'
+ */
 function updateSeasonHeader(selectedSeason) {
   const dynamicHeader = document.getElementById('seasonsDynamicHeader');
   const headerBg = document.getElementById('seasonHeaderBg');
@@ -204,8 +225,14 @@ function updateSeasonHeader(selectedSeason) {
   }
 }
 
+/** @type {boolean} Estado global de visibilidad de spoilers */
 let isSpoilersRevealed = false;
 
+/**
+ * Conmuta o establece la visibilidad de los spoilers en todas las tarjetas de episodios
+ * y sincroniza el estado de los interruptores de la interfaz.
+ * @param {boolean} [forceState] Si se proporciona, fuerza un estado booleano específico
+ */
 function toggleSpoilers(forceState) {
   const container = document.getElementById('seasonsContainer');
   if (!container) return;
@@ -234,6 +261,11 @@ function toggleSpoilers(forceState) {
   }
 }
 
+/**
+ * Renderiza dinámicamente los bloques de temporadas, sinopsis condensadas con botón
+ * de expansión y la cuadrícula de episodios clave.
+ * @param {string|number} selectedSeason Temporada a filtrar ('all' o '1'..'7')
+ */
 function renderSeasons(selectedSeason) {
   const container = document.getElementById('seasonsContainer');
   if (!container) return;
@@ -308,6 +340,11 @@ function renderSeasons(selectedSeason) {
   attachSynopsisModalListeners();
 }
 
+/**
+ * Despliega el modal con la sinopsis desclasificada completa de la temporada.
+ * Bloquea el desplazamiento del body para una lectura inmersiva.
+ * @param {string|number} seasonNum Número de temporada a abrir
+ */
 function openSeasonSynopsisModal(seasonNum) {
   const modal = document.getElementById('seasonSynopsisModal');
   const body = document.getElementById('seasonSynopsisModalBody');
@@ -348,6 +385,9 @@ function openSeasonSynopsisModal(seasonNum) {
   }
 }
 
+/**
+ * Cierra el modal del expediente de sinopsis y restablece el scroll del body.
+ */
 function closeSeasonSynopsisModal() {
   const modal = document.getElementById('seasonSynopsisModal');
   if (!modal) return;
@@ -355,6 +395,9 @@ function closeSeasonSynopsisModal() {
   document.body.style.overflow = '';
 }
 
+/**
+ * Enlaza el evento click a todos los botones "Leer sinopsis completa".
+ */
 function attachSynopsisModalListeners() {
   const buttons = document.querySelectorAll('.btn-read-more-season');
   buttons.forEach(btn => {
@@ -365,6 +408,10 @@ function attachSynopsisModalListeners() {
   });
 }
 
+/**
+ * Inicializa los controladores de cierre del modal de sinopsis
+ * (botón de cierre, clic en el fondo translúcido y tecla ESC).
+ */
 function initSeasonSynopsisModal() {
   const modal = document.getElementById('seasonSynopsisModal');
   const closeBtn = document.getElementById('closeSeasonSynopsisBtn');
@@ -388,6 +435,9 @@ function initSeasonSynopsisModal() {
   });
 }
 
+/**
+ * Inicializa las pestañas tipo píldora para filtrar temporadas de forma reactiva.
+ */
 function initSeasonPills() {
   const pills = document.querySelectorAll('.season-pill');
   pills.forEach(pill => {
@@ -401,6 +451,9 @@ function initSeasonPills() {
   });
 }
 
+/**
+ * Inicializa la delegación de eventos para los botones e interruptores de spoilers.
+ */
 function initSpoilerToggle() {
   const container = document.getElementById('seasonsContainer');
   if (container) {
