@@ -79,10 +79,64 @@
       <button class="filter-btn" data-category="nemesis" id="filterNemesis">Némesis & Antagonistas</button>
     </div>
 
-    <!-- CUADRÍCULA DE TARJETAS DE PERSONAJES (ADAPTATIVA: CERO HUECOS VACÍOS) -->
-    <div class="dossier-grid" id="charactersGrid">
-      <!-- Se inyecta dinámicamente mediante js/characters.js -->
-    </div>
+    <!-- ARCHIVADOR METÁLICO CLÁSICO / FICHERO DE OFICINA CBI -->
+    <section class="cbi-archive-locker" aria-label="Mueble Archivador Oficial CBI">
+      <!-- Frente superior de cajón con cerradura cilíndrica y manija con ficha amarilla -->
+      <div class="locker-header-bar">
+        <div class="cabinet-top-lock" title="Cerradura CBI Nº 411-C">
+          <span class="lock-cylinder">
+            <span class="key-slit"></span>
+          </span>
+          <span class="lock-serial">CBI HQ // L-4</span>
+        </div>
+
+        <div class="locker-badge-plate drawer-handle-fixture">
+          <div class="drawer-yellow-card">
+            <i class="fa-solid fa-folder-closed"></i>
+            <span>ARCHIVO CBI // DIVISIÓN DE HOMICIDIOS</span>
+          </div>
+          <div class="drawer-pull-latch"></div>
+        </div>
+
+        <div class="locker-status-indicator">
+          <span class="locker-archive-icon"><i class="fa-solid fa-stamp"></i></span>
+          <span id="lockerCounterText" class="locker-counter">EXPEDIENTES ARCHIVADOS</span>
+        </div>
+      </div>
+
+      <!-- Interior del cajón abierto con rieles telescópicos laterales y expedientes colgantes -->
+      <div class="locker-drawer-interior">
+        <div class="telescopic-slide slide-left" aria-hidden="true">
+          <div class="slide-metal-rail"></div>
+          <div class="slide-ball-bearing"></div>
+        </div>
+
+        <button type="button" class="locker-nav-btn locker-nav-prev" id="carouselPrevBtn" aria-label="Ver expedientes anteriores">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <div class="locker-carousel-viewport" id="lockerCarouselViewport">
+          <div class="dossier-overlap-track" id="charactersGrid">
+            <!-- Se inyecta dinámicamente mediante js/characters.js -->
+          </div>
+        </div>
+
+        <button type="button" class="locker-nav-btn locker-nav-next" id="carouselNextBtn" aria-label="Ver siguientes expedientes">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+
+        <div class="telescopic-slide slide-right" aria-hidden="true">
+          <div class="slide-metal-rail"></div>
+          <div class="slide-ball-bearing"></div>
+        </div>
+      </div>
+
+      <!-- Borde inferior / frente de cajón y separación con el cajón inferior -->
+      <div class="locker-bottom-runner">
+        <div class="drawer-front-lip"></div>
+        <div class="cabinet-seam-line"></div>
+      </div>
+    </section>
 
   </main>
 

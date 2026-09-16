@@ -2059,7 +2059,7 @@ body.cbi-modal-open {
   overflow: hidden;
   width: 100%;
   border-radius: 12px;
-  padding: 0.85rem 0.25rem 1.75rem 0.25rem;
+  padding: 1rem 0.5rem 2.2rem 0.5rem;
 }
 
 .moments-dossier-track {
@@ -2158,7 +2158,8 @@ body.cbi-modal-open {
 }
 
 /* ==========================================================================
-   ESTILO EXPEDIENTE DE INVESTIGACIÓN CBI (Dossier Cards)
+   ESTILO EXPEDIENTE DE INVESTIGACIÓN CBI - DOSSIER CARDS (Mejores Momentos)
+   Idéntico al estilo de archivador CBI de personajes.html
    ========================================================================== */
 .dossier-moment-card {
   flex: 0 0 calc(33.333% - 1.2rem);
@@ -2166,8 +2167,22 @@ body.cbi-modal-open {
   display: flex;
   flex-direction: column;
   position: relative;
-  transition: transform var(--transition-fast), filter var(--transition-fast);
+  background: linear-gradient(155deg, #f4e6ca 0%, #ecd7af 45%, #debfa0 75%, #cca871 100%);
+  border: 1.5px solid #ab8f56;
+  border-radius: 4px 16px 6px 6px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  transition: transform 0.35s cubic-bezier(0.2, 0.95, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
   user-select: none;
+  overflow: visible;
+  padding: 0;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+/* Expedientes clasificados vinculados a Red John (Tonalidad rojiza) */
+.dossier-moment-card.nemesis-moment {
+  background: linear-gradient(155deg, #ebd2c5 0%, #deb8a5 45%, #cfa38d 75%, #b9866e 100%);
+  border-color: #945243;
 }
 
 @media (max-width: 1100px) {
@@ -2220,260 +2235,323 @@ body.cbi-modal-open {
 }
 
 .dossier-moment-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55), 0 0 16px rgba(171, 143, 86, 0.3);
+  border-color: #8c713b;
 }
 
-/* Pestaña de Carpeta de Archivo (Folder Tab - Estilo Manila / Kraft Clásico) */
-.dossier-folder-tab {
+.dossier-moment-card.nemesis-moment:hover {
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6), 0 0 16px rgba(148, 82, 67, 0.35);
+  border-color: #7d2618;
+}
+
+/* Pestaña superior del expediente (Folder Tab) */
+.dossier-moment-card .dossier-folder-tab {
+  background: #dbbe83;
+  border-bottom: 1.5px solid #ab8f56;
+  padding: 0.38rem 0.95rem;
+  border-radius: 2px 14px 0 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: linear-gradient(135deg, #3a2e1d 0%, #291f13 100%);
-  border: 1.5px solid rgba(212, 180, 131, 0.42);
-  border-bottom: none;
-  border-radius: 8px 8px 0 0;
-  padding: 0.45rem 1rem;
-  width: 90%;
-  position: relative;
-  z-index: 2;
-  margin-left: 5%;
-}
-
-.dossier-folder-tab .tab-label {
   font-family: var(--font-typewriter);
-  font-size: 0.72rem;
+  font-size: 0.66rem;
+  color: #3f2f18;
   font-weight: 700;
-  color: #d4b483;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.dossier-moment-card.nemesis-moment .dossier-folder-tab {
+  background: #cd9e89;
+  border-bottom-color: #945243;
+  color: #451b14;
+}
+
+.dossier-moment-card .folder-tab-badge {
   text-transform: uppercase;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.4rem;
 }
 
-.dossier-stamp-classified {
-  font-family: var(--font-typewriter);
-  font-size: 0.65rem;
-  font-weight: 800;
-  color: #ff6b7b;
-  border: 1.5px solid rgba(255, 107, 123, 0.65);
-  padding: 0.1rem 0.45rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  transform: rotate(-3deg);
-  background: rgba(128, 8, 23, 0.28);
-  border-radius: 2px;
+.dossier-moment-card .folder-tab-id {
+  opacity: 0.85;
 }
 
-/* Cuerpo de la Carpeta Manila Clásica */
-.dossier-folder-body {
+/* Contenedor y Marco Polaroid de Evidencia con Clip Metálico */
+.dossier-moment-card .dossier-photo-container {
   position: relative;
-  background: linear-gradient(175deg, #241b12 0%, #17110a 100%);
-  border: 1.5px solid rgba(212, 180, 131, 0.35);
-  border-radius: 8px;
-  padding: 1.35rem 1.25rem 1.25rem 1.25rem;
-  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  padding: 0.85rem 1rem 0.25rem;
   display: flex;
-  flex-direction: column;
-  flex: 1;
-  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.dossier-moment-card:hover .dossier-folder-body {
-  border-color: rgba(212, 180, 131, 0.7);
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.85), 0 0 25px rgba(212, 180, 131, 0.25);
-}
-
-/* Clip metálico simulado */
-.dossier-metal-clip {
-  position: absolute;
-  top: -8px;
-  left: 26px;
-  width: 10px;
-  height: 30px;
-  background: linear-gradient(90deg, #9595a0 0%, #dcdce4 50%, #707078 100%);
-  border-radius: 4px;
-  box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.7);
-  z-index: 5;
-}
-
-/* Fotografía de Evidencia Adjunta */
-.dossier-evidence-wrap {
+.dossier-moment-card .dossier-photo-frame {
   position: relative;
-  width: 100%;
-  height: 185px;
-  background: #08080c;
-  border: 1px solid rgba(250, 246, 238, 0.18);
-  border-radius: 4px;
-  padding: 5px;
-  background-color: #1a1a24;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
-  margin-bottom: 1.15rem;
-  overflow: hidden;
-}
-
-.evidence-tape {
-  position: absolute;
-  top: -4px;
-  right: 18px;
-  width: 55px;
-  height: 16px;
-  background: rgba(220, 210, 180, 0.35);
-  transform: rotate(4deg);
-  z-index: 3;
-  backdrop-filter: blur(2px);
-  border-left: 1px dashed rgba(255, 255, 255, 0.3);
-  border-right: 1px dashed rgba(255, 255, 255, 0.3);
-}
-
-.dossier-evidence-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  background: #fdfdfd;
+  padding: 6px 6px 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25), 0 1px 3px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 2px;
-  filter: contrast(1.05);
+  transform: rotate(-1deg);
+  transition: transform 0.25s ease;
+  overflow: visible;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.dossier-moment-card:hover .dossier-photo-frame {
+  transform: rotate(0deg) scale(1.01);
+}
+
+.dossier-moment-card .dossier-photo-frame .dossier-paperclip {
+  position: absolute;
+  top: -14px;
+  left: 14px;
+  width: 26px;
+  height: 52px;
+  z-index: 10;
+  pointer-events: none;
+  filter: drop-shadow(2px 2.5px 2px rgba(0, 0, 0, 0.42));
+  transform: rotate(-2deg);
+}
+
+.dossier-moment-card .dossier-evidence-img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  margin: 0 auto;
+  border-radius: 1px;
+  filter: contrast(1.04) saturate(0.95);
   transition: transform 0.4s ease;
 }
 
 .dossier-moment-card:hover .dossier-evidence-img {
-  transform: scale(1.04);
+  transform: scale(1.03);
 }
 
-.evidence-tag {
+.dossier-moment-card .photo-evidence-tag {
+  font-family: var(--font-typewriter);
+  font-size: 0.58rem;
+  color: #5c4f40;
+  text-align: center;
+  margin-top: 5px;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* Sello de tinta en la foto */
+.dossier-moment-card .dossier-stamp {
   position: absolute;
-  bottom: 10px;
-  left: 10px;
-  background: rgba(24, 18, 12, 0.92);
-  border: 1px solid #d4b483;
-  color: #ecdcc2;
+  bottom: 8px;
+  right: 14px;
+  border: 2px dashed #143d2b;
+  color: #143d2b;
   font-family: var(--font-typewriter);
   font-size: 0.68rem;
-  font-weight: 700;
-  padding: 0.2rem 0.55rem;
+  font-weight: 800;
+  padding: 0.15rem 0.5rem;
+  text-transform: uppercase;
+  transform: rotate(-6deg);
+  background: rgba(255, 255, 255, 0.9);
   border-radius: 2px;
-  letter-spacing: 0.08em;
-  backdrop-filter: blur(4px);
+  letter-spacing: 0.1em;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  z-index: 5;
+  pointer-events: none;
 }
 
-/* Hoja de Datos del Expediente */
-.dossier-data-sheet {
+.dossier-moment-card .dossier-stamp.red {
+  border-color: #8c101c;
+  color: #8c101c;
+  transform: rotate(7deg);
+  background: rgba(255, 240, 240, 0.92);
+  box-shadow: 0 2px 6px rgba(140, 16, 28, 0.22);
+}
+
+/* Cuerpo de Ficha del Expediente */
+.dossier-moment-card .dossier-body {
+  padding: 0.65rem 1.15rem 1.15rem;
   display: flex;
   flex-direction: column;
-  flex: 1;
+  flex-grow: 1;
+  text-align: left;
+  box-sizing: border-box;
 }
 
-.dossier-case-meta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.dossier-moment-card .dossier-header {
+  margin-bottom: 0.45rem;
+  text-align: left;
+}
+
+.dossier-moment-card .dossier-category-seal {
+  display: inline-block;
+  margin-bottom: 0.3rem;
   font-family: var(--font-typewriter);
-  font-size: 0.72rem;
-  color: var(--text-muted);
-  letter-spacing: 0.06em;
-  margin-bottom: 0.5rem;
-  padding-bottom: 0.35rem;
-  border-bottom: 1px solid rgba(250, 246, 238, 0.08);
-}
-
-.dossier-case-meta .meta-case-num strong {
-  color: var(--cream-pure);
-}
-
-.dossier-case-meta .meta-archive-date {
-  color: #c8a97e;
-}
-
-.dossier-moment-title {
-  font-family: var(--font-display);
-  font-size: 1.15rem;
+  font-size: 0.64rem;
   font-weight: 700;
-  color: var(--cream-pure);
-  line-height: 1.35;
-  margin-bottom: 0.75rem;
+  letter-spacing: 0.06em;
+  padding: 0.12rem 0.48rem;
+  border-radius: 2px;
+  text-align: left;
 }
 
-.dossier-report-box {
-  background: rgba(20, 15, 10, 0.75);
-  border-left: 3px solid #c8a97e;
-  padding: 0.75rem 0.9rem;
+.dossier-moment-card .seal-cbi {
+  background: rgba(20, 61, 43, 0.12);
+  color: #143d2b;
+  border: 1px solid #143d2b;
+}
+
+.dossier-moment-card .seal-crimson {
+  background: rgba(140, 16, 28, 0.12);
+  color: #8c101c;
+  border: 1px solid #8c101c;
+}
+
+.dossier-moment-card .dossier-moment-title {
+  font-size: 1.18rem;
+  font-family: var(--font-heading);
+  color: #1a1208;
+  margin-bottom: 0.45rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.32;
+  text-align: left;
+}
+
+.dossier-moment-card .dossier-report-box {
+  background: rgba(255, 255, 255, 0.58);
+  border-left: 3px solid #ab8f56;
+  padding: 0.75rem 0.85rem;
   border-radius: 0 4px 4px 0;
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.95rem;
   flex: 1;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  text-align: left;
 }
 
-.dossier-report-text {
+.dossier-moment-card.nemesis-moment .dossier-report-box {
+  border-left-color: #945243;
+}
+
+.dossier-moment-card .dossier-report-text {
   font-family: var(--font-body);
-  font-size: 0.86rem;
-  color: #d8d4c8;
-  line-height: 1.55;
+  font-size: 0.84rem;
+  color: #2a1f14;
+  line-height: 1.5;
   font-style: italic;
+  text-align: left;
+  margin: 0;
 }
 
-/* Pie del Expediente y Sello de Aprobación/Voto */
-.dossier-footer-seal {
+/* Pie de Expediente: Investigador & Sello de Votación */
+.dossier-moment-card .dossier-footer {
+  margin-top: auto;
+  padding-top: 0.75rem;
+  border-top: 1px dashed #b89b65;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-top: 1px dashed rgba(250, 246, 238, 0.12);
-  padding-top: 0.85rem;
-  margin-top: auto;
+  gap: 0.75rem;
 }
 
-.dossier-agent-credit {
+.dossier-moment-card.nemesis-moment .dossier-footer {
+  border-top-color: #945243;
+}
+
+.dossier-moment-card .dossier-agent-credit {
   display: flex;
   flex-direction: column;
-  line-height: 1.2;
+  line-height: 1.25;
+  text-align: left;
 }
 
-.dossier-agent-credit .agent-label {
+.dossier-moment-card .dossier-agent-credit .agent-label {
   font-family: var(--font-typewriter);
   font-size: 0.62rem;
-  color: var(--text-muted);
+  color: #53402b;
   letter-spacing: 0.06em;
-}
-
-.dossier-agent-credit .agent-name {
-  font-family: var(--font-body);
-  font-size: 0.82rem;
   font-weight: 700;
-  color: var(--cream-pure);
 }
 
+.dossier-moment-card .dossier-agent-credit .agent-name {
+  font-family: var(--font-typewriter);
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #1a1208;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 140px;
+}
+
+/* Botón de Sello de Votación Oficial */
 .dossier-vote-stamp {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1.5px solid rgba(250, 246, 238, 0.16);
-  border-radius: 6px;
-  padding: 0.4rem 0.8rem;
-  color: var(--cream-pure);
+  background: rgba(255, 255, 255, 0.88);
+  border: 1.5px solid #143d2b;
+  border-radius: 4px;
+  padding: 0.38rem 0.75rem;
+  color: #143d2b;
   font-family: var(--font-typewriter);
-  font-size: 0.78rem;
+  font-size: 0.74rem;
+  font-weight: 700;
   cursor: pointer;
   transition: all var(--transition-fast);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 .dossier-vote-stamp:hover {
-  background: rgba(128, 8, 23, 0.28);
-  border-color: #ff4757;
-  color: #ff999f;
-  transform: scale(1.05) rotate(-1deg);
+  background: #143d2b;
+  color: #f7eedb;
+  border-color: #0d2a1d;
+  transform: scale(1.05);
+  box-shadow: 0 3px 8px rgba(20, 61, 43, 0.3);
+}
+
+.dossier-vote-stamp .vote-heart {
+  color: #8c101c;
+  transition: transform 0.2s ease;
+  font-size: 0.82rem;
+}
+
+.dossier-vote-stamp:hover .vote-heart {
+  transform: scale(1.2);
 }
 
 .dossier-vote-stamp.voted {
-  background: rgba(128, 8, 23, 0.45);
-  border-color: #ff4757;
+  background: #8c101c;
+  border-color: #5c0b13;
   color: #ffffff;
-  box-shadow: 0 0 12px rgba(255, 71, 87, 0.35);
+  box-shadow: 0 2px 8px rgba(140, 16, 28, 0.35);
 }
 
 .dossier-vote-stamp.voted .vote-heart {
-  color: #ff4757;
+  color: #ffffff;
 }
 
 .dossier-vote-stamp .vote-text {
-  font-size: 0.65rem;
+  font-size: 0.66rem;
   letter-spacing: 0.08em;
-  opacity: 0.75;
+  text-transform: uppercase;
+}
+
+.dossier-vote-stamp .vote-count {
+  font-size: 0.78rem;
+  font-weight: 800;
 }

@@ -24,7 +24,19 @@
     7: 'img/jane&lisbon.jpeg'
   };
 
-  // Momentos icónicos precargados (T1 a T7)
+  // Clip metálico para sujetar fotografía de evidencia al dossier (SVG Idéntico a characters.js)
+  const PAPERCLIP_SVG = `
+  <div class="dossier-paperclip" aria-hidden="true">
+    <svg width="24" height="56" viewBox="0 0 24 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M7 14V42C7 46.5 10.5 50 15 50C19.5 50 22 46.5 22 42V9C22 4 17.5 1.5 12 1.5C6.5 1.5 2 4.5 2 11V45C2 51.5 7.5 55 14 55C19 55 22 52 22 47" 
+        stroke="#d2d8e0" stroke-width="2.8" stroke-linecap="round"/>
+      <path d="M7 14V42C7 46.5 10.5 50 15 50C19.5 50 22 46.5 22 42V9C22 4 17.5 1.5 12 1.5C6.5 1.5 2 4.5 2 11V45C2 51.5 7.5 55 14 55C19 55 22 52 22 47" 
+        stroke="rgba(50, 55, 65, 0.45)" stroke-width="1.2" stroke-linecap="round"/>
+    </svg>
+  </div>
+  `;
+
+  // Momentos icónicos precargados (T1 a T7) con sellos oficiales de investigación
   const DEFAULT_MOMENTS = [
     {
       id: 'moment-s1-pilot',
@@ -34,7 +46,9 @@
       description: 'Patrick Jane prepara tranquilamente una taza de té en la cocina de los deudos y luego finge tener las cenizas de la víctima para quebrar la coartada del culpable en cuestión de minutos.',
       author: 'Teresa Lisbon Fan',
       image: 'img/sillon&tea.jpg',
-      votes: 48
+      votes: 48,
+      stamp: 'EVIDENCIA CLAVE',
+      stampClass: ''
     },
     {
       id: 'moment-s2-tyger',
@@ -44,7 +58,9 @@
       description: 'Red John salva a Patrick de unos imitadores en un cine abandonado. Al amparo de las sombras, le susurra al oído los primeros versos de William Blake antes de esfumarse para siempre.',
       author: 'CBI_SpecialAgent',
       image: 'img/linterna-smiley-web.jpg',
-      votes: 94
+      votes: 94,
+      stamp: 'CONFIDENCIAL',
+      stampClass: 'red'
     },
     {
       id: 'moment-s3-strawberries',
@@ -54,7 +70,9 @@
       description: 'Jane encara a Timothy Carter en una cafetería. Tras exigirle detalles íntimos sobre el olor del champú de su hija y confirmar su frialdad, Jane dispara y se sienta en paz a beber su té.',
       author: 'SimonBaker_Fan',
       image: 'img/Seasons/S3.jpg',
-      votes: 120
+      votes: 120,
+      stamp: 'DESCLASIFICADO',
+      stampClass: ''
     },
     {
       id: 'moment-s4-crimson',
@@ -64,7 +82,9 @@
       description: 'Jane finge durante meses un quiebre emocional absoluto en Nevada para ganarse la devoción de Lorelei Martins y tenderle una encerrona de alta inteligencia a Red John.',
       author: 'Wayne_Rigsby',
       image: 'img/citroenDS.jpg',
-      votes: 71
+      votes: 71,
+      stamp: 'OP. ENCUBIERTA',
+      stampClass: 'red'
     },
     {
       id: 'moment-s5-rules',
@@ -74,7 +94,9 @@
       description: 'Jane reduce la cacería de su vida a 7 sospechosos precisos, sólo para quedar estupefacto al reproducir el disco de Lorelei: Red John había adivinado su lista completa semanas antes.',
       author: 'Mentalist_Forensics',
       image: 'img/sospechosos.jpg',
-      votes: 105
+      votes: 105,
+      stamp: 'ALTA PRIORIDAD',
+      stampClass: 'red'
     },
     {
       id: 'moment-s6-redjohn',
@@ -84,7 +106,9 @@
       description: 'Tras despistar al Sheriff McAllister usando una paloma oculta en la capilla de Sacramento, Patrick lo persigue a través del parque y cumple su juramento con sus propias manos.',
       author: 'Cho_IceCold',
       image: 'img/Seasons/S6.jpg',
-      votes: 156
+      votes: 156,
+      stamp: 'CASO CERRADO',
+      stampClass: 'red'
     },
     {
       id: 'moment-s7-wedding',
@@ -94,7 +118,9 @@
       description: 'Patrick y Teresa celebran su amor junto al lago rodeados de sus viejos camaradas del CBI y el FBI, sellando 7 temporadas con una revelación que devuelve la luz a la vida de Jane.',
       author: 'JisbonForever',
       image: 'img/jane&lisbon.jpeg',
-      votes: 139
+      votes: 139,
+      stamp: 'AUTORIZADO CBI',
+      stampClass: ''
     }
   ];
 
@@ -556,57 +582,58 @@
 
     track.innerHTML = filtered.map(moment => {
       const isVoted = !!userLikes[moment.id];
+      const isNemesisTheme = moment.season === 2 || moment.season === 5 || moment.season === 6;
+      const defaultStamp = isNemesisTheme ? 'CONFIDENCIAL' : 'EVIDENCIA CLAVE';
+      const defaultStampClass = isNemesisTheme ? 'red' : '';
+      const stampText = moment.stamp || defaultStamp;
+      const stampClass = (moment.stampClass !== undefined && moment.stampClass !== null) ? moment.stampClass : defaultStampClass;
+      const epCode = moment.episode ? moment.episode.split(' ')[0] : `#${moment.season}`;
+
       return `
-        <article class="dossier-moment-card" data-id="${moment.id}">
-          <!-- Pestaña Superior de Carpeta de Archivo (Folder Tab) -->
+        <article class="dossier-moment-card ${isNemesisTheme ? 'nemesis-moment' : ''}" data-id="${moment.id}">
+          <!-- Pestaña Superior de Carpeta Manila (Folder Tab) -->
           <div class="dossier-folder-tab">
-            <div class="tab-label">
-              <i class="fa-solid fa-folder-closed"></i>
-              <span>EXPEDIENTE // T${moment.season}</span>
-            </div>
-            <div class="dossier-stamp-classified">CONFIDENCIAL</div>
+            <span class="folder-tab-badge">
+              <i class="fa-solid fa-folder-closed"></i> ARCHIVO CBI // REGISTRO EPISÓDICO
+            </span>
+            <span class="folder-tab-id">#T${moment.season}_E${epCode.replace('x', '_')}</span>
           </div>
 
-          <!-- Cuerpo de la Carpeta Manila Oscura -->
-          <div class="dossier-folder-body">
-            <!-- Clip Metálico de Carpeta -->
-            <div class="dossier-metal-clip" title="Clip Oficial CBI"></div>
+          <!-- Contenedor de Fotografía con Clip Metálico y Sello de Tinta -->
+          <div class="dossier-photo-container">
+            <div class="dossier-photo-frame">
+              ${PAPERCLIP_SVG}
+              <img src="${moment.image}" alt="${escapeHTML(moment.title)}" class="dossier-evidence-img" loading="lazy">
+              <div class="photo-evidence-tag">EVIDENCIA EN CÁMARA // CBI-REC #${moment.season}x${epCode}</div>
+            </div>
+            <div class="dossier-stamp ${stampClass}">${stampText}</div>
+          </div>
 
-            <!-- Fotografía de Evidencia -->
-            <div class="dossier-evidence-wrap">
-              <div class="evidence-tape"></div>
-              <img src="${moment.image}" alt="${moment.title}" class="dossier-evidence-img" loading="lazy">
-              <div class="evidence-tag">
-                <i class="fa-solid fa-camera"></i> EVIDENCIA #0${moment.season} // CBI
+          <!-- Hoja de Datos del Expediente -->
+          <div class="dossier-body">
+            <div class="dossier-header">
+              <div class="dossier-category-seal ${isNemesisTheme ? 'seal-crimson' : 'seal-cbi'}">
+                <span>CASO REF: ${escapeHTML(moment.episode)}</span>
               </div>
+              <h3 class="dossier-moment-title">${escapeHTML(moment.title)}</h3>
             </div>
 
-            <!-- Hoja de Datos del Expediente -->
-            <div class="dossier-data-sheet">
-              <div class="dossier-case-meta">
-                <span class="meta-case-num">CASO REF: <strong>${moment.episode}</strong></span>
-                <span class="meta-archive-date"><i class="fa-solid fa-shield-halved"></i> ARCHIVO CBI</span>
+            <div class="dossier-report-box">
+              <p class="dossier-report-text">"${escapeHTML(moment.description)}"</p>
+            </div>
+
+            <!-- Pie del Expediente: Investigador y Sello de Aprobación/Voto -->
+            <div class="dossier-footer">
+              <div class="dossier-agent-credit">
+                <span class="agent-label">PROPUESTO POR:</span>
+                <span class="agent-name">${escapeHTML(moment.author)}</span>
               </div>
 
-              <h3 class="dossier-moment-title">${moment.title}</h3>
-
-              <div class="dossier-report-box">
-                <p class="dossier-report-text">"${moment.description}"</p>
-              </div>
-
-              <!-- Pie del Expediente: Investigador y Sello de Aprobación -->
-              <div class="dossier-footer-seal">
-                <div class="dossier-agent-credit">
-                  <span class="agent-label">PROPUESTO POR:</span>
-                  <span class="agent-name">${escapeHTML(moment.author)}</span>
-                </div>
-
-                <button type="button" class="dossier-vote-stamp ${isVoted ? 'voted' : ''}" data-moment-id="${moment.id}" aria-label="Aprobar y votar este expediente">
-                  <i class="fa-solid fa-heart vote-heart"></i>
-                  <span class="vote-text">VOTOS</span>
-                  <span class="vote-count">${moment.votes || 0}</span>
-                </button>
-              </div>
+              <button type="button" class="dossier-vote-stamp ${isVoted ? 'voted' : ''}" data-moment-id="${moment.id}" aria-label="Aprobar y votar este expediente">
+                <i class="fa-solid fa-heart vote-heart"></i>
+                <span class="vote-text">${isVoted ? 'APROBADO' : 'VOTOS'}</span>
+                <span class="vote-count">${moment.votes || 0}</span>
+              </button>
             </div>
           </div>
         </article>

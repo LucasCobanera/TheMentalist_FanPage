@@ -237,6 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderCharacters('all');
   initFilterTabs();
   initCharacterModal();
+  initCarouselControls();
 });
 
 function renderCharacters(filterCategory) {
@@ -247,10 +248,17 @@ function renderCharacters(filterCategory) {
     ? CHARACTERS_DATA
     : CHARACTERS_DATA.filter(c => c.category === filterCategory);
 
-  grid.innerHTML = filtered.map(c => {
+  // Actualizar contador del archivador
+  const counterText = document.getElementById('lockerCounterText');
+  if (counterText) {
+    const plural = filtered.length === 1 ? 'EXPEDIENTE ARCHIVADO' : 'EXPEDIENTES ARCHIVADOS';
+    counterText.textContent = `${filtered.length} ${plural}`;
+  }
+
+  grid.innerHTML = filtered.map((c, index) => {
     const hasImage = c.imageSrc && c.imageSrc.trim() !== '';
     return `
-    <article class="dossier-card ${c.category === 'nemesis' ? 'nemesis-card' : ''}" data-id="${c.id}">
+    <article class="dossier-card ${c.category === 'nemesis' ? 'nemesis-card' : ''}" data-id="${c.id}" style="z-index: ${index + 1};">
       <div class="dossier-folder-tab">
         <span class="folder-tab-badge">ARCHIVO CBI // DIV. HOMICIDIOS</span>
         <span class="folder-tab-id">#${c.id.toUpperCase().replace('-', '_')}</span>
@@ -282,10 +290,6 @@ function renderCharacters(filterCategory) {
 
         <p class="dossier-desc">${c.description}</p>
 
-        <div class="dossier-skills">
-          ${c.skills.map(s => `<span class="skill-tag">${s}</span>`).join('')}
-        </div>
-
         <div class="dossier-footer">
           <button type="button" class="btn-dossier-open view-dossier-btn" data-id="${c.id}">
             <i class="fa-solid fa-folder-open"></i>
@@ -305,6 +309,81 @@ function renderCharacters(filterCategory) {
       openCharacterModal(id);
     });
   });
+
+  // Reiniciar scroll del carrusel al renderizar y actualizar botones
+  const viewport = document.getElementById('lockerCarouselViewport');
+  if (viewport) {
+    viewport.scrollTo({ left: 0, behavior: 'smooth' });
+    setTimeout(updateCarouselNavState, 80);
+  }
+}
+
+let navUpdateRafId = null;
+
+function initCarouselControls() {
+  const prevBtn = document.getElementById('carouselPrevBtn');
+  const nextBtn = document.getElementById('carouselNextBtn');
+  const viewport = document.getElementById('lockerCarouselViewport');
+
+  if (!viewport || !prevBtn || !nextBtn) return;
+
+  // Distancia de deslizamiento basada en ancho visible (aproximadamente 2-3 expedientes)
+  const getScrollStep = () => {
+    return Math.max(290, Math.floor(viewport.clientWidth * 0.72));
+  };
+
+  prevBtn.addEventListener('click', () => {
+    viewport.scrollBy({ left: -getScrollStep(), behavior: 'smooth' });
+  });
+
+  nextBtn.addEventListener('click', () => {
+    viewport.scrollBy({ left: getScrollStep(), behavior: 'smooth' });
+  });
+
+  // Optimización con requestAnimationFrame para evitar layout thrashing durante el scroll
+  viewport.addEventListener('scroll', () => {
+    if (!navUpdateRafId) {
+      navUpdateRafId = requestAnimationFrame(() => {
+        updateCarouselNavState();
+        navUpdateRafId = null;
+      });
+    }
+  }, { passive: true });
+
+  window.addEventListener('resize', () => {
+    updateCarouselNavState();
+  }, { passive: true });
+
+  updateCarouselNavState();
+}
+
+function updateCarouselNavState() {
+  const prevBtn = document.getElementById('carouselPrevBtn');
+  const nextBtn = document.getElementById('carouselNextBtn');
+  const viewport = document.getElementById('lockerCarouselViewport');
+
+  if (!viewport || !prevBtn || !nextBtn) return;
+
+  const scrollLeft = viewport.scrollLeft;
+  const maxScrollLeft = viewport.scrollWidth - viewport.clientWidth;
+
+  // Deshabilitar botón izquierdo si está al inicio
+  if (scrollLeft <= 5) {
+    prevBtn.disabled = true;
+    prevBtn.classList.add('disabled');
+  } else {
+    prevBtn.disabled = false;
+    prevBtn.classList.remove('disabled');
+  }
+
+  // Deshabilitar botón derecho si no hay más elementos o llegó al final
+  if (maxScrollLeft <= 5 || scrollLeft >= maxScrollLeft - 8) {
+    nextBtn.disabled = true;
+    nextBtn.classList.add('disabled');
+  } else {
+    nextBtn.disabled = false;
+    nextBtn.classList.remove('disabled');
+  }
 }
 
 function initFilterTabs() {

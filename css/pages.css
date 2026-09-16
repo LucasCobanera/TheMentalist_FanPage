@@ -205,7 +205,6 @@
 }
 
 .highlights-container>*,
-.dossier-card,
 .suspect-card,
 .curio-grid>* {
   flex: 1 1 320px;
@@ -271,6 +270,250 @@
   box-shadow: 0 4px 14px rgba(67, 197, 142, 0.4);
 }
 
+/* ==========================================================================
+   ARCHIVADOR METÁLICO CLÁSICO DE OFICINA / FICHERO CBI (personajes.html)
+   Inspirado en el clásico archivador vertical de 4 cajones de chapa esmaltada verde salvia
+   ========================================================================== */
+.cbi-archive-locker {
+  background: linear-gradient(180deg, #64776c 0%, #56685e 22%, #495a50 70%, #3a483f 100%);
+  border: 4px solid #323e36;
+  border-radius: 4px;
+  box-shadow: 
+    0 26px 65px rgba(0, 0, 0, 0.8),
+    0 4px 14px rgba(0, 0, 0, 0.45),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.35),
+    inset 1.5px 0 0 rgba(255, 255, 255, 0.15),
+    inset -1.5px 0 0 rgba(0, 0, 0, 0.35);
+  position: relative;
+  overflow: hidden;
+  margin: 1.5rem auto 4rem;
+  max-width: 1260px;
+  width: 100%;
+}
+
+/* Frente superior de cajón con costura metálica de separación */
+.locker-header-bar {
+  background: linear-gradient(180deg, #6b7f73 0%, #586b5f 45%, #4b5c52 100%);
+  border-bottom: 3.5px solid #1f2722;
+  padding: 0.85rem 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Cerradura cilíndrica plateada clásica de archivador */
+.cabinet-top-lock {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.lock-cylinder {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ffffff 0%, #cbd5cf 45%, #7a8a81 100%);
+  border: 1.5px solid #9bb0a4;
+  box-shadow: inset 0 1px 1.5px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.5);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lock-cylinder .key-slit {
+  width: 2.5px;
+  height: 10px;
+  background: #18201b;
+  border-radius: 1px;
+  box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+}
+
+.lock-serial {
+  font-family: var(--font-typewriter);
+  font-size: 0.68rem;
+  color: #d1ddd6;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+/* Manija embutida clásica de archivador con portaetiquetas de ficha amarilla */
+.drawer-handle-fixture {
+  background: #232c26;
+  border: 2px solid #3a473e;
+  border-radius: 4px;
+  padding: 0.35rem 0.65rem 0.28rem;
+  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.8), 0 1.5px 0 rgba(255, 255, 255, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+/* Ficha rectangular amarilla icónica de los cajones del archivador */
+.drawer-yellow-card {
+  background: linear-gradient(180deg, #fcd34d 0%, #f59e0b 100%);
+  color: #1a1306;
+  font-family: var(--font-typewriter);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  padding: 0.22rem 1.1rem;
+  border: 1px solid #d97706;
+  border-radius: 2px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 1px 3px rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.drawer-yellow-card i {
+  color: #3b2505;
+  font-size: 0.82rem;
+}
+
+/* Pestaña / tirador metálico inferior de la manija embutida */
+.drawer-pull-latch {
+  width: 76px;
+  height: 9px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, #e5ede8 0%, #9cb0a5 50%, #687970 100%);
+  border: 1px solid #48564e;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+}
+
+/* Placa metálica de registro y contador de expedientes */
+.locker-status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: #2b362f;
+  padding: 0.38rem 0.95rem;
+  border-radius: 3px;
+  border: 1px solid #435449;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.6), 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.locker-archive-icon {
+  color: #f59e0b;
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+.locker-counter {
+  font-family: var(--font-typewriter);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #e5ede8;
+  letter-spacing: 0.08em;
+}
+
+/* Interior del cajón abierto: Cavidad profunda donde descansan las carpetas */
+.locker-drawer-interior {
+  background: radial-gradient(ellipse at 50% 30%, #29342e 0%, #1c241f 65%, #101512 100%);
+  box-shadow: 
+    inset 0 18px 30px rgba(0, 0, 0, 0.95),
+    inset 12px 0 24px rgba(0, 0, 0, 0.8),
+    inset -12px 0 24px rgba(0, 0, 0, 0.8);
+  padding: 0.85rem 0 0 0; /* Sin márgenes laterales ni inferiores: pegado a los extremos */
+  position: relative;
+  display: block;
+  width: 100%;
+  border-top: 2px solid #161c18;
+  border-bottom: none;
+  overflow: hidden;
+}
+
+/* Los rieles telescópicos se integran a ras de los extremos laterales del cajón */
+.telescopic-slide {
+  display: none; /* Oculto para permitir que las carpetas toquen exactamente los extremos */
+}
+
+/* Botones de navegación flotantes sobre los extremos del cajón */
+.locker-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, rgba(123, 142, 131, 0.94) 0%, rgba(82, 99, 89, 0.94) 50%, rgba(54, 68, 60, 0.94) 100%);
+  border: 2px solid rgba(163, 184, 172, 0.85);
+  color: #ffffff;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 
+    0 8px 20px rgba(0, 0, 0, 0.75),
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.5),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.7);
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  z-index: 35;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+}
+
+.locker-nav-prev {
+  left: 12px;
+}
+
+.locker-nav-next {
+  right: 12px;
+}
+
+.locker-nav-btn:hover:not(:disabled) {
+  background: linear-gradient(145deg, #8fa397 0%, #63776c 50%, #44544b 100%);
+  color: #ffffff;
+  border-color: #d2e3d9;
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 
+    0 10px 24px rgba(0, 0, 0, 0.85),
+    0 0 14px rgba(163, 184, 172, 0.5);
+}
+
+.locker-nav-btn:active:not(:disabled) {
+  transform: translateY(-50%) scale(0.96);
+}
+
+.locker-nav-btn:disabled,
+.locker-nav-btn.disabled {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+/* Ventana de visualización del carrusel: Pegada exactamente a los extremos */
+.locker-carousel-viewport {
+  width: 100%;
+  max-width: 100%; /* 100% de pared a pared del archivador */
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  padding: 0.85rem 0 0 0; /* Sin padding lateral: al ras de los extremos */
+  -webkit-overflow-scrolling: touch;
+}
+
+.locker-carousel-viewport::-webkit-scrollbar {
+  display: none;
+}
+
+/* Riel o pista de solapamiento de expedientes con aceleración GPU */
+.dossier-overlap-track {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end; /* Carpetas apoyadas al ras de la base */
+  padding: 0 20px 0 0; /* Pegada directamente al extremo izquierdo */
+  width: max-content;
+  transform: translateZ(0);
+}
+
 /* --------------------------------------------------------------------------
    PERSONAJES / DOSSIER POLICIAL (personajes.html)
    Estilo de Carpeta de Expediente Manila / Cartón con Sujetapapeles Metálico
@@ -280,20 +523,53 @@
 .dossier-card {
   background: linear-gradient(155deg, #f4e6ca 0%, #ecd7af 45%, #debfa0 75%, #cca871 100%);
   border: 1.5px solid #ab8f56;
-  border-radius: 4px 16px 4px 4px;
+  border-bottom: none; /* Sin borde inferior para dar la impresión de estar insertada en el cajón */
+  border-radius: 4px 16px 0 0; /* Esquinas inferiores rectas, pareciendo que entra al cajón */
   position: relative;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.6), inset 0 -2px 5px rgba(100, 75, 35, 0.2);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: -3px -3px 12px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  transition: transform 0.5s cubic-bezier(0.2, 0.95, 0.3, 1), box-shadow 0.5s ease, border-color 0.4s ease;
   overflow: visible;
   padding-top: 0;
+  margin-bottom: 0 !important;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
-.dossier-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.6), 0 0 18px rgba(171, 143, 86, 0.35);
+/* Tarjetas de expediente dentro del archivador en modo carrusel solapado (Más Anchas: 310px) */
+.dossier-overlap-track .dossier-card {
+  flex: 0 0 310px !important;
+  width: 310px !important;
+  min-width: 310px !important;
+  max-width: 310px !important;
+  margin-left: -65px; /* Solapamiento de expedientes más anchos */
+  margin-bottom: 0 !important;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.5s cubic-bezier(0.2, 0.95, 0.3, 1), box-shadow 0.5s ease, border-color 0.4s ease;
+  transform: translateZ(0);
+}
+
+.dossier-overlap-track .dossier-card:first-child {
+  margin-left: 0; /* Pegado directamente al extremo izquierdo del archivador */
+}
+
+/* EFECTO HOVER: Desplazamiento suave SOLO hacia la izquierda (manteniéndose dentro y detrás del expediente de la derecha) */
+.dossier-overlap-track .dossier-card:hover {
+  transform: translateX(-40px) !important;
+  box-shadow: 
+    -12px -3px 18px rgba(0, 0, 0, 0.55),
+    0 0 10px rgba(171, 143, 86, 0.25) !important;
   border-color: #8c713b;
+}
+
+/* La primera tarjeta ya se encuentra apoyada en el extremo izquierdo */
+.dossier-overlap-track .dossier-card:first-child:hover {
+  transform: translateX(0) !important;
+  box-shadow: 
+    0 -3px 16px rgba(0, 0, 0, 0.55),
+    0 0 10px rgba(171, 143, 86, 0.25) !important;
 }
 
 .dossier-card.nemesis-card {
@@ -301,9 +577,100 @@
   border-color: #945243;
 }
 
-.dossier-card.nemesis-card:hover {
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.65), 0 0 22px rgba(148, 82, 67, 0.4);
+.dossier-overlap-track .dossier-card.nemesis-card:hover {
+  transform: translateX(-45px) !important;
+  box-shadow: 
+    -14px -3px 20px rgba(0, 0, 0, 0.6),
+    0 0 12px rgba(148, 82, 67, 0.35) !important;
   border-color: #7d2618;
+}
+
+/* Borde inferior / labio frontal del cajón que enmarca la base de las carpetas */
+.locker-bottom-runner {
+  height: 28px;
+  background: linear-gradient(180deg, #445349 0%, #56675d 40%, #404f45 100%);
+  border-top: 2.5px solid #202722;
+  border-radius: 0 0 4px 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1.5rem;
+  position: relative;
+  z-index: 15;
+  box-shadow: 0 -3px 8px rgba(0, 0, 0, 0.55);
+}
+
+.cabinet-seam-line {
+  width: 100%;
+  height: 3.5px;
+  background: #161c18;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 1px;
+}
+
+/* Adaptación responsive para pantallas más pequeñas */
+@media (max-width: 1040px) {
+  .locker-carousel-viewport {
+    max-width: 720px; /* ~3 expedientes solapados */
+  }
+}
+
+@media (max-width: 768px) {
+  .telescopic-slide {
+    display: none;
+  }
+
+  .locker-drawer-interior {
+    padding: 0.75rem 0 0 0;
+  }
+
+  .locker-nav-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 0.95rem;
+  }
+
+  .locker-nav-prev {
+    left: 6px;
+  }
+
+  .locker-nav-next {
+    right: 6px;
+  }
+
+  .locker-carousel-viewport {
+    max-width: 100%;
+    padding: 0.75rem 0 0 0;
+  }
+
+  .dossier-overlap-track .dossier-card {
+    flex: 0 0 240px !important;
+    width: 240px !important;
+    min-width: 240px !important;
+    max-width: 240px !important;
+    margin-left: -42px;
+  }
+
+  .dossier-overlap-track .dossier-card:hover {
+    transform: translateX(-24px) !important;
+  }
+
+  .dossier-overlap-track .dossier-card.nemesis-card:hover {
+    transform: translateX(-24px) !important;
+  }
+
+  .locker-header-bar {
+    padding: 0.75rem 1rem;
+  }
+
+  .locker-badge-plate {
+    padding: 0.35rem 1rem;
+  }
+
+  .locker-brass-tag {
+    font-size: 0.68rem;
+  }
 }
 
 /* Pestaña superior del expediente cerrado (Folder Tab) */
@@ -361,7 +728,7 @@
   transition: transform 0.25s ease;
   overflow: visible;
   width: 100%;
-  max-width: 270px;
+  max-width: 295px;
   margin: 0 auto;
   text-align: center;
 }
@@ -385,7 +752,7 @@
 
 .dossier-photo-frame img {
   width: 100%;
-  height: 195px;
+  height: 215px;
   object-fit: cover;
   object-position: center 18%;
   display: block;
@@ -592,7 +959,7 @@
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
-  max-width: 1140px !important;
+  max-width: 1200px !important;
   width: 96vw !important;
   padding: 1.25rem 0.5rem 0.5rem !important;
   max-height: 94vh !important;
@@ -775,12 +1142,12 @@
 /* Marco Polaroid con Imagen Más Grande y Clip Anclado */
 .dossier-modal-photo-frame {
   position: relative;
-  flex: 0 0 175px;
-  width: 175px;
+  flex: 0 0 225px;
+  width: 225px;
   background: #ffffff;
-  padding: 6px 6px 12px;
+  padding: 7px 7px 14px;
   border: 1px solid rgba(0, 0, 0, 0.14);
-  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.22);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.24);
   border-radius: 2px;
   transform: rotate(-1deg);
   overflow: visible;
@@ -791,8 +1158,8 @@
   position: absolute;
   top: -14px;
   left: 14px;
-  width: 26px;
-  height: 52px;
+  width: 28px;
+  height: 56px;
   z-index: 10;
   pointer-events: none;
   filter: drop-shadow(1.5px 2px 2px rgba(0, 0, 0, 0.42));
@@ -801,7 +1168,7 @@
 
 .dossier-modal-photo {
   width: 100%;
-  height: 200px;
+  height: 265px;
   object-fit: cover;
   object-position: center 18%;
   border-radius: 1px;
@@ -2069,7 +2436,6 @@ body.red-john-page::before {
   }
 
   .highlights-container > *,
-  .dossier-card,
   .suspect-card,
   .curio-card,
   .curio-grid > *,
