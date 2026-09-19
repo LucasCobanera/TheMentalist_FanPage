@@ -39,8 +39,148 @@
       <nav aria-label="Navegación principal">
         <ul class="nav-menu" id="navMenu">
           <li><a href="index.html" class="nav-link">Inicio</a></li>
-          <li><a href="personajes.html" class="nav-link">Personajes</a></li>
-          <li><a href="temporadas.html" class="nav-link active">Temporadas</a></li>
+
+          <!-- Dropdown Personajes -->
+          <li class="nav-item-dropdown" id="navItemPersonajes">
+            <a href="personajes.html" class="nav-link nav-dropdown-trigger" id="dropdownPersonajesBtn" aria-haspopup="true" aria-expanded="false">
+              <span>Personajes</span>
+              <i class="fa-solid fa-chevron-down nav-dropdown-icon" aria-hidden="true"></i>
+            </a>
+            <div class="nav-dropdown-menu nav-dropdown-personajes" aria-labelledby="dropdownPersonajesBtn">
+              <div class="dropdown-section-label">
+                <i class="fa-solid fa-star"></i>
+                <span>Principales de la saga</span>
+              </div>
+              <div class="dropdown-featured-grid">
+                <a href="personajes.html?character=patrick-jane" class="dropdown-card-link" title="Abrir expediente de Patrick Jane">
+                  <div class="dropdown-card-avatar">
+                    <img src="img/characters/patrick_jane.jpg" alt="Patrick Jane">
+                  </div>
+                  <div class="dropdown-card-info">
+                    <span class="dropdown-card-name">Patrick Jane</span>
+                    <span class="dropdown-card-role">Consultor CBI / FBI</span>
+                  </div>
+                  <span class="dropdown-open-badge">Expediente <i class="fa-solid fa-folder-open"></i></span>
+                </a>
+                <a href="personajes.html?character=teresa-lisbon" class="dropdown-card-link" title="Abrir expediente de Teresa Lisbon">
+                  <div class="dropdown-card-avatar">
+                    <img src="img/characters/teresa_lisbon.jpg" alt="Teresa Lisbon">
+                  </div>
+                  <div class="dropdown-card-info">
+                    <span class="dropdown-card-name">Teresa Lisbon</span>
+                    <span class="dropdown-card-role">Agente Especial a Cargo</span>
+                  </div>
+                  <span class="dropdown-open-badge">Expediente <i class="fa-solid fa-folder-open"></i></span>
+                </a>
+                <a href="personajes.html?character=red-john" class="dropdown-card-link redjohn-card" title="Abrir expediente de Red John">
+                  <div class="dropdown-card-avatar">
+                    <img src="img/characters/red_john.jpg" alt="Red John">
+                  </div>
+                  <div class="dropdown-card-info">
+                    <span class="dropdown-card-name">Red John</span>
+                    <span class="dropdown-card-role">Némesis / Tyger Tyger</span>
+                  </div>
+                  <span class="dropdown-open-badge badge-crimson">Expediente <i class="fa-solid fa-skull"></i></span>
+                </a>
+              </div>
+
+              <div class="dropdown-section-label">
+                <i class="fa-solid fa-folder-tree"></i>
+                <span>Divisiones & Archivo</span>
+              </div>
+              <div class="dropdown-categories-list">
+                <a href="personajes.html?category=all" class="dropdown-cat-item">
+                  <i class="fa-solid fa-boxes-stacked"></i>
+                  <span>Todos los Expedientes</span>
+                </a>
+                <a href="personajes.html?category=cbi" class="dropdown-cat-item">
+                  <i class="fa-solid fa-shield-halved"></i>
+                  <span>División CBI (Sacramento)</span>
+                </a>
+                <a href="personajes.html?category=fbi" class="dropdown-cat-item">
+                  <i class="fa-solid fa-building-columns"></i>
+                  <span>Oficina FBI (Texas)</span>
+                </a>
+                <a href="personajes.html?category=nemesis" class="dropdown-cat-item nemesis-item">
+                  <i class="fa-solid fa-skull"></i>
+                  <span>Némesis & Antagonistas</span>
+                </a>
+              </div>
+            </div>
+          </li>
+
+          <!-- Dropdown Temporadas -->
+          <li class="nav-item-dropdown" id="navItemTemporadas">
+            <a href="temporadas.html" class="nav-link nav-dropdown-trigger active" id="dropdownTemporadasBtn" aria-haspopup="true" aria-expanded="false">
+              <span>Temporadas</span>
+              <i class="fa-solid fa-chevron-down nav-dropdown-icon" aria-hidden="true"></i>
+            </a>
+            <div class="nav-dropdown-menu nav-dropdown-temporadas" aria-labelledby="dropdownTemporadasBtn">
+              <div class="dropdown-section-label">
+                <i class="fa-solid fa-film"></i>
+                <span>Guía Oficial de Temporadas</span>
+              </div>
+              <div class="dropdown-seasons-grid">
+                <a href="temporadas.html?season=1" class="dropdown-season-card" title="Temporada 1">
+                  <span class="season-badge">T1</span>
+                  <div class="season-info-col">
+                    <span class="season-title">La llegada del Consultor</span>
+                    <span class="season-meta">2008 - 2009 &bull; 23 Eps</span>
+                  </div>
+                </a>
+                <a href="temporadas.html?season=2" class="dropdown-season-card" title="Temporada 2">
+                  <span class="season-badge">T2</span>
+                  <div class="season-info-col">
+                    <span class="season-title">La Amenaza de Bosco</span>
+                    <span class="season-meta">2009 - 2010 &bull; 23 Eps</span>
+                  </div>
+                </a>
+                <a href="temporadas.html?season=3" class="dropdown-season-card" title="Temporada 3">
+                  <span class="season-badge">T3</span>
+                  <div class="season-info-col">
+                    <span class="season-title">La Conspiración Interna</span>
+                    <span class="season-meta">2010 - 2011 &bull; 24 Eps</span>
+                  </div>
+                </a>
+                <a href="temporadas.html?season=4" class="dropdown-season-card" title="Temporada 4">
+                  <span class="season-badge">T4</span>
+                  <div class="season-info-col">
+                    <span class="season-title">El Juicio de Jane</span>
+                    <span class="season-meta">2011 - 2012 &bull; 24 Eps</span>
+                  </div>
+                </a>
+                <a href="temporadas.html?season=5" class="dropdown-season-card" title="Temporada 5">
+                  <span class="season-badge">T5</span>
+                  <div class="season-info-col">
+                    <span class="season-title">Los Siete Sospechosos</span>
+                    <span class="season-meta">2012 - 2013 &bull; 22 Eps</span>
+                  </div>
+                </a>
+                <a href="temporadas.html?season=6" class="dropdown-season-card" title="Temporada 6">
+                  <span class="season-badge">T6</span>
+                  <div class="season-info-col">
+                    <span class="season-title">La Caída de Red John</span>
+                    <span class="season-meta">2013 - 2014 &bull; 22 Eps</span>
+                  </div>
+                </a>
+                <a href="temporadas.html?season=7" class="dropdown-season-card" title="Temporada 7">
+                  <span class="season-badge">T7</span>
+                  <div class="season-info-col">
+                    <span class="season-title">El Capítulo Final</span>
+                    <span class="season-meta">2014 - 2015 &bull; 13 Eps</span>
+                  </div>
+                </a>
+                <a href="temporadas.html?season=all" class="dropdown-season-card season-card-all" title="Ver todas las temporadas">
+                  <span class="season-badge"><i class="fa-solid fa-list-check"></i></span>
+                  <div class="season-info-col">
+                    <span class="season-title">Ver Todas las Temporadas</span>
+                    <span class="season-meta">151 Episodios &bull; Galería Completa</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </li>
+
           <li><a href="red-john.html" class="nav-link nav-red-john">Misterio Red John</a></li>
           <li><a href="curiosidades.html" class="nav-link">Curiosidades</a></li>
           <li><a href="juego.html" class="nav-link nav-game-link">🧠 Juego Mental</a></li>
@@ -85,6 +225,139 @@
   </div>
 
   <main class="container" style="padding: 2.5rem 1.5rem 6rem;">
+
+    <!-- CRONOLOGÍA NARRATIVA INTERACTIVA: EL CAMINO DE LA VENGANZA (IDEA 3) -->
+    <section class="narrative-timeline-section" id="caminoVenganza">
+      <div class="timeline-header-block">
+        <div class="timeline-badge">
+          <i class="fa-solid fa-route"></i> CRONOLOGÍA NARRATIVA CBI
+        </div>
+        <h2 class="timeline-main-title">El Camino de la <span class="text-gold">Venganza</span> (2008 - 2015)</h2>
+        <p class="timeline-subtitle">
+          Sigue el arco cronológico de los 7 hitos decisivos en la cruzada de Patrick Jane contra Red John. Haz clic en cualquier hito para saltar al expediente completo de esa temporada.
+        </p>
+      </div>
+
+      <!-- Barra de Pistas Cronológica con Scroll Horizontal Fluido -->
+      <div class="timeline-track-wrap">
+        <div class="timeline-track-line"></div>
+        <div class="timeline-milestones-row" id="timelineMilestonesRow">
+
+          <!-- Hito T1 -->
+          <div class="timeline-milestone-node active" data-season="1" tabindex="0" role="button" aria-label="Ver Temporada 1: El Nacimiento del Consultor">
+            <div class="milestone-marker">
+              <span class="milestone-season-tag">T1</span>
+              <div class="milestone-dot"></div>
+            </div>
+            <div class="milestone-card">
+              <span class="milestone-year">2008 - 2009</span>
+              <h4 class="milestone-title">El Nacimiento del Consultor</h4>
+              <p class="milestone-desc">Patrick Jane renuncia a su farsa psíquica y se une al CBI tras la tragedia de su familia.</p>
+              <div class="milestone-footer">
+                <span class="milestone-action">Explorar T1 <i class="fa-solid fa-arrow-right"></i></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hito T2 -->
+          <div class="timeline-milestone-node" data-season="2" tabindex="0" role="button" aria-label="Ver Temporada 2: His Red Right Hand">
+            <div class="milestone-marker">
+              <span class="milestone-season-tag">T2</span>
+              <div class="milestone-dot"></div>
+            </div>
+            <div class="milestone-card">
+              <span class="milestone-year">2009 - 2010</span>
+              <h4 class="milestone-title">His Red Right Hand</h4>
+              <p class="milestone-desc">Masacre del equipo de Bosco en el CBI y primer susurro en las sombras: <em>"Tyger, Tyger"</em>.</p>
+              <div class="milestone-footer">
+                <span class="milestone-action">Explorar T2 <i class="fa-solid fa-arrow-right"></i></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hito T3 -->
+          <div class="timeline-milestone-node" data-season="3" tabindex="0" role="button" aria-label="Ver Temporada 3: La Trampa del Centro Comercial">
+            <div class="milestone-marker">
+              <span class="milestone-season-tag">T3</span>
+              <div class="milestone-dot"></div>
+            </div>
+            <div class="milestone-card">
+              <span class="milestone-year">2010 - 2011</span>
+              <h4 class="milestone-title">La Trampa del Centro Comercial</h4>
+              <p class="milestone-desc">Gambito matemático para cazar al topo en el CBI y disparo a quemarropa a Timothy Carter.</p>
+              <div class="milestone-footer">
+                <span class="milestone-action">Explorar T3 <i class="fa-solid fa-arrow-right"></i></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hito T4 -->
+          <div class="timeline-milestone-node" data-season="4" tabindex="0" role="button" aria-label="Ver Temporada 4: La Caída Simulada en Las Vegas">
+            <div class="milestone-marker">
+              <span class="milestone-season-tag">T4</span>
+              <div class="milestone-dot"></div>
+            </div>
+            <div class="milestone-card">
+              <span class="milestone-year">2011 - 2012</span>
+              <h4 class="milestone-title">La Caída Simulada en Las Vegas</h4>
+              <p class="milestone-desc">Jane finge su derrumbe moral en los casinos para engañar a Red John y atrapar a Lorelei Martins.</p>
+              <div class="milestone-footer">
+                <span class="milestone-action">Explorar T4 <i class="fa-solid fa-arrow-right"></i></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hito T5 -->
+          <div class="timeline-milestone-node" data-season="5" tabindex="0" role="button" aria-label="Ver Temporada 5: La Lista de los 7 Sospechosos">
+            <div class="milestone-marker">
+              <span class="milestone-season-tag">T5</span>
+              <div class="milestone-dot"></div>
+            </div>
+            <div class="milestone-card">
+              <span class="milestone-year">2012 - 2013</span>
+              <h4 class="milestone-title">La Lista de los Siete</h4>
+              <p class="milestone-desc">Jane reduce la lista a 7 sospechosos; Red John envía un video prediciendo exactamente los mismos nombres.</p>
+              <div class="milestone-footer">
+                <span class="milestone-action">Explorar T5 <i class="fa-solid fa-arrow-right"></i></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hito T6 -->
+          <div class="timeline-milestone-node" data-season="6" tabindex="0" role="button" aria-label="Ver Temporada 6: La Caída de Red John">
+            <div class="milestone-marker">
+              <span class="milestone-season-tag">T6</span>
+              <div class="milestone-dot milestone-dot-crimson"></div>
+            </div>
+            <div class="milestone-card milestone-card-crimson">
+              <span class="milestone-year">2013 - 2014</span>
+              <h4 class="milestone-title">La Caída de Red John</h4>
+              <p class="milestone-desc">Explosión de Malibú, caída de la Asociación Blake y estrangulamiento final del sheriff McAllister.</p>
+              <div class="milestone-footer">
+                <span class="milestone-action">Explorar T6 <i class="fa-solid fa-arrow-right"></i></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hito T7 -->
+          <div class="timeline-milestone-node" data-season="7" tabindex="0" role="button" aria-label="Ver Temporada 7: Redención, FBI y Boda">
+            <div class="milestone-marker">
+              <span class="milestone-season-tag">T7</span>
+              <div class="milestone-dot milestone-dot-gold"></div>
+            </div>
+            <div class="milestone-card">
+              <span class="milestone-year">2014 - 2015</span>
+              <h4 class="milestone-title">Redención, FBI y Boda</h4>
+              <p class="milestone-desc">Jane encuentra la paz junto a Teresa Lisbon en el FBI de Austin, culminando en su boda y nueva vida.</p>
+              <div class="milestone-footer">
+                <span class="milestone-action">Explorar T7 <i class="fa-solid fa-arrow-right"></i></span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
 
     <!-- CONTENEDOR DE LAS 7 TEMPORADAS -->
     <div id="seasonsContainer">

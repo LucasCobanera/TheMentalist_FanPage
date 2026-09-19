@@ -129,6 +129,48 @@
         });
       } catch (e) {}
     }
+
+    /**
+     * Reproduce un pulso binaural / drone meditativo de baja frecuencia (65 Hz)
+     * simulando el estado mental de concentración profunda de Patrick Jane.
+     */
+    playFocusPulse() {
+      if (!this.ctx) return;
+      try {
+        this.stopFocusPulse();
+        const now = this.ctx.currentTime;
+        this.focusOsc = this.ctx.createOscillator();
+        this.focusGain = this.ctx.createGain();
+
+        this.focusOsc.type = 'sine';
+        this.focusOsc.frequency.setValueAtTime(65, now);
+
+        // Entrada suave para una inmersión natural
+        this.focusGain.gain.setValueAtTime(0.001, now);
+        this.focusGain.gain.exponentialRampToValueAtTime(0.04, now + 1.2);
+
+        this.focusOsc.connect(this.focusGain);
+        this.focusGain.connect(this.ctx.destination);
+        this.focusOsc.start(now);
+      } catch (e) {}
+    }
+
+    /**
+     * Detiene con desvanecimiento suave el pulso de concentración mental.
+     */
+    stopFocusPulse() {
+      if (!this.ctx || !this.focusOsc) return;
+      try {
+        const now = this.ctx.currentTime;
+        if (this.focusGain) {
+          this.focusGain.gain.setValueAtTime(this.focusGain.gain.value, now);
+          this.focusGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.5);
+        }
+        this.focusOsc.stop(now + 0.55);
+        this.focusOsc = null;
+        this.focusGain = null;
+      } catch (e) {}
+    }
   }
 
   /**
@@ -416,6 +458,10 @@
       this.finalAccuracyEl = document.getElementById('finalAccuracy');
       this.resultsQuoteEl = document.getElementById('resultsQuote');
 
+      // Modo Concentración Cinemático (Idea 4)
+      this.gameContainer = document.getElementById('gameContainer');
+      this.focusOverlay = document.getElementById('mentalFocusOverlay');
+
       this.bindEvents();
     }
 
@@ -513,8 +559,11 @@
       // Renderizar objetos de la habitación
       this.renderMemoryGrid(room.items);
 
-      // Iniciar cuenta regresiva de memorización
+      // Iniciar cuenta regresiva de memorización y activar modo concentración (Idea 4)
       this.showScreen(this.screenMemorize);
+      if (this.gameContainer) this.gameContainer.classList.add('focus-mode-active');
+      if (this.focusOverlay) this.focusOverlay.classList.add('active');
+      this.sound.playFocusPulse();
       this.startMemorizationTimer(room.memorizeTime);
     }
 
@@ -576,6 +625,11 @@
      */
     finishMemorizationPhase() {
       clearInterval(this.timerInterval);
+      // Desactivar modo concentración cinemático
+      if (this.gameContainer) this.gameContainer.classList.remove('focus-mode-active');
+      if (this.focusOverlay) this.focusOverlay.classList.remove('active');
+      this.sound.stopFocusPulse();
+
       this.currentQuestionIndex = 0;
       this.showScreen(this.screenChallenge);
       this.loadQuestion();
@@ -694,6 +748,10 @@
      * asigna un rango con cita representativa de la serie y reproduce la fanfarria de victoria.
      */
     showFinalResults() {
+      if (this.gameContainer) this.gameContainer.classList.remove('focus-mode-active');
+      if (this.focusOverlay) this.focusOverlay.classList.remove('active');
+      this.sound.stopFocusPulse();
+
       this.saveHighScore();
       this.showScreen(this.screenResults);
       this.sound.playVictory();

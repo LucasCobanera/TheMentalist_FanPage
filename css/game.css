@@ -745,6 +745,119 @@
 }
 
 /* ==========================================================================
+   MODO CONCENTRACIÓN: PALACIO DE LA MEMORIA (IDEA 4)
+   Efecto cinemático de visión túnel, viñeta profunda y aura mental de Patrick Jane.
+   ========================================================================== */
+
+/* Overlay de Viñeta Inmersiva de Pantalla Completa */
+.mental-focus-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 90;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 28%, rgba(3, 5, 8, 0.75) 65%, rgba(1, 2, 4, 0.96) 100%);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.65s;
+}
+
+.mental-focus-overlay.active {
+  opacity: 1;
+  visibility: visible;
+  animation: mentalTunnelBreathe 4s ease-in-out infinite;
+}
+
+@keyframes mentalTunnelBreathe {
+  0%, 100% {
+    opacity: 0.88;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.015);
+  }
+}
+
+/* Transformaciones del Contenedor del Juego durante el Modo Focus */
+.game-container.focus-mode-active {
+  box-shadow:
+    0 0 60px rgba(46, 116, 80, 0.45),
+    0 25px 70px rgba(0, 0, 0, 0.95) !important;
+  border-color: rgba(67, 197, 142, 0.65) !important;
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Banner de Concentración Mental (Palacio de la Memoria) */
+.mental-focus-banner {
+  display: flex;
+  align-items: center;
+  gap: 1.15rem;
+  background: linear-gradient(135deg, rgba(16, 32, 24, 0.92) 0%, rgba(8, 16, 12, 0.96) 100%);
+  border: 1px solid rgba(67, 197, 142, 0.4);
+  border-left: 4px solid var(--green-bright);
+  border-radius: 8px;
+  padding: 0.85rem 1.25rem;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 20px rgba(46, 116, 80, 0.2);
+  animation: focusBannerGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes focusBannerGlow {
+  0% {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 15px rgba(46, 116, 80, 0.15);
+  }
+  100% {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 28px rgba(67, 197, 142, 0.35);
+  }
+}
+
+.focus-pulse-icon {
+  font-size: 1.9rem;
+  animation: focusIconPulse 2s ease-in-out infinite;
+  filter: drop-shadow(0 0 8px rgba(67, 197, 142, 0.6));
+  flex-shrink: 0;
+}
+
+@keyframes focusIconPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+}
+
+.focus-text-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  text-align: left;
+}
+
+.focus-mode-tag {
+  font-family: var(--font-typewriter, monospace);
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--green-bright);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.focus-mantra {
+  font-family: var(--font-display, serif);
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--cream-pure);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* ==========================================================================
    OPTIMIZACIONES MÓVILES DEL JUEGO MENTAL
    ========================================================================== */
 @media (max-width: 768px) {

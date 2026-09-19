@@ -39,8 +39,148 @@
       <nav aria-label="Navegación principal">
         <ul class="nav-menu" id="navMenu">
           <li><a href="index.html" class="nav-link">Inicio</a></li>
-          <li><a href="personajes.html" class="nav-link active">Personajes</a></li>
-          <li><a href="temporadas.html" class="nav-link">Temporadas</a></li>
+
+          <!-- Dropdown Personajes -->
+          <li class="nav-item-dropdown" id="navItemPersonajes">
+            <a href="personajes.html" class="nav-link nav-dropdown-trigger active" id="dropdownPersonajesBtn" aria-haspopup="true" aria-expanded="false">
+              <span>Personajes</span>
+              <i class="fa-solid fa-chevron-down nav-dropdown-icon" aria-hidden="true"></i>
+            </a>
+            <div class="nav-dropdown-menu nav-dropdown-personajes" aria-labelledby="dropdownPersonajesBtn">
+              <div class="dropdown-section-label">
+                <i class="fa-solid fa-star"></i>
+                <span>Principales de la saga</span>
+              </div>
+              <div class="dropdown-featured-grid">
+                <a href="personajes.html?character=patrick-jane" class="dropdown-card-link" title="Abrir expediente de Patrick Jane">
+                  <div class="dropdown-card-avatar">
+                    <img src="img/characters/patrick_jane.jpg" alt="Patrick Jane">
+                  </div>
+                  <div class="dropdown-card-info">
+                    <span class="dropdown-card-name">Patrick Jane</span>
+                    <span class="dropdown-card-role">Consultor CBI / FBI</span>
+                  </div>
+                  <span class="dropdown-open-badge">Expediente <i class="fa-solid fa-folder-open"></i></span>
+                </a>
+                <a href="personajes.html?character=teresa-lisbon" class="dropdown-card-link" title="Abrir expediente de Teresa Lisbon">
+                  <div class="dropdown-card-avatar">
+                    <img src="img/characters/teresa_lisbon.jpg" alt="Teresa Lisbon">
+                  </div>
+                  <div class="dropdown-card-info">
+                    <span class="dropdown-card-name">Teresa Lisbon</span>
+                    <span class="dropdown-card-role">Agente Especial a Cargo</span>
+                  </div>
+                  <span class="dropdown-open-badge">Expediente <i class="fa-solid fa-folder-open"></i></span>
+                </a>
+                <a href="personajes.html?character=red-john" class="dropdown-card-link redjohn-card" title="Abrir expediente de Red John">
+                  <div class="dropdown-card-avatar">
+                    <img src="img/characters/red_john.jpg" alt="Red John">
+                  </div>
+                  <div class="dropdown-card-info">
+                    <span class="dropdown-card-name">Red John</span>
+                    <span class="dropdown-card-role">Némesis / Tyger Tyger</span>
+                  </div>
+                  <span class="dropdown-open-badge badge-crimson">Expediente <i class="fa-solid fa-skull"></i></span>
+                </a>
+              </div>
+
+              <div class="dropdown-section-label">
+                <i class="fa-solid fa-folder-tree"></i>
+                <span>Divisiones & Archivo</span>
+              </div>
+              <div class="dropdown-categories-list">
+                <a href="personajes.html?category=all" class="dropdown-cat-item">
+                  <i class="fa-solid fa-boxes-stacked"></i>
+                  <span>Todos los Expedientes</span>
+                </a>
+                <a href="personajes.html?category=cbi" class="dropdown-cat-item">
+                  <i class="fa-solid fa-shield-halved"></i>
+                  <span>División CBI (Sacramento)</span>
+                </a>
+                <a href="personajes.html?category=fbi" class="dropdown-cat-item">
+                  <i class="fa-solid fa-building-columns"></i>
+                  <span>Oficina FBI (Texas)</span>
+                </a>
+                <a href="personajes.html?category=nemesis" class="dropdown-cat-item nemesis-item">
+                  <i class="fa-solid fa-skull"></i>
+                  <span>Némesis & Antagonistas</span>
+                </a>
+              </div>
+            </div>
+          </li>
+
+          <!-- Dropdown Temporadas -->
+          <li class="nav-item-dropdown" id="navItemTemporadas">
+            <a href="temporadas.html" class="nav-link nav-dropdown-trigger" id="dropdownTemporadasBtn" aria-haspopup="true" aria-expanded="false">
+              <span>Temporadas</span>
+              <i class="fa-solid fa-chevron-down nav-dropdown-icon" aria-hidden="true"></i>
+            </a>
+            <div class="nav-dropdown-menu nav-dropdown-temporadas" aria-labelledby="dropdownTemporadasBtn">
+              <div class="dropdown-section-label">
+                <i class="fa-solid fa-film"></i>
+                <span>Guía Oficial de Temporadas</span>
+              </div>
+              <div class="dropdown-seasons-grid">
+                <a href="temporadas.html?season=1" class="dropdown-season-card" title="Temporada 1">
+                  <span class="season-badge">T1</span>
+                  <div class="season-info-col">
+                    <span class="season-title">La llegada del Consultor</span>
+                    <span class="season-meta">2008 - 2009 &bull; 23 Eps</span>
+                  </div>
+                </a>
+                <a href="temporadas.html?season=2" class="dropdown-season-card" title="Temporada 2">
+                  <span class="season-badge">T2</span>
+                  <div class="season-info-col">
+                    <span class="season-title">La Amenaza de Bosco</span>
+                    <span class="season-meta">2009 - 2010 &bull; 23 Eps</span>
+                  </div>
+                </a>
+                <a href="temporadas.html?season=3" class="dropdown-season-card" title="Temporada 3">
+                  <span class="season-badge">T3</span>
+                  <div class="season-info-col">
+                    <span class="season-title">La Conspiración Interna</span>
+                    <span class="season-meta">2010 - 2011 &bull; 24 Eps</span>
+                  </div>
+                </a>
+                <a href="temporadas.html?season=4" class="dropdown-season-card" title="Temporada 4">
+                  <span class="season-badge">T4</span>
+                  <div class="season-info-col">
+                    <span class="season-title">El Juicio de Jane</span>
+                    <span class="season-meta">2011 - 2012 &bull; 24 Eps</span>
+                  </div>
+                </a>
+                <a href="temporadas.html?season=5" class="dropdown-season-card" title="Temporada 5">
+                  <span class="season-badge">T5</span>
+                  <div class="season-info-col">
+                    <span class="season-title">Los Siete Sospechosos</span>
+                    <span class="season-meta">2012 - 2013 &bull; 22 Eps</span>
+                  </div>
+                </a>
+                <a href="temporadas.html?season=6" class="dropdown-season-card" title="Temporada 6">
+                  <span class="season-badge">T6</span>
+                  <div class="season-info-col">
+                    <span class="season-title">La Caída de Red John</span>
+                    <span class="season-meta">2013 - 2014 &bull; 22 Eps</span>
+                  </div>
+                </a>
+                <a href="temporadas.html?season=7" class="dropdown-season-card" title="Temporada 7">
+                  <span class="season-badge">T7</span>
+                  <div class="season-info-col">
+                    <span class="season-title">El Capítulo Final</span>
+                    <span class="season-meta">2014 - 2015 &bull; 13 Eps</span>
+                  </div>
+                </a>
+                <a href="temporadas.html?season=all" class="dropdown-season-card season-card-all" title="Ver todas las temporadas">
+                  <span class="season-badge"><i class="fa-solid fa-list-check"></i></span>
+                  <div class="season-info-col">
+                    <span class="season-title">Ver Todas las Temporadas</span>
+                    <span class="season-meta">151 Episodios &bull; Galería Completa</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </li>
+
           <li><a href="red-john.html" class="nav-link nav-red-john">Misterio Red John</a></li>
           <li><a href="curiosidades.html" class="nav-link">Curiosidades</a></li>
           <li><a href="juego.html" class="nav-link nav-game-link">🧠 Juego Mental</a></li>

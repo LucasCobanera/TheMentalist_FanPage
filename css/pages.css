@@ -286,14 +286,14 @@
   background: linear-gradient(180deg, #64776c 0%, #56685e 22%, #495a50 70%, #3a483f 100%);
   border: 4px solid #323e36;
   border-radius: 4px;
-  box-shadow: 
+  box-shadow:
     0 26px 65px rgba(0, 0, 0, 0.8),
     0 4px 14px rgba(0, 0, 0, 0.45),
     inset 0 1.5px 0 rgba(255, 255, 255, 0.35),
     inset 1.5px 0 0 rgba(255, 255, 255, 0.15),
     inset -1.5px 0 0 rgba(0, 0, 0, 0.35);
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   margin: 1.5rem auto 4rem;
   max-width: 1260px;
   width: 100%;
@@ -424,22 +424,25 @@
 /* Interior del cajón abierto: Cavidad profunda donde descansan las carpetas */
 .locker-drawer-interior {
   background: radial-gradient(ellipse at 50% 30%, #29342e 0%, #1c241f 65%, #101512 100%);
-  box-shadow: 
+  box-shadow:
     inset 0 18px 30px rgba(0, 0, 0, 0.95),
     inset 12px 0 24px rgba(0, 0, 0, 0.8),
     inset -12px 0 24px rgba(0, 0, 0, 0.8);
-  padding: 0.85rem 0 0 0; /* Sin márgenes laterales ni inferiores: pegado a los extremos */
+  padding: 0;
+  /* Sin restricciones de padding */
   position: relative;
   display: block;
   width: 100%;
   border-top: 2px solid #161c18;
   border-bottom: none;
-  overflow: hidden;
+  overflow: visible;
+  /* Permite que las carpetas sobresalgan del archivador al extraerse */
 }
 
 /* Los rieles telescópicos se integran a ras de los extremos laterales del cajón */
 .telescopic-slide {
-  display: none; /* Oculto para permitir que las carpetas toquen exactamente los extremos */
+  display: none;
+  /* Oculto para permitir que las carpetas toquen exactamente los extremos */
 }
 
 /* Botones de navegación flotantes sobre los extremos del cajón */
@@ -458,7 +461,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 
+  box-shadow:
     0 8px 20px rgba(0, 0, 0, 0.75),
     inset 0 1.5px 2px rgba(255, 255, 255, 0.5),
     inset 0 -2px 4px rgba(0, 0, 0, 0.7);
@@ -481,7 +484,7 @@
   color: #ffffff;
   border-color: #d2e3d9;
   transform: translateY(-50%) scale(1.1);
-  box-shadow: 
+  box-shadow:
     0 10px 24px rgba(0, 0, 0, 0.85),
     0 0 14px rgba(163, 184, 172, 0.5);
 }
@@ -497,14 +500,16 @@
   visibility: hidden;
 }
 
-/* Ventana de visualización del carrusel: Pegada exactamente a los extremos */
+/* Ventana de visualización del carrusel: Integrada limpiamente dentro del archivador */
 .locker-carousel-viewport {
   width: 100%;
-  max-width: 100%; /* 100% de pared a pared del archivador */
+  max-width: 100%;
   overflow-x: auto;
-  overflow-y: hidden;
+  overflow-y: visible;
   scrollbar-width: none;
-  padding: 0.85rem 0 0 0; /* Sin padding lateral: al ras de los extremos */
+  padding: 2.5rem 30px 0.85rem 30px;
+  /* Margen vertical para que la carpeta elevada sobresalga del labio del cajón */
+  margin-top: -1rem;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -516,8 +521,10 @@
 .dossier-overlap-track {
   display: flex;
   flex-direction: row;
-  align-items: flex-end; /* Carpetas apoyadas al ras de la base */
-  padding: 0 20px 0 0; /* Pegada directamente al extremo izquierdo */
+  align-items: flex-end;
+  /* Carpetas apoyadas al ras de la base */
+  padding: 0 35px 0 35px;
+  /* Margen interno simétrico para que ninguna tarjeta toque el borde de corte */
   width: max-content;
   transform: translateZ(0);
 }
@@ -529,20 +536,23 @@
    -------------------------------------------------------------------------- */
 
 .dossier-card {
-  background: linear-gradient(155deg, #f4e6ca 0%, #ecd7af 45%, #debfa0 75%, #cca871 100%);
-  border: 1.5px solid #ab8f56;
-  border-bottom: none; /* Sin borde inferior para dar la impresión de estar insertada en el cajón */
-  border-radius: 4px 16px 0 0; /* Esquinas inferiores rectas, pareciendo que entra al cajón */
+  background: linear-gradient(155deg, #2b2f3a 0%, #232731 45%, #1b1e26 80%, #15171d 100%);
+  border: 1.5px solid #4a5160;
+  border-bottom: none;
+  /* Sin borde inferior para dar la impresión de estar insertada en el cajón */
+  border-radius: 4px 16px 0 0;
+  /* Esquinas inferiores rectas, pareciendo que entra al cajón */
   position: relative;
   display: flex;
   flex-direction: column;
-  box-shadow: -3px -3px 12px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.6);
-  transition: transform 0.5s cubic-bezier(0.2, 0.95, 0.3, 1), box-shadow 0.5s ease, border-color 0.4s ease;
+  box-shadow: -3px -3px 14px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  transition: transform 0.35s cubic-bezier(0.2, 0.95, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
   overflow: visible;
   padding-top: 0;
   margin-bottom: 0 !important;
   transform: translateZ(0);
   backface-visibility: hidden;
+  will-change: transform;
 }
 
 /* Tarjetas de expediente dentro del archivador en modo carrusel solapado (Más Anchas: 310px) */
@@ -551,46 +561,60 @@
   width: 310px !important;
   min-width: 310px !important;
   max-width: 310px !important;
-  margin-left: -65px; /* Solapamiento de expedientes más anchos */
+  margin-left: -65px;
+  /* Solapamiento de expedientes más anchos */
   margin-bottom: 0 !important;
   cursor: pointer;
   position: relative;
-  transition: transform 0.5s cubic-bezier(0.2, 0.95, 0.3, 1), box-shadow 0.5s ease, border-color 0.4s ease;
+  transition: transform 0.35s cubic-bezier(0.2, 0.95, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
   transform: translateZ(0);
 }
 
 .dossier-overlap-track .dossier-card:first-child {
-  margin-left: 0; /* Pegado directamente al extremo izquierdo del archivador */
+  margin-left: 0;
+  /* Primer expediente en el extremo izquierdo */
 }
 
-/* EFECTO HOVER: Desplazamiento suave SOLO hacia la izquierda (manteniéndose dentro y detrás del expediente de la derecha) */
+/* EFECTO HOVER: Elevación vertical fluida (extrayendo el expediente hacia arriba del cajón) */
 .dossier-overlap-track .dossier-card:hover {
-  transform: translateX(-40px) !important;
-  box-shadow: 
-    -12px -3px 18px rgba(0, 0, 0, 0.55),
-    0 0 10px rgba(171, 143, 86, 0.25) !important;
-  border-color: #8c713b;
+  transform: translateY(-24px) !important;
+  box-shadow:
+    -6px 16px 30px rgba(0, 0, 0, 0.88),
+    0 0 16px rgba(85, 194, 153, 0.3) !important;
+  border-color: #8fa0b5;
+  z-index: 50;
 }
 
-/* La primera tarjeta ya se encuentra apoyada en el extremo izquierdo */
 .dossier-overlap-track .dossier-card:first-child:hover {
-  transform: translateX(0) !important;
-  box-shadow: 
-    0 -3px 16px rgba(0, 0, 0, 0.55),
-    0 0 10px rgba(171, 143, 86, 0.25) !important;
+  transform: translateY(-24px) !important;
+  box-shadow:
+    -6px 16px 30px rgba(0, 0, 0, 0.88),
+    0 0 18px rgba(85, 194, 153, 0.35) !important;
+  border-color: #8fa0b5;
+  z-index: 50;
 }
 
 .dossier-card.nemesis-card {
-  background: linear-gradient(155deg, #ebd2c5 0%, #deb8a5 45%, #cfa38d 75%, #b9866e 100%);
-  border-color: #945243;
+  background: linear-gradient(155deg, #2d1b20 0%, #241418 45%, #1c0e12 80%, #13070a 100%);
+  border-color: #682933;
 }
 
 .dossier-overlap-track .dossier-card.nemesis-card:hover {
-  transform: translateX(-45px) !important;
-  box-shadow: 
-    -14px -3px 20px rgba(0, 0, 0, 0.6),
-    0 0 12px rgba(148, 82, 67, 0.35) !important;
-  border-color: #7d2618;
+  transform: translateY(-24px) !important;
+  box-shadow:
+    -6px 16px 32px rgba(0, 0, 0, 0.92),
+    0 0 18px rgba(255, 71, 87, 0.35) !important;
+  border-color: #d1495b;
+  z-index: 50;
+}
+
+.dossier-overlap-track .dossier-card.nemesis-card:first-child:hover {
+  transform: translateY(-24px) !important;
+  box-shadow:
+    -6px 16px 32px rgba(0, 0, 0, 0.92),
+    0 0 20px rgba(255, 71, 87, 0.4) !important;
+  border-color: #d1495b;
+  z-index: 50;
 }
 
 /* Borde inferior / labio frontal del cajón que enmarca la base de las carpetas */
@@ -620,7 +644,8 @@
 /* Adaptación responsive para pantallas más pequeñas */
 @media (max-width: 1040px) {
   .locker-carousel-viewport {
-    max-width: 720px; /* ~3 expedientes solapados */
+    max-width: 720px;
+    /* ~3 expedientes solapados */
   }
 }
 
@@ -649,7 +674,8 @@
 
   .locker-carousel-viewport {
     max-width: 100%;
-    padding: 0.75rem 0 0 0;
+    padding: 1.8rem 0 0.5rem 0;
+    margin-top: -1rem;
   }
 
   .dossier-overlap-track .dossier-card {
@@ -683,8 +709,8 @@
 
 /* Pestaña superior del expediente cerrado (Folder Tab) */
 .dossier-card .dossier-folder-tab {
-  background: #dbbe83;
-  border-bottom: 1.5px solid #ab8f56;
+  background: #353b47;
+  border-bottom: 1.5px solid #4a5160;
   padding: 0.35rem 0.85rem;
   border-radius: 2px 14px 0 0;
   display: flex;
@@ -692,7 +718,7 @@
   justify-content: space-between;
   font-family: var(--font-typewriter);
   font-size: 0.65rem;
-  color: #3f2f18;
+  color: #e2e8f0;
   font-weight: 700;
   letter-spacing: 0.08em;
   width: 100%;
@@ -700,9 +726,9 @@
 }
 
 .dossier-card.nemesis-card .dossier-folder-tab {
-  background: #cd9e89;
-  border-bottom-color: #945243;
-  color: #451b14;
+  background: #3a1e24;
+  border-bottom-color: #682933;
+  color: #fad4dc;
 }
 
 .folder-tab-badge {
@@ -742,7 +768,8 @@
 }
 
 .dossier-card:hover .dossier-photo-frame {
-  transform: rotate(0deg) scale(1.01);
+  transform: translateY(-6px) scale(1.02) rotate(0deg);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
 }
 
 /* Clip Metálico anclado exactamente al marco de la foto */
@@ -848,16 +875,17 @@
 .dossier-name {
   font-size: 1.28rem;
   font-family: var(--font-heading);
-  color: #1a1208;
+  color: #f8fafc;
   margin-bottom: 0.15rem;
   font-weight: 800;
   letter-spacing: -0.01em;
   text-align: left;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
 }
 
 .dossier-role {
   font-size: 0.76rem;
-  color: #1b4934;
+  color: #4ade80;
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -867,24 +895,24 @@
 }
 
 .nemesis-card .dossier-role {
-  color: #8c101c;
+  color: #ff6b81;
 }
 
 .dossier-actor {
   font-size: 0.74rem;
-  color: #53402b;
+  color: #9aa4b2;
   font-family: var(--font-typewriter);
   margin-bottom: 0.55rem;
   text-align: left;
 }
 
 .dossier-actor strong {
-  color: #22170b;
+  color: #e2e8f0;
 }
 
 .dossier-desc {
   font-size: 0.82rem;
-  color: #2a1f14;
+  color: #cbd5e1;
   line-height: 1.45;
   margin-bottom: 0.65rem;
   text-align: left;
@@ -898,20 +926,20 @@
 }
 
 .dossier-skills .skill-tag {
-  background: rgba(255, 255, 255, 0.82);
-  border: 1px solid #b89b65;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   font-size: 0.68rem;
   padding: 0.16rem 0.48rem;
   border-radius: 2px;
-  color: #261b0f;
+  color: #e2e8f0;
   font-family: var(--font-typewriter);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .dossier-footer {
   margin-top: auto;
   padding-top: 0.65rem;
-  border-top: 1px dashed #b89b65;
+  border-top: 1px dashed rgba(255, 255, 255, 0.15);
   display: flex;
   align-items: center;
 }
@@ -996,20 +1024,20 @@
 
 .dossier-open-folder {
   position: relative;
-  background: linear-gradient(155deg, #eedcb5 0%, #dfc28b 45%, #c8a463 80%, #b8924e 100%);
-  border: 3px solid #8a6c33;
+  background: linear-gradient(155deg, #262a34 0%, #1f222a 45%, #181a21 80%, #111317 100%);
+  border: 2px solid #4a5160;
   border-radius: 8px;
   padding: 1.4rem 1.5rem 1.3rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
-  box-shadow: 0 22px 55px rgba(0, 0, 0, 0.85), inset 0 2px 4px rgba(255, 255, 255, 0.45), inset 0 -2px 8px rgba(70, 50, 20, 0.3);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.92), inset 0 1px 2px rgba(255, 255, 255, 0.2);
   margin-top: 0.6rem;
 }
 
 .dossier-open-folder.nemesis-folder {
-  background: linear-gradient(155deg, #e8d0be 0%, #d4a991 45%, #b97f62 80%, #9e6446 100%);
-  border-color: #7d3326;
+  background: linear-gradient(155deg, #2a191e 0%, #201216 45%, #190c10 80%, #110609 100%);
+  border-color: #6d2732;
 }
 
 /* Pestaña superior del folder abierto */
@@ -1017,8 +1045,8 @@
   position: absolute;
   top: -24px;
   left: 20px;
-  background: #dfc28b;
-  border: 2px solid #8a6c33;
+  background: #333844;
+  border: 2px solid #4a5160;
   border-bottom: none;
   border-radius: 5px 14px 0 0;
   padding: 0.28rem 1.15rem;
@@ -1027,16 +1055,16 @@
   gap: 1.25rem;
   font-family: var(--font-typewriter);
   font-size: 0.68rem;
-  color: #3a2912;
+  color: #e2e8f0;
   font-weight: 700;
   letter-spacing: 0.06em;
   z-index: 5;
 }
 
 .nemesis-folder .folder-spread-tab {
-  background: #d4a991;
-  border-color: #7d3326;
-  color: #3b160e;
+  background: #381d22;
+  border-color: #6d2732;
+  color: #fad4dc;
 }
 
 .folder-ref-num {
@@ -1052,27 +1080,27 @@
   left: 50%;
   width: 26px;
   transform: translateX(-50%);
-  background: linear-gradient(90deg, 
-    rgba(0, 0, 0, 0.06) 0%, 
-    rgba(0, 0, 0, 0.25) 42%, 
-    rgba(0, 0, 0, 0.42) 50%, 
-    rgba(0, 0, 0, 0.25) 58%, 
-    rgba(0, 0, 0, 0.06) 100%);
+  background: linear-gradient(90deg,
+      rgba(0, 0, 0, 0.08) 0%,
+      rgba(0, 0, 0, 0.35) 42%,
+      rgba(0, 0, 0, 0.55) 50%,
+      rgba(0, 0, 0, 0.35) 58%,
+      rgba(0, 0, 0, 0.08) 100%);
   pointer-events: none;
   z-index: 8;
 }
 
 /* Hojas de Papel Oficial (Left & Right) */
 .dossier-leaf {
-  background: #fbf6ec;
-  background-image: 
-    radial-gradient(rgba(170, 140, 90, 0.08) 1px, transparent 1px),
-    linear-gradient(180deg, #fefcf7 0%, #fbf5e9 60%, #f5ecd5 100%);
+  background: #f1f4f8;
+  background-image:
+    radial-gradient(rgba(70, 85, 105, 0.08) 1px, transparent 1px),
+    linear-gradient(180deg, #f8fafc 0%, #eff2f6 60%, #e2e7ee 100%);
   background-size: 16px 16px, 100% 100%;
-  border: 1px solid #d8c298;
+  border: 1px solid #c2c9d4;
   border-radius: 4px;
   padding: 1.15rem 1.3rem;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15), inset 0 0 16px rgba(180, 150, 100, 0.08);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25), inset 0 0 16px rgba(80, 95, 115, 0.06);
   position: relative;
   overflow: hidden;
   display: flex;
@@ -1085,7 +1113,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  border-bottom: 1.5px solid #d4c096;
+  border-bottom: 1.5px solid #bcc4cf;
   padding-bottom: 0.5rem;
   margin-bottom: 0.65rem;
 }
@@ -1112,7 +1140,7 @@
 .agency-sub {
   font-family: var(--font-typewriter);
   font-size: 0.62rem;
-  color: #55442f;
+  color: #475569;
   letter-spacing: 0.04em;
   text-align: left;
 }
@@ -1127,7 +1155,7 @@
   text-transform: uppercase;
   transform: rotate(-5deg);
   letter-spacing: 0.08em;
-  background: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.95);
   border-radius: 2px;
 }
 
@@ -1135,7 +1163,7 @@
   border-color: #8c101c;
   color: #8c101c;
   transform: rotate(6deg);
-  background: rgba(255, 238, 238, 0.92);
+  background: rgba(255, 238, 238, 0.95);
 }
 
 /* Fila de Foto Ampliada e Identificación en Hoja Izquierda */
@@ -1186,7 +1214,7 @@
 .dossier-modal-photo-frame .photo-polaroid-caption {
   font-family: var(--font-typewriter);
   font-size: 0.55rem;
-  color: #5c4f40;
+  color: #475569;
   text-align: center;
   margin-top: 5px;
   letter-spacing: 0.05em;
@@ -1212,7 +1240,7 @@
 .modal-agent-name {
   font-size: 1.48rem;
   font-family: var(--font-heading);
-  color: #1a1208 !important;
+  color: #0f172a !important;
   margin: 0.2rem 0 0.12rem;
   font-weight: 800;
   letter-spacing: -0.01em;
@@ -1223,7 +1251,7 @@
 .dossier-leaf .modal-agent-role,
 .modal-agent-role {
   font-size: 0.78rem;
-  color: #143d2b !important;
+  color: #15803d !important;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -1234,41 +1262,44 @@
 }
 
 .nemesis-folder .dossier-leaf .modal-agent-role {
-  color: #8c101c !important;
+  color: #b91c1c !important;
 }
 
 .dossier-leaf .modal-agent-actor,
 .modal-agent-actor {
   font-size: 0.74rem;
-  color: #53402b !important;
+  color: #475569 !important;
   font-family: var(--font-typewriter);
   margin-top: 0.2rem;
   text-align: left !important;
 }
 
 .modal-agent-actor strong {
-  color: #22170b;
+  color: #0f172a;
 }
 
 /* Cuadro de Cita Registrada */
 .modal-agent-quote-box {
-  background: rgba(225, 205, 165, 0.32);
-  border-left: 3px solid #143d2b;
+  background: rgba(255, 255, 255, 0.85);
+  border-left: 3px solid #15803d;
   padding: 0.5rem 0.85rem;
   margin-bottom: 0.65rem;
   border-radius: 0 3px 3px 0;
+  border-top: 1px solid #e2e8f0;
+  border-right: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
   text-align: left !important;
 }
 
 .nemesis-folder .modal-agent-quote-box {
-  border-left-color: #8c101c;
+  border-left-color: #b91c1c;
 }
 
 .quote-typewriter-mark {
   font-family: var(--font-typewriter);
   font-size: 0.6rem;
   font-weight: 800;
-  color: #554128;
+  color: #334155;
   letter-spacing: 0.08em;
   margin-bottom: 0.2rem;
   text-align: left !important;
@@ -1278,7 +1309,7 @@
 .modal-agent-quote-box p {
   font-family: var(--font-body);
   font-size: 0.8rem;
-  color: #1e1509 !important;
+  color: #1e293b !important;
   font-style: italic;
   line-height: 1.38;
   margin: 0;
@@ -1290,7 +1321,7 @@
   font-family: var(--font-typewriter);
   font-size: 0.7rem;
   font-weight: 800;
-  color: #143d2b;
+  color: #15803d;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   margin-bottom: 0.35rem;
@@ -1298,7 +1329,7 @@
 }
 
 .nemesis-folder .dossier-section-subtitle {
-  color: #8c101c;
+  color: #b91c1c;
 }
 
 /* Métricas de Evaluación de Campo */
@@ -1315,18 +1346,19 @@
 
 .dossier-leaf .modal-stat-box,
 .modal-stat-box {
-  background: rgba(255, 255, 255, 0.75) !important;
-  border: 1px solid #d4c096 !important;
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
   border-radius: 3px;
   padding: 0.35rem 0.5rem;
   text-align: left !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .dossier-leaf .modal-stat-box .stat-name,
 .modal-stat-box .stat-name {
   font-family: var(--font-typewriter);
   font-size: 0.6rem;
-  color: #5c4933 !important;
+  color: #64748b !important;
   text-transform: capitalize;
   display: block;
   text-align: left !important;
@@ -1336,7 +1368,7 @@
 .modal-stat-box .stat-val {
   font-size: 1rem;
   font-family: var(--font-display);
-  color: #143d2b !important;
+  color: #15803d !important;
   font-weight: 700;
   display: block;
   text-align: left !important;
@@ -1345,7 +1377,7 @@
 
 .nemesis-folder .dossier-leaf .modal-stat-box .stat-val,
 .nemesis-folder .modal-stat-box .stat-val {
-  color: #8c101c !important;
+  color: #b91c1c !important;
 }
 
 /* Hoja Derecha: Marca de Agua Confidencial */
@@ -1381,14 +1413,14 @@
 }
 
 .right-leaf-header {
-  border-bottom: 1.5px solid #d4c096;
+  border-bottom: 1.5px solid #bcc4cf;
 }
 
 .leaf-doc-title {
   font-family: var(--font-typewriter);
   font-size: 0.68rem;
   font-weight: 800;
-  color: #1a1208;
+  color: #0f172a;
   letter-spacing: 0.05em;
   text-align: left;
 }
@@ -1396,7 +1428,7 @@
 .leaf-doc-date {
   font-family: var(--font-typewriter);
   font-size: 0.6rem;
-  color: #63503a;
+  color: #64748b;
   letter-spacing: 0.04em;
 }
 
@@ -1408,7 +1440,7 @@
 
 .modal-agent-bio {
   font-size: 0.81rem;
-  color: #261c10 !important;
+  color: #1e293b !important;
   line-height: 1.42;
   text-align: left !important;
   margin: 0;
@@ -1433,24 +1465,24 @@
   gap: 0.35rem;
   font-family: var(--font-typewriter);
   font-size: 0.74rem;
-  color: #241a0e;
+  color: #1e293b;
   text-align: left;
 }
 
 .skill-bullet {
-  color: #143d2b;
+  color: #15803d;
   font-weight: 800;
   font-size: 0.76rem;
 }
 
 .nemesis-folder .skill-bullet {
-  color: #8c101c;
+  color: #b91c1c;
 }
 
 /* Memorándum de Evaluación */
 .dossier-summary-memo {
-  background: rgba(255, 255, 255, 0.65);
-  border: 1px dashed #b89b65;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px dashed #94a3b8;
   border-radius: 3px;
   padding: 0.5rem 0.85rem;
   margin-bottom: 0.65rem;
@@ -1461,7 +1493,7 @@
   font-family: var(--font-typewriter);
   font-size: 0.64rem;
   font-weight: 800;
-  color: #554128;
+  color: #334155;
   letter-spacing: 0.08em;
   margin-bottom: 0.18rem;
   text-align: left;
@@ -1469,7 +1501,7 @@
 
 .memo-text {
   font-size: 0.78rem;
-  color: #291e12;
+  color: #1e293b;
   line-height: 1.38;
   margin: 0;
   text-align: left;
@@ -1478,7 +1510,7 @@
 /* Pie de Página Oficial con Firma y Sello */
 .dossier-leaf-footer {
   margin-top: auto;
-  border-top: 1.5px solid #d4c096;
+  border-top: 1.5px solid #bcc4cf;
   padding-top: 0.55rem;
   display: flex;
   justify-content: space-between;
@@ -1496,14 +1528,14 @@
 .sign-line {
   width: 120px;
   height: 1px;
-  background: #3a2b18;
+  background: #334155;
   margin-bottom: 0.25rem;
 }
 
 .footer-sign-col span {
   font-family: var(--font-typewriter);
   font-size: 0.6rem;
-  color: #554128;
+  color: #64748b;
   letter-spacing: 0.04em;
   text-align: left;
 }
@@ -1525,7 +1557,7 @@
   text-transform: uppercase;
   letter-spacing: 0.08em;
   border-radius: 2px;
-  background: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.95);
   margin-bottom: 0.12rem;
 }
 
@@ -1684,6 +1716,258 @@ input:checked+.slider {
 
 input:checked+.slider:before {
   transform: translateX(22px);
+}
+
+/* --------------------------------------------------------------------------
+   CRONOLOGÍA NARRATIVA INTERACTIVA: EL CAMINO DE LA VENGANZA (temporadas.html)
+   -------------------------------------------------------------------------- */
+.narrative-timeline-section {
+  margin-bottom: 3.5rem;
+  position: relative;
+  padding: 2.2rem 1.8rem;
+  background: rgba(14, 16, 22, 0.75);
+  border: 1px solid rgba(212, 180, 131, 0.22);
+  border-radius: 12px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
+}
+
+.timeline-header-block {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 1.5rem;
+}
+
+.timeline-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(212, 180, 131, 0.12);
+  border: 1px solid rgba(212, 180, 131, 0.35);
+  color: #ecdcc2;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 0.35rem 0.95rem;
+  border-radius: 20px;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.timeline-main-title {
+  font-family: var(--font-display, serif);
+  font-size: clamp(1.5rem, 2.5vw, 2.1rem);
+  color: var(--cream-pure);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.03em;
+}
+
+.timeline-subtitle {
+  font-size: 0.94rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Barra de Pistas con desplazamiento horizontal */
+.timeline-track-wrap {
+  position: relative;
+  margin-top: 2.5rem;
+  padding: 1.5rem 0.5rem 0.75rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(212, 180, 131, 0.4) rgba(15, 17, 23, 0.6);
+}
+
+.timeline-track-wrap::-webkit-scrollbar {
+  height: 6px;
+}
+
+.timeline-track-wrap::-webkit-scrollbar-track {
+  background: rgba(15, 17, 23, 0.6);
+  border-radius: 3px;
+}
+
+.timeline-track-wrap::-webkit-scrollbar-thumb {
+  background: rgba(212, 180, 131, 0.4);
+  border-radius: 3px;
+}
+
+.timeline-track-wrap::-webkit-scrollbar-thumb:hover {
+  background: rgba(212, 180, 131, 0.7);
+}
+
+.timeline-track-line {
+  position: absolute;
+  top: 48px;
+  left: 35px;
+  right: 35px;
+  height: 3px;
+  background: linear-gradient(90deg, #d4b483 0%, #dc143c 75%, #f59e0b 100%);
+  z-index: 1;
+  border-radius: 3px;
+  opacity: 0.65;
+}
+
+.timeline-milestones-row {
+  display: flex;
+  gap: 1.4rem;
+  min-width: max-content;
+  position: relative;
+  z-index: 2;
+  padding: 0 0.5rem 0.5rem;
+}
+
+/* Nodo individual de hito */
+.timeline-milestone-node {
+  width: 250px;
+  flex-shrink: 0;
+  cursor: pointer;
+  text-align: left;
+  transition: transform 0.28s ease, filter 0.28s ease;
+  scroll-snap-align: start;
+  outline: none;
+  user-select: none;
+}
+
+.timeline-milestone-node:hover {
+  transform: translateY(-5px);
+}
+
+.milestone-marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0.9rem;
+}
+
+.milestone-season-tag {
+  font-family: var(--font-display, serif);
+  font-weight: 800;
+  font-size: 0.85rem;
+  color: #d4b483;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.35rem;
+}
+
+.milestone-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #11141b;
+  border: 3px solid #d4b483;
+  box-shadow: 0 0 10px rgba(212, 180, 131, 0.45);
+  transition: all 0.25s ease;
+}
+
+.milestone-dot-crimson {
+  border-color: #dc143c;
+  box-shadow: 0 0 12px rgba(220, 20, 60, 0.65);
+}
+
+.milestone-dot-gold {
+  border-color: #f59e0b;
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.65);
+}
+
+.timeline-milestone-node.active .milestone-dot {
+  background: #d4b483;
+  box-shadow: 0 0 16px rgba(212, 180, 131, 0.9);
+  transform: scale(1.25);
+}
+
+.timeline-milestone-node.active .milestone-dot-crimson {
+  background: #dc143c;
+  box-shadow: 0 0 18px rgba(220, 20, 60, 0.95);
+  transform: scale(1.25);
+}
+
+.timeline-milestone-node.active .milestone-dot-gold {
+  background: #f59e0b;
+  box-shadow: 0 0 18px rgba(245, 158, 11, 0.95);
+  transform: scale(1.25);
+}
+
+/* Tarjeta del Hito */
+.milestone-card {
+  background: rgba(18, 20, 28, 0.92);
+  border: 1px solid rgba(212, 180, 131, 0.22);
+  border-radius: 8px;
+  padding: 1.15rem 1.1rem;
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 185px;
+}
+
+.timeline-milestone-node:hover .milestone-card {
+  border-color: #d4b483;
+  background: rgba(25, 28, 38, 0.96);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7), 0 0 15px rgba(212, 180, 131, 0.25);
+}
+
+.timeline-milestone-node.active .milestone-card {
+  border-color: #d4b483;
+  border-top: 3px solid #d4b483;
+  background: rgba(28, 32, 44, 0.98);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7), 0 0 20px rgba(212, 180, 131, 0.35);
+}
+
+.milestone-card-crimson {
+  border-color: rgba(220, 20, 60, 0.32);
+}
+
+.timeline-milestone-node.active .milestone-card-crimson {
+  border-color: #dc143c;
+  border-top: 3px solid #dc143c;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7), 0 0 20px rgba(220, 20, 60, 0.45);
+}
+
+.milestone-year {
+  font-family: var(--font-typewriter, monospace);
+  font-size: 0.72rem;
+  color: #a1a1aa;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.milestone-title {
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: var(--cream-pure);
+  margin-bottom: 0.45rem;
+  line-height: 1.3;
+}
+
+.milestone-desc {
+  font-size: 0.81rem;
+  color: var(--text-secondary);
+  line-height: 1.48;
+  margin-bottom: 0.75rem;
+  flex-grow: 1;
+}
+
+.milestone-action {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #d4b483;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: gap 0.2s ease;
+}
+
+.timeline-milestone-node:hover .milestone-action {
+  gap: 0.55rem;
+  color: #fff;
 }
 
 .season-block {
@@ -2035,6 +2319,1079 @@ body.red-john-page::before {
 }
 
 /* --------------------------------------------------------------------------
+   TABLERO DE INVESTIGACIÓN INTERACTIVO (MURDER / EVIDENCE BOARD)
+   -------------------------------------------------------------------------- */
+.investigation-board-section {
+  margin-bottom: 5rem;
+  position: relative;
+}
+
+/* Barra de Filtros de Conspiraciones (Fija en la parte superior al scrollear) */
+.board-filters-bar {
+  position: sticky;
+  top: 68px;
+  z-index: 150;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-bottom: 1.5rem;
+  padding: 0.75rem 1.4rem;
+  border-radius: 40px;
+  background: rgba(14, 11, 16, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(220, 20, 60, 0.22);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.65);
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
+}
+
+.board-filters-bar.is-stuck {
+  background: rgba(10, 8, 12, 0.96);
+  border-color: rgba(220, 20, 60, 0.55);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9), 0 0 18px rgba(220, 20, 60, 0.3);
+  padding: 0.65rem 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .board-filters-bar {
+    padding: 0.5rem 0.8rem;
+    gap: 0.4rem;
+    border-radius: 20px;
+  }
+}
+
+.board-filters-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--cream-muted);
+  margin-right: 0.4rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.board-filter-btn {
+  background: rgba(18, 20, 26, 0.85);
+  border: 1px solid rgba(140, 145, 160, 0.25);
+  color: var(--text-secondary);
+  padding: 0.55rem 1.15rem;
+  border-radius: 30px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(8px);
+}
+
+.board-filter-btn:hover {
+  color: var(--cream-pure);
+  border-color: var(--crimson-bright);
+  background: rgba(40, 15, 20, 0.7);
+  transform: translateY(-2px);
+}
+
+.board-filter-btn.active {
+  background: linear-gradient(135deg, rgba(220, 20, 60, 0.35) 0%, rgba(138, 12, 30, 0.7) 100%);
+  border-color: var(--crimson-bright);
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(220, 20, 60, 0.35);
+}
+
+/* Botón para restablecer la disposición del tablero interactivo */
+.board-action-btn {
+  background: rgba(35, 12, 18, 0.85);
+  border: 1px solid var(--border-crimson);
+  color: var(--cream-soft);
+  padding: 0.5rem 1.05rem;
+  font-size: 0.8rem;
+  font-family: var(--font-typewriter, monospace);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 30px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  transition: all 0.25s ease;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+  margin-left: auto;
+}
+
+.board-action-btn:hover {
+  background: var(--crimson-dark);
+  border-color: var(--crimson-bright);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 16px rgba(220, 20, 60, 0.45);
+}
+
+.board-action-btn:active {
+  transform: translateY(0);
+}
+
+/* Leyenda interactiva */
+/* Leyenda interactiva */
+.board-interaction-legend {
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+  letter-spacing: 0.02em;
+}
+
+/* ==========================================================================
+   ESTANTE DE APUNTES DE INVESTIGACIÓN (JANE'S NOTEBOOK SHELF)
+   Bandeja superior para notas de evidencia clave sin deformar el corcho
+   ========================================================================== */
+.jane-notebook-shelf {
+  background: linear-gradient(180deg, rgba(20, 16, 22, 0.95) 0%, rgba(12, 10, 14, 0.98) 100%);
+  border: 1px solid rgba(220, 20, 60, 0.28);
+  border-radius: 8px;
+  padding: 1.15rem 1.4rem 1.35rem;
+  margin-bottom: 1.75rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.shelf-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.12);
+}
+
+.shelf-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #ff9da4;
+  font-family: var(--font-display, serif);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.shelf-title-wrap i {
+  color: var(--crimson-bright);
+}
+
+.shelf-hint {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-family: var(--font-typewriter, monospace);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.notebook-notes-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 1024px) {
+  .notebook-notes-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.9rem;
+  }
+}
+
+@media (max-width: 580px) {
+  .notebook-notes-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Ficha / Nota individual del estante */
+.shelf-note-item {
+  position: relative;
+  border-radius: 4px;
+  padding: 1.1rem 0.95rem 0.85rem;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.55);
+  cursor: pointer;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease, border-color 0.22s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 125px;
+  user-select: none;
+}
+
+.shelf-note-item:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.75), 0 0 15px rgba(220, 20, 60, 0.35);
+}
+
+.shelf-note-item:focus-visible {
+  outline: 2px solid var(--crimson-bright);
+  outline-offset: 2px;
+}
+
+/* Chincheta pequeña en la parte superior de la nota */
+.shelf-note-pin {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(circle at 35% 35%, #fff 0%, #94a3b8 60%, #475569 100%);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.shelf-note-icon {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.8rem;
+  font-size: 1.15rem;
+  opacity: 0.28;
+  pointer-events: none;
+}
+
+.shelf-note-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.shelf-note-tag {
+  font-size: 0.62rem;
+  font-family: var(--font-typewriter, monospace);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+  display: block;
+}
+
+.shelf-note-title {
+  font-family: var(--font-display, serif);
+  font-size: 0.98rem;
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0 0 0.4rem 0;
+}
+
+.shelf-note-excerpt {
+  font-size: 0.74rem;
+  line-height: 1.4;
+  margin: 0;
+  opacity: 0.92;
+}
+
+.shelf-note-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-typewriter, monospace);
+  font-size: 0.66rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-top: 0.65rem;
+  padding-top: 0.45rem;
+  border-top: 1px dashed rgba(0, 0, 0, 0.15);
+  transition: gap 0.2s ease;
+}
+
+.shelf-note-item:hover .shelf-note-cta {
+  gap: 0.55rem;
+}
+
+/* Variantes temáticas de color para las notas del estante */
+.note-theme-yellow {
+  background: #fbf5be;
+  color: #2b2505;
+  border-left: 4px solid #c9b01c;
+}
+.note-theme-yellow .shelf-note-tag { color: #856f08; }
+.note-theme-yellow .shelf-note-title { color: #1a1502; }
+.note-theme-yellow .shelf-note-cta { color: #735e02; }
+
+.note-theme-crimson {
+  background: #fce8eb;
+  color: #3b0911;
+  border-left: 4px solid #dc143c;
+}
+.note-theme-crimson .shelf-note-tag { color: #9f0c29; }
+.note-theme-crimson .shelf-note-title { color: #2e050c; }
+.note-theme-crimson .shelf-note-cta { color: #8b0922; }
+
+.note-theme-blue {
+  background: #e9f3fa;
+  color: #0b2b40;
+  border-left: 4px solid #2980b9;
+}
+.note-theme-blue .shelf-note-tag { color: #1b6391; }
+.note-theme-blue .shelf-note-title { color: #071f2e; }
+.note-theme-blue .shelf-note-cta { color: #165680; }
+
+.note-theme-amber {
+  background: #fdedd8;
+  color: #3e2206;
+  border-left: 4px solid #d97706;
+}
+.note-theme-amber .shelf-note-tag { color: #9a5303; }
+.note-theme-amber .shelf-note-title { color: #2e1802; }
+.note-theme-amber .shelf-note-cta { color: #874600; }
+
+/* ==========================================================================
+   CONTENEDOR DEL TABLERO DE CORCHO (PANORÁMICO COMPACTO)
+   ========================================================================== */
+.evidence-cork-board {
+  position: relative;
+  background: radial-gradient(ellipse at 50% 35%, #2a1b14 0%, #170e0a 75%, #0d0705 100%);
+  border: 10px solid #1a110a;
+  border-radius: 10px;
+  box-shadow:
+    inset 0 0 50px rgba(0, 0, 0, 0.92),
+    0 25px 60px rgba(0, 0, 0, 0.85);
+  padding: 2.5rem 1.6rem 2.8rem;
+  overflow: hidden;
+  min-height: 560px;
+  contain: layout paint;
+}
+
+/* Capa SVG de Hilos de Lana Roja */
+.board-threads-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+  will-change: transform;
+}
+
+.board-threads-layer path {
+  fill: none;
+  stroke: #df1b34;
+  stroke-width: 2.2px;
+  stroke-linecap: round;
+  opacity: 0.65;
+  transition: opacity 0.2s ease, stroke-width 0.2s ease, stroke 0.2s ease;
+}
+
+.board-threads-layer path.thread-highlighted {
+  opacity: 1 !important;
+  stroke-width: 3.6px !important;
+  stroke: #ff2a44 !important;
+}
+
+.board-threads-layer path.thread-dimmed {
+  opacity: 0.12 !important;
+}
+
+/* Chinchetas 3D (Push Pins) */
+.push-pin {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 6;
+  box-shadow:
+    0 3px 5px rgba(0, 0, 0, 0.8),
+    inset -2px -2px 3px rgba(0, 0, 0, 0.6),
+    inset 2px 2px 3px rgba(255, 255, 255, 0.5);
+}
+
+.push-pin::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 5px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.pin-crimson {
+  background: radial-gradient(circle at 35% 35%, #ff4b60 0%, #b80c1d 70%, #6e000c 100%);
+}
+
+.pin-silver {
+  background: radial-gradient(circle at 35% 35%, #f1f5f9 0%, #94a3b8 70%, #475569 100%);
+}
+
+/* ==========================================================================
+   GRID DE PINES: 7 SOSPECHOSOS + RED JOHN CENTRADO (3x3 PANORÁMICO)
+   ========================================================================== */
+.board-pins-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 2rem 1.5rem;
+  position: relative;
+  z-index: 3;
+  align-items: center;
+  justify-items: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+@media (min-width: 880px) {
+  .board-pins-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.2rem 1.6rem;
+  }
+
+  /* Centra a Gale Bertram en la 3ª fila debajo de Red John */
+  .board-pin-card-bottom {
+    grid-column: 2 / 3;
+  }
+}
+
+/* Tarjeta Pin individual interactiva (arrastrable) */
+.board-pin-card {
+  position: relative;
+  width: 100%;
+  max-width: 220px;
+  margin: 0 auto;
+  transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.25s ease, filter 0.25s ease, opacity 0.25s ease;
+  will-change: transform;
+  transform: translateZ(0);
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.board-pin-card:active {
+  cursor: grabbing;
+}
+
+.board-pin-card.is-dragging {
+  cursor: grabbing !important;
+  z-index: 120 !important;
+  transition: none !important;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.95), 0 0 25px rgba(220, 20, 60, 0.55) !important;
+}
+
+.board-pin-card.is-pinned-custom {
+  z-index: 8;
+  cursor: grab;
+}
+
+.board-pin-card.is-resetting {
+  transition: transform 0.48s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+/* Inclinaciones naturales de las tarjetas */
+#pin-partridge { transform: rotate(-1.5deg); }
+#pin-kirkland  { transform: rotate(1.2deg); }
+#pin-haffner   { transform: rotate(-1.4deg); }
+#pin-stiles    { transform: rotate(1.8deg); }
+#node-redjohn  { transform: rotate(0deg); }
+#pin-smith     { transform: rotate(-1.2deg); }
+#pin-bertram   { transform: rotate(1deg); }
+
+.board-pin-card:not(.is-pinned-custom):not(.is-dragging):hover {
+  transform: translateY(-8px) scale(1.03) rotate(0deg) !important;
+  z-index: 15;
+}
+
+.board-pin-card.is-pinned-custom:not(.is-dragging):hover {
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.95), 0 0 18px rgba(220, 20, 60, 0.4);
+  z-index: 25;
+}
+
+.board-pin-card.board-item-dimmed {
+  opacity: 0.22;
+  filter: grayscale(85%);
+}
+
+.board-pin-card.board-item-highlighted {
+  opacity: 1;
+  filter: none;
+}
+
+.board-pin-card.board-item-highlighted .polaroid-frame {
+  box-shadow: 0 0 25px rgba(220, 20, 60, 0.65), 0 12px 30px rgba(0, 0, 0, 0.9);
+}
+
+/* Fotografía Polaroid Vintage (Compacta, uniforme y sin deformaciones) */
+.polaroid-frame {
+  background: #f7f4ed;
+  padding: 8px 8px 9px;
+  border-radius: 2px;
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.65),
+    0 1px 3px rgba(0, 0, 0, 0.4);
+  color: #1a1a1a;
+  width: 100%;
+  max-width: 215px;
+  height: 236px; /* Altura fija uniforme para todo el tablero */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0 auto;
+  text-align: center;
+  transition: box-shadow 0.25s ease;
+}
+
+/* Contenedor de Imagen de Polaroid */
+.polaroid-img-wrap {
+  position: relative;
+  width: 96px;
+  height: 108px;
+  margin: 0 auto;
+  background: #111;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+}
+
+.polaroid-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  margin: 0 auto;
+  display: block;
+  filter: contrast(1.05) brightness(0.95);
+  transition: transform 0.35s ease;
+}
+
+.board-pin-card:hover .polaroid-img {
+  transform: scale(1.06);
+}
+
+.pin-badge-status {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 0.56rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  padding: 0.18rem 0.4rem;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+
+.polaroid-caption {
+  padding-top: 5px;
+  text-align: center;
+}
+
+.polaroid-name {
+  font-family: var(--font-display, serif);
+  font-size: 1.02rem;
+  color: #111827;
+  font-weight: 700;
+  margin: 0 0 0.1rem 0;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+.polaroid-role {
+  font-family: var(--font-typewriter, monospace);
+  font-size: 0.68rem;
+  color: #8b1122;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0;
+  text-align: center;
+}
+
+/* Botón indicador para abrir expediente clasificado */
+.card-expand-hint {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  font-size: 0.64rem;
+  font-family: var(--font-typewriter, monospace);
+  color: #8b2535;
+  font-weight: 700;
+  margin-top: 0.35rem;
+  padding-top: 0.3rem;
+  border-top: 1px dashed rgba(0, 0, 0, 0.15);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  transition: color 0.2s ease, gap 0.2s ease;
+  user-select: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.board-pin-card:hover .card-expand-hint {
+  color: var(--crimson-bright);
+  gap: 0.65rem;
+}
+
+.card-expand-hint i {
+  font-size: 0.64rem;
+}
+
+/* ==========================================================================
+   NODO CENTRAL COMBINADO: RED JOHN + COMISARIO MCALLISTER
+   Tamaño 100% idéntico y fijo en ambos estados (Sin salto de tamaño)
+   ========================================================================== */
+.board-center-master-card {
+  position: relative;
+  width: 100%;
+  max-width: 215px;
+  height: 236px; /* Altura estricta idéntica a las demás tarjetas */
+  margin: 0 auto;
+  z-index: 8;
+  cursor: pointer;
+}
+
+/* Estado 1: Máscara / Símbolo de Red John */
+.board-master-unrevealed {
+  background: linear-gradient(150deg, #240c12 0%, #15060a 100%);
+  border: 2px solid var(--crimson-bright);
+  border-radius: 4px;
+  padding: 0.9rem 0.8rem 0.85rem;
+  text-align: center;
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.88),
+    0 0 28px rgba(220, 20, 60, 0.45);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 236px; /* Misma altura exacta */
+  box-sizing: border-box;
+  transition: opacity 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  opacity: 1;
+  transform: scale(1);
+}
+
+.board-master-unrevealed.fade-out {
+  opacity: 0;
+  transform: scale(0.95);
+  pointer-events: none;
+}
+
+/* Estado 2: Identidad Revelada de Thomas McAllister */
+.board-master-revealed {
+  width: 100%;
+  max-width: 215px;
+  height: 236px; /* Misma altura exacta */
+  box-sizing: border-box;
+  margin: 0 auto;
+  transition: opacity 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+.board-master-revealed.fade-in {
+  opacity: 1 !important;
+  transform: scale(1) !important;
+}
+
+.polaroid-master-frame {
+  background: #fef1f2;
+  border: 2px solid var(--crimson-bright);
+  height: 236px; /* Misma altura exacta */
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 8px 8px 7px;
+  margin: 0 auto;
+}
+
+.board-center-master-card .center-symbol-wrap {
+  width: 62px;
+  height: 62px;
+  margin: 0 auto 0.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 0 8px rgba(220, 20, 60, 0.85));
+}
+
+.board-center-master-card .center-symbol-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.board-center-master-card .center-node-title {
+  font-family: var(--font-display, serif);
+  font-size: 1.18rem;
+  letter-spacing: 0.12em;
+  color: #ff9da4;
+  margin: 0 0 0.15rem 0;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.btn-reveal-master {
+  font-size: 0.74rem;
+  padding: 0.38rem 0.95rem;
+  margin-top: 0.35rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-color: var(--crimson-bright);
+  background: rgba(220, 20, 60, 0.25);
+  color: #ffb8bd;
+  box-shadow: 0 4px 12px rgba(220, 20, 60, 0.3);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.25s ease;
+}
+
+.btn-reveal-master:hover {
+  background: var(--crimson-bright);
+  color: #ffffff;
+  box-shadow: 0 6px 20px rgba(220, 20, 60, 0.6);
+  transform: translateY(-2px);
+}
+
+.spoiler-warning-hint {
+  display: block;
+  font-size: 0.62rem;
+  color: var(--text-muted);
+  font-family: var(--font-typewriter, monospace);
+  margin-top: 0.25rem;
+}
+
+.hide-spoiler-wrap {
+  text-align: center;
+  margin-top: 0.2rem;
+  padding-top: 0.1rem;
+}
+
+.btn-hide-spoiler-link {
+  background: none;
+  border: none;
+  color: #7f1d2b;
+  font-size: 0.68rem;
+  cursor: pointer;
+  text-decoration: underline;
+  font-family: var(--font-typewriter, monospace);
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.btn-hide-spoiler-link:hover {
+  color: #b91c1c;
+}
+
+.card-revealing {
+  animation: rjCardFlash 0.75s ease;
+}
+
+@keyframes rjCardFlash {
+  0% { box-shadow: 0 0 10px rgba(220, 20, 60, 0.3); }
+  50% { box-shadow: 0 0 35px rgba(220, 20, 60, 0.85); }
+  100% { box-shadow: 0 0 20px rgba(220, 20, 60, 0.4); }
+}
+
+.btn-hide-spoiler-link {
+  background: none;
+  border: none;
+  color: #7f1d2b;
+  font-size: 0.7rem;
+  cursor: pointer;
+  text-decoration: underline;
+  font-family: var(--font-typewriter, monospace);
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.btn-hide-spoiler-link:hover {
+  color: #b91c1c;
+}
+
+/* ==========================================================================
+   PANEL FORENSE LATERAL (EVIDENCE SLIDE-OVER DRAWER)
+   Dossier deslizable desde la derecha para desclasificar fichas y apuntes
+   ========================================================================== */
+.evidence-drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 5, 8, 0.75);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  z-index: 998;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.32s;
+  pointer-events: none;
+}
+
+.evidence-drawer-backdrop.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.evidence-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 480px;
+  max-width: 94vw;
+  height: 100vh;
+  height: 100dvh;
+  background: #0f0c11;
+  border-left: 2px solid var(--crimson-bright);
+  box-shadow: -15px 0 50px rgba(0, 0, 0, 0.95), 0 0 35px rgba(220, 20, 60, 0.3);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.evidence-drawer.active {
+  transform: translateX(0);
+}
+
+.drawer-header {
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(180deg, rgba(30, 11, 16, 0.98) 0%, rgba(15, 12, 17, 0.98) 100%);
+  border-bottom: 1px solid rgba(220, 20, 60, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.drawer-badge-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.drawer-stamp {
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  font-weight: 800;
+  font-family: var(--font-typewriter, monospace);
+  padding: 0.2rem 0.55rem;
+  align-self: flex-start;
+}
+
+.drawer-case-code {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-family: var(--font-typewriter, monospace);
+  letter-spacing: 0.08em;
+}
+
+.drawer-close-btn {
+  background: rgba(220, 20, 60, 0.15);
+  border: 1px solid rgba(220, 20, 60, 0.4);
+  color: #ffb8bd;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.drawer-close-btn:hover {
+  background: var(--crimson-bright);
+  color: #fff;
+  transform: scale(1.08);
+}
+
+.drawer-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem 1.6rem 2rem;
+  color: #e5e0dc;
+  scrollbar-width: thin;
+  scrollbar-color: var(--crimson-bright) rgba(20, 16, 20, 0.8);
+}
+
+.drawer-footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(12, 10, 13, 0.98);
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Componentes internos del Drawer */
+.dossier-profile-card {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(220, 20, 60, 0.2);
+  border-radius: 6px;
+  padding: 1.15rem;
+  margin-bottom: 1.5rem;
+}
+
+.dossier-avatar-wrap {
+  width: 88px;
+  height: 104px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 2px solid var(--crimson-bright);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.8);
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dossier-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.dossier-avatar-icon {
+  font-size: 2.2rem;
+  color: var(--crimson-bright);
+}
+
+.dossier-profile-info {
+  flex: 1;
+}
+
+.dossier-name {
+  font-family: var(--font-display, serif);
+  font-size: 1.45rem;
+  color: #fff;
+  margin: 0 0 0.25rem 0;
+  line-height: 1.2;
+}
+
+.dossier-role {
+  font-family: var(--font-typewriter, monospace);
+  font-size: 0.78rem;
+  color: #ff9da4;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0 0 0.6rem 0;
+}
+
+.dossier-section {
+  margin-bottom: 1.4rem;
+}
+
+.dossier-section-title {
+  font-family: var(--font-typewriter, monospace);
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #ff7584;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  border-bottom: 1px dashed rgba(220, 20, 60, 0.25);
+  padding-bottom: 0.35rem;
+}
+
+.dossier-text {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: #d1cbc7;
+  margin: 0;
+}
+
+/* Deducción de Patrick Jane en el Drawer */
+.jane-deduction-box {
+  background: rgba(28, 20, 24, 0.75);
+  border: 1px solid rgba(220, 20, 60, 0.35);
+  border-left: 3px solid var(--crimson-bright);
+  border-radius: 4px;
+  padding: 1.1rem 1.2rem;
+  margin: 1.2rem 0;
+}
+
+.jane-deduction-header {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-typewriter, monospace);
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #ffb8bd;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.55rem;
+}
+
+.jane-deduction-quote {
+  font-family: var(--font-typewriter, monospace);
+  font-style: italic;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: #faecef;
+  margin: 0;
+}
+
+/* Etiquetas de conspiraciones */
+.dossier-tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.5rem;
+}
+
+.dossier-tag-pill {
+  font-family: var(--font-typewriter, monospace);
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: 3px;
+  background: rgba(220, 20, 60, 0.15);
+  color: #ffb8bd;
+  border: 1px solid rgba(220, 20, 60, 0.3);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* Caja de desenlace / destino */
+.dossier-outcome-box {
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  padding: 0.85rem 1rem;
+  margin-top: 1rem;
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: #b8b0aa;
+}
+
+/* --------------------------------------------------------------------------
    CURIOSIDADES & GENERADOR DE CITAS (curiosidades.html)
    Estética con sombras verdes esmeralda/jade que armonizan con el index
    -------------------------------------------------------------------------- */
@@ -2340,6 +3697,7 @@ body.red-john-page::before {
    con scroll-snap), evitando listados verticales interminables.
    ========================================================================== */
 @media (max-width: 768px) {
+
   /* Hero compacto en móviles con fondo cinematográfico */
   .hero-section {
     padding: 2.25rem 0 1.85rem;
@@ -2443,10 +3801,10 @@ body.red-john-page::before {
     border-radius: 4px;
   }
 
-  .highlights-container > *,
+  .highlights-container>*,
   .suspect-card,
   .curio-card,
-  .curio-grid > *,
+  .curio-grid>*,
   .episode-card {
     flex: 0 0 85% !important;
     max-width: 310px !important;

@@ -184,8 +184,11 @@ document.addEventListener('DOMContentLoaded', () => {
   renderSeasons('all');
   updateSeasonHeader('all');
   initSeasonPills();
+  initNarrativeTimeline();
   initSpoilerToggle();
   initSeasonSynopsisModal();
+  handleSeasonDeepLinks();
+  window.addEventListener('popstate', handleSeasonDeepLinks);
 });
 
 /**
@@ -447,6 +450,65 @@ function initSeasonPills() {
       const val = pill.getAttribute('data-season');
       renderSeasons(val);
       updateSeasonHeader(val);
+
+      // Sincronizar estado activo en la cronología narrativa
+      const timelineNodes = document.querySelectorAll('.timeline-milestone-node');
+      timelineNodes.forEach(node => {
+        const nodeSeason = node.getAttribute('data-season');
+        if (val === 'all') {
+          node.classList.toggle('active', nodeSeason === '1');
+        } else {
+          node.classList.toggle('active', nodeSeason === val);
+        }
+      });
+    });
+  });
+}
+
+/**
+ * Inicializa los controladores interactivos de la cronología narrativa "El Camino de la Venganza".
+ * Al pulsar en un hito, activa la temporada correspondiente, actualiza el encabezado
+ * y realiza un desplazamiento suave hacia el contenido del expediente.
+ */
+function initNarrativeTimeline() {
+  const timelineNodes = document.querySelectorAll('.timeline-milestone-node');
+  if (timelineNodes.length === 0) return;
+
+  timelineNodes.forEach(node => {
+    const handleMilestoneSelect = () => {
+      const seasonNum = node.getAttribute('data-season');
+      if (!seasonNum) return;
+
+      // Actualizar nodos de la cronología
+      timelineNodes.forEach(n => n.classList.remove('active'));
+      node.classList.add('active');
+
+      // Sincronizar con las píldoras de temporadas
+      const targetPill = document.querySelector(`.season-pill[data-season="${seasonNum}"]`);
+      if (targetPill) {
+        targetPill.click();
+      } else {
+        renderSeasons(seasonNum);
+        updateSeasonHeader(seasonNum);
+      }
+
+      // Scroll suave hacia el contenedor de temporadas
+      const container = document.getElementById('seasonsContainer');
+      if (container) {
+        const offset = container.getBoundingClientRect().top + window.pageYOffset - 110;
+        window.scrollTo({
+          top: offset,
+          behavior: 'smooth'
+        });
+      }
+    };
+
+    node.addEventListener('click', handleMilestoneSelect);
+    node.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        handleMilestoneSelect();
+      }
     });
   });
 }
@@ -473,3 +535,55 @@ function initSpoilerToggle() {
     });
   }
 }
+
+/**
+ * Procesa parámetros de la URL para deep-linking de temporadas:
+ * - ?season=1..7 o ?season=all o hash #season-3:
+ *   Activa la píldora correspondiente, actualiza el banner y hace scroll suave a la temporada.
+ */
+function handleSeasonDeepLinks() {
+  const urlParams = new URLSearchParams(window.location.search);
+  let seasonParam = urlParams.get('season');
+
+  if (!seasonParam && window.location.hash) {
+    const match = window.location.hash.match(/season-(\d+|all)/i);
+    if (match) seasonParam = match[1];
+  }
+
+  if (seasonParam) {
+    const pill = document.querySelector(`.season-pill[data-season="${seasonParam}"]`);
+    if (pill) {
+      pill.click();
+    } else if (seasonParam === 'all') {
+      const allPill = document.querySelector('.season-pill[data-season="all"]');
+      if (allPill) allPill.click();
+    }
+
+    if (seasonParam !== 'all') {
+      setTimeout(() => {
+        const block = document.getElementById(`season-${seasonParam}`);
+        if (block) {
+          block.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 300);
+    }
+  }
+}
+
+// Delegación de clics directos para enlaces de temporadas cuando ya se está en temporadas.html
+document.addEventListener('click', (e) => {
+  const seasonLink = e.target.closest('a[href*="season="]');
+  if (seasonLink && (window.location.pathname.endsWith('temporadas.html') || window.location.pathname.endsWith('temporadas'))) {
+    try {
+      const url = new URL(seasonLink.href, window.location.href);
+      const season = url.searchParams.get('season');
+      if (season) {
+        e.preventDefault();
+        history.pushState(null, '', `temporadas.html?season=${season}`);
+        handleSeasonDeepLinks();
+      }
+    } catch (err) {}
+  }
+});
+
+

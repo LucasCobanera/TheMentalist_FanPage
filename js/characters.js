@@ -249,6 +249,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initFilterTabs();
   initCharacterModal();
   initCarouselControls();
+  handleCharacterDeepLinks();
+  window.addEventListener('popstate', handleCharacterDeepLinks);
 });
 
 /**
@@ -289,11 +291,11 @@ function renderCharacters(filterCategory) {
         <div class="dossier-photo-frame">
           ${PAPERCLIP_SVG}
           ${hasImage
-            ? `<img src="${c.imageSrc}" alt="${c.imageAlt}" loading="lazy">`
-            : `<div class="image-slot" id="${c.imageSlotId}">
+        ? `<img src="${c.imageSrc}" alt="${c.imageAlt}" loading="lazy">`
+        : `<div class="image-slot" id="${c.imageSlotId}">
                 <p>📁 ${c.name}</p>
               </div>`
-          }
+      }
           <div class="photo-evidence-tag">EVIDENCIA FOTOGRÁFICA // CBI-EVD</div>
         </div>
         <div class="dossier-stamp ${c.stampClass}">${c.stamp}</div>
@@ -590,3 +592,77 @@ function openCharacterModal(characterId) {
   modalOverlay.classList.add('active');
   document.body.style.overflow = 'hidden';
 }
+
+/**
+ * Procesa parámetros de la URL para deep-linking:
+ * - ?character=patrick-jane (o hash #patrick-jane): Abre directamente el expediente en pantalla completa.
+ * - ?category=cbi / fbi / nemesis: Selecciona la pestaña de filtro y renderiza los personajes de esa división.
+ */
+function handleCharacterDeepLinks() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const characterParam = urlParams.get('character') || (window.location.hash ? window.location.hash.replace('#', '') : null);
+  const categoryParam = urlParams.get('category');
+
+  if (categoryParam) {
+    const filterBtn = document.querySelector(`.filter-btn[data-category="${categoryParam}"]`);
+    if (filterBtn) {
+      filterBtn.click();
+    }
+  }
+
+  if (characterParam) {
+    const targetChar = CHARACTERS_DATA.find(c => c.id === characterParam);
+    if (targetChar) {
+      // Si el personaje pertenece a otra categoría o no está visible, restablecer vista completa
+      if (!categoryParam || categoryParam !== targetChar.category) {
+        renderCharacters('all');
+        const allBtn = document.getElementById('filterAll');
+        if (allBtn) {
+          document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+          allBtn.classList.add('active');
+        }
+      }
+
+      // Desplazamiento suave hacia el archivador y apertura del expediente
+      const locker = document.querySelector('.cbi-archive-locker');
+      if (locker) {
+        locker.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+
+      setTimeout(() => {
+        openCharacterModal(targetChar.id);
+      }, 350);
+    }
+  }
+}
+
+// Delegación de clics directos para enlaces del dropdown cuando ya se está en personajes.html
+document.addEventListener('click', (e) => {
+  const charLink = e.target.closest('a[href*="character="]');
+  if (charLink && (window.location.pathname.endsWith('personajes.html') || window.location.pathname.endsWith('personajes'))) {
+    try {
+      const url = new URL(charLink.href, window.location.href);
+      const charId = url.searchParams.get('character');
+      if (charId) {
+        e.preventDefault();
+        history.pushState(null, '', `personajes.html?character=${charId}`);
+        handleCharacterDeepLinks();
+      }
+    } catch (err) { }
+  }
+
+  const catLink = e.target.closest('a[href*="category="]');
+  if (catLink && (window.location.pathname.endsWith('personajes.html') || window.location.pathname.endsWith('personajes'))) {
+    try {
+      const url = new URL(catLink.href, window.location.href);
+      const cat = url.searchParams.get('category');
+      if (cat) {
+        e.preventDefault();
+        history.pushState(null, '', `personajes.html?category=${cat}`);
+        handleCharacterDeepLinks();
+      }
+    } catch (err) { }
+  }
+});
+
+

@@ -41,14 +41,102 @@ function initNavigation() {
       navToggle.setAttribute('aria-expanded', String(isOpen));
     });
 
-    // Cerrar menú al pulsar un enlace
-    navMenu.querySelectorAll('.nav-link').forEach(link => {
+    // Cerrar menú al pulsar un enlace directo (que no sea disparador de dropdown en móvil)
+    navMenu.querySelectorAll('.nav-link:not(.nav-dropdown-trigger)').forEach(link => {
       link.addEventListener('click', () => {
         navMenu.classList.remove('open');
         navToggle.setAttribute('aria-expanded', 'false');
       });
     });
   }
+
+  // Soporte interactivo para desplegables (Desktop hover con debounce + Mobile acordeón)
+  const dropdownItems = document.querySelectorAll('.nav-item-dropdown');
+  dropdownItems.forEach(item => {
+    const trigger = item.querySelector('.nav-dropdown-trigger');
+    let hoverTimeout = null;
+
+    // En escritorio, añadir clase is-active con micro-retardo para evitar cierres accidentales
+    item.addEventListener('mouseenter', () => {
+      if (window.innerWidth > 992) {
+        clearTimeout(hoverTimeout);
+        dropdownItems.forEach(other => {
+          if (other !== item) {
+            other.classList.remove('is-active');
+            const ot = other.querySelector('.nav-dropdown-trigger');
+            if (ot) ot.setAttribute('aria-expanded', 'false');
+          }
+        });
+        item.classList.add('is-active');
+        if (trigger) trigger.setAttribute('aria-expanded', 'true');
+      }
+    });
+
+    item.addEventListener('mouseleave', () => {
+      if (window.innerWidth > 992) {
+        hoverTimeout = setTimeout(() => {
+          item.classList.remove('is-active');
+          if (trigger) trigger.setAttribute('aria-expanded', 'false');
+        }, 150);
+      }
+    });
+
+    // En móviles, alternar acordeón con clic
+    if (trigger) {
+      trigger.addEventListener('click', (e) => {
+        if (window.innerWidth <= 992) {
+          e.preventDefault();
+          const wasOpen = item.classList.contains('open');
+          dropdownItems.forEach(other => {
+            if (other !== item) {
+              other.classList.remove('open');
+              other.classList.remove('is-active');
+              const ot = other.querySelector('.nav-dropdown-trigger');
+              if (ot) ot.setAttribute('aria-expanded', 'false');
+            }
+          });
+          const isOpen = item.classList.toggle('open', !wasOpen);
+          item.classList.toggle('is-active', isOpen);
+          trigger.setAttribute('aria-expanded', String(isOpen));
+        }
+      });
+    }
+
+    // Al pulsar un subenlace, cerrar el menú responsive móvil y desactivar estado
+    item.querySelectorAll('.nav-dropdown-menu a').forEach(subLink => {
+      subLink.addEventListener('click', () => {
+        if (navMenu) navMenu.classList.remove('open');
+        if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
+        item.classList.remove('open');
+        item.classList.remove('is-active');
+      });
+    });
+  });
+
+  // Cerrar menús al hacer clic fuera en desktop
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.nav-item-dropdown')) {
+      dropdownItems.forEach(item => {
+        item.classList.remove('is-active');
+        const trigger = item.querySelector('.nav-dropdown-trigger');
+        if (trigger) trigger.setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
+
+  // Cerrar menú con la tecla Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      dropdownItems.forEach(item => {
+        item.classList.remove('open');
+        item.classList.remove('is-active');
+        const trigger = item.querySelector('.nav-dropdown-trigger');
+        if (trigger) trigger.setAttribute('aria-expanded', 'false');
+      });
+      if (navMenu) navMenu.classList.remove('open');
+      if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
 }
 
 /* --------------------------------------------------------------------------
