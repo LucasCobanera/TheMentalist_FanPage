@@ -961,3 +961,41 @@
     font-size: 0.86rem !important;
   }
 }
+
+@media (max-width: 576px) {
+  .memory-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.65rem !important;
+  }
+
+  .memory-card-img-wrap {
+    height: 95px !important;
+  }
+
+  .memory-card-body {
+    padding: 0.45rem 0.5rem !important;
+  }
+
+  .memory-card-name {
+    font-size: 0.82rem !important;
+  }
+
+  .memory-card-detail {
+    font-size: 0.68rem !important;
+  }
+
+  .memory-card-pos {
+    font-size: 0.62rem !important;
+    padding: 0.1rem 0.35rem !important;
+  }
+
+  .options-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0.5rem !important;
+  }
+
+  .option-btn {
+    padding: 0.65rem 0.85rem !important;
+    font-size: 0.82rem !important;
+  }
+}

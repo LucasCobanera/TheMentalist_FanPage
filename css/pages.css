@@ -686,12 +686,11 @@
     margin-left: -42px;
   }
 
-  .dossier-overlap-track .dossier-card:hover {
-    transform: translateX(-24px) !important;
-  }
-
-  .dossier-overlap-track .dossier-card.nemesis-card:hover {
-    transform: translateX(-24px) !important;
+  .dossier-overlap-track .dossier-card:hover,
+  .dossier-overlap-track .dossier-card:first-child:hover,
+  .dossier-overlap-track .dossier-card.nemesis-card:hover,
+  .dossier-overlap-track .dossier-card.nemesis-card:first-child:hover {
+    transform: translateY(-20px) !important;
   }
 
   .locker-header-bar {
@@ -2746,7 +2745,8 @@ body.red-john-page::before {
 @media (min-width: 880px) {
   .board-pins-grid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 2.2rem 1.6rem;
+    max-width: 760px;
+    gap: 1.6rem 1.3rem;
   }
 
   /* Centra a Gale Bertram en la 3ª fila debajo de Red John */
@@ -2759,7 +2759,7 @@ body.red-john-page::before {
 .board-pin-card {
   position: relative;
   width: 100%;
-  max-width: 220px;
+  max-width: 185px;
   margin: 0 auto;
   transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.25s ease, filter 0.25s ease, opacity 0.25s ease;
   will-change: transform;
@@ -2825,15 +2825,15 @@ body.red-john-page::before {
 /* Fotografía Polaroid Vintage (Compacta, uniforme y sin deformaciones) */
 .polaroid-frame {
   background: #f7f4ed;
-  padding: 8px 8px 9px;
+  padding: 7px 7px 7px;
   border-radius: 2px;
   box-shadow:
     0 8px 20px rgba(0, 0, 0, 0.65),
     0 1px 3px rgba(0, 0, 0, 0.4);
   color: #1a1a1a;
   width: 100%;
-  max-width: 215px;
-  height: 236px; /* Altura fija uniforme para todo el tablero */
+  max-width: 185px;
+  height: 206px; /* Altura fija uniforme para todo el tablero */
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -2846,8 +2846,8 @@ body.red-john-page::before {
 /* Contenedor de Imagen de Polaroid */
 .polaroid-img-wrap {
   position: relative;
-  width: 96px;
-  height: 108px;
+  width: 82px;
+  height: 90px;
   margin: 0 auto;
   background: #111;
   overflow: hidden;
@@ -2875,24 +2875,24 @@ body.red-john-page::before {
 
 .pin-badge-status {
   position: absolute;
-  top: 5px;
-  right: 5px;
-  font-size: 0.56rem;
+  top: 4px;
+  right: 4px;
+  font-size: 0.52rem;
   font-weight: 800;
   letter-spacing: 0.05em;
-  padding: 0.18rem 0.4rem;
+  padding: 0.15rem 0.35rem;
   border-radius: 2px;
   text-transform: uppercase;
 }
 
 .polaroid-caption {
-  padding-top: 5px;
+  padding-top: 4px;
   text-align: center;
 }
 
 .polaroid-name {
   font-family: var(--font-display, serif);
-  font-size: 1.02rem;
+  font-size: 0.94rem;
   color: #111827;
   font-weight: 700;
   margin: 0 0 0.1rem 0;
@@ -2902,7 +2902,7 @@ body.red-john-page::before {
 
 .polaroid-role {
   font-family: var(--font-typewriter, monospace);
-  font-size: 0.68rem;
+  font-size: 0.62rem;
   color: #8b1122;
   font-weight: 700;
   text-transform: uppercase;
@@ -2916,13 +2916,13 @@ body.red-john-page::before {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.45rem;
-  font-size: 0.64rem;
+  gap: 0.4rem;
+  font-size: 0.60rem;
   font-family: var(--font-typewriter, monospace);
   color: #8b2535;
   font-weight: 700;
-  margin-top: 0.35rem;
-  padding-top: 0.3rem;
+  margin-top: 0.2rem;
+  padding-top: 0.2rem;
   border-top: 1px dashed rgba(0, 0, 0, 0.15);
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -2934,11 +2934,11 @@ body.red-john-page::before {
 
 .board-pin-card:hover .card-expand-hint {
   color: var(--crimson-bright);
-  gap: 0.65rem;
+  gap: 0.6rem;
 }
 
 .card-expand-hint i {
-  font-size: 0.64rem;
+  font-size: 0.60rem;
 }
 
 /* ==========================================================================
@@ -2948,8 +2948,8 @@ body.red-john-page::before {
 .board-center-master-card {
   position: relative;
   width: 100%;
-  max-width: 215px;
-  height: 236px; /* Altura estricta idéntica a las demás tarjetas */
+  max-width: 185px;
+  height: 206px; /* Altura estricta idéntica a las demás tarjetas */
   margin: 0 auto;
   z-index: 8;
   cursor: pointer;
@@ -2960,7 +2960,7 @@ body.red-john-page::before {
   background: linear-gradient(150deg, #240c12 0%, #15060a 100%);
   border: 2px solid var(--crimson-bright);
   border-radius: 4px;
-  padding: 0.9rem 0.8rem 0.85rem;
+  padding: 0.7rem 0.65rem 0.65rem;
   text-align: center;
   box-shadow:
     0 12px 32px rgba(0, 0, 0, 0.88),
@@ -2970,7 +2970,8 @@ body.red-john-page::before {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: 236px; /* Misma altura exacta */
+  max-width: 185px;
+  height: 206px; /* Misma altura exacta */
   box-sizing: border-box;
   transition: opacity 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
   opacity: 1;
@@ -2986,8 +2987,8 @@ body.red-john-page::before {
 /* Estado 2: Identidad Revelada de Thomas McAllister */
 .board-master-revealed {
   width: 100%;
-  max-width: 215px;
-  height: 236px; /* Misma altura exacta */
+  max-width: 185px;
+  height: 206px; /* Misma altura exacta */
   box-sizing: border-box;
   margin: 0 auto;
   transition: opacity 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -3003,20 +3004,20 @@ body.red-john-page::before {
 .polaroid-master-frame {
   background: #fef1f2;
   border: 2px solid var(--crimson-bright);
-  height: 236px; /* Misma altura exacta */
+  height: 206px; /* Misma altura exacta */
   width: 100%;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 8px 8px 7px;
+  padding: 7px 7px 6px;
   margin: 0 auto;
 }
 
 .board-center-master-card .center-symbol-wrap {
-  width: 62px;
-  height: 62px;
-  margin: 0 auto 0.15rem;
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 0.1rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3032,18 +3033,18 @@ body.red-john-page::before {
 
 .board-center-master-card .center-node-title {
   font-family: var(--font-display, serif);
-  font-size: 1.18rem;
+  font-size: 1.05rem;
   letter-spacing: 0.12em;
   color: #ff9da4;
-  margin: 0 0 0.15rem 0;
+  margin: 0 0 0.1rem 0;
   text-align: center;
   text-transform: uppercase;
 }
 
 .btn-reveal-master {
-  font-size: 0.74rem;
-  padding: 0.38rem 0.95rem;
-  margin-top: 0.35rem;
+  font-size: 0.68rem;
+  padding: 0.3rem 0.75rem;
+  margin-top: 0.25rem;
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
@@ -4126,5 +4127,310 @@ body.red-john-page::before {
     min-width: 0 !important;
     scroll-snap-align: center !important;
     padding: 1.1rem 1rem !important;
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE OPTIMIZATIONS: TABLET & MOBILE (Zero desktop regressions)
+   ========================================================================== */
+
+/* 1. Red John: Tablero de corcho panorámico e interacción en pantallas <= 880px */
+@media (max-width: 880px) {
+  .evidence-cork-board {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding: 1.6rem 0.85rem 2.2rem !important;
+  }
+
+  .board-pins-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    width: 580px !important;
+    min-width: 580px !important;
+    max-width: 580px !important;
+    gap: 1.3rem 1rem !important;
+    margin: 0 auto !important;
+  }
+
+  .board-pin-card-bottom {
+    grid-column: 2 / 3 !important;
+  }
+
+  .board-pin-card {
+    max-width: 175px !important;
+  }
+
+  .polaroid-frame {
+    max-width: 175px !important;
+    height: 196px !important;
+    padding: 6px 6px 6px !important;
+  }
+
+  .polaroid-img-wrap {
+    width: 76px !important;
+    height: 84px !important;
+  }
+
+  .polaroid-name {
+    font-size: 0.88rem !important;
+  }
+
+  .polaroid-role {
+    font-size: 0.58rem !important;
+  }
+
+  .card-expand-hint {
+    font-size: 0.58rem !important;
+  }
+
+  .board-center-master-card,
+  .board-master-unrevealed,
+  .board-master-revealed,
+  .polaroid-master-frame {
+    max-width: 175px !important;
+    height: 196px !important;
+  }
+
+  .board-master-unrevealed {
+    padding: 0.6rem 0.55rem 0.55rem !important;
+  }
+
+  .board-center-master-card .center-symbol-wrap {
+    width: 44px !important;
+    height: 44px !important;
+  }
+
+  .board-center-master-card .center-node-title {
+    font-size: 0.95rem !important;
+  }
+
+  .btn-reveal-master {
+    font-size: 0.64rem !important;
+    padding: 0.25rem 0.65rem !important;
+  }
+
+  .polaroid-master-frame {
+    padding: 6px 6px 5px !important;
+  }
+
+  .board-interaction-legend {
+    padding: 0.65rem 0.85rem !important;
+    font-size: 0.78rem !important;
+    line-height: 1.45 !important;
+  }
+
+  .shelf-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.4rem !important;
+  }
+
+  .shelf-hint {
+    font-size: 0.68rem !important;
+  }
+}
+
+/* 2. Personajes, Temporadas y Curiosidades en Pantallas Móviles (<= 768px) */
+@media (max-width: 768px) {
+  /* Personajes */
+  .dossier-cabinet-frame {
+    border-width: 8px !important;
+    border-radius: 8px !important;
+  }
+
+  .locker-cabinet-inner {
+    padding: 0 0.25rem !important;
+  }
+
+  .locker-badge-plate {
+    padding: 0.25rem 0.65rem !important;
+  }
+
+  .locker-pull-handle {
+    width: 90px !important;
+    height: 12px !important;
+  }
+
+  /* Temporadas */
+  .narrative-timeline-section {
+    padding: 1.35rem 0.85rem !important;
+    margin-bottom: 2rem !important;
+    border-radius: 8px !important;
+  }
+
+  .timeline-main-title {
+    font-size: 1.35rem !important;
+  }
+
+  .timeline-subtitle {
+    font-size: 0.82rem !important;
+  }
+
+  .timeline-milestone-node {
+    width: 220px !important;
+  }
+
+  .milestone-card {
+    padding: 0.95rem 0.85rem !important;
+    min-height: 165px !important;
+  }
+
+  .milestone-title {
+    font-size: 0.92rem !important;
+  }
+
+  .milestone-desc {
+    font-size: 0.78rem !important;
+  }
+
+  /* Curiosidades */
+  .quotes-generator-card {
+    padding: 1.8rem 1rem !important;
+    margin-bottom: 2rem !important;
+  }
+
+  .quote-display {
+    min-height: 90px !important;
+    margin-bottom: 1.25rem !important;
+  }
+
+  .quote-display blockquote {
+    font-size: clamp(1rem, 4.2vw, 1.15rem) !important;
+    line-height: 1.45 !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .quote-display cite {
+    font-size: 0.78rem !important;
+  }
+
+  .quote-actions {
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 0.6rem !important;
+  }
+
+  .quote-actions .btn {
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 0.65rem 1rem !important;
+    font-size: 0.82rem !important;
+  }
+}
+
+/* 3. Pantallas Ultra-Compactas (<= 576px) */
+@media (max-width: 576px) {
+  /* Evidence Drawer Full-Width en celulares */
+  .evidence-drawer {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    border-left: none !important;
+  }
+
+  .drawer-header {
+    padding: 1rem 1.15rem !important;
+  }
+
+  .drawer-body {
+    padding: 1.15rem 1rem 2rem !important;
+  }
+
+  .drawer-suspect-profile {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  .drawer-suspect-photo-wrap {
+    width: 120px !important;
+    height: 135px !important;
+    margin: 0 auto !important;
+  }
+
+  /* Filtros pegajosos compactos */
+  .board-filters-bar {
+    top: 60px !important;
+    padding: 0.45rem 0.55rem !important;
+    gap: 0.35rem !important;
+    border-radius: 16px !important;
+  }
+
+  .board-filters-label {
+    font-size: 0.72rem !important;
+    width: 100% !important;
+    justify-content: center !important;
+    margin-bottom: 0.15rem !important;
+  }
+
+  .board-filter-btn {
+    font-size: 0.72rem !important;
+    padding: 0.35rem 0.65rem !important;
+  }
+
+  .board-action-btn {
+    font-size: 0.72rem !important;
+    padding: 0.35rem 0.65rem !important;
+  }
+
+  /* Personajes en celulares pequeños */
+  .dossier-overlap-track .dossier-card {
+    flex: 0 0 215px !important;
+    width: 215px !important;
+    min-width: 215px !important;
+    max-width: 215px !important;
+    margin-left: -32px !important;
+  }
+
+  .dossier-overlap-track .dossier-card:first-child {
+    margin-left: 0 !important;
+  }
+
+  .locker-nav-btn {
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 0.8rem !important;
+  }
+
+  .locker-nav-prev {
+    left: 2px !important;
+  }
+
+  .locker-nav-next {
+    right: 2px !important;
+  }
+
+  .dossier-body {
+    padding: 0.55rem 0.75rem 0.85rem !important;
+  }
+
+  .dossier-photo-frame img {
+    height: 180px !important;
+  }
+
+  /* Modal de Personajes */
+  .dossier-modal-container {
+    padding: 0.35rem !important;
+    max-width: 98vw !important;
+  }
+
+  .dossier-open-folder {
+    padding: 0.85rem 0.65rem !important;
+  }
+
+  .modal-agent-stats-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.4rem !important;
+  }
+
+  .modal-stat-box {
+    padding: 0.35rem 0.45rem !important;
+  }
+
+  .modal-stat-label {
+    font-size: 0.58rem !important;
+  }
+
+  .modal-stat-val {
+    font-size: 0.72rem !important;
   }
 }

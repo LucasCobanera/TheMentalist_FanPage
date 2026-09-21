@@ -451,8 +451,8 @@ function initEvidenceBoard() {
     const boardRect = board.getBoundingClientRect();
 
     return {
-      x: pinRect.left - boardRect.left + pinRect.width / 2,
-      y: pinRect.top - boardRect.top + pinRect.height / 2
+      x: pinRect.left - boardRect.left + (board.scrollLeft || 0) + pinRect.width / 2,
+      y: pinRect.top - boardRect.top + (board.scrollTop || 0) + pinRect.height / 2
     };
   }
 
@@ -473,7 +473,12 @@ function initEvidenceBoard() {
     const boardRect = board.getBoundingClientRect();
     if (boardRect.width === 0 || boardRect.height === 0) return;
 
-    svg.setAttribute('viewBox', `0 0 ${boardRect.width} ${boardRect.height}`);
+    const fullWidth = Math.max(board.scrollWidth, Math.round(boardRect.width));
+    const fullHeight = Math.max(board.scrollHeight, Math.round(boardRect.height));
+
+    svg.style.width = fullWidth + 'px';
+    svg.style.height = fullHeight + 'px';
+    svg.setAttribute('viewBox', `0 0 ${fullWidth} ${fullHeight}`);
 
     const centerCoords = getPinCoords(centerNode);
 
