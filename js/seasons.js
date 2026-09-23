@@ -181,8 +181,8 @@ const SEASONS_DATA = [
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
-  renderSeasons('all');
-  updateSeasonHeader('all');
+  renderSeasons('all', true);
+  updateSeasonHeader('all', true);
   initSeasonPills();
   initNarrativeTimeline();
   initSpoilerToggle();
@@ -192,39 +192,132 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /**
- * Actualiza el encabezado visual dinámico con la portada, título del arco y número
- * de episodios según la temporada filtrada (o la vista global de 'all').
+/** @type {number} Token secuencial para evitar condiciones de carrera en el hero header */
+let currentHeaderTransitionId = 0;
+/** @type {number|null} Referencia al temporizador del crossfade para cancelaciones */
+let headerFadeTimeout = null;
+
+/**
+ * Actualiza el encabezado visual dinámico mediante un cross-fade real de doble capa,
+ * garantizando cero parpadeos, sin pantallas intermedias ni desplazamientos indeseados.
  * @param {string|number} selectedSeason Número de temporada ('1'..'7') o 'all'
+ * @param {boolean} [immediate=false] Si es true, omite la animación (usado en carga inicial)
  */
-function updateSeasonHeader(selectedSeason) {
-  const dynamicHeader = document.getElementById('seasonsDynamicHeader');
-  const headerBg = document.getElementById('seasonHeaderBg');
+function updateSeasonHeader(selectedSeason, immediate = false) {
   const headerImg = document.getElementById('seasonHeaderImg');
+  let headerImgFade = document.getElementById('seasonHeaderImgFade');
   const headerBadge = document.getElementById('seasonHeaderBadge');
   const headerTitle = document.getElementById('seasonHeaderTitle');
+  const headerTitles = document.getElementById('seasonHeaderTitles');
   const headerDesc = document.getElementById('seasonHeaderDesc');
 
   if (headerDesc) headerDesc.remove();
+  if (!headerTitle || !headerImg) return;
 
-  if (!headerTitle) return;
+  // Fallback si no existe la capa de fundido en el HTML
+  if (!headerImgFade && headerImg.parentElement) {
+    headerImgFade = document.createElement('img');
+    headerImgFade.id = 'seasonHeaderImgFade';
+    headerImgFade.className = 'season-header-img-fade';
+    headerImgFade.setAttribute('aria-hidden', 'true');
+    headerImg.parentElement.appendChild(headerImgFade);
+  }
+
+  let targetSrc = '';
+  let targetBadge = '';
+  let targetTitle = '';
 
   if (selectedSeason === 'all') {
-    const bgUrl = "url('img/Seasons/temporadas.jpg')";
-    if (headerBadge) headerBadge.textContent = '151 EPISODIOS';
-    headerTitle.textContent = 'Temporadas';
-    if (headerImg) headerImg.src = 'img/Seasons/temporadas.jpg';
-    if (headerBg) headerBg.style.backgroundImage = bgUrl;
-    if (dynamicHeader) dynamicHeader.style.backgroundImage = bgUrl;
+    targetSrc = 'img/Seasons/temporadas.jpg';
+    targetBadge = '151 EPISODIOS';
+    targetTitle = 'Temporadas';
   } else {
     const s = SEASONS_DATA.find(item => item.season.toString() === selectedSeason.toString());
     if (!s) return;
 
-    const bgUrl = `url('img/Seasons/S${s.season}.jpg')`;
-    if (headerBadge) headerBadge.textContent = `${s.episodesCount} EPISODIOS`;
-    headerTitle.textContent = `T${s.season}: "${s.arc}"`;
-    if (headerImg) headerImg.src = `img/Seasons/S${s.season}.jpg`;
-    if (headerBg) headerBg.style.backgroundImage = bgUrl;
-    if (dynamicHeader) dynamicHeader.style.backgroundImage = bgUrl;
+    targetSrc = `img/Seasons/S${s.season}.jpg`;
+    targetBadge = `${s.episodesCount} EPISODIOS`;
+    targetTitle = `T${s.season}: "${s.arc}"`;
+  }
+
+  // Evitar re-ejecución si ya está mostrando la misma temporada
+  if (headerImg.getAttribute('data-current-season') === selectedSeason.toString()) {
+    return;
+  }
+
+  const transitionId = ++currentHeaderTransitionId;
+  if (headerFadeTimeout) {
+    clearTimeout(headerFadeTimeout);
+    headerFadeTimeout = null;
+  }
+
+  // Si es la carga inicial o forzado sin animación
+  if (immediate) {
+    headerImg.src = targetSrc;
+    headerImg.setAttribute('data-current-season', selectedSeason.toString());
+    if (headerBadge) headerBadge.textContent = targetBadge;
+    headerTitle.textContent = targetTitle;
+    if (headerImgFade) {
+      headerImgFade.classList.remove('is-active');
+      headerImgFade.src = '';
+    }
+    return;
+  }
+
+  // 1. Transición suave del bloque de títulos (los botones de temporadas nunca se mueven ni parpadean)
+  if (headerTitles) {
+    headerTitles.classList.add('is-fading');
+    setTimeout(() => {
+      if (transitionId !== currentHeaderTransitionId) return;
+      if (headerBadge) headerBadge.textContent = targetBadge;
+      headerTitle.textContent = targetTitle;
+      headerTitles.classList.remove('is-fading');
+    }, 110);
+  } else {
+    if (headerBadge) headerBadge.textContent = targetBadge;
+    headerTitle.textContent = targetTitle;
+  }
+
+  // 2. Transición suave de foto (Crossfade real de doble capa sin saltos)
+  headerImg.setAttribute('data-current-season', selectedSeason.toString());
+
+  if (!headerImgFade) {
+    headerImg.src = targetSrc;
+    return;
+  }
+
+  const activateCrossfade = () => {
+    if (transitionId !== currentHeaderTransitionId) return;
+
+    // Activar fundido en la capa superior
+    headerImgFade.classList.add('is-active');
+
+    // Al finalizar la animación del crossfade (380ms), transferir a la capa base
+    headerFadeTimeout = setTimeout(() => {
+      if (transitionId !== currentHeaderTransitionId) return;
+      headerImg.src = targetSrc;
+      headerImgFade.style.transition = 'none';
+      headerImgFade.classList.remove('is-active');
+      void headerImgFade.offsetHeight; // forzar reflujo
+      headerImgFade.style.transition = '';
+    }, 380);
+  };
+
+  headerImgFade.onload = () => {
+    activateCrossfade();
+  };
+
+  headerImgFade.onerror = () => {
+    if (transitionId !== currentHeaderTransitionId) return;
+    headerImg.src = targetSrc;
+    headerImgFade.classList.remove('is-active');
+  };
+
+  headerImgFade.src = targetSrc;
+
+  // Si la imagen ya estaba en caché y lista en el navegador
+  if (headerImgFade.complete && headerImgFade.naturalWidth > 0) {
+    activateCrossfade();
   }
 }
 
@@ -264,83 +357,112 @@ function toggleSpoilers(forceState) {
   }
 }
 
+/** @type {number} Token secuencial para evitar condiciones de carrera en el renderizado */
+let currentRenderTransitionId = 0;
+/** @type {number|null} Referencia al temporizador de renderizado para cancelaciones */
+let renderSwitchTimeout = null;
+
 /**
  * Renderiza dinámicamente los bloques de temporadas, sinopsis condensadas con botón
- * de expansión y la cuadrícula de episodios clave.
+ * de expansión y la cuadrícula de episodios clave, con transición suave de cambio.
  * @param {string|number} selectedSeason Temporada a filtrar ('all' o '1'..'7')
+ * @param {boolean} [immediate=false] Si es true, renderiza sin retraso de transición
  */
-function renderSeasons(selectedSeason) {
+function renderSeasons(selectedSeason, immediate = false) {
   const container = document.getElementById('seasonsContainer');
   if (!container) return;
+
+  const renderId = ++currentRenderTransitionId;
+  if (renderSwitchTimeout) {
+    clearTimeout(renderSwitchTimeout);
+    renderSwitchTimeout = null;
+  }
 
   const list = selectedSeason === 'all'
     ? SEASONS_DATA
     : SEASONS_DATA.filter(s => s.season.toString() === selectedSeason.toString());
 
-  if (isSpoilersRevealed) {
-    container.classList.add('spoilers-revealed');
-  } else {
-    container.classList.remove('spoilers-revealed');
-  }
+  const applySeasonHTML = () => {
+    if (renderId !== currentRenderTransitionId) return;
 
-  container.innerHTML = list.map(s => {
-    const isLong = s.synopsis && s.synopsis.length > 140;
-    const excerpt = isLong ? s.synopsis.substring(0, 137).trim() + '...' : s.synopsis;
+    if (isSpoilersRevealed) {
+      container.classList.add('spoilers-revealed');
+    } else {
+      container.classList.remove('spoilers-revealed');
+    }
 
-    return `
-    <section class="season-block season-block-${s.season}" id="season-${s.season}">
-      <div class="season-header-row">
-        <div class="season-info">
-          <span class="badge badge-gold">TEMPORADA ${s.season}</span>
-          <h3 style="margin-top: 0.5rem;">${s.arc}</h3>
-          <div class="season-meta-tags">
-            <span class="badge badge-cbi">📅 ${s.year}</span>
-            <span class="badge badge-cbi">🎬 ${s.episodesCount} Episodios</span>
-          </div>
-        </div>
-      </div>
+    container.innerHTML = list.map((s, idx) => {
+      const isLong = s.synopsis && s.synopsis.length > 140;
+      const excerpt = isLong ? s.synopsis.substring(0, 137).trim() + '...' : s.synopsis;
+      const delay = Math.min(idx * 0.04, 0.2);
 
-      <div class="season-synopsis-box">
-        <p class="season-synopsis">${excerpt}</p>
-        ${isLong ? `
-          <button type="button" class="btn-read-more-season" data-season="${s.season}" aria-label="Leer sinopsis completa de la Temporada ${s.season}">
-            <i class="fa-solid fa-book-open" style="font-size: 0.75rem;"></i>
-            <span>Leer sinopsis completa</span>
-            <i class="fa-solid fa-arrow-right" style="font-size: 0.75rem;"></i>
-          </button>
-        ` : ''}
-      </div>
-
-      <div class="episodes-header-bar">
-        <h4 class="episodes-section-title">
-          Episodios Clave & Momentos Cumbre:
-        </h4>
-        <button type="button" class="btn-spoiler-toggle ${isSpoilersRevealed ? 'active' : ''}" aria-pressed="${isSpoilersRevealed}" title="Mostrar u ocultar resoluciones y spoilers">
-          <span class="toggle-switch-ui">
-            <span class="slider-ui"></span>
-          </span>
-          <span class="spoiler-btn-label">${isSpoilersRevealed ? 'Ocultar spoilers' : 'Mostrar spoilers'}</span>
-        </button>
-      </div>
-
-      <div class="episodes-grid">
-        ${s.episodes.map(ep => `
-          <div class="episode-card">
-            <div class="episode-num">${ep.num}</div>
-            <h5 class="episode-title">${ep.title}</h5>
-            <p class="episode-plot">${ep.plot}</p>
-            <div style="margin-top: 0.75rem; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 0.5rem;">
-              <span style="font-size: 0.7rem; text-transform: uppercase; color: var(--crimson-bright); font-weight: 700; letter-spacing: 0.05em;">Resolución Clave:</span>
-              <p class="episode-plot spoiler-content" style="margin-top: 0.25rem;">${ep.spoiler}</p>
+      return `
+      <section class="season-block season-block-${s.season}" id="season-${s.season}" style="animation-delay: ${delay}s;">
+        <div class="season-header-row">
+          <div class="season-info">
+            <span class="badge badge-gold">TEMPORADA ${s.season}</span>
+            <h3 style="margin-top: 0.5rem;">${s.arc}</h3>
+            <div class="season-meta-tags">
+              <span class="badge badge-cbi">📅 ${s.year}</span>
+              <span class="badge badge-cbi">🎬 ${s.episodesCount} Episodios</span>
             </div>
           </div>
-        `).join('')}
-      </div>
-    </section>
-  `;
-  }).join('');
+        </div>
 
-  attachSynopsisModalListeners();
+        <div class="season-synopsis-box">
+          <p class="season-synopsis">${excerpt}</p>
+          ${isLong ? `
+            <button type="button" class="btn-read-more-season" data-season="${s.season}" aria-label="Leer sinopsis completa de la Temporada ${s.season}">
+              <i class="fa-solid fa-book-open" style="font-size: 0.75rem;"></i>
+              <span>Leer sinopsis completa</span>
+              <i class="fa-solid fa-arrow-right" style="font-size: 0.75rem;"></i>
+            </button>
+          ` : ''}
+        </div>
+
+        <div class="episodes-header-bar">
+          <h4 class="episodes-section-title">
+            Episodios Clave & Momentos Cumbre:
+          </h4>
+          <button type="button" class="btn-spoiler-toggle ${isSpoilersRevealed ? 'active' : ''}" aria-pressed="${isSpoilersRevealed}" title="Mostrar u ocultar resoluciones y spoilers">
+            <span class="toggle-switch-ui">
+              <span class="slider-ui"></span>
+            </span>
+            <span class="spoiler-btn-label">${isSpoilersRevealed ? 'Ocultar spoilers' : 'Mostrar spoilers'}</span>
+          </button>
+        </div>
+
+        <div class="episodes-grid">
+          ${s.episodes.map(ep => `
+            <div class="episode-card">
+              <div class="episode-num">${ep.num}</div>
+              <h5 class="episode-title">${ep.title}</h5>
+              <p class="episode-plot">${ep.plot}</p>
+              <div style="margin-top: 0.75rem; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 0.5rem;">
+                <span style="font-size: 0.7rem; text-transform: uppercase; color: var(--crimson-bright); font-weight: 700; letter-spacing: 0.05em;">Resolución Clave:</span>
+                <p class="episode-plot spoiler-content" style="margin-top: 0.25rem;">${ep.spoiler}</p>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </section>
+    `;
+    }).join('');
+
+    attachSynopsisModalListeners();
+
+    requestAnimationFrame(() => {
+      container.classList.remove('is-switching');
+    });
+  };
+
+  if (immediate || !container.classList.contains('has-rendered')) {
+    container.classList.add('has-rendered');
+    applySeasonHTML();
+  } else {
+    container.classList.add('is-switching');
+    renderSwitchTimeout = setTimeout(applySeasonHTML, 100);
+  }
 }
 
 /**

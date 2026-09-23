@@ -300,20 +300,21 @@
   font-size: 0.95rem;
 }
 
-/* Menú de navegación rediseñado: centrado, compacto y con separación amplia con el logo y acciones */
+/* Menú de navegación alineado a la izquierda para ocupar el espacio adecuadamente */
 .site-header nav {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex: 1;
   min-width: 0;
+  margin-left: clamp(0.75rem, 1.8vw, 2rem);
 }
 
 .nav-menu {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: clamp(0.35rem, 0.9vw, 0.95rem);
+  justify-content: flex-end;
+  gap: clamp(0.25rem, 0.6vw, 0.75rem);
   list-style: none;
 }
 
@@ -366,6 +367,25 @@
   box-shadow: 0 0 14px var(--crimson-glow);
 }
 
+.nav-link.nav-contact-link {
+  color: #ecdcc2;
+  border-color: rgba(212, 180, 131, 0.25);
+}
+
+.nav-link.nav-contact-link:hover {
+  color: #fff;
+  background: rgba(212, 180, 131, 0.16);
+  border-color: rgba(212, 180, 131, 0.45);
+  box-shadow: 0 0 10px rgba(212, 180, 131, 0.25);
+}
+
+.nav-link.nav-contact-link.active {
+  color: #fff;
+  background: rgba(212, 180, 131, 0.28);
+  border-color: rgba(212, 180, 131, 0.6);
+  box-shadow: 0 0 14px rgba(212, 180, 131, 0.35);
+}
+
 /* --------------------------------------------------------------------------
    MENÚS DESPLEGABLES DEL HEADER (PERSONAJES & TEMPORADAS)
    Mega-flyouts interactivos con glassmorphism, elevación y microanimaciones
@@ -412,8 +432,8 @@
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 12px;
-  box-shadow: 
-    0 24px 50px rgba(0, 0, 0, 0.9), 
+  box-shadow:
+    0 24px 50px rgba(0, 0, 0, 0.9),
     0 0 30px rgba(46, 116, 80, 0.12),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
   padding: 1.15rem;
@@ -437,9 +457,10 @@
 
 /* Apertura al hacer hover en desktop */
 @media (min-width: 993px) {
-  .nav-item-dropdown:hover > .nav-dropdown-menu,
-  .nav-item-dropdown:focus-within > .nav-dropdown-menu,
-  .nav-item-dropdown.is-active > .nav-dropdown-menu {
+
+  .nav-item-dropdown:hover>.nav-dropdown-menu,
+  .nav-item-dropdown:focus-within>.nav-dropdown-menu,
+  .nav-item-dropdown.is-active>.nav-dropdown-menu {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
@@ -815,6 +836,7 @@
   from {
     height: 4px;
   }
+
   to {
     height: 14px;
   }
@@ -1336,7 +1358,7 @@
     transition: max-height 0.35s ease, opacity 0.25s ease, padding 0.3s ease;
   }
 
-  .nav-item-dropdown.open > .nav-dropdown-menu {
+  .nav-item-dropdown.open>.nav-dropdown-menu {
     max-height: 800px;
     padding: 0.85rem 0.65rem;
     opacity: 1;
@@ -1912,8 +1934,15 @@ body.cbi-modal-open {
 }
 
 @keyframes fadeInAlert {
-  from { opacity: 0; transform: translateY(-4px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .cbi-alert.alert-success {

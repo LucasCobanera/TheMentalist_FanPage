@@ -101,6 +101,9 @@ function initQuoteGenerator() {
   /** @type {number} Índice de la cita mostrada actualmente */
   let currentIndex = 0;
 
+  /** @type {number|null} Temporizador de transición para evitar carreras si se pulsa rápidamente */
+  let quoteTransitionTimeout = null;
+
   /**
    * Muestra la cita seleccionada aplicando una suave transición de fundido
    * y zoom en la imagen de fondo.
@@ -108,17 +111,28 @@ function initQuoteGenerator() {
    */
   function displayQuote(index) {
     const q = QUOTES_LIST[index];
+    if (quoteTransitionTimeout) {
+      clearTimeout(quoteTransitionTimeout);
+      quoteTransitionTimeout = null;
+    }
+
     quoteText.style.opacity = '0';
-    quoteText.style.transform = 'translateY(8px)';
+    quoteText.style.transform = 'translateY(6px)';
+    if (quoteAuthor) {
+      quoteAuthor.style.opacity = '0';
+      quoteAuthor.style.transform = 'translateY(4px)';
+    }
     
     if (quoteBg) {
       quoteBg.style.opacity = '0.35';
-      quoteBg.style.transform = 'scale(1.03)';
+      quoteBg.style.transform = 'scale(1.02)';
     }
     
-    setTimeout(() => {
+    quoteTransitionTimeout = setTimeout(() => {
       quoteText.textContent = `"${q.quote}"`;
-      quoteAuthor.textContent = `— ${q.author} (${q.season})`;
+      if (quoteAuthor) {
+        quoteAuthor.textContent = `— ${q.author} (${q.season})`;
+      }
       
       if (quoteBg && q.bg) {
         quoteBg.style.backgroundImage = `url('${q.bg}')`;
@@ -128,8 +142,14 @@ function initQuoteGenerator() {
       
       quoteText.style.opacity = '1';
       quoteText.style.transform = 'translateY(0)';
-      quoteText.style.transition = 'all 0.3s ease';
-    }, 150);
+      quoteText.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+
+      if (quoteAuthor) {
+        quoteAuthor.style.opacity = '1';
+        quoteAuthor.style.transform = 'translateY(0)';
+        quoteAuthor.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+      }
+    }, 130);
   }
 
   // Inicializar con la primera cita

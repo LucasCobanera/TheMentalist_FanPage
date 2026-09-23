@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Galería de imágenes y momentos icónicos de The Mentalist: Revive las escenas más memorables de Patrick Jane, Teresa Lisbon, Red John y el equipo del CBI en alta resolución.">
+  <title>Galería de Imágenes & Momentos | The Mentalist</title>
+
+  <!-- Google Fonts & Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800;900&family=Inter:wght@300;400;500;600;700&family=Special+Elite&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Estilos CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+
+<body class="page-gallery">
+
+  <!-- CABECERA PRINCIPAL -->
+  <header class="site-header" id="mainHeader">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo" title="The Mentalist Fanpage">
+        <div class="brand-icon">
+          <img src="img/Red-John-Smiley-Face.png" alt="Red John Smiley" class="brand-smiley-img">
+          <div class="blood-drip-container">
+            <span class="blood-drip drip-left"></span>
+            <span class="blood-drip drip-right"></span>
+            <span class="blood-drop drop-left"></span>
+            <span class="blood-drop drop-right"></span>
+            <span class="blood-puddle"></span>
+          </div>
+        </div>
+        <div class="brand-text">
+          <span>THE</span>
+          <span class="logo-boxed">MENTALIST</span>
+        </div>
+      </a>
+
+      <!-- Menú de Navegación -->
+      <nav aria-label="Navegación principal">
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="index.html" class="nav-link">Inicio</a></li>
+
+          <!-- Dropdown Personajes -->
+          <li class="nav-item-dropdown" id="navItemPersonajes">
+            <a href="personajes.html" class="nav-link nav-dropdown-trigger" id="dropdownPersonajesBtn"
+              aria-haspopup="true" aria-expanded="false">
+              <span>Personajes</span>
+              <i class="fa-solid fa-chevron-down nav-dropdown-icon" aria-hidden="true"></i>
+            </a>
+            <div class="nav-dropdown-menu nav-dropdown-personajes" aria-labelledby="dropdownPersonajesBtn">
+              <div class="dropdown-section-label">
+                <i class="fa-solid fa-star"></i>
+                <span>Principales de la saga</span>
+              </div>
+              <div class="dropdown-featured-grid">
+                <a href="personajes.html?character=patrick-jane" class="dropdown-card-link"
+                  title="Abrir expediente de Patrick Jane">
+                  <div class="dropdown-card-avatar">
+                    <img src="img/characters/patrick_jane.jpg" alt="Patrick Jane">
+                  </div>
+                  <div class="dropdown-card-info">
+                    <span class="dropdown-card-name">Patrick Jane</span>
+                    <span class="dropdown-card-role">Consultor CBI / FBI</span>
+                  </div>
+                  <span class="dropdown-open-badge">Expediente <i class="fa-solid fa-folder-open"></i></span>
+                </a>
+                <a href="personajes.html?character=teresa-lisbon" class="dropdown-card-link"
+                  title="Abrir expediente de Teresa Lisbon">
+                  <div class="dropdown-card-avatar">
+                    <img src="img/characters/teresa_lisbon.jpg" alt="Teresa Lisbon">
+                  </div>
+                  <div class="dropdown-card-info">
+                    <span class="dropdown-card-name">Teresa Lisbon</span>
+                    <span class="dropdown-card-role">Agente Especial a Cargo</span>
+                  </div>
+                  <span class="dropdown-open-badge">Expediente <i class="fa-solid fa-folder-open"></i></span>
+                </a>
+                <a href="personajes.html?character=red-john" class="dropdown-card-link redjohn-card"
+                  title="Abrir expediente de Red John">
+                  <div class="dropdown-card-avatar">
+                    <img src="img/characters/red_john.jpg" alt="Red John">
+                  </div>
+                  <div class="dropdown-card-info">
+                    <span class="dropdown-card-name">Red John</span>
+                    <span class="dropdown-card-role">Némesis / Tyger Tyger</span>
+                  </div>
+                  <span class="dropdown-open-badge badge-crimson">Expediente <i class="fa-solid fa-skull"></i></span>
+                </a>
+              </div>
+
+              <div class="dropdown-section-label">
+                <i class="fa-solid fa-folder-tree"></i>
+                <span>Divisiones & Archivo</span>
+              </div>
+              <div class="dropdown-categories-list">
+                <a href="personajes.html?category=all" class="dropdown-cat-item">
+                  <i class="fa-solid fa-boxes-stacked"></i>
+                  <span>Todos los Expedientes</span>
+                </a>
+                <a href="personajes.html?category=cbi" class="dropdown-cat-item">
+                  <i class="fa-solid fa-shield-halved"></i>
+                  <span>División CBI (Sacramento)</span>
+                </a>
+                <a href="personajes.html?category=fbi" class="dropdown-cat-item">
+                  <i class="fa-solid fa-building-columns"></i>
+                  <span>Oficina FBI (Texas)</span>
+                </a>
+                <a href="personajes.html?category=nemesis" class="dropdown-cat-item nemesis-item">
+                  <i class="fa-solid fa-skull"></i>
+                  <span>Némesis & Antagonistas</span>
+                </a>
+              </div>
+            </div>
+          </li>
+
+          <!-- Dropdown Temporadas -->
+          <li class="nav-item-dropdown" id="navItemTemporadas">
+            <a href="temporadas.html" class="nav-link nav-dropdown-trigger" id="dropdownTemporadasBtn"
+              aria-haspopup="true" aria-expanded="false">
+              <span>Temporadas</span>
+              <i class="fa-solid fa-chevron-down nav-dropdown-icon" aria-hidden="true"></i>
+            </a>
+            <div class="nav-dropdown-menu nav-dropdown-temporadas" aria-labelledby="dropdownTemporadasBtn">
+              <div class="dropdown-section-label">
+                <i class="fa-solid fa-film"></i>
+                <span>Guía Oficial de Temporadas</span>
+              </div>
+              <div class="dropdown-seasons-grid">
+                <a href="temporadas.html?season=1" class="dropdown-season-card" title="Temporada 1">
+                  <span class="season-badge">T1</span>
+                  <div class="season-info-col">
+                    <span class="season-title">La llegada del Consultor</span>
+                    <span class="season-meta">2008 - 2009 &bull; 23 Eps</span>
+                  </div>
+                </a>
+                <a href="temporadas.html?season=2" class="dropdown-season-card" title="Temporada 2">
+                  <span class="season-badge">T2</span>
+                  <div class="season-info-col">
+                    <span class="season-title">La Amenaza de Bosco</span>
+                    <span class="season-meta">2009 - 2010 &bull; 23 Eps</span>
+                  </div>
+                </a>
+                <a href="temporadas.html?season=3" class="dropdown-season-card" title="Temporada 3">
+                  <span class="season-badge">T3</span>
+                  <div class="season-info-col">
+                    <span class="season-title">El Falso Red John</span>
+                    <span class="season-meta">2010 - 2011 &bull; 24 Eps</span>
+                  </div>
+                </a>
+                <a href="temporadas.html?season=4" class="dropdown-season-card" title="Temporada 4">
+                  <span class="season-badge">T4</span>
+                  <div class="season-info-col">
+                    <span class="season-title">El Sombrero Carmesí</span>
+                    <span class="season-meta">2011 - 2012 &bull; 24 Eps</span>
+                  </div>
+                </a>
+                <a href="temporadas.html?season=5" class="dropdown-season-card" title="Temporada 5">
+                  <span class="season-badge">T5</span>
+                  <div class="season-info-col">
+                    <span class="season-title">Los 7 Sospechosos</span>
+                    <span class="season-meta">2012 - 2013 &bull; 22 Eps</span>
+                  </div>
+                </a>
+                <a href="temporadas.html?season=6" class="dropdown-season-card" title="Temporada 6">
+                  <span class="season-badge">T6</span>
+                  <div class="season-info-col">
+                    <span class="season-title">Desenlace & Fin de Red John</span>
+                    <span class="season-meta">2013 - 2014 &bull; 22 Eps</span>
+                  </div>
+                </a>
+                <a href="temporadas.html?season=7" class="dropdown-season-card" title="Temporada 7">
+                  <span class="season-badge">T7</span>
+                  <div class="season-info-col">
+                    <span class="season-title">Nuevo Comienzo en el FBI</span>
+                    <span class="season-meta">2014 - 2015 &bull; 13 Eps</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </li>
+
+          <li><a href="galeria.html" class="nav-link active">Galería</a></li>
+          <li><a href="red-john.html" class="nav-link nav-red-john">Misterio Red John</a></li>
+          <li><a href="curiosidades.html" class="nav-link">Curiosidades</a></li>
+          <li><a href="juego.html" class="nav-link nav-game-link">🧠 Juego Mental</a></li>
+          <li><a href="contacto.html" class="nav-link nav-contact-link"><i class="fa-solid fa-envelope"></i>
+              Contacto</a></li>
+        </ul>
+      </nav>
+
+      <!-- Acciones de cabecera -->
+      <div class="nav-actions">
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HEADER COMPACTO DE LA GALERÍA -->
+    <div class="section-header"
+      style="padding: 1.6rem 1.5rem 1rem; text-align: center; background: radial-gradient(ellipse at 50% 20%, rgba(46, 116, 80, 0.12) 0%, transparent 70%), #090a0e; border-bottom: 1px solid rgba(255,255,255,0.08);">
+      <div class="container">
+        <span class="badge badge-gold" style="font-size: 0.74rem; letter-spacing: 0.1em; margin-bottom: 0.35rem;">
+          <i class="fa-solid fa-camera-retro"></i> ARCHIVO FOTOGRÁFICO CBI & FBI
+        </span>
+        <h1
+          style="font-family: var(--font-display, serif); font-size: clamp(1.5rem, 2.6vw, 2.1rem); text-transform: uppercase; color: var(--cream-pure); letter-spacing: 0.04em; margin-bottom: 0.25rem;">
+          Galería de <span class="text-gold">Momentos</span> Icónicos
+        </h1>
+        <p
+          style="max-width: 660px; margin: 0 auto; color: var(--text-secondary); font-size: 0.88rem; line-height: 1.45;">
+          Colección fotográfica y expedientes visuales de la saga. Haz clic en cualquier imagen para abrir el visor
+          interactivo en pantalla completa.
+        </p>
+      </div>
+    </div>
+
+    <!-- VISTA PRINCIPAL: HERO CARRUSEL DE MOMENTOS DESTACADOS -->
+    <section class="iconic-gallery-section" id="galeriaPrincipal" style="padding-top: 2.2rem; padding-bottom: 3.2rem;">
+      <div class="container">
+        <div class="gallery-header-row" style="margin-bottom: 1.6rem;">
+          <div class="gallery-title-col">
+            <span class="badge badge-cbi" style="font-size: 0.78rem;"><i class="fa-solid fa-star"></i> HERO CARRUSEL
+              &bull; ESCENAS DESTACADAS</span>
+            <h2 class="gallery-main-title" style="font-size: 1.75rem; margin-top: 0.45rem;">Momentos <span
+                class="text-gold">Icónicos</span> de la Serie</h2>
+            <p class="gallery-subtitle">
+              Desplázate con los controles interactivos para ver las escenas cinematográficas destacadas o haz clic para
+              abrirlas en pantalla completa.
+            </p>
+          </div>
+
+          <!-- Controles del Carrusel -->
+          <div class="gallery-controls">
+            <span class="gallery-counter-badge" id="galleryCounter">1 / 8</span>
+            <button type="button" class="gallery-nav-btn" id="galleryPrevBtn" aria-label="Momento anterior"
+              title="Momento anterior">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <button type="button" class="gallery-nav-btn" id="galleryNextBtn" aria-label="Momento siguiente"
+              title="Momento siguiente">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Pizarra de Corcho del Carrusel Principal -->
+        <div class="gallery-cork-board hero-cork-board">
+          <div class="board-top-pin-bar">
+            <span class="cork-board-label"><i class="fa-solid fa-thumbtack"></i> SACRAMENTO CBI &bull; TABLERO DE
+              EVIDENCIAS & ESCENAS DESTACADAS</span>
+            <span class="cork-board-note"><i class="fa-solid fa-shield-halved"></i> FOTOGRAFÍAS POLICIALES FIJADAS CON
+              PINES</span>
+          </div>
+
+          <!-- Viewport y Carrusel Deslizable -->
+          <div class="gallery-carousel-viewport" id="galleryViewport" tabindex="0" role="region"
+            aria-label="Carrusel de momentos icónicos">
+            <div class="gallery-carousel-track" id="galleryTrack">
+
+              <!-- Tarjeta 1: Patrick & Lisbon -->
+              <article class="gallery-card" tabindex="0" role="button" aria-label="Ver imagen: Jane & Lisbon en el CBI"
+                data-img="img/jane&lisbon.jpeg" data-title="Jane & Lisbon: Complicidad en el CBI"
+                data-tag="VÍNCULO & DETECTIVES" data-season="Temporadas 1 - 6"
+                data-desc="La inquebrantable relación de confianza, exasperación mutua y lealtad incondicional entre el consultor Patrick Jane y la jefa de brigada Teresa Lisbon en las oficinas de Sacramento.">
+                <div class="push-pin pin-crimson"></div>
+                <div class="gallery-card-img-wrap">
+                  <img src="img/jane&lisbon.jpeg" alt="Patrick Jane y Teresa Lisbon" class="gallery-card-img"
+                    loading="lazy">
+                  <div class="gallery-card-zoom-hint"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                </div>
+                <div class="gallery-card-body">
+                  <div>
+                    <span class="polaroid-stamp-tag">VÍNCULO & DETECTIVES</span>
+                    <h3 class="gallery-card-title">Jane & Lisbon: Complicidad</h3>
+                    <p class="gallery-card-desc">Lealtad incondicional entre el consultor y la líder de brigada a través
+                      de cientos de homicidios.</p>
+                  </div>
+                  <div class="gallery-card-footer">
+                    <span>EXP. CBI #01</span>
+                    <span class="expand-callout"><i class="fa-solid fa-expand"></i> Ampliar</span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Tarjeta 2: Sofá y Té -->
+              <article class="gallery-card" tabindex="0" role="button" aria-label="Ver imagen: El Sofá Marrón y el Té"
+                data-img="img/sillon&tea.jpg" data-title="El Sofá de Cuero & La Taza de Té" data-tag="RITUALES DE JANE"
+                data-season="Santuario CBI & Austin FBI"
+                data-desc="El emblemático sofá de cuero marrón y la taza de porcelana fina donde Jane resolvía casos aparentemente imposibles mientras fingía dormir, leyendo a testigos y sospechosos.">
+                <div class="push-pin pin-silver"></div>
+                <div class="gallery-card-img-wrap">
+                  <img src="img/sillon&tea.jpg" alt="El Sofá Marrón y el Té de Patrick Jane" class="gallery-card-img"
+                    loading="lazy">
+                  <div class="gallery-card-zoom-hint"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                </div>
+                <div class="gallery-card-body">
+                  <div>
+                    <span class="polaroid-stamp-tag">RITUALES DE JANE</span>
+                    <h3 class="gallery-card-title">El Sofá & La Taza de Té</h3>
+                    <p class="gallery-card-desc">El rincón de meditación y deducción psicológica donde Jane desarmaba
+                      las coartadas más complejas.</p>
+                  </div>
+                  <div class="gallery-card-footer">
+                    <span>EXP. CBI #02</span>
+                    <span class="expand-callout"><i class="fa-solid fa-expand"></i> Ampliar</span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Tarjeta 3: Citroën DS 21 -->
+              <article class="gallery-card" tabindex="0" role="button" aria-label="Ver imagen: El Citroën DS 21 Pallas"
+                data-img="img/citroenDS2.jpg" data-title="El Citroën DS 21 Pallas (1971)"
+                data-tag="ICONO AUTOMOVILÍSTICO" data-season="Vehículo Personal de Patrick Jane"
+                data-desc="El vehículo francés con suspensión hidroneumática de Patrick Jane. Un tributo personal del actor Simon Baker a la legendaria serie Columbo, convirtiéndose en sello estético de la serie.">
+                <div class="push-pin pin-gold"></div>
+                <div class="gallery-card-img-wrap">
+                  <img src="img/citroenDS2.jpg" alt="Citroën DS 21 Pallas de Patrick Jane" class="gallery-card-img"
+                    loading="lazy">
+                  <div class="gallery-card-zoom-hint"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                </div>
+                <div class="gallery-card-body">
+                  <div>
+                    <span class="polaroid-stamp-tag">AUTO CLÁSICO</span>
+                    <h3 class="gallery-card-title">Citroën DS 21 Pallas (1971)</h3>
+                    <p class="gallery-card-desc">El automóvil clásico con suspensión hidroneumática que acompañó a Jane
+                      por toda California.</p>
+                  </div>
+                  <div class="gallery-card-footer">
+                    <span>EXP. CBI #03</span>
+                    <span class="expand-callout"><i class="fa-solid fa-expand"></i> Ampliar</span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Tarjeta 4: La Sonrisa de Red John -->
+              <article class="gallery-card" tabindex="0" role="button" aria-label="Ver imagen: La Sonrisa de Sangre"
+                data-img="img/linterna-smiley-web.jpg" data-title="La Primera Sonrisa en la Pared"
+                data-tag="FIRMA DE RED JOHN" data-season="Caso Piloto • S1E01"
+                data-desc="La siniestra carita sonriente trazada con la sangre de las víctimas en el sentido de las agujas del reloj con tres dedos de la mano derecha enguantada.">
+                <div class="push-pin pin-crimson"></div>
+                <div class="gallery-card-img-wrap">
+                  <img src="img/linterna-smiley-web.jpg" alt="La Sonrisa de Red John iluminada con linterna"
+                    class="gallery-card-img" loading="lazy">
+                  <div class="gallery-card-zoom-hint"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                </div>
+                <div class="gallery-card-body">
+                  <div>
+                    <span class="polaroid-stamp-tag">FIRMA DE RED JOHN</span>
+                    <h3 class="gallery-card-title">La Sonrisa de Sangre</h3>
+                    <p class="gallery-card-desc">La marca macabra que dio inicio a una cacería obsesiva a lo largo de
+                      diez años de venganza.</p>
+                  </div>
+                  <div class="gallery-card-footer">
+                    <span>EXP. CBI #04</span>
+                    <span class="expand-callout"><i class="fa-solid fa-expand"></i> Ampliar</span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Tarjeta 5: Los Siete Sospechosos -->
+              <article class="gallery-card" tabindex="0" role="button" aria-label="Ver imagen: Los Siete Sospechosos"
+                data-img="img/sospechosos.jpg" data-title="La Lista de los Siete Sospechosos"
+                data-tag="PUNTO DE INFLEXIÓN" data-season="Temporada 5 • Episodio 22"
+                data-desc="Jane reduce la lista definitiva de sospechosos a siete hombres de su pasado. Segundos después, un video dejado por Lorelei Martins revela que Red John predijo exactamente los mismos nombres.">
+                <div class="push-pin pin-gold"></div>
+                <div class="gallery-card-img-wrap">
+                  <img src="img/sospechosos.jpg" alt="Los 7 Sospechosos de Red John" class="gallery-card-img"
+                    loading="lazy">
+                  <div class="gallery-card-zoom-hint"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                </div>
+                <div class="gallery-card-body">
+                  <div>
+                    <span class="polaroid-stamp-tag">PUNTO DE INFLEXIÓN</span>
+                    <h3 class="gallery-card-title">Los Siete Sospechosos</h3>
+                    <p class="gallery-card-desc">El momento en que Patrick Jane y Red John coinciden matemáticamente en
+                      la lista final.</p>
+                  </div>
+                  <div class="gallery-card-footer">
+                    <span>EXP. CBI #05</span>
+                    <span class="expand-callout"><i class="fa-solid fa-expand"></i> Ampliar</span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Tarjeta 6: Tyger Tyger -->
+              <article class="gallery-card" tabindex="0" role="button" aria-label="Ver imagen: Tyger Tyger"
+                data-img="img/frases/tigertiger.jpg" data-title="Tyger, Tyger: La Conspiración Blake"
+                data-tag="ASOCIACIÓN BLAKE" data-season="Temporada 2 &bull; S2E23"
+                data-desc="Red John salva a Patrick Jane de unos imitadores y le susurra al oído los primeros versos del poema de William Blake, destapando una red criminal en las agencias de la ley.">
+                <div class="push-pin pin-crimson"></div>
+                <div class="gallery-card-img-wrap">
+                  <img src="img/frases/tigertiger.jpg" alt="Tyger Tyger poema de William Blake" class="gallery-card-img"
+                    loading="lazy">
+                  <div class="gallery-card-zoom-hint"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                </div>
+                <div class="gallery-card-body">
+                  <div>
+                    <span class="polaroid-stamp-tag">ASOCIACIÓN BLAKE</span>
+                    <h3 class="gallery-card-title">Tyger, Tyger: Conspiración</h3>
+                    <p class="gallery-card-desc">El susurro poético que reveló la existencia del sindicato clandestino
+                      policial de Red John.</p>
+                  </div>
+                  <div class="gallery-card-footer">
+                    <span>EXP. CBI #06</span>
+                    <span class="expand-callout"><i class="fa-solid fa-expand"></i> Ampliar</span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Tarjeta 7: La Caída de Red John (T6) -->
+              <article class="gallery-card" tabindex="0" role="button" aria-label="Ver imagen: La Caída de Red John"
+                data-img="img/Seasons/S6.jpg" data-title="La Caída de Red John (6x08)" data-tag="CLÍMAX DEFINITIVO"
+                data-season="Temporada 6 • Episodio 8"
+                data-desc="Tras la explosión en Malibú y una persecución a través de un cementerio y un parque, Patrick Jane acorrala al sheriff Thomas McAllister y consuma su venganza.">
+                <div class="push-pin pin-silver"></div>
+                <div class="gallery-card-img-wrap">
+                  <img src="img/Seasons/S6.jpg" alt="Temporada 6: La Caída de Red John" class="gallery-card-img"
+                    loading="lazy">
+                  <div class="gallery-card-zoom-hint"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                </div>
+                <div class="gallery-card-body">
+                  <div>
+                    <span class="polaroid-stamp-tag">CLÍMAX DEFINITIVO</span>
+                    <h3 class="gallery-card-title">La Caída de Red John</h3>
+                    <p class="gallery-card-desc">El cierre de una década de duelo y la muerte del sheriff Thomas
+                      McAllister a manos de Jane.</p>
+                  </div>
+                  <div class="gallery-card-footer">
+                    <span>EXP. CBI #07</span>
+                    <span class="expand-callout"><i class="fa-solid fa-expand"></i> Ampliar</span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Tarjeta 8: Un Nuevo Comienzo (T7) -->
+              <article class="gallery-card" tabindex="0" role="button" aria-label="Ver imagen: Un Nuevo Comienzo"
+                data-img="img/Seasons/S7.jpg" data-title="Redención & Un Nuevo Comienzo" data-tag="RENACIMIENTO & BODA"
+                data-season="Temporada 7 • Episodios Finales"
+                data-desc="Liberado del peso de la venganza, Patrick Jane se integra al FBI en Austin junto a Lisbon, culminando su historia en una emotiva boda frente al lago y la promesa de una nueva vida.">
+                <div class="push-pin pin-gold"></div>
+                <div class="gallery-card-img-wrap">
+                  <img src="img/Seasons/S7.jpg" alt="Temporada 7: Patrick Jane y Teresa Lisbon en el FBI"
+                    class="gallery-card-img" loading="lazy">
+                  <div class="gallery-card-zoom-hint"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                </div>
+                <div class="gallery-card-body">
+                  <div>
+                    <span class="polaroid-stamp-tag">RENACIMIENTO & BODA</span>
+                    <h3 class="gallery-card-title">Redención & Nuevo Comienzo</h3>
+                    <p class="gallery-card-desc">La reconstrucción emocional de Jane en el FBI y el feliz enlace
+                      matrimonial junto a Lisbon.</p>
+                  </div>
+                  <div class="gallery-card-footer">
+                    <span>EXP. CBI #08</span>
+                    <span class="expand-callout"><i class="fa-solid fa-expand"></i> Ampliar</span>
+                  </div>
+                </div>
+              </article>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN DE GRILLA DE TODAS LAS FOTOS (ARCHIVO COMPLETO) -->
+    <section class="gallery-grid-section" id="todasLasFotos">
+      <div class="container">
+        <div class="gallery-header-row" style="margin-bottom: 2rem;">
+          <div class="gallery-title-col">
+            <span class="badge badge-gold" style="font-size: 0.78rem;"><i class="fa-solid fa-table-cells"></i> ARCHIVO
+              FOTOGRÁFICO COMPLETO</span>
+            <h2 class="gallery-main-title" style="font-size: 1.7rem; margin-top: 0.4rem;">Todas las <span
+                class="text-gold">Fotografías</span> del Archivo</h2>
+            <p class="gallery-subtitle">
+              Explora el catálogo completo con todas las fotos de la serie y nuevos expedientes gráficos. Haz clic en
+              cualquiera para abrirla en alta resolución.
+            </p>
+          </div>
+          <div class="gallery-grid-badge-count">
+            <span class="gallery-counter-badge"><i class="fa-solid fa-images"></i> 17 Imágenes en Archivo</span>
+          </div>
+        </div>
+
+        <!-- Pizarra de Corcho de la Grilla Completa -->
+        <div class="gallery-cork-board grid-cork-board">
+          <div class="board-top-pin-bar">
+            <span class="cork-board-label"><i class="fa-solid fa-folder-open"></i> REGISTRO FOTOGRÁFICO DE EVIDENCIAS
+              &bull; DIVISIÓN CBI / FBI</span>
+            <span class="cork-board-note"><i class="fa-solid fa-thumbtack"></i> 17 FOTOGRAFÍAS FIJADAS CON PINES</span>
+          </div>
+
+          <div class="gallery-photos-grid">
+
+            <!-- Foto 1: Janeylisbon.jpg (gallery+) -->
+            <article class="gallery-grid-card gallery-card" tabindex="0" role="button"
+              aria-label="Ver imagen: Jane & Lisbon" data-img="img/gallery+/Janeylisbon.jpg"
+              data-title="Jane & Lisbon: Confianza y Complicidad" data-tag="VÍNCULO & DETECTIVES"
+              data-season="Temporada 6"
+              data-desc="La cercanía incondicional y química entre Patrick Jane y Teresa Lisbon durante sus investigaciones conjuntas.">
+              <div class="push-pin pin-crimson"></div>
+              <div class="gallery-grid-img-wrap">
+                <img src="img/gallery+/Janeylisbon.jpg" alt="Jane y Lisbon" class="gallery-grid-img" loading="lazy">
+                <div class="gallery-grid-zoom-hint"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+              </div>
+              <div class="gallery-grid-info">
+                <span class="polaroid-stamp-tag">VÍNCULO & DETECTIVES</span>
+                <h3 class="gallery-grid-title">Jane & Lisbon</h3>
+                <div class="gallery-grid-meta">
+                  <span>Temporada 6</span>
+                  <span class="gallery-grid-view-link"><i class="fa-solid fa-expand"></i> Ver</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Foto 2: fbi_recluta_jane.jpg (gallery+) -->
+            <article class="gallery-grid-card gallery-card" tabindex="0" role="button"
+              aria-label="Ver imagen: Reclutamiento FBI" data-img="img/gallery+/fbi_recluta_jane.jpg"
+              data-title="El Reclutamiento de Jane en el FBI" data-tag="OPERACIÓN AUSTIN" data-season="Temporada 6"
+              data-desc="Dennis Abbott y la comitiva del FBI negociando los términos del regreso de Jane a territorio estadounidense tras el desenlace con Red John.">
+              <div class="push-pin pin-silver"></div>
+              <div class="gallery-grid-img-wrap">
+                <img src="img/gallery+/fbi_recluta_jane.jpg" alt="Reclutamiento de Patrick Jane por el FBI"
+                  class="gallery-grid-img" loading="lazy">
+                <div class="gallery-grid-zoom-hint"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+              </div>
+              <div class="gallery-grid-info">
+                <span class="polaroid-stamp-tag">OPERACIÓN AUSTIN</span>
+                <h3 class="gallery-grid-title">Reclutamiento FBI</h3>
+                <div class="gallery-grid-meta">
+                  <span>Temporada 6</span>
+                  <span class="gallery-grid-view-link"><i class="fa-solid fa-expand"></i> Ver</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Foto 3: janeFBIjpg.jpg (gallery+) -->
+            <article class="gallery-grid-card gallery-card" tabindex="0" role="button"
+              aria-label="Ver imagen: Jane en el FBI" data-img="img/gallery+/janeFBIjpg.jpg"
+              data-title="Patrick Jane en el Cuartel FBI" data-tag="OFICINA AUSTIN" data-season="Temporadas 6 - 7"
+              data-desc="Jane adaptándose a las normas y despachos modernos del FBI en Texas, sin perder su taza de té ni sus métodos poco ortodoxos.">
+              <div class="push-pin pin-gold"></div>
+              <div class="gallery-grid-img-wrap">
+                <img src="img/gallery+/janeFBIjpg.jpg" alt="Patrick Jane en el FBI de Texas" class="gallery-grid-img"
+                  loading="lazy">
+                <div class="gallery-grid-zoom-hint"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+              </div>
+              <div class="gallery-grid-info">
+                <span class="polaroid-stamp-tag">OFICINA AUSTIN</span>
+                <h3 class="gallery-grid-title">Patrick Jane en Texas</h3>
+                <div class="gallery-grid-meta">
+                  <span>Temporadas 6 - 7</span>
+                  <span class="gallery-grid-view-link"><i class="fa-solid fa-expand"></i> Ver</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Foto 4: jane2.jpg (gallery+) -->
+            <article class="gallery-grid-card gallery-card" tabindex="0" role="button"
+              aria-label="Ver imagen: La Mirada del Mentalista" data-img="img/gallery+/jane2.jpg"
+              data-title="La Mirada y Análisis del Mentalista" data-tag="PERFIL PSICOLÓGICO" data-season="Saga Completa"
+              data-desc="Patrick Jane analizando microexpresiones, posturas corporales y secretos ocultos para descubrir la verdad.">
+              <div class="push-pin pin-crimson"></div>
+              <div class="gallery-grid-img-wrap">
+                <img src="img/gallery+/jane2.jpg" alt="Retrato de Patrick Jane" class="gallery-grid-img" loading="lazy">
+                <div class="gallery-grid-zoom-hint"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+              </div>
+              <div class="gallery-grid-info">
+                <span class="polaroid-stamp-tag">PERFIL PSICOLÓGICO</span>
+                <h3 class="gallery-grid-title">La Mirada de Jane</h3>
+                <div class="gallery-grid-meta">
+                  <span>Consultor Experto</span>
+                  <span class="gallery-grid-view-link"><i class="fa-solid fa-expand"></i> Ver</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Foto 5: jane_erica.jpg (gallery+) -->
+            <article class="gallery-grid-card gallery-card" tabindex="0" role="button"
+              aria-label="Ver imagen: Jane y Erica Flynn" data-img="img/gallery+/jane_erica.jpg"
+              data-title="Jane & Erica Flynn: Duelo de Mentes" data-tag="JUEGO INTELECTUAL" data-season="Temporada 4"
+              data-desc="Uno de los enfrentamientos intelectuales y de seducción psicológica más memorables de Jane contra la brillante y manipuladora Erica Flynn.">
+              <div class="push-pin pin-gold"></div>
+              <div class="gallery-grid-img-wrap">
+                <img src="img/gallery+/jane_erica.jpg" alt="Patrick Jane y Erica Flynn" class="gallery-grid-img"
+                  loading="lazy">
+                <div class="gallery-grid-zoom-hint"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+              </div>
+              <div class="gallery-grid-info">
+                <span class="polaroid-stamp-tag">JUEGO INTELECTUAL</span>
+                <h3 class="gallery-grid-title">Jane & Erica Flynn</h3>
+                <div class="gallery-grid-meta">
+                  <span>Temporada 4</span>
+                  <span class="gallery-grid-view-link"><i class="fa-solid fa-expand"></i> Ver</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Foto 6: casoRigsby_FBI.jpg (gallery+) -->
+            <article class="gallery-grid-card gallery-card" tabindex="0" role="button"
+              aria-label="Ver imagen: Operativo Rigsby" data-img="img/gallery+/casoRigsby_FBI.jpg"
+              data-title="Operativo Rigsby: Amenaza Inminente" data-tag="EQUIPO CBI / FBI" data-season="Temporada 6"
+              data-desc="Wayne Rigsby y el equipo colaborando en un operativo de alto riesgo en la cacería de amenazas contra antiguos agentes del CBI.">
+              <div class="push-pin pin-silver"></div>
+              <div class="gallery-grid-img-wrap">
+                <img src="img/gallery+/casoRigsby_FBI.jpg" alt="Caso Wayne Rigsby y FBI" class="gallery-grid-img"
+                  loading="lazy">
+                <div class="gallery-grid-zoom-hint"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+              </div>
+              <div class="gallery-grid-info">
+                <span class="polaroid-stamp-tag">EQUIPO CBI / FBI</span>
+                <h3 class="gallery-grid-title">Operativo Rigsby</h3>
+                <div class="gallery-grid-meta">
+                  <span>Temporada 6</span>
+                  <span class="gallery-grid-view-link"><i class="fa-solid fa-expand"></i> Ver</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Foto 7: jane_estafa_ruso.jpg (gallery+) -->
+            <article class="gallery-grid-card gallery-card" tabindex="0" role="button"
+              aria-label="Ver imagen: La Gran Estafa" data-img="img/gallery+/jane_estafa_ruso.jpg"
+              data-title="La Gran Estafa y Engaño al Ruso" data-tag="ESTRATAGEMA JANE" data-season="Temporada 5"
+              data-desc="Jane orquestando una elaborada y teatral farsa psicológica para atrapar a criminales internacionales y mafiosos de alto perfil.">
+              <div class="push-pin pin-crimson"></div>
+              <div class="gallery-grid-img-wrap">
+                <img src="img/gallery+/jane_estafa_ruso.jpg" alt="Patrick Jane en la estafa al ruso"
+                  class="gallery-grid-img" loading="lazy">
+                <div class="gallery-grid-zoom-hint"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+              </div>
+              <div class="gallery-grid-info">
+                <span class="polaroid-stamp-tag">ESTRATAGEMA JANE</span>
+                <h3 class="gallery-grid-title">La Gran Estafa</h3>
+                <div class="gallery-grid-meta">
+                  <span>Temporada 5</span>
+                  <span class="gallery-grid-view-link"><i class="fa-solid fa-expand"></i> Ver</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Foto 8: lisbon_se_va.jpg (gallery+) -->
+            <article class="gallery-grid-card gallery-card" tabindex="0" role="button"
+              aria-label="Ver imagen: Despedida en el Aeropuerto" data-img="img/gallery+/lisbon_se_va.jpg"
+              data-title="La Despedida de Lisbon en el Aeropuerto" data-tag="MOMENTO CUMBRE"
+              data-season="Temporada 6 • Episodio 22"
+              data-desc="Patrick Jane interceptando el avión y declarando sus verdaderos sentimientos a Teresa Lisbon en uno de los clímax más aclamados de la serie.">
+              <div class="push-pin pin-crimson"></div>
+              <div class="gallery-grid-img-wrap">
+                <img src="img/gallery+/lisbon_se_va.jpg" alt="Despedida de Lisbon en el aeropuerto"
+                  class="gallery-grid-img" loading="lazy">
+                <div class="gallery-grid-zoom-hint"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+              </div>
+              <div class="gallery-grid-info">
+                <span class="polaroid-stamp-tag">MOMENTO CUMBRE</span>
+                <h3 class="gallery-grid-title">El Aeropuerto</h3>
+                <div class="gallery-grid-meta">
+                  <span>Temporada 6</span>
+                  <span class="gallery-grid-view-link"><i class="fa-solid fa-expand"></i> Ver</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Foto 9: risgbyboda.jpeg (gallery+) -->
+            <article class="gallery-grid-card gallery-card" tabindex="0" role="button"
+              aria-label="Ver imagen: Boda Rigsby y Van Pelt" data-img="img/gallery+/risgbyboda.jpeg"
+              data-title="Boda de Wayne Rigsby & Grace Van Pelt" data-tag="FAMILIA CBI" data-season="Temporada 6"
+              data-desc="La emotiva ceremonia nupcial de Rigsby y Van Pelt rodeados de sus compañeros de brigada, celebrando la unión y la lealtad tras años de servicio.">
+              <div class="push-pin pin-gold"></div>
+              <div class="gallery-grid-img-wrap">
+                <img src="img/gallery+/risgbyboda.jpeg" alt="Boda de Rigsby y Van Pelt" class="gallery-grid-img"
+                  loading="lazy">
+                <div class="gallery-grid-zoom-hint"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+              </div>
+              <div class="gallery-grid-info">
+                <span class="polaroid-stamp-tag">FAMILIA CBI</span>
+                <h3 class="gallery-grid-title">Boda Rigsby & Grace</h3>
+                <div class="gallery-grid-meta">
+                  <span>Temporada 6</span>
+                  <span class="gallery-grid-view-link"><i class="fa-solid fa-expand"></i> Ver</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Foto 10: jane&lisbon.jpeg -->
+            <article class="gallery-grid-card gallery-card" tabindex="0" role="button"
+              aria-label="Ver imagen: Jane & Lisbon CBI" data-img="img/jane&lisbon.jpeg"
+              data-title="Jane & Lisbon: Complicidad en el CBI" data-tag="VÍNCULO & DETECTIVES"
+              data-season="Temporadas 1 - 6"
+              data-desc="La inquebrantable relación de confianza, exasperación mutua y lealtad incondicional entre el consultor Patrick Jane y la jefa de brigada Teresa Lisbon en las oficinas de Sacramento.">
+              <div class="push-pin pin-silver"></div>
+              <div class="gallery-grid-img-wrap">
+                <img src="img/jane&lisbon.jpeg" alt="Patrick Jane y Teresa Lisbon" class="gallery-grid-img"
+                  loading="lazy">
+                <div class="gallery-grid-zoom-hint"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+              </div>
+              <div class="gallery-grid-info">
+                <span class="polaroid-stamp-tag">VÍNCULO & DETECTIVES</span>
+                <h3 class="gallery-grid-title">Jane & Lisbon CBI</h3>
+                <div class="gallery-grid-meta">
+                  <span>Sacramento</span>
+                  <span class="gallery-grid-view-link"><i class="fa-solid fa-expand"></i> Ver</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Foto 11: sillon&tea.jpg -->
+            <article class="gallery-grid-card gallery-card" tabindex="0" role="button"
+              aria-label="Ver imagen: Sofá y Té" data-img="img/sillon&tea.jpg"
+              data-title="El Sofá de Cuero & La Taza de Té" data-tag="RITUALES DE JANE" data-season="Santuario CBI"
+              data-desc="El emblemático sofá de cuero marrón y la taza de porcelana fina donde Jane resolvía casos aparentemente imposibles mientras fingía dormir.">
+              <div class="push-pin pin-crimson"></div>
+              <div class="gallery-grid-img-wrap">
+                <img src="img/sillon&tea.jpg" alt="Sofá marrón y taza de té de Patrick Jane" class="gallery-grid-img"
+                  loading="lazy">
+                <div class="gallery-grid-zoom-hint"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+              </div>
+              <div class="gallery-grid-info">
+                <span class="polaroid-stamp-tag">RITUALES DE JANE</span>
+                <h3 class="gallery-grid-title">El Sofá & El Té</h3>
+                <div class="gallery-grid-meta">
+                  <span>Santuario CBI</span>
+                  <span class="gallery-grid-view-link"><i class="fa-solid fa-expand"></i> Ver</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Foto 12: citroenDS2.jpg -->
+            <article class="gallery-grid-card gallery-card" tabindex="0" role="button"
+              aria-label="Ver imagen: Citroën DS 21" data-img="img/citroenDS2.jpg"
+              data-title="El Citroën DS 21 Pallas (1971)" data-tag="AUTO ICÓNICO" data-season="Vehículo Personal"
+              data-desc="El vehículo francés con suspensión hidroneumática de Patrick Jane. Un tributo personal del actor Simon Baker a la legendaria serie Columbo.">
+              <div class="push-pin pin-gold"></div>
+              <div class="gallery-grid-img-wrap">
+                <img src="img/citroenDS2.jpg" alt="Citroën DS 21 de Patrick Jane" class="gallery-grid-img"
+                  loading="lazy">
+                <div class="gallery-grid-zoom-hint"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+              </div>
+              <div class="gallery-grid-info">
+                <span class="polaroid-stamp-tag">AUTO CLÁSICO</span>
+                <h3 class="gallery-grid-title">Citroën DS 21 Pallas</h3>
+                <div class="gallery-grid-meta">
+                  <span>California</span>
+                  <span class="gallery-grid-view-link"><i class="fa-solid fa-expand"></i> Ver</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Foto 13: linterna-smiley-web.jpg -->
+            <article class="gallery-grid-card gallery-card" tabindex="0" role="button"
+              aria-label="Ver imagen: Sonrisa de Red John" data-img="img/linterna-smiley-web.jpg"
+              data-title="La Primera Sonrisa en la Pared" data-tag="FIRMA DE RED JOHN" data-season="Caso Piloto • S1E01"
+              data-desc="La siniestra carita sonriente trazada con la sangre de las víctimas en el sentido de las agujas del reloj con tres dedos de la mano derecha enguantada.">
+              <div class="push-pin pin-crimson"></div>
+              <div class="gallery-grid-img-wrap">
+                <img src="img/linterna-smiley-web.jpg" alt="Sonrisa de Red John con linterna" class="gallery-grid-img"
+                  loading="lazy">
+                <div class="gallery-grid-zoom-hint"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+              </div>
+              <div class="gallery-grid-info">
+                <span class="polaroid-stamp-tag">FIRMA DE RED JOHN</span>
+                <h3 class="gallery-grid-title">La Sonrisa de Sangre</h3>
+                <div class="gallery-grid-meta">
+                  <span>Caso Piloto</span>
+                  <span class="gallery-grid-view-link"><i class="fa-solid fa-expand"></i> Ver</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Foto 14: sospechosos.jpg -->
+            <article class="gallery-grid-card gallery-card" tabindex="0" role="button"
+              aria-label="Ver imagen: Los Siete Sospechosos" data-img="img/sospechosos.jpg"
+              data-title="La Lista de los Siete Sospechosos" data-tag="PUNTO DE INFLEXIÓN"
+              data-season="Temporada 5 • Episodio 22"
+              data-desc="Jane reduce la lista definitiva de sospechosos a siete hombres de su pasado. Segundos después, un video dejado por Lorelei Martins revela que Red John predijo exactamente los mismos nombres.">
+              <div class="push-pin pin-silver"></div>
+              <div class="gallery-grid-img-wrap">
+                <img src="img/sospechosos.jpg" alt="Lista de los 7 sospechosos" class="gallery-grid-img" loading="lazy">
+                <div class="gallery-grid-zoom-hint"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+              </div>
+              <div class="gallery-grid-info">
+                <span class="polaroid-stamp-tag">PUNTO DE INFLEXIÓN</span>
+                <h3 class="gallery-grid-title">Los 7 Sospechosos</h3>
+                <div class="gallery-grid-meta">
+                  <span>Temporada 5</span>
+                  <span class="gallery-grid-view-link"><i class="fa-solid fa-expand"></i> Ver</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Foto 15: frases/tigertiger.jpg -->
+            <article class="gallery-grid-card gallery-card" tabindex="0" role="button"
+              aria-label="Ver imagen: Tyger Tyger" data-img="img/frases/tigertiger.jpg"
+              data-title="Tyger, Tyger: La Conspiración Blake" data-tag="ASOCIACIÓN BLAKE"
+              data-season="Temporada 2 &bull; S2E23"
+              data-desc="Red John salva a Patrick Jane de unos imitadores y le susurra al oído los primeros versos del poema de William Blake, destapando una red criminal en las agencias de la ley.">
+              <div class="push-pin pin-crimson"></div>
+              <div class="gallery-grid-img-wrap">
+                <img src="img/frases/tigertiger.jpg" alt="Tyger Tyger conspiración Blake" class="gallery-grid-img"
+                  loading="lazy">
+                <div class="gallery-grid-zoom-hint"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+              </div>
+              <div class="gallery-grid-info">
+                <span class="polaroid-stamp-tag">ASOCIACIÓN BLAKE</span>
+                <h3 class="gallery-grid-title">Tyger, Tyger...</h3>
+                <div class="gallery-grid-meta">
+                  <span>Temporada 2</span>
+                  <span class="gallery-grid-view-link"><i class="fa-solid fa-expand"></i> Ver</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Foto 16: Seasons/S6.jpg -->
+            <article class="gallery-grid-card gallery-card" tabindex="0" role="button"
+              aria-label="Ver imagen: Caída de Red John" data-img="img/Seasons/S6.jpg"
+              data-title="La Caída de Red John (6x08)" data-tag="CLÍMAX DEFINITIVO"
+              data-season="Temporada 6 • Episodio 8"
+              data-desc="Tras la explosión en Malibú y una persecución a través de un cementerio y un parque, Patrick Jane acorrala al sheriff Thomas McAllister y consuma su venganza.">
+              <div class="push-pin pin-silver"></div>
+              <div class="gallery-grid-img-wrap">
+                <img src="img/Seasons/S6.jpg" alt="Temporada 6 Desenlace Red John" class="gallery-grid-img"
+                  loading="lazy">
+                <div class="gallery-grid-zoom-hint"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+              </div>
+              <div class="gallery-grid-info">
+                <span class="polaroid-stamp-tag">CLÍMAX DEFINITIVO</span>
+                <h3 class="gallery-grid-title">Desenlace Carmesí</h3>
+                <div class="gallery-grid-meta">
+                  <span>Temporada 6</span>
+                  <span class="gallery-grid-view-link"><i class="fa-solid fa-expand"></i> Ver</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Foto 17: Seasons/S7.jpg -->
+            <article class="gallery-grid-card gallery-card" tabindex="0" role="button"
+              aria-label="Ver imagen: Nuevo Comienzo" data-img="img/Seasons/S7.jpg"
+              data-title="Redención & Un Nuevo Comienzo" data-tag="RENACIMIENTO" data-season="Temporada 7"
+              data-desc="Liberado del peso de la venganza, Patrick Jane se integra al FBI en Austin junto a Lisbon, culminando su historia en una emotiva boda frente al lago y la promesa de una nueva vida.">
+              <div class="push-pin pin-gold"></div>
+              <div class="gallery-grid-img-wrap">
+                <img src="img/Seasons/S7.jpg" alt="Temporada 7 Jane y Lisbon en Austin" class="gallery-grid-img"
+                  loading="lazy">
+                <div class="gallery-grid-zoom-hint"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+              </div>
+              <div class="gallery-grid-info">
+                <span class="polaroid-stamp-tag">RENACIMIENTO & BODA</span>
+                <h3 class="gallery-grid-title">Nuevo Comienzo FBI</h3>
+                <div class="gallery-grid-meta">
+                  <span>Temporada 7</span>
+                  <span class="gallery-grid-view-link"><i class="fa-solid fa-expand"></i> Ver</span>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER SIMPLIFICADO -->
+  <footer class="site-footer">
+    <div class="container footer-simple-content">
+      <div class="footer-brand-compact">
+        <span>THE</span>
+        <span style="border: 1px solid var(--cream-pure); padding: 0 0.35rem;">MENTALIST</span>
+        <span style="color: var(--text-muted); font-size: 0.75rem; font-weight: 400; font-family: var(--font-body);">|
+          Fanpage Tributo</span>
+      </div>
+
+      <ul class="footer-nav-compact">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="personajes.html">Personajes</a></li>
+        <li><a href="temporadas.html">Temporadas</a></li>
+        <li><a href="galeria.html">Galería</a></li>
+        <li><a href="red-john.html">Red John</a></li>
+        <li><a href="curiosidades.html">Curiosidades</a></li>
+        <li><a href="juego.html">Juego Mental</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+
+      <div class="footer-social-links">
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-icon"
+          aria-label="Instagram" title="Instagram">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="GitHub"
+          title="GitHub">
+          <i class="fa-brands fa-github"></i>
+        </a>
+        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-icon"
+          aria-label="Facebook" title="Facebook">
+          <i class="fa-brands fa-facebook-f"></i>
+        </a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-icon"
+          aria-label="LinkedIn" title="LinkedIn">
+          <i class="fa-brands fa-linkedin-in"></i>
+        </a>
+      </div>
+
+      <div class="footer-copy-text">
+        &copy; The Mentalist Fanpage. "Tyger, Tyger..."
+      </div>
+    </div>
+  </footer>
+
+  <!-- =====================================================================
+       VISOR DE IMÁGENES A PANTALLA COMPLETA (LIGHTBOX MODAL INTERACTIVO)
+       ===================================================================== -->
+  <div class="gallery-lightbox-modal" id="galleryLightbox" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="lightbox-backdrop" id="lightboxBackdrop" aria-label="Cerrar visor de imagen"></div>
+    <div class="lightbox-container" role="document">
+
+      <!-- Chincheta 3D superior idéntica a las notas del tablero -->
+      <div class="push-pin pin-crimson lightbox-push-pin" id="lightboxPushPin" title="Chincheta de sujeción"></div>
+
+      <!-- Cabecera del Lightbox estilo nota/ficha -->
+      <div class="lightbox-header">
+        <div class="lightbox-header-info">
+          <span class="lightbox-counter-badge" id="lightboxCounter">1 de 8</span>
+          <span class="lightbox-tag-badge" id="lightboxTag">MOMENTO ICÓNICO</span>
+        </div>
+        <button type="button" class="lightbox-close-btn" id="lightboxCloseBtn" aria-label="Cerrar visor (Esc)"
+          title="Cerrar visor (Esc)">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Escenario central con foto y flechas laterales -->
+      <div class="lightbox-stage">
+        <button type="button" class="lightbox-nav-btn prev" id="lightboxPrevBtn"
+          aria-label="Foto anterior (Flecha izquierda)" title="Foto anterior (←)">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <img src="img/jane&lisbon.jpeg" alt="Momento Icónico ampliado" class="lightbox-img" id="lightboxImg">
+
+        <button type="button" class="lightbox-nav-btn next" id="lightboxNextBtn"
+          aria-label="Siguiente foto (Flecha derecha)" title="Siguiente foto (→)">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
+
+      <!-- Pie informativo de la escena -->
+      <div class="lightbox-caption-box">
+        <div class="lightbox-title-row">
+          <h3 class="lightbox-title" id="lightboxTitle">Título del Momento</h3>
+          <span class="lightbox-season" id="lightboxSeason">Temporada</span>
+        </div>
+        <p class="lightbox-desc" id="lightboxDesc">Descripción de la escena seleccionada.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+  <script src="js/gallery.js"></script>
+</body>
+
+</html>

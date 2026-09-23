@@ -900,10 +900,10 @@
 
   /**
    * Inicialización del módulo:
-   * Inyecta el botón flotante global del CBI y vincula la sección de mejores momentos si está presente.
+   * Vincula la sección de mejores momentos si está presente en la página.
+   * El botón flotante se retira de las páginas generales conforme a la separación del formulario en contacto.html.
    */
   function init() {
-    injectFloatingElements();
     setupMomentsSection();
   }
 
@@ -914,11 +914,12 @@
   }
 
   /**
-   * API pública global del Despacho CBI para integración desde cualquier página.
+   * API pública global del Despacho CBI para integración.
    */
   window.CbiDispatch = {
     open: openModal,
     close: closeModal,
+    injectFloatingElements: injectFloatingElements,
     refreshMoments: renderMomentsTrack
   };
 

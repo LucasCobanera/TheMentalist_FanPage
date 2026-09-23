@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Formulario de contacto oficial de The Mentalist Fanpage. Envía tus sugerencias, teorías sobre Red John, momentos favoritos o comentarios para la brigada del CBI.">
+  <title>Contacto & Despacho Oficial | The Mentalist</title>
+
+  <!-- Google Fonts & Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800;900&family=Inter:wght@300;400;500;600;700&family=Special+Elite&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Estilos CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+
+  <style>
+    /* Estilos específicos para la página de Contacto CBI */
+    .contact-layout-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 2.5rem;
+      align-items: start;
+      margin-top: 2rem;
+    }
+
+    .contact-form-card {
+      background: rgba(14, 17, 22, 0.94);
+      border: 1px solid rgba(212, 180, 131, 0.35);
+      border-radius: 10px;
+      padding: 2.5rem 2.2rem;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), 0 0 25px rgba(46, 116, 80, 0.15);
+      position: relative;
+    }
+
+    .contact-form-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #d4b483, #2e7450, #d4b483);
+      border-radius: 10px 10px 0 0;
+    }
+
+    .contact-form-group {
+      margin-bottom: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      text-align: left;
+    }
+
+    .contact-form-label {
+      font-family: var(--font-mono, 'Courier New', monospace);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #ecdcc2;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .contact-form-input,
+    .contact-form-select,
+    .contact-form-textarea {
+      width: 100%;
+      background: rgba(8, 10, 14, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      color: #fff;
+      font-family: var(--font-body, sans-serif);
+      font-size: 0.95rem;
+      transition: all 0.25s ease;
+      outline: none;
+    }
+
+    .contact-form-input:focus,
+    .contact-form-select:focus,
+    .contact-form-textarea:focus {
+      border-color: #55c299;
+      box-shadow: 0 0 12px rgba(85, 194, 153, 0.35);
+      background: rgba(12, 16, 20, 0.95);
+    }
+
+    .contact-form-select option {
+      background: #0e1116;
+      color: #fff;
+    }
+
+    .contact-sidebar-card {
+      background: rgba(12, 14, 18, 0.92);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 2rem 1.8rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      text-align: left;
+    }
+
+    .contact-info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+    }
+
+    .contact-info-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .contact-info-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      background: rgba(46, 116, 80, 0.2);
+      border: 1px solid rgba(85, 194, 153, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #55c299;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .contact-success-banner {
+      display: none;
+      background: rgba(46, 116, 80, 0.25);
+      border: 1px solid #55c299;
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.75rem;
+      color: #a7f3d0;
+      text-align: left;
+      animation: fadeIn 0.35s ease-out;
+    }
+
+    .contact-success-banner.active {
+      display: block;
+    }
+
+    @media (max-width: 900px) {
+      .contact-layout-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .contact-form-card {
+        padding: 1.75rem 1.25rem;
+      }
+    }
+  </style>
+</head>
+
+<body class="page-contact">
+
+  <!-- CABECERA PRINCIPAL -->
+  <header class="site-header" id="mainHeader">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo" title="The Mentalist Fanpage">
+        <div class="brand-icon">
+          <img src="img/Red-John-Smiley-Face.png" alt="Red John Smiley" class="brand-smiley-img">
+          <div class="blood-drip-container">
+            <span class="blood-drip drip-left"></span>
+            <span class="blood-drip drip-right"></span>
+            <span class="blood-drop drop-left"></span>
+            <span class="blood-drop drop-right"></span>
+            <span class="blood-puddle"></span>
+          </div>
+        </div>
+        <div class="brand-text">
+          <span>THE</span>
+          <span class="logo-boxed">MENTALIST</span>
+        </div>
+      </a>
+
+      <!-- Menú de Navegación -->
+      <nav aria-label="Navegación principal">
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="index.html" class="nav-link">Inicio</a></li>
+
+          <!-- Dropdown Personajes -->
+          <li class="nav-item-dropdown" id="navItemPersonajes">
+            <a href="personajes.html" class="nav-link nav-dropdown-trigger" id="dropdownPersonajesBtn" aria-haspopup="true" aria-expanded="false">
+              <span>Personajes</span>
+              <i class="fa-solid fa-chevron-down nav-dropdown-icon" aria-hidden="true"></i>
+            </a>
+            <div class="nav-dropdown-menu nav-dropdown-personajes" aria-labelledby="dropdownPersonajesBtn">
+              <div class="dropdown-section-label">
+                <i class="fa-solid fa-star"></i>
+                <span>Principales de la saga</span>
+              </div>
+              <div class="dropdown-featured-grid">
+                <a href="personajes.html?character=patrick-jane" class="dropdown-card-link" title="Abrir expediente de Patrick Jane">
+                  <div class="dropdown-card-avatar">
+                    <img src="img/characters/patrick_jane.jpg" alt="Patrick Jane">
+                  </div>
+                  <div class="dropdown-card-info">
+                    <span class="dropdown-card-name">Patrick Jane</span>
+                    <span class="dropdown-card-role">Consultor CBI / FBI</span>
+                  </div>
+                  <span class="dropdown-open-badge">Expediente <i class="fa-solid fa-folder-open"></i></span>
+                </a>
+                <a href="personajes.html?character=teresa-lisbon" class="dropdown-card-link" title="Abrir expediente de Teresa Lisbon">
+                  <div class="dropdown-card-avatar">
+                    <img src="img/characters/teresa_lisbon.jpg" alt="Teresa Lisbon">
+                  </div>
+                  <div class="dropdown-card-info">
+                    <span class="dropdown-card-name">Teresa Lisbon</span>
+                    <span class="dropdown-card-role">Agente Especial a Cargo</span>
+                  </div>
+                  <span class="dropdown-open-badge">Expediente <i class="fa-solid fa-folder-open"></i></span>
+                </a>
+                <a href="personajes.html?character=red-john" class="dropdown-card-link redjohn-card" title="Abrir expediente de Red John">
+                  <div class="dropdown-card-avatar">
+                    <img src="img/characters/red_john.jpg" alt="Red John">
+                  </div>
+                  <div class="dropdown-card-info">
+                    <span class="dropdown-card-name">Red John</span>
+                    <span class="dropdown-card-role">Némesis / Tyger Tyger</span>
+                  </div>
+                  <span class="dropdown-open-badge badge-crimson">Expediente <i class="fa-solid fa-skull"></i></span>
+                </a>
+              </div>
+
+              <div class="dropdown-section-label">
+                <i class="fa-solid fa-folder-tree"></i>
+                <span>Divisiones & Archivo</span>
+              </div>
+              <div class="dropdown-categories-list">
+                <a href="personajes.html?category=all" class="dropdown-cat-item">
+                  <i class="fa-solid fa-boxes-stacked"></i>
+                  <span>Todos los Expedientes</span>
+                </a>
+                <a href="personajes.html?category=cbi" class="dropdown-cat-item">
+                  <i class="fa-solid fa-shield-halved"></i>
+                  <span>División CBI (Sacramento)</span>
+                </a>
+                <a href="personajes.html?category=fbi" class="dropdown-cat-item">
+                  <i class="fa-solid fa-building-columns"></i>
+                  <span>Oficina FBI (Texas)</span>
+                </a>
+                <a href="personajes.html?category=nemesis" class="dropdown-cat-item nemesis-item">
+                  <i class="fa-solid fa-skull"></i>
+                  <span>Némesis & Antagonistas</span>
+                </a>
+              </div>
+            </div>
+          </li>
+
+          <!-- Dropdown Temporadas -->
+          <li class="nav-item-dropdown" id="navItemTemporadas">
+            <a href="temporadas.html" class="nav-link nav-dropdown-trigger" id="dropdownTemporadasBtn" aria-haspopup="true" aria-expanded="false">
+              <span>Temporadas</span>
+              <i class="fa-solid fa-chevron-down nav-dropdown-icon" aria-hidden="true"></i>
+            </a>
+            <div class="nav-dropdown-menu nav-dropdown-temporadas" aria-labelledby="dropdownTemporadasBtn">
+              <div class="dropdown-section-label">
+                <i class="fa-solid fa-film"></i>
+                <span>Guía Oficial de Temporadas</span>
+              </div>
+              <div class="dropdown-seasons-grid">
+                <a href="temporadas.html?season=1" class="dropdown-season-card" title="Temporada 1">
+                  <span class="season-badge">T1</span>
+                  <div class="season-info-col">
+                    <span class="season-title">La llegada del Consultor</span>
+                    <span class="season-meta">2008 - 2009 &bull; 23 Eps</span>
+                  </div>
+                </a>
+                <a href="temporadas.html?season=2" class="dropdown-season-card" title="Temporada 2">
+                  <span class="season-badge">T2</span>
+                  <div class="season-info-col">
+                    <span class="season-title">La Amenaza de Bosco</span>
+                    <span class="season-meta">2009 - 2010 &bull; 23 Eps</span>
+                  </div>
+                </a>
+                <a href="temporadas.html?season=3" class="dropdown-season-card" title="Temporada 3">
+                  <span class="season-badge">T3</span>
+                  <div class="season-info-col">
+                    <span class="season-title">El Falso Red John</span>
+                    <span class="season-meta">2010 - 2011 &bull; 24 Eps</span>
+                  </div>
+                </a>
+                <a href="temporadas.html?season=4" class="dropdown-season-card" title="Temporada 4">
+                  <span class="season-badge">T4</span>
+                  <div class="season-info-col">
+                    <span class="season-title">El Sombrero Carmesí</span>
+                    <span class="season-meta">2011 - 2012 &bull; 24 Eps</span>
+                  </div>
+                </a>
+                <a href="temporadas.html?season=5" class="dropdown-season-card" title="Temporada 5">
+                  <span class="season-badge">T5</span>
+                  <div class="season-info-col">
+                    <span class="season-title">Los 7 Sospechosos</span>
+                    <span class="season-meta">2012 - 2013 &bull; 22 Eps</span>
+                  </div>
+                </a>
+                <a href="temporadas.html?season=6" class="dropdown-season-card" title="Temporada 6">
+                  <span class="season-badge">T6</span>
+                  <div class="season-info-col">
+                    <span class="season-title">Desenlace & Fin de Red John</span>
+                    <span class="season-meta">2013 - 2014 &bull; 22 Eps</span>
+                  </div>
+                </a>
+                <a href="temporadas.html?season=7" class="dropdown-season-card" title="Temporada 7">
+                  <span class="season-badge">T7</span>
+                  <div class="season-info-col">
+                    <span class="season-title">Nuevo Comienzo en el FBI</span>
+                    <span class="season-meta">2014 - 2015 &bull; 13 Eps</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </li>
+
+          <li><a href="galeria.html" class="nav-link">Galería</a></li>
+          <li><a href="red-john.html" class="nav-link nav-red-john">Misterio Red John</a></li>
+          <li><a href="curiosidades.html" class="nav-link">Curiosidades</a></li>
+          <li><a href="juego.html" class="nav-link nav-game-link">🧠 Juego Mental</a></li>
+          <li><a href="contacto.html" class="nav-link nav-contact-link active"><i class="fa-solid fa-envelope"></i> Contacto</a></li>
+        </ul>
+      </nav>
+
+      <!-- Acciones de cabecera -->
+      <div class="nav-actions">
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO HEADER DE CONTACTO (COMPACTO) -->
+    <div class="section-header" style="padding: 1.6rem 1.5rem 1rem; text-align: center; background: radial-gradient(ellipse at 50% 20%, rgba(212, 180, 131, 0.12) 0%, transparent 70%), #090a0e; border-bottom: 1px solid rgba(255,255,255,0.08);">
+      <div class="container">
+        <span class="badge badge-gold" style="font-size: 0.74rem; letter-spacing: 0.1em; margin-bottom: 0.35rem;">
+          <i class="fa-solid fa-shield-halved"></i> DESPACHO OFICIAL CBI & FANPAGE
+        </span>
+        <h1 style="font-family: var(--font-display, serif); font-size: clamp(1.5rem, 2.6vw, 2.1rem); text-transform: uppercase; color: var(--cream-pure); letter-spacing: 0.04em; margin-bottom: 0.25rem;">
+          Formulario de <span class="text-gold">Contacto</span>
+        </h1>
+        <p style="max-width: 660px; margin: 0 auto; color: var(--text-secondary); font-size: 0.88rem; line-height: 1.45;">
+          ¿Tienes una recomendación para el sitio, una teoría sobre Red John o quieres sugerir un momento de la serie? Completa el formulario a continuación para despachar tu mensaje a los archivos del CBI.
+        </p>
+      </div>
+    </div>
+
+    <!-- CONTENEDOR PRINCIPAL DE CONTACTO -->
+    <div class="container" style="padding: 2.2rem 1.5rem 4.5rem;">
+      <div class="contact-layout-grid">
+
+        <!-- Columna Izquierda: Formulario Oficial -->
+        <section class="contact-form-card" aria-labelledby="contactFormTitle">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.75rem; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 1rem;">
+            <div>
+              <span class="badge badge-cbi" style="font-size: 0.72rem; margin-bottom: 0.35rem;">FORMULARIO DESCLASIFICADO</span>
+              <h2 id="contactFormTitle" style="font-family: var(--font-display, serif); font-size: 1.45rem; color: var(--cream-pure); margin: 0; text-transform: uppercase; letter-spacing: 0.04em;">
+                Despachar Mensaje
+              </h2>
+            </div>
+            <i class="fa-solid fa-folder-closed" style="color: var(--gold); font-size: 1.5rem; opacity: 0.75;"></i>
+          </div>
+
+          <!-- Banner de éxito al enviar -->
+          <div class="contact-success-banner" id="contactSuccessBanner" role="status" aria-live="polite">
+            <div style="display: flex; align-items: center; gap: 0.65rem; margin-bottom: 0.4rem;">
+              <i class="fa-solid fa-circle-check" style="font-size: 1.2rem; color: #55c299;"></i>
+              <strong style="font-size: 1rem; color: #fff;">¡Expediente Despachado con Éxito!</strong>
+            </div>
+            <p style="font-size: 0.88rem; margin: 0; line-height: 1.5;">
+              Tu mensaje ha sido registrado en la base de datos del CBI bajo el radicado <strong>#CBI-<span id="registrationNumber">8492</span></strong>. Teresa Lisbon y el equipo te responderán pronto.
+            </p>
+          </div>
+
+          <form id="cbiContactForm" novalidate>
+            <!-- Fila: Nombre y Correo -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+              <div class="contact-form-group">
+                <label for="contactName" class="contact-form-label">
+                  <i class="fa-solid fa-user-secret"></i> Nombre o Alias *
+                </label>
+                <input type="text" id="contactName" name="name" class="contact-form-input" required placeholder="Ej: Patrick Jane">
+              </div>
+
+              <div class="contact-form-group">
+                <label for="contactEmail" class="contact-form-label">
+                  <i class="fa-solid fa-envelope"></i> Correo Electrónico *
+                </label>
+                <input type="email" id="contactEmail" name="email" class="contact-form-input" required placeholder="agente@cbi.ca.gov">
+              </div>
+            </div>
+
+            <!-- Fila: Asunto y Temporada -->
+            <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 1.25rem;">
+              <div class="contact-form-group">
+                <label for="contactDepartment" class="contact-form-label">
+                  <i class="fa-solid fa-building-shield"></i> División o Motivo *
+                </label>
+                <select id="contactDepartment" name="department" class="contact-form-select" required>
+                  <option value="" disabled selected>Selecciona una opción...</option>
+                  <option value="general">Consulta General / Comunidad de Fans</option>
+                  <option value="sugerencia">Sugerencia para Mejorar el Sitio</option>
+                  <option value="momento">Propuesta de Momento o Capítulo Favorito</option>
+                  <option value="redjohn">Pista o Teoría sobre Red John</option>
+                  <option value="reporte">Reporte de Error Técnico en la Página</option>
+                </select>
+              </div>
+
+              <div class="contact-form-group">
+                <label for="contactSeason" class="contact-form-label">
+                  <i class="fa-solid fa-film"></i> Temporada Referencia
+                </label>
+                <select id="contactSeason" name="season" class="contact-form-select">
+                  <option value="general">Toda la Serie (T1 - T7)</option>
+                  <option value="1">Temporada 1 (2008)</option>
+                  <option value="2">Temporada 2 (2009)</option>
+                  <option value="3">Temporada 3 (2010)</option>
+                  <option value="4">Temporada 4 (2011)</option>
+                  <option value="5">Temporada 5 (2012)</option>
+                  <option value="6">Temporada 6 (2013)</option>
+                  <option value="7">Temporada 7 (2014)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Campo: Mensaje -->
+            <div class="contact-form-group">
+              <label for="contactMessage" class="contact-form-label">
+                <i class="fa-solid fa-message"></i> Contenido del Mensaje / Expediente *
+              </label>
+              <textarea id="contactMessage" name="message" class="contact-form-textarea" rows="5" required placeholder="Escribe aquí tu mensaje, consulta, momento inolvidable o teoría criminalística..."></textarea>
+            </div>
+
+            <!-- Casilla de Privacidad -->
+            <div style="display: flex; align-items: flex-start; gap: 0.65rem; margin-bottom: 1.75rem; text-align: left;">
+              <input type="checkbox" id="contactConsent" required style="margin-top: 0.25rem; accent-color: #55c299;">
+              <label for="contactConsent" style="font-size: 0.84rem; color: var(--text-secondary); line-height: 1.5; cursor: pointer;">
+                Confirmo que la información suministrada no contiene spoilers no clasificados y acepto el registro en el archivo de fans del CBI.
+              </label>
+            </div>
+
+            <!-- Botón de Envío -->
+            <button type="submit" class="btn btn-primary" id="contactSubmitBtn" style="width: 100%; justify-content: center; padding: 0.85rem 1.5rem; font-size: 0.95rem;">
+              <i class="fa-solid fa-paper-plane" style="margin-right: 0.4rem;"></i>
+              <span>Enviar Expediente al CBI</span>
+            </button>
+          </form>
+        </section>
+
+        <!-- Columna Derecha: Información Institucional & Sede CBI -->
+        <aside class="contact-sidebar-card" aria-label="Información del Despacho CBI">
+          <div style="text-align: center; margin-bottom: 1.5rem; padding-bottom: 1.25rem; border-bottom: 1px solid rgba(255,255,255,0.08);">
+            <div style="width: 60px; height: 60px; border-radius: 50%; background: rgba(212, 180, 131, 0.15); border: 2px solid #d4b483; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.75rem; color: #d4b483; font-size: 1.75rem;">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <h3 style="font-family: var(--font-display, serif); font-size: 1.2rem; color: var(--cream-pure); margin: 0; text-transform: uppercase;">
+              California Bureau of Investigation
+            </h3>
+            <span style="font-size: 0.8rem; color: var(--text-muted); letter-spacing: 0.05em;">División de Crímenes Mayores</span>
+          </div>
+
+          <div class="contact-info-item">
+            <div class="contact-info-icon">
+              <i class="fa-solid fa-location-dot"></i>
+            </div>
+            <div>
+              <strong style="color: #fff; font-size: 0.9rem; display: block; margin-bottom: 0.2rem;">Sede Central CBI</strong>
+              <span style="color: var(--text-secondary); font-size: 0.84rem; line-height: 1.4; display: block;">
+                1020 N Street, Suite 520<br>Sacramento, CA 95814
+              </span>
+            </div>
+          </div>
+
+          <div class="contact-info-item">
+            <div class="contact-info-icon">
+              <i class="fa-solid fa-phone"></i>
+            </div>
+            <div>
+              <strong style="color: #fff; font-size: 0.9rem; display: block; margin-bottom: 0.2rem;">Línea de Despacho</strong>
+              <span style="color: var(--text-secondary); font-size: 0.84rem; line-height: 1.4; display: block;">
+                (916) 555-0199 (Guardia 24/7)<br>Interno de Consultoría: #771
+              </span>
+            </div>
+          </div>
+
+          <div class="contact-info-item">
+            <div class="contact-info-icon">
+              <i class="fa-solid fa-mug-hot"></i>
+            </div>
+            <div>
+              <strong style="color: #fff; font-size: 0.9rem; display: block; margin-bottom: 0.2rem;">Atención de Patrick Jane</strong>
+              <span style="color: var(--text-secondary); font-size: 0.84rem; line-height: 1.4; display: block;">
+                Disponible en el ático tras la hora del té (Lapsang Souchong).
+              </span>
+            </div>
+          </div>
+
+          <!-- Tarjeta de Cita de Jane -->
+          <div style="background: rgba(10, 14, 12, 0.7); border: 1px solid rgba(46, 116, 80, 0.35); border-left: 3px solid #55c299; border-radius: 6px; padding: 1.1rem 1.2rem; margin-top: 1.75rem;">
+            <p style="font-family: var(--font-display, serif); font-style: italic; color: #dcd8d0; font-size: 0.88rem; line-height: 1.6; margin: 0 0 0.5rem 0;">
+              «La verdad siempre se esconde en los detalles más insignificantes. No temas escribirme lo que observas.»
+            </p>
+            <span style="font-family: var(--font-typewriter, monospace); color: #55c299; font-size: 0.78rem; font-weight: 600;">
+              — Patrick Jane
+            </span>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER SIMPLIFICADO -->
+  <footer class="site-footer">
+    <div class="container footer-simple-content">
+      <div class="footer-brand-compact">
+        <span>THE</span>
+        <span style="border: 1px solid var(--cream-pure); padding: 0 0.35rem;">MENTALIST</span>
+        <span style="color: var(--text-muted); font-size: 0.75rem; font-weight: 400; font-family: var(--font-body);">|
+          Fanpage Tributo</span>
+      </div>
+
+      <ul class="footer-nav-compact">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="personajes.html">Personajes</a></li>
+        <li><a href="temporadas.html">Temporadas</a></li>
+        <li><a href="galeria.html">Galería</a></li>
+        <li><a href="red-john.html">Red John</a></li>
+        <li><a href="curiosidades.html">Curiosidades</a></li>
+        <li><a href="juego.html">Juego Mental</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+
+      <div class="footer-social-links">
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram" title="Instagram">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="GitHub" title="GitHub">
+          <i class="fa-brands fa-github"></i>
+        </a>
+        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook" title="Facebook">
+          <i class="fa-brands fa-facebook-f"></i>
+        </a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn" title="LinkedIn">
+          <i class="fa-brands fa-linkedin-in"></i>
+        </a>
+      </div>
+
+      <div class="footer-copy-text">
+        &copy; The Mentalist Fanpage. "Tyger, Tyger..."
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+  <script>
+    // Gestión reactiva del formulario de contacto CBI
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('cbiContactForm');
+      const banner = document.getElementById('contactSuccessBanner');
+      const regNum = document.getElementById('registrationNumber');
+
+      if (!form) return;
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        // Validaciones semánticas
+        const name = document.getElementById('contactName').value.trim();
+        const email = document.getElementById('contactEmail').value.trim();
+        const department = document.getElementById('contactDepartment').value;
+        const message = document.getElementById('contactMessage').value.trim();
+        const consent = document.getElementById('contactConsent').checked;
+
+        if (!name || !email || !department || !message || !consent) {
+          alert('Por favor completa todos los campos requeridos y acepta la confirmación de envío.');
+          return;
+        }
+
+        // Generar número de registro dinámico
+        const randomId = Math.floor(1000 + Math.random() * 9000);
+        if (regNum) regNum.textContent = randomId;
+
+        // Mostrar banner de éxito y resetear formulario
+        if (banner) {
+          banner.classList.add('active');
+          banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Guardar en localStorage para persistencia de la simulación
+        try {
+          const submissions = JSON.parse(localStorage.getItem('the_mentalist_contact_messages') || '[]');
+          submissions.push({
+            id: randomId,
+            name,
+            email,
+            department,
+            season: document.getElementById('contactSeason').value,
+            message,
+            timestamp: new Date().toISOString()
+          });
+          localStorage.setItem('the_mentalist_contact_messages', JSON.stringify(submissions));
+        } catch (err) {
+          console.warn('Almacenamiento local no disponible', err);
+        }
+
+        form.reset();
+      });
+    });
+  </script>
+</body>
+
+</html>
