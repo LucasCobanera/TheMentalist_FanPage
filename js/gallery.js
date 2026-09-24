@@ -2,9 +2,9 @@
  * ==========================================================================
  * THE MENTALIST - GALERÍA DE MOMENTOS ICÓNICOS (CARRUSEL & LIGHTBOX MODAL)
  * ==========================================================================
- * Provee interacción completa para:
- * 1. Desplazamiento fluido del carrusel con botones de avance / retroceso.
- * 2. Soporte para gestos táctiles (touch swipe) en móviles y tablets.
+ * Provee interacción de alto rendimiento para:
+ * 1. Desplazamiento fluido del carrusel con aceleración por hardware (GPU).
+ * 2. Arrastre táctil y con ratón (Grab & Drag-to-scroll) ultra fluido y sin bloqueos.
  * 3. Apertura de Lightbox modal a pantalla completa al hacer clic en cualquier tarjeta.
  * 4. Navegación continua en el Lightbox con botones laterales y teclado (←, →, Esc).
  * ==========================================================================
@@ -13,13 +13,16 @@
 (function () {
   'use strict';
 
+  // Bandera para diferenciar entre arrastre (scroll) y clic para abrir modal
+  let hasDraggedCarousel = false;
+
   document.addEventListener('DOMContentLoaded', () => {
     initGalleryCarousel();
     initGalleryLightbox();
   });
 
   /**
-   * Inicializa la navegación del carrusel de tarjetas
+   * Inicializa la navegación del carrusel de tarjetas con desplazamiento fluido
    */
   function initGalleryCarousel() {
     const viewport = document.getElementById('galleryViewport');
@@ -34,43 +37,101 @@
     const totalCards = cards.length;
     if (totalCards === 0) return;
 
-    // Actualiza el indicador numérico (ej. "1 / 8")
+    // Desactivar arrastre fantasma de imágenes nativo
+    track.querySelectorAll('img').forEach(img => {
+      img.setAttribute('draggable', 'false');
+    });
+
+    // Medición en caché para evitar Reflow / Layout Thrashing durante el scroll
+    let cardStep = 360;
+    function measureStep() {
+      if (cards.length > 1) {
+        cardStep = Math.max(1, cards[1].offsetLeft - cards[0].offsetLeft);
+      } else if (cards.length > 0) {
+        cardStep = cards[0].offsetWidth + 36;
+      }
+    }
+    measureStep();
+    window.addEventListener('resize', measureStep, { passive: true });
+
+    // Actualización del indicador numérico (ej. "1 / 8") sincronizado con requestAnimationFrame
+    let counterTicking = false;
     function updateCounter() {
-      if (!counterEl) return;
+      if (!counterEl || cardStep <= 0) return;
       const scrollLeft = viewport.scrollLeft;
-      const cardStep = cards.length > 1 ? Math.max(1, cards[1].offsetLeft - cards[0].offsetLeft) : (cards[0].offsetWidth + 36);
       const currentIndex = Math.min(
         totalCards,
         Math.max(1, Math.round(scrollLeft / cardStep) + 1)
       );
       counterEl.textContent = `${currentIndex} / ${totalCards}`;
+      counterTicking = false;
     }
 
-    // Calcula el ancho de desplazamiento por clic
-    function getScrollStep() {
-      if (cards.length === 0) return 360;
-      const cardStep = cards.length > 1 ? (cards[1].offsetLeft - cards[0].offsetLeft) : (cards[0].offsetWidth + 36);
-      return viewport.clientWidth > 900 ? cardStep * 1.5 : cardStep;
+    viewport.addEventListener('scroll', () => {
+      if (!counterTicking) {
+        requestAnimationFrame(updateCounter);
+        counterTicking = true;
+      }
+    }, { passive: true });
+
+    // Desplazamiento por botones de navegación
+    function scrollByStep(direction) {
+      const step = viewport.clientWidth > 900 ? cardStep * 1.5 : cardStep;
+      viewport.scrollBy({ left: direction * step, behavior: 'smooth' });
     }
 
     if (prevBtn) {
-      prevBtn.addEventListener('click', () => {
-        viewport.scrollBy({ left: -getScrollStep(), behavior: 'smooth' });
+      prevBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        scrollByStep(-1);
       });
     }
 
     if (nextBtn) {
-      nextBtn.addEventListener('click', () => {
-        viewport.scrollBy({ left: getScrollStep(), behavior: 'smooth' });
+      nextBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        scrollByStep(1);
       });
     }
 
-    // Actualizar indicador durante el scroll pasivo
-    let scrollTimeout;
-    viewport.addEventListener('scroll', () => {
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(updateCounter, 60);
-    }, { passive: true });
+    // ------------------------------------------------------------------------
+    // Soporte para Arrastre con Ratón (Desktop Grab & Drag-to-scroll)
+    // ------------------------------------------------------------------------
+    let isDown = false;
+    let startX = 0;
+    let scrollStart = 0;
+
+    viewport.addEventListener('mousedown', (e) => {
+      if (e.button !== 0) return; // Solo botón principal
+      isDown = true;
+      hasDraggedCarousel = false;
+      startX = e.pageX;
+      scrollStart = viewport.scrollLeft;
+      viewport.style.scrollBehavior = 'auto'; // Desactiva suavizado durante arrastre activo
+      viewport.style.scrollSnapType = 'none'; // Desactiva snap durante arrastre
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      const x = e.pageX;
+      const walk = x - startX;
+      if (Math.abs(walk) > 6) {
+        hasDraggedCarousel = true;
+      }
+      viewport.scrollLeft = scrollStart - walk;
+    });
+
+    const endMouseDrag = () => {
+      if (!isDown) return;
+      isDown = false;
+      viewport.style.scrollBehavior = '';
+      viewport.style.scrollSnapType = '';
+      setTimeout(() => {
+        hasDraggedCarousel = false;
+      }, 60);
+    };
+
+    window.addEventListener('mouseup', endMouseDrag);
 
     updateCounter();
   }
@@ -128,7 +189,9 @@
       if (pushPin && item.element) {
         const cardPin = item.element.querySelector('.push-pin');
         if (cardPin) {
-          const pinColor = cardPin.classList.contains('pin-gold') ? 'pin-gold' : (cardPin.classList.contains('pin-silver') ? 'pin-silver' : 'pin-crimson');
+          const pinColor = cardPin.classList.contains('pin-gold')
+            ? 'pin-gold'
+            : (cardPin.classList.contains('pin-silver') ? 'pin-silver' : 'pin-crimson');
           pushPin.className = `push-pin ${pinColor} lightbox-push-pin`;
         }
       }
@@ -136,13 +199,13 @@
       // Efecto suave de transición de imagen
       if (lightboxImg) {
         lightboxImg.style.opacity = '0';
-        lightboxImg.style.transform = 'scale(0.97)';
+        lightboxImg.style.transform = 'scale(0.98)';
         setTimeout(() => {
           lightboxImg.src = item.img;
           lightboxImg.alt = item.alt;
           lightboxImg.style.opacity = '1';
           lightboxImg.style.transform = 'scale(1)';
-        }, 120);
+        }, 90);
       }
 
       if (lightboxTag) lightboxTag.textContent = item.tag;
@@ -159,7 +222,7 @@
       showItem(index);
       lightbox.classList.add('active');
       lightbox.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden'; // Evita scroll de la página de fondo
+      document.body.style.overflow = 'hidden';
       if (closeBtn) closeBtn.focus();
     }
 
@@ -180,9 +243,13 @@
       showItem(currentItemIndex - 1);
     }
 
-    // Vincular clics en las tarjetas del carrusel
+    // Vincular clics en las tarjetas (respetando la bandera de arrastre)
     cards.forEach((card, idx) => {
       card.addEventListener('click', (e) => {
+        if (hasDraggedCarousel) {
+          e.preventDefault();
+          return;
+        }
         e.preventDefault();
         openLightbox(idx);
       });
@@ -231,9 +298,9 @@
       const swipeDistance = touchEndX - touchStartX;
       if (Math.abs(swipeDistance) > 45) {
         if (swipeDistance < 0) {
-          nextItem(); // Deslizar hacia la izquierda = siguiente foto
+          nextItem();
         } else {
-          prevItem(); // Deslizar hacia la derecha = foto anterior
+          prevItem();
         }
       }
     }

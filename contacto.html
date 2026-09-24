@@ -139,24 +139,217 @@
 
     .contact-success-banner {
       display: none;
-      background: rgba(46, 116, 80, 0.25);
-      border: 1px solid #55c299;
+      position: relative;
+      background: rgba(22, 101, 52, 0.22);
+      border: 1.5px solid #22c55e;
       border-radius: 8px;
-      padding: 1.25rem 1.5rem;
+      padding: 1.35rem 1.6rem;
       margin-bottom: 1.75rem;
-      color: #a7f3d0;
+      color: #bbf7d0;
       text-align: left;
+      overflow: hidden;
       animation: fadeIn 0.35s ease-out;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.1);
     }
 
     .contact-success-banner.active {
       display: block;
     }
 
+    /* Botón de Despacho Táctico CBI con Microanimaciones */
+    .btn-cbi-dispatch {
+      position: relative;
+      width: 100%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      padding: 0.95rem 1.75rem;
+      font-size: 0.96rem;
+      font-weight: 700;
+      font-family: var(--font-body, sans-serif);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #f0fdf4;
+      background: linear-gradient(135deg, #14532d 0%, #052e16 100%);
+      border: 1.5px solid #22c55e;
+      border-radius: 6px;
+      cursor: pointer;
+      overflow: hidden;
+      box-shadow: 0 4px 18px rgba(34, 197, 94, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.2);
+      transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .btn-cbi-dispatch::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+      transition: left 0.65s ease;
+    }
+
+    .btn-cbi-dispatch:hover {
+      background: linear-gradient(135deg, #166534 0%, #0f3d20 100%);
+      border-color: #4ade80;
+      color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(34, 197, 94, 0.45), 0 0 16px rgba(74, 222, 128, 0.35);
+    }
+
+    .btn-cbi-dispatch:hover::before {
+      left: 100%;
+    }
+
+    .btn-dispatch-icon {
+      font-size: 1.05rem;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .btn-cbi-dispatch:hover .btn-dispatch-icon {
+      transform: translateX(4px) translateY(-2px) rotate(-14deg);
+    }
+
+    .btn-cbi-dispatch:active {
+      transform: translateY(0);
+      box-shadow: 0 3px 10px rgba(34, 197, 94, 0.3);
+    }
+
+    /* Estado de Expediente Despachado / Verificado al Enviar */
+    .btn-cbi-dispatch.is-sent {
+      background: linear-gradient(135deg, #059669 0%, #047857 100%) !important;
+      border-color: #34d399 !important;
+      color: #ffffff !important;
+      box-shadow: 0 0 25px rgba(52, 211, 153, 0.55), inset 0 1px 2px rgba(255, 255, 255, 0.3) !important;
+      cursor: default;
+      pointer-events: none;
+      animation: pulseSent 2.2s infinite ease-in-out;
+    }
+
+    @keyframes pulseSent {
+      0%, 100% { box-shadow: 0 0 16px rgba(52, 211, 153, 0.4); }
+      50% { box-shadow: 0 0 30px rgba(52, 211, 153, 0.8); }
+    }
+
+    /* Sello Circular Policial CBI (Animated Police/Postal Round Stamp) */
+    .cbi-round-stamp {
+      position: absolute;
+      top: 50%;
+      right: 25px;
+      width: 130px;
+      height: 130px;
+      margin-top: -65px;
+      border-radius: 50%;
+      border: 3px dashed #b91c1c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      opacity: 0;
+      z-index: 10;
+      box-shadow: 0 0 12px rgba(185, 28, 28, 0.3);
+      transform: rotate(-14deg) scale(0);
+    }
+
+    .contact-success-banner.active .cbi-round-stamp {
+      animation: stampImpact 0.55s cubic-bezier(0.18, 0.89, 0.32, 1.28) 0.1s forwards;
+    }
+
+    @keyframes stampImpact {
+      0% {
+        opacity: 0;
+        transform: scale(2.8) rotate(-35deg);
+        filter: blur(5px);
+      }
+      60% {
+        opacity: 0.95;
+        transform: scale(0.92) rotate(-11deg);
+        filter: blur(0px);
+      }
+      80% {
+        transform: scale(1.05) rotate(-15deg);
+      }
+      100% {
+        opacity: 0.92;
+        transform: scale(1) rotate(-13deg);
+      }
+    }
+
+    .stamp-inner-border {
+      width: 114px;
+      height: 114px;
+      border-radius: 50%;
+      border: 2px solid #b91c1c;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4px;
+      color: #b91c1c;
+      font-family: var(--font-typewriter, monospace);
+      background: rgba(185, 28, 28, 0.05);
+    }
+
+    .stamp-sub-top {
+      font-size: 0.44rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      line-height: 1.1;
+      text-transform: uppercase;
+    }
+
+    .stamp-stars {
+      font-size: 0.42rem;
+      color: #dc2626;
+      margin: 1px 0;
+      letter-spacing: 0.15em;
+    }
+
+    .stamp-title-main {
+      font-family: var(--font-display, serif);
+      font-size: 0.92rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      line-height: 1;
+      color: #991b1b;
+      border-top: 1.5px solid #b91c1c;
+      border-bottom: 1.5px solid #b91c1c;
+      padding: 2px 4px;
+      margin: 2px 0;
+      text-transform: uppercase;
+    }
+
+    .stamp-division {
+      font-size: 0.48rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      line-height: 1.1;
+    }
+
+    .stamp-sub-bottom {
+      font-size: 0.40rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
     @media (max-width: 900px) {
       .contact-layout-grid {
         grid-template-columns: 1fr;
         gap: 2rem;
+      }
+      .cbi-round-stamp {
+        position: static;
+        margin: 1rem auto 0;
+        width: 110px;
+        height: 110px;
+      }
+      .stamp-inner-border {
+        width: 96px;
+        height: 96px;
       }
     }
 
@@ -382,14 +575,23 @@
             <i class="fa-solid fa-folder-closed" style="color: var(--gold); font-size: 1.5rem; opacity: 0.75;"></i>
           </div>
 
-          <!-- Banner de éxito al enviar -->
+          <!-- Banner de éxito al enviar con Sello Circular Policial CBI -->
           <div class="contact-success-banner" id="contactSuccessBanner" role="status" aria-live="polite">
-            <div style="display: flex; align-items: center; gap: 0.65rem; margin-bottom: 0.4rem;">
-              <i class="fa-solid fa-circle-check" style="font-size: 1.2rem; color: #55c299;"></i>
-              <strong style="font-size: 1rem; color: #fff;">¡Expediente Despachado con Éxito!</strong>
+            <div class="cbi-round-stamp" id="cbiRoundStamp" aria-hidden="true">
+              <div class="stamp-inner-border">
+                <div class="stamp-sub-top">CALIFORNIA BUREAU OF INVESTIGATION</div>
+                <div class="stamp-stars"><i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i></div>
+                <div class="stamp-title-main">DESPACHADO</div>
+                <div class="stamp-division">EVIDENCE #CBI-<span id="stampIdNumber">8492</span></div>
+                <div class="stamp-sub-bottom">SACRAMENTO HEADQUARTERS</div>
+              </div>
             </div>
-            <p style="font-size: 0.88rem; margin: 0; line-height: 1.5;">
-              Tu mensaje ha sido registrado en la base de datos del CBI bajo el radicado <strong>#CBI-<span id="registrationNumber">8492</span></strong>. Teresa Lisbon y el equipo te responderán pronto.
+            <div style="display: flex; align-items: center; gap: 0.65rem; margin-bottom: 0.4rem; position: relative; z-index: 2;">
+              <i class="fa-solid fa-circle-check" style="font-size: 1.25rem; color: #55c299;"></i>
+              <strong style="font-size: 1.05rem; color: #fff;">¡Expediente Despachado con Éxito!</strong>
+            </div>
+            <p style="font-size: 0.88rem; margin: 0; line-height: 1.5; position: relative; z-index: 2; max-width: 440px;">
+              Tu mensaje ha sido registrado en la base de datos del CBI bajo el radicado oficial <strong>#CBI-<span id="registrationNumber">8492</span></strong>. Teresa Lisbon y la brigada de Crímenes Mayores han recibido el archivo.
             </p>
           </div>
 
@@ -460,10 +662,10 @@
               </label>
             </div>
 
-            <!-- Botón de Envío -->
-            <button type="submit" class="btn btn-primary" id="contactSubmitBtn" style="width: 100%; justify-content: center; padding: 0.85rem 1.5rem; font-size: 0.95rem;">
-              <i class="fa-solid fa-paper-plane" style="margin-right: 0.4rem;"></i>
-              <span>Enviar Expediente al CBI</span>
+            <!-- Botón de Envío Táctico CBI con Microanimaciones -->
+            <button type="submit" class="btn-cbi-dispatch" id="contactSubmitBtn">
+              <i class="fa-solid fa-paper-plane btn-dispatch-icon"></i>
+              <span class="btn-dispatch-text">Enviar Expediente al CBI</span>
             </button>
           </form>
         </section>
@@ -553,16 +755,16 @@
       </ul>
 
       <div class="footer-social-links">
-        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram" title="Instagram">
+        <a href="https://www.instagram.com/lucass_cobanera/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram" title="Instagram">
           <i class="fa-brands fa-instagram"></i>
         </a>
-        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="GitHub" title="GitHub">
+        <a href="https://github.com/LucasCobanera" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="GitHub" title="GitHub">
           <i class="fa-brands fa-github"></i>
         </a>
-        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook" title="Facebook">
+        <a href="https://www.facebook.com/lucas.cobanera.9" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook" title="Facebook">
           <i class="fa-brands fa-facebook-f"></i>
         </a>
-        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn" title="LinkedIn">
+        <a href="https://www.linkedin.com/in/lucas-cobanera-alucen-5aa892219/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn" title="LinkedIn">
           <i class="fa-brands fa-linkedin-in"></i>
         </a>
       </div>
@@ -581,6 +783,19 @@
       const form = document.getElementById('cbiContactForm');
       const banner = document.getElementById('contactSuccessBanner');
       const regNum = document.getElementById('registrationNumber');
+
+      // Auto-selección desde parámetros de URL (?dept=momento&season=1, etc.)
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const deptParam = urlParams.get('dept') || urlParams.get('department');
+        if (deptParam && document.getElementById('contactDepartment')) {
+          document.getElementById('contactDepartment').value = deptParam;
+        }
+        const seasonParam = urlParams.get('season');
+        if (seasonParam && document.getElementById('contactSeason')) {
+          document.getElementById('contactSeason').value = seasonParam;
+        }
+      } catch (err) {}
 
       if (!form) return;
 
@@ -602,8 +817,17 @@
         // Generar número de registro dinámico
         const randomId = Math.floor(1000 + Math.random() * 9000);
         if (regNum) regNum.textContent = randomId;
+        const stampId = document.getElementById('stampIdNumber');
+        if (stampId) stampId.textContent = randomId;
 
-        // Mostrar banner de éxito y resetear formulario
+        // Activar estado verificado en el botón de despacho
+        const submitBtn = document.getElementById('contactSubmitBtn');
+        if (submitBtn) {
+          submitBtn.classList.add('is-sent');
+          submitBtn.innerHTML = '<i class="fa-solid fa-circle-check btn-dispatch-icon"></i> <span class="btn-dispatch-text">✓ EXPEDIENTE DESPACHADO AL CBI</span>';
+        }
+
+        // Mostrar banner de éxito con sello policial animado
         if (banner) {
           banner.classList.add('active');
           banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });

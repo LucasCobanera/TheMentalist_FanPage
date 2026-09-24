@@ -17,6 +17,7 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  initPoemTranslation();
   initBlakeModal();
   initRedJohnSpoiler();
   initEvidenceBoard();
@@ -339,6 +340,43 @@ function initBlakeModal() {
 }
 
 /**
+ * Gestiona la traducción interactiva del poema de William Blake
+ * entre el texto original en inglés y su versión traducida al español.
+ */
+function initPoemTranslation() {
+  const btn = document.getElementById('btnTranslatePoem');
+  const btnText = document.getElementById('translateBtnText');
+  const contentEn = document.getElementById('poemContentEn');
+  const contentEs = document.getElementById('poemContentEs');
+
+  if (!btn || !contentEn || !contentEs) return;
+
+  let isSpanish = false;
+
+  btn.addEventListener('click', () => {
+    isSpanish = !isSpanish;
+
+    if (isSpanish) {
+      contentEn.style.display = 'none';
+      contentEs.style.display = 'block';
+      contentEs.classList.remove('fade-enter');
+      void contentEs.offsetWidth;
+      contentEs.classList.add('fade-enter');
+      if (btnText) btnText.textContent = 'Ver Original (Inglés)';
+      btn.classList.add('active');
+    } else {
+      contentEs.style.display = 'none';
+      contentEn.style.display = 'block';
+      contentEn.classList.remove('fade-enter');
+      void contentEn.offsetWidth;
+      contentEn.classList.add('fade-enter');
+      if (btnText) btnText.textContent = 'Traducir a Español';
+      btn.classList.remove('active');
+    }
+  });
+}
+
+/**
  * Administra el panel de revelación de la identidad definitiva de Red John
  * (Thomas McAllister), alternando el velo de advertencia y la foto redjohn.jpeg.
  */
@@ -441,9 +479,14 @@ function initEvidenceBoard() {
 
   let currentFilter = 'all';
   let cachedPaths = [];
+  let currentZoom = 1.0;
+  const MIN_ZOOM = 0.70;
+  const MAX_ZOOM = 1.45;
+  const ZOOM_STEP = 0.15;
 
   /**
-   * Obtiene las coordenadas centrales de una chincheta respecto al lienzo SVG del tablero.
+   * Obtiene las coordenadas centrales de una chincheta respecto al lienzo SVG del tablero,
+   * normalizadas matemáticamente por el factor de zoom activo.
    */
   function getPinCoords(element) {
     const pin = element.querySelector('.push-pin') || element;
@@ -451,8 +494,8 @@ function initEvidenceBoard() {
     const boardRect = board.getBoundingClientRect();
 
     return {
-      x: pinRect.left - boardRect.left + (board.scrollLeft || 0) + pinRect.width / 2,
-      y: pinRect.top - boardRect.top + (board.scrollTop || 0) + pinRect.height / 2
+      x: (pinRect.left - boardRect.left) / currentZoom + (board.scrollLeft || 0) + (pinRect.width / 2) / currentZoom,
+      y: (pinRect.top - boardRect.top) / currentZoom + (board.scrollTop || 0) + (pinRect.height / 2) / currentZoom
     };
   }
 
@@ -466,15 +509,15 @@ function initEvidenceBoard() {
   }
 
   /**
-   * Dibuja todos los hilos en la capa SVG de manera optimizada.
+   * Dibuja todos los hilos en la capa SVG de manera optimizada y adaptada al zoom.
    */
   function drawThreads() {
     svg.innerHTML = '';
     const boardRect = board.getBoundingClientRect();
     if (boardRect.width === 0 || boardRect.height === 0) return;
 
-    const fullWidth = Math.max(board.scrollWidth, Math.round(boardRect.width));
-    const fullHeight = Math.max(board.scrollHeight, Math.round(boardRect.height));
+    const fullWidth = Math.max(board.scrollWidth, board.offsetWidth);
+    const fullHeight = Math.max(board.scrollHeight, board.offsetHeight);
 
     svg.style.width = fullWidth + 'px';
     svg.style.height = fullHeight + 'px';
@@ -692,8 +735,8 @@ function initEvidenceBoard() {
     card.addEventListener('pointermove', (e) => {
       if (!pointerActive || activePointerCard !== card) return;
 
-      const dx = e.clientX - startX;
-      const dy = e.clientY - startY;
+      const dx = (e.clientX - startX) / currentZoom;
+      const dy = (e.clientY - startY) / currentZoom;
 
       if (!isCardDragging && Math.hypot(dx, dy) > 5) {
         isCardDragging = true;
@@ -822,12 +865,98 @@ function initEvidenceBoard() {
     });
   }
 
+  /**
+   * CONTROLES DE ZOOM DEL TABLERO (+, -, 100%)
+   * Permite ampliar o reducir la escala visual del corcho policial.
+   */
+  function initBoardZoom() {
+    const zoomInBtn = document.getElementById('btnZoomIn');
+    const zoomOutBtn = document.getElementById('btnZoomOut');
+    const zoomResetBtn = document.getElementById('btnZoomReset');
+    const zoomBadge = document.getElementById('boardZoomLevel');
+    const wrapper = document.getElementById('evidenceBoardZoomWrapper');
+    const scaler = document.getElementById('evidenceBoardScaler');
+
+    if (!zoomInBtn || !zoomOutBtn || !zoomBadge) return;
+
+    function updateZoomUI() {
+      zoomBadge.textContent = `${Math.round(currentZoom * 100)}%`;
+      zoomInBtn.disabled = currentZoom >= MAX_ZOOM - 0.01;
+      zoomOutBtn.disabled = currentZoom <= MIN_ZOOM + 0.01;
+    }
+
+    function applyZoom(newZoom) {
+      currentZoom = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, Math.round(newZoom * 100) / 100));
+
+      if (Math.abs(currentZoom - 1.0) < 0.02) {
+        currentZoom = 1.0;
+      }
+
+      if (currentZoom === 1.0) {
+        board.style.transform = '';
+        board.style.transformOrigin = '';
+        if (scaler) {
+          scaler.style.width = '';
+          scaler.style.height = '';
+          scaler.style.margin = '';
+        }
+      } else {
+        board.style.transform = `scale(${currentZoom})`;
+        board.style.transformOrigin = 'top left';
+
+        if (scaler && wrapper) {
+          const origW = board.offsetWidth;
+          const origH = board.offsetHeight;
+          const scaledW = Math.round(origW * currentZoom);
+          const scaledH = Math.round(origH * currentZoom);
+
+          scaler.style.width = `${scaledW}px`;
+          scaler.style.height = `${scaledH}px`;
+
+          if (scaledW < wrapper.clientWidth) {
+            scaler.style.margin = '0 auto';
+          } else {
+            scaler.style.margin = '0';
+          }
+        }
+      }
+
+      updateZoomUI();
+      drawThreads();
+      setTimeout(drawThreads, 120);
+      setTimeout(drawThreads, 260);
+    }
+
+    zoomInBtn.addEventListener('click', () => applyZoom(currentZoom + ZOOM_STEP));
+    zoomOutBtn.addEventListener('click', () => applyZoom(currentZoom - ZOOM_STEP));
+    if (zoomResetBtn) zoomResetBtn.addEventListener('click', () => applyZoom(1.0));
+    zoomBadge.addEventListener('click', () => applyZoom(1.0));
+
+    window.adjustBoardZoomLayout = () => {
+      if (currentZoom !== 1.0 && scaler && wrapper) {
+        const scaledW = Math.round(board.offsetWidth * currentZoom);
+        if (scaledW < wrapper.clientWidth) {
+          scaler.style.margin = '0 auto';
+        } else {
+          scaler.style.margin = '0';
+        }
+      }
+    };
+
+    updateZoomUI();
+  }
+
+  initBoardZoom();
+
   // Trazado inicial y redibujado reactivo con debounce en resize
   window.refreshEvidenceBoard = drawThreads;
   let resizeTimer = null;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(drawThreads, 120);
+    resizeTimer = setTimeout(() => {
+      if (window.adjustBoardZoomLayout) window.adjustBoardZoomLayout();
+      drawThreads();
+    }, 120);
   });
 
   // Dibujar tras permitir la estabilización del layout inicial

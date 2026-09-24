@@ -184,6 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderSeasons('all', true);
   updateSeasonHeader('all', true);
   initSeasonPills();
+  initStickySeasonControls();
   initNarrativeTimeline();
   initSpoilerToggle();
   initSeasonSynopsisModal();
@@ -585,6 +586,36 @@ function initSeasonPills() {
       });
     });
   });
+}
+
+/**
+ * Detecta cuando la barra de controles de temporadas queda fijada en el viewport
+ * y aplica la clase .is-stuck para intensificar el desenfoque y efecto glassmorphism.
+ */
+function initStickySeasonControls() {
+  const bar = document.getElementById('seasonsStickyBar');
+  if (!bar) return;
+
+  let ticking = false;
+  const checkSticky = () => {
+    const rect = bar.getBoundingClientRect();
+    // 68px a 72px corresponde a la altura de .site-header
+    if (rect.top <= 74) {
+      bar.classList.add('is-stuck');
+    } else {
+      bar.classList.remove('is-stuck');
+    }
+    ticking = false;
+  };
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(checkSticky);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  checkSticky();
 }
 
 /**

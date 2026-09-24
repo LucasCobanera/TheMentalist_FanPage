@@ -233,15 +233,33 @@
     </div>
 
     <!-- EL POEMA DE WILLIAM BLAKE (TYGER TYGER) -->
-    <section class="poem-box">
-      <span class="badge badge-crimson" style="margin-bottom: 1.25rem;">LA CONTRASEÑA EN LAS SOMBRAS</span>
-      <p>
-        "Tyger, Tyger, burning bright,<br>
-        In the forests of the night;<br>
-        What immortal hand or eye,<br>
-        Could frame thy fearful symmetry?"
-      </p>
-      <cite>— William Blake (1794), susurrado por Red John al oído de Patrick Jane</cite>
+    <section class="poem-box" id="poemBox">
+      <div class="poem-header-row">
+        <span class="badge badge-crimson">LA CONTRASEÑA EN LAS SOMBRAS</span>
+        <button type="button" class="btn-poem-translate" id="btnTranslatePoem" aria-label="Traducir poema a español">
+          <i class="fa-solid fa-language"></i> <span id="translateBtnText">Traducir a Español</span>
+        </button>
+      </div>
+
+      <div class="poem-text-content" id="poemContentEn">
+        <p>
+          "Tyger, Tyger, burning bright,<br>
+          In the forests of the night;<br>
+          What immortal hand or eye,<br>
+          Could frame thy fearful symmetry?"
+        </p>
+        <cite>— William Blake (1794), susurrado por Red John al oído de Patrick Jane</cite>
+      </div>
+
+      <div class="poem-text-content" id="poemContentEs" style="display: none;">
+        <p>
+          "Tigre, Tigre, que ardes brillante,<br>
+          en los bosques de la noche;<br>
+          ¿qué ojo o mano inmortal,<br>
+          pudo concebir tu temible simetría?"
+        </p>
+        <cite>— William Blake (1794), traducción al español</cite>
+      </div>
     </section>
 
     <!-- LA ASOCIACIÓN BLAKE (Informe Ejecutivo & Desclasificación) -->
@@ -302,6 +320,24 @@
         <button type="button" class="board-filter-btn" data-filter="malibu">
           <i class="fa-solid fa-bomb"></i> Explosión de Malibú (6x06)
         </button>
+        <!-- Controles de Zoom del Tablero -->
+        <div class="board-zoom-controls" id="boardZoomControls">
+          <span class="zoom-controls-label"><i class="fa-solid fa-magnifying-glass"></i> Zoom:</span>
+          <button type="button" class="board-zoom-btn" id="btnZoomOut" title="Reducir zoom (-)"
+            aria-label="Reducir zoom">
+            <i class="fa-solid fa-minus"></i>
+          </button>
+          <span class="board-zoom-badge" id="boardZoomLevel" title="Clic para restablecer al 100%">100%</span>
+          <button type="button" class="board-zoom-btn" id="btnZoomIn" title="Aumentar zoom (+)"
+            aria-label="Aumentar zoom">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+          <button type="button" class="board-zoom-btn btn-zoom-reset" id="btnZoomReset" title="Restablecer zoom al 100%"
+            aria-label="Restablecer zoom">
+            <i class="fa-solid fa-arrows-rotate"></i> 100%
+          </button>
+        </div>
+
         <button type="button" class="board-action-btn" id="resetBoardPositionsBtn"
           title="Restablecer disposición del tablero">
           <i class="fa-solid fa-rotate-left"></i> Reordenar Tablero
@@ -380,168 +416,173 @@
         </div>
       </div>
 
-      <!-- Tablero de Corcho con textura de corcho e hilos SVG -->
-      <div class="evidence-cork-board" id="evidenceBoard">
+      <!-- Contenedor con Zoom y Scroll Panorámico del Tablero de Evidencias -->
+      <div class="evidence-board-zoom-wrapper" id="evidenceBoardZoomWrapper">
+        <div class="evidence-board-scaler" id="evidenceBoardScaler">
+          <div class="evidence-cork-board" id="evidenceBoard">
 
-        <!-- Capa SVG para los hilos de lana roja -->
-        <svg class="board-threads-layer" id="boardThreadsSvg" aria-hidden="true"></svg>
+            <!-- Capa SVG para los hilos de lana roja -->
+            <svg class="board-threads-layer" id="boardThreadsSvg" aria-hidden="true"></svg>
 
-        <!-- Cuadrícula Panorámica Compacta: 7 Sospechosos + Red John en el Centro -->
-        <div class="board-pins-grid" id="boardPinsGrid">
+            <!-- Cuadrícula Panorámica Compacta: 7 Sospechosos + Red John en el Centro -->
+            <div class="board-pins-grid" id="boardPinsGrid">
 
-          <!-- Sospechoso 1: Brett Partridge -->
-          <article class="board-pin-card" id="pin-partridge" data-suspect="partridge" data-conspiracies="blake">
-            <div class="push-pin pin-silver"></div>
-            <div class="polaroid-frame">
-              <div class="polaroid-img-wrap">
-                <img src="img/characters/brett_partridge.jpg" alt="Brett Partridge" class="polaroid-img">
-              </div>
-              <div class="polaroid-caption">
-                <h4 class="polaroid-name">Brett Partridge</h4>
-                <p class="polaroid-role">Jefe Técnico Forense CBI</p>
-              </div>
-              <div class="card-expand-hint" role="button" aria-label="Ver expediente">
-                <span class="expand-text">Ver expediente</span>
-                <i class="fa-solid fa-arrow-right"></i>
-              </div>
-            </div>
-          </article>
-
-          <!-- Sospechoso 2: Bob Kirkland -->
-          <article class="board-pin-card" id="pin-kirkland" data-suspect="kirkland" data-conspiracies="">
-            <div class="push-pin pin-silver"></div>
-            <div class="polaroid-frame">
-              <div class="polaroid-img-wrap">
-                <img src="img/characters/bob_kirkland.jpg" alt="Bob Kirkland" class="polaroid-img">
-              </div>
-              <div class="polaroid-caption">
-                <h4 class="polaroid-name">Bob Kirkland</h4>
-                <p class="polaroid-role">Agente Homeland Security</p>
-              </div>
-              <div class="card-expand-hint" role="button" aria-label="Ver expediente">
-                <span class="expand-text">Ver expediente</span>
-                <i class="fa-solid fa-arrow-right"></i>
-              </div>
-            </div>
-          </article>
-
-          <!-- Sospechoso 3: Ray Haffner -->
-          <article class="board-pin-card" id="pin-haffner" data-suspect="haffner" data-conspiracies="visualize,malibu">
-            <div class="push-pin pin-silver"></div>
-            <div class="polaroid-frame">
-              <div class="polaroid-img-wrap">
-                <img src="img/characters/ray_haffner.jpg" alt="Ray Haffner" class="polaroid-img">
-              </div>
-              <div class="polaroid-caption">
-                <h4 class="polaroid-name">Ray Haffner</h4>
-                <p class="polaroid-role">Ex-Agente CBI / Detective</p>
-              </div>
-              <div class="card-expand-hint" role="button" aria-label="Ver expediente">
-                <span class="expand-text">Ver expediente</span>
-                <i class="fa-solid fa-arrow-right"></i>
-              </div>
-            </div>
-          </article>
-
-          <!-- Sospechoso 4: Brett Stiles -->
-          <article class="board-pin-card" id="pin-stiles" data-suspect="stiles" data-conspiracies="visualize,malibu">
-            <div class="push-pin pin-silver"></div>
-            <div class="polaroid-frame">
-              <div class="polaroid-img-wrap">
-                <img src="img/characters/brett_stiles.jpg" alt="Brett Stiles" class="polaroid-img">
-              </div>
-              <div class="polaroid-caption">
-                <h4 class="polaroid-name">Brett Stiles</h4>
-                <p class="polaroid-role">Líder Supremo de Visualize</p>
-              </div>
-              <div class="card-expand-hint" role="button" aria-label="Ver expediente">
-                <span class="expand-text">Ver expediente</span>
-                <i class="fa-solid fa-arrow-right"></i>
-              </div>
-            </div>
-          </article>
-
-          <!-- CARD COMBINADA CENTRAL: RED JOHN / SHERIFF THOMAS MCALLISTER (NODO MAESTRO CENTRADO) -->
-          <article class="board-pin-card board-center-master-card" id="node-redjohn" data-suspect="mcallister"
-            data-conspiracies="blake,malibu">
-            <div class="push-pin pin-crimson" title="Chincheta central de Red John"></div>
-
-            <!-- Estado 1: Máscara / Símbolo de Red John con botón de desclasificación -->
-            <div class="board-master-unrevealed" id="redJohnSpoilerOverlay">
-              <div class="center-symbol-wrap">
-                <img src="img/redjohn.jpeg" alt="Símbolo de Red John" class="center-symbol-img">
-              </div>
-              <h3 class="center-node-title">RED JOHN</h3>
-              <span class="badge badge-crimson"
-                style="font-size: 0.68rem; letter-spacing: 0.08em; padding: 0.15rem 0.5rem;">OBJETIVO #1 &bull;
-                SOSPECHOSO #7</span>
-              <button type="button" class="btn-reveal-master" id="btnRevealRedJohn">
-                <i class="fa-solid fa-unlock-keyhole"></i> Revelar Identidad
-              </button>
-              <span class="spoiler-warning-hint"><i class="fa-solid fa-triangle-exclamation"></i> Spoilers Temporada
-                6</span>
-            </div>
-
-            <!-- Estado 2: Thomas McAllister Revelado con redjohn.jpeg y desvanecimiento suave -->
-            <div class="board-master-revealed" id="redJohnRevealedContent" style="display: none;">
-              <div class="polaroid-frame polaroid-master-frame">
-                <div class="polaroid-img-wrap">
-                  <img src="img/mcalister.jpg" alt="Thomas McAllister - Red John" class="polaroid-img">
+              <!-- Sospechoso 1: Brett Partridge -->
+              <article class="board-pin-card" id="pin-partridge" data-suspect="partridge" data-conspiracies="blake">
+                <div class="push-pin pin-silver"></div>
+                <div class="polaroid-frame">
+                  <div class="polaroid-img-wrap">
+                    <img src="img/characters/brett_partridge.jpg" alt="Brett Partridge" class="polaroid-img">
+                  </div>
+                  <div class="polaroid-caption">
+                    <h4 class="polaroid-name">Brett Partridge</h4>
+                    <p class="polaroid-role">Jefe Técnico Forense CBI</p>
+                  </div>
+                  <div class="card-expand-hint" role="button" aria-label="Ver expediente">
+                    <span class="expand-text">Ver expediente</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                  </div>
                 </div>
-                <div class="polaroid-caption">
-                  <h4 class="polaroid-name" style="color: #b91c1c;">Thomas McAllister</h4>
-                  <p class="polaroid-role">Sheriff de Napa // Red John</p>
-                </div>
-                <div class="card-expand-hint" role="button" aria-label="Ver expediente criminal">
-                  <span class="expand-text">Ver expediente criminal</span>
-                  <i class="fa-solid fa-arrow-right"></i>
-                </div>
-                <div class="hide-spoiler-wrap">
-                  <button type="button" id="btnHideRedJohn" class="btn-hide-spoiler-link"><i
-                      class="fa-solid fa-lock"></i> Ocultar de nuevo</button>
-                </div>
-              </div>
-            </div>
-          </article>
+              </article>
 
-          <!-- Sospechoso 5: Reede Smith -->
-          <article class="board-pin-card" id="pin-smith" data-suspect="smith" data-conspiracies="blake,malibu">
-            <div class="push-pin pin-silver"></div>
-            <div class="polaroid-frame">
-              <div class="polaroid-img-wrap">
-                <img src="img/characters/reede_smith.jpg" alt="Reede Smith" class="polaroid-img">
-                <span class="pin-badge-status badge-green">CONFESOR VIVO</span>
-              </div>
-              <div class="polaroid-caption">
-                <h4 class="polaroid-name">Reede Smith</h4>
-                <p class="polaroid-role">Agente Especial del FBI</p>
-              </div>
-              <div class="card-expand-hint" role="button" aria-label="Ver expediente">
-                <span class="expand-text">Ver expediente</span>
-                <i class="fa-solid fa-arrow-right"></i>
-              </div>
-            </div>
-          </article>
+              <!-- Sospechoso 2: Bob Kirkland -->
+              <article class="board-pin-card" id="pin-kirkland" data-suspect="kirkland" data-conspiracies="">
+                <div class="push-pin pin-silver"></div>
+                <div class="polaroid-frame">
+                  <div class="polaroid-img-wrap">
+                    <img src="img/characters/bob_kirkland.jpg" alt="Bob Kirkland" class="polaroid-img">
+                  </div>
+                  <div class="polaroid-caption">
+                    <h4 class="polaroid-name">Bob Kirkland</h4>
+                    <p class="polaroid-role">Agente Homeland Security</p>
+                  </div>
+                  <div class="card-expand-hint" role="button" aria-label="Ver expediente">
+                    <span class="expand-text">Ver expediente</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                  </div>
+                </div>
+              </article>
 
-          <!-- Sospechoso 6: Gale Bertram (Centrado en la fila inferior) -->
-          <article class="board-pin-card board-pin-card-bottom" id="pin-bertram" data-suspect="bertram"
-            data-conspiracies="blake,malibu">
-            <div class="push-pin pin-silver"></div>
-            <div class="polaroid-frame">
-              <div class="polaroid-img-wrap">
-                <img src="img/characters/gale_bertram.jpg" alt="Gale Bertram" class="polaroid-img">
-              </div>
-              <div class="polaroid-caption">
-                <h4 class="polaroid-name">Gale Bertram</h4>
-                <p class="polaroid-role">Director del CBI</p>
-              </div>
-              <div class="card-expand-hint" role="button" aria-label="Ver expediente">
-                <span class="expand-text">Ver expediente</span>
-                <i class="fa-solid fa-arrow-right"></i>
-              </div>
-            </div>
-          </article>
+              <!-- Sospechoso 3: Ray Haffner -->
+              <article class="board-pin-card" id="pin-haffner" data-suspect="haffner"
+                data-conspiracies="visualize,malibu">
+                <div class="push-pin pin-silver"></div>
+                <div class="polaroid-frame">
+                  <div class="polaroid-img-wrap">
+                    <img src="img/characters/ray_haffner.jpg" alt="Ray Haffner" class="polaroid-img">
+                  </div>
+                  <div class="polaroid-caption">
+                    <h4 class="polaroid-name">Ray Haffner</h4>
+                    <p class="polaroid-role">Ex-Agente CBI / Detective</p>
+                  </div>
+                  <div class="card-expand-hint" role="button" aria-label="Ver expediente">
+                    <span class="expand-text">Ver expediente</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                  </div>
+                </div>
+              </article>
 
+              <!-- Sospechoso 4: Brett Stiles -->
+              <article class="board-pin-card" id="pin-stiles" data-suspect="stiles"
+                data-conspiracies="visualize,malibu">
+                <div class="push-pin pin-silver"></div>
+                <div class="polaroid-frame">
+                  <div class="polaroid-img-wrap">
+                    <img src="img/characters/brett_stiles.jpg" alt="Brett Stiles" class="polaroid-img">
+                  </div>
+                  <div class="polaroid-caption">
+                    <h4 class="polaroid-name">Brett Stiles</h4>
+                    <p class="polaroid-role">Líder Supremo de Visualize</p>
+                  </div>
+                  <div class="card-expand-hint" role="button" aria-label="Ver expediente">
+                    <span class="expand-text">Ver expediente</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                  </div>
+                </div>
+              </article>
+
+              <!-- CARD COMBINADA CENTRAL: RED JOHN / SHERIFF THOMAS MCALLISTER (NODO MAESTRO CENTRADO) -->
+              <article class="board-pin-card board-center-master-card" id="node-redjohn" data-suspect="mcallister"
+                data-conspiracies="blake,malibu">
+                <div class="push-pin pin-crimson" title="Chincheta central de Red John"></div>
+
+                <!-- Estado 1: Máscara / Símbolo de Red John con botón de desclasificación -->
+                <div class="board-master-unrevealed" id="redJohnSpoilerOverlay">
+                  <div class="center-symbol-wrap">
+                    <img src="img/redjohn.jpeg" alt="Símbolo de Red John" class="center-symbol-img">
+                  </div>
+                  <h3 class="center-node-title">RED JOHN</h3>
+                  <span class="badge badge-crimson"
+                    style="font-size: 0.68rem; letter-spacing: 0.08em; padding: 0.15rem 0.5rem;">OBJETIVO #1 &bull;
+                    SOSPECHOSO #7</span>
+                  <button type="button" class="btn-reveal-master" id="btnRevealRedJohn">
+                    <i class="fa-solid fa-unlock-keyhole"></i> Revelar Identidad
+                  </button>
+                  <span class="spoiler-warning-hint"><i class="fa-solid fa-triangle-exclamation"></i> Spoilers Temporada
+                    6</span>
+                </div>
+
+                <!-- Estado 2: Thomas McAllister Revelado con redjohn.jpeg y desvanecimiento suave -->
+                <div class="board-master-revealed" id="redJohnRevealedContent" style="display: none;">
+                  <div class="polaroid-frame polaroid-master-frame">
+                    <div class="polaroid-img-wrap">
+                      <img src="img/mcalister.jpg" alt="Thomas McAllister - Red John" class="polaroid-img">
+                    </div>
+                    <div class="polaroid-caption">
+                      <h4 class="polaroid-name" style="color: #b91c1c;">Thomas McAllister</h4>
+                      <p class="polaroid-role">Sheriff de Napa // Red John</p>
+                    </div>
+                    <div class="card-expand-hint" role="button" aria-label="Ver expediente criminal">
+                      <span class="expand-text">Ver expediente criminal</span>
+                      <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                    <div class="hide-spoiler-wrap">
+                      <button type="button" id="btnHideRedJohn" class="btn-hide-spoiler-link"><i
+                          class="fa-solid fa-lock"></i> Ocultar de nuevo</button>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Sospechoso 5: Reede Smith -->
+              <article class="board-pin-card" id="pin-smith" data-suspect="smith" data-conspiracies="blake,malibu">
+                <div class="push-pin pin-silver"></div>
+                <div class="polaroid-frame">
+                  <div class="polaroid-img-wrap">
+                    <img src="img/characters/reede_smith.jpg" alt="Reede Smith" class="polaroid-img">
+                  </div>
+                  <div class="polaroid-caption">
+                    <h4 class="polaroid-name">Reede Smith</h4>
+                    <p class="polaroid-role">Agente Especial del FBI</p>
+                  </div>
+                  <div class="card-expand-hint" role="button" aria-label="Ver expediente">
+                    <span class="expand-text">Ver expediente</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Sospechoso 6: Gale Bertram (Centrado en la fila inferior) -->
+              <article class="board-pin-card board-pin-card-bottom" id="pin-bertram" data-suspect="bertram"
+                data-conspiracies="blake,malibu">
+                <div class="push-pin pin-silver"></div>
+                <div class="polaroid-frame">
+                  <div class="polaroid-img-wrap">
+                    <img src="img/characters/gale_bertram.jpg" alt="Gale Bertram" class="polaroid-img">
+                  </div>
+                  <div class="polaroid-caption">
+                    <h4 class="polaroid-name">Gale Bertram</h4>
+                    <p class="polaroid-role">Director del CBI</p>
+                  </div>
+                  <div class="card-expand-hint" role="button" aria-label="Ver expediente">
+                    <span class="expand-text">Ver expediente</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                  </div>
+                </div>
+              </article>
+
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -654,19 +695,19 @@
       </ul>
 
       <div class="footer-social-links">
-        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-icon"
+        <a href="https://www.instagram.com/lucass_cobanera/" target="_blank" rel="noopener noreferrer" class="social-icon"
           aria-label="Instagram" title="Instagram">
           <i class="fa-brands fa-instagram"></i>
         </a>
-        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="GitHub"
+        <a href="https://github.com/LucasCobanera" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="GitHub"
           title="GitHub">
           <i class="fa-brands fa-github"></i>
         </a>
-        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-icon"
+        <a href="https://www.facebook.com/lucas.cobanera.9" target="_blank" rel="noopener noreferrer" class="social-icon"
           aria-label="Facebook" title="Facebook">
           <i class="fa-brands fa-facebook-f"></i>
         </a>
-        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-icon"
+        <a href="https://www.linkedin.com/in/lucas-cobanera-alucen-5aa892219/" target="_blank" rel="noopener noreferrer" class="social-icon"
           aria-label="LinkedIn" title="LinkedIn">
           <i class="fa-brands fa-linkedin-in"></i>
         </a>
