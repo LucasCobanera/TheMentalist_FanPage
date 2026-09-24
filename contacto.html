@@ -336,6 +336,16 @@
       text-transform: uppercase;
     }
 
+    .contact-form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    .contact-form-row-asunto {
+      grid-template-columns: 1.4fr 1fr;
+    }
+
     @media (max-width: 900px) {
       .contact-layout-grid {
         grid-template-columns: 1fr;
@@ -350,6 +360,14 @@
       .stamp-inner-border {
         width: 96px;
         height: 96px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .contact-form-row,
+      .contact-form-row-asunto {
+        grid-template-columns: 1fr !important;
+        gap: 0.85rem !important;
       }
     }
 
@@ -597,7 +615,7 @@
 
           <form id="cbiContactForm" novalidate>
             <!-- Fila: Nombre y Correo -->
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+            <div class="contact-form-row">
               <div class="contact-form-group">
                 <label for="contactName" class="contact-form-label">
                   <i class="fa-solid fa-user-secret"></i> Nombre o Alias *
@@ -614,7 +632,7 @@
             </div>
 
             <!-- Fila: Asunto y Temporada -->
-            <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 1.25rem;">
+            <div class="contact-form-row contact-form-row-asunto">
               <div class="contact-form-group">
                 <label for="contactDepartment" class="contact-form-label">
                   <i class="fa-solid fa-building-shield"></i> División o Motivo *

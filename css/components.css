@@ -1308,44 +1308,79 @@
     justify-content: center;
   }
 
+body.nav-menu-open {
+  overflow: hidden !important;
+}
+
+@media (max-width: 992px) {
+  /* En móviles/tablets fijar el header a la pantalla visible en cualquier posición de scroll */
+  .site-header {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    z-index: 2000 !important;
+  }
+
+  body {
+    padding-top: 68px !important;
+  }
+
   .nav-menu {
-    position: fixed;
-    top: 68px;
-    left: 0;
-    right: 0;
-    background: rgba(8, 8, 10, 0.98);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--border-subtle);
-    flex-direction: column;
-    padding: 1.5rem 1rem;
-    gap: 0.6rem;
-    max-height: 0;
-    overflow-y: auto;
-    opacity: 0;
-    pointer-events: none;
-    transition: all var(--transition-smooth);
-    scrollbar-width: thin;
+    position: fixed !important;
+    top: 68px !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    height: calc(100dvh - 68px) !important;
+    max-height: calc(100dvh - 68px) !important;
+    background: rgba(8, 8, 10, 0.98) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border-bottom: 1px solid var(--border-subtle) !important;
+    display: none !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    align-items: stretch !important;
+    text-align: left !important;
+    box-sizing: border-box !important;
+    padding: 1.25rem 1rem 3.5rem 1rem !important;
+    gap: 0.6rem !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    overscroll-behavior: contain !important;
+    touch-action: pan-y !important;
+    scrollbar-width: thin !important;
+    z-index: 1999 !important;
   }
 
   .nav-menu.open {
-    max-height: calc(100vh - 75px);
-    opacity: 1;
-    pointer-events: auto;
+    display: flex !important;
+    pointer-events: auto !important;
   }
 
   .nav-item-dropdown {
     width: 100%;
+    text-align: left !important;
   }
 
   .nav-dropdown-trigger {
     width: 100%;
-    justify-content: space-between;
+    justify-content: space-between !important;
+    text-align: left !important;
   }
 
-  .nav-dropdown-menu {
-    position: static;
+  .nav-dropdown-menu,
+  .nav-dropdown-personajes,
+  .nav-dropdown-temporadas {
+    position: static !important;
     transform: none !important;
     width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
     max-height: 0;
     overflow: hidden;
     padding: 0 0.5rem;
@@ -1356,25 +1391,103 @@
     visibility: hidden;
     pointer-events: none;
     transition: max-height 0.35s ease, opacity 0.25s ease, padding 0.3s ease;
+    text-align: left !important;
   }
 
   .nav-item-dropdown.open>.nav-dropdown-menu {
-    max-height: 800px;
+    max-height: 2000px !important;
     padding: 0.85rem 0.65rem;
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
+    overflow-y: visible !important;
+  }
+
+  .dropdown-section-label {
+    justify-content: flex-start !important;
+    text-align: left !important;
+  }
+
+  .dropdown-featured-grid {
+    grid-template-columns: 1fr !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    gap: 0.5rem !important;
+  }
+
+  .dropdown-card-link {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+    padding: 0.55rem 0.65rem !important;
+  }
+
+  .dropdown-card-info {
+    text-align: left !important;
+    align-items: flex-start !important;
+    min-width: 0 !important;
+  }
+
+  .dropdown-card-name {
+    text-align: left !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+  }
+
+  .dropdown-card-role {
+    text-align: left !important;
+    white-space: normal !important;
+  }
+
+  .dropdown-open-badge {
+    flex-shrink: 0 !important;
+    margin-left: auto !important;
   }
 
   .dropdown-categories-list,
   .dropdown-seasons-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .dropdown-cat-item {
+    justify-content: flex-start !important;
+    text-align: left !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .dropdown-season-card {
+    justify-content: flex-start !important;
+    text-align: left !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .season-info-col {
+    text-align: left !important;
+    align-items: flex-start !important;
+    min-width: 0 !important;
+  }
+
+  .season-title {
+    text-align: left !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+  }
+
+  .season-meta {
+    text-align: left !important;
   }
 
   .nav-link {
     width: 100%;
     padding: 0.75rem 1.25rem;
     font-size: 0.86rem;
+    justify-content: flex-start !important;
+    text-align: left !important;
   }
 
   .footer-simple-content {

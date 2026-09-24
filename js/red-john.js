@@ -715,6 +715,11 @@ function initEvidenceBoard() {
     let pointerActive = false;
 
     card.addEventListener('pointerdown', (e) => {
+      // En vista móvil (pantallas <= 768px), deshabilitar arrastre para permitir el scroll vertical natural
+      if (window.innerWidth <= 768) {
+        return;
+      }
+
       if (e.target.closest('#btnRevealRedJohn') || e.target.closest('#btnHideRedJohn') || e.target.closest('a')) {
         return;
       }
@@ -954,6 +959,14 @@ function initEvidenceBoard() {
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
+      if (window.innerWidth <= 768) {
+        allCards.forEach(c => {
+          c.style.transform = '';
+          c._dragX = 0;
+          c._dragY = 0;
+          c.classList.remove('is-dragging', 'is-pinned-custom');
+        });
+      }
       if (window.adjustBoardZoomLayout) window.adjustBoardZoomLayout();
       drawThreads();
     }, 120);

@@ -34,11 +34,20 @@ function initNavigation() {
     }
   }, { passive: true });
 
+  function setMenuScrollLock(lock) {
+    if (lock) {
+      document.body.classList.add('nav-menu-open');
+    } else {
+      document.body.classList.remove('nav-menu-open');
+    }
+  }
+
   // Alternar menú hamburguesa móvil
   if (navToggle && navMenu) {
     navToggle.addEventListener('click', () => {
       const isOpen = navMenu.classList.toggle('open');
       navToggle.setAttribute('aria-expanded', String(isOpen));
+      setMenuScrollLock(isOpen);
     });
 
     // Cerrar menú al pulsar un enlace directo (que no sea disparador de dropdown en móvil)
@@ -46,6 +55,7 @@ function initNavigation() {
       link.addEventListener('click', () => {
         navMenu.classList.remove('open');
         navToggle.setAttribute('aria-expanded', 'false');
+        setMenuScrollLock(false);
       });
     });
   }
@@ -107,6 +117,7 @@ function initNavigation() {
       subLink.addEventListener('click', () => {
         if (navMenu) navMenu.classList.remove('open');
         if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
+        setMenuScrollLock(false);
         item.classList.remove('open');
         item.classList.remove('is-active');
       });
@@ -135,8 +146,20 @@ function initNavigation() {
       });
       if (navMenu) navMenu.classList.remove('open');
       if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
+      setMenuScrollLock(false);
     }
   });
+
+  // Al redimensionar a desktop, restaurar scroll si el menú estaba abierto
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 992) {
+      if (navMenu && navMenu.classList.contains('open')) {
+        navMenu.classList.remove('open');
+        if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
+        setMenuScrollLock(false);
+      }
+    }
+  }, { passive: true });
 }
 
 /* --------------------------------------------------------------------------
